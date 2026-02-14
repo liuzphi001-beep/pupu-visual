@@ -84,9 +84,15 @@
         .dashboard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
         .card {
             background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 20px; transition: all 0.2s;
+            border-radius: 16px; padding: 20px; transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease forwards;
         }
-        .card:hover { border-color: rgba(0, 255, 245, 0.3); }
+        .card:hover { border-color: rgba(0, 255, 245, 0.3); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 255, 245, 0.1); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
         .card-title { font-size: 0.9rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
         .card-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: rgba(0, 255, 245, 0.1); color: var(--accent-cyan); }
@@ -279,10 +285,9 @@
             <div class="card">
                 <div class="card-header"><span class="card-title">📋 活动记录</span></div>
                 <div class="timeline" id="timeline">
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">每小时迭代任务</div><div class="timeline-time">02:11</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">添加运行时长显示</div><div class="timeline-time">02:11</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Dashboard V3.3</div><div class="timeline-time">02:11</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon info">🚀</div><div class="timeline-content"><div class="timeline-title">等待GitHub Pages</div><div class="timeline-time">now</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">卡片渐入动画</div><div class="timeline-time">now</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">悬停效果增强</div><div class="timeline-time">now</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Dashboard V3.4</div><div class="timeline-time">now</div></div></div>
                 </div>
             </div>
             <div class="card">
@@ -331,7 +336,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V3.3</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V3.4</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
