@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V4.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V4.1 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -280,7 +280,7 @@
                 <div class="avatar">🐾</div>
                 <div class="header-title">
                     <h1>噗噗控制台</h1>
-                    <div class="subtitle">MiniMax-M2.5 · <span id="serverTime">--</span></div>
+                    <div class="subtitle">MiniMax-M2.5 · <span id="serverTime">--:--:--</span></div>
                 </div>
             </div>
             <div class="header-right">
@@ -293,7 +293,7 @@
         <div class="dashboard">
             <div class="card stat-card">
                 <div class="card-header"><span class="card-title">⚡ Skills</span><span class="card-badge">63+个</span></div>
-                <div class="stat-value" id="skillCount">63</div>
+                <div class="stat-value" id="skillCount">56</div>
                 <div class="stat-label">已安装技能</div>
                 <div class="stat-trend up">↑ 实时同步</div>
             </div>
@@ -311,9 +311,15 @@
             </div>
             <div class="card stat-card">
                 <div class="card-header"><span class="card-title">📊 负载</span></div>
-                <div class="stat-value" id="loadAvg">0.12</div>
+                <div class="stat-value" id="loadAvg">0.00</div>
                 <div class="stat-label">系统负载</div>
                 <div class="stat-trend up">正常运行</div>
+            </div>
+            <div class="card stat-card">
+                <div class="card-header"><span class="card-title">🖥️ 服务器</span></div>
+                <div class="stat-value" style="font-size:1.2rem">VM-0-17</div>
+                <div class="stat-label">主机名</div>
+                <div class="stat-trend">OpenCloudOS</div>
             </div>
         </div>
 
@@ -404,7 +410,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V4.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V4.1</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -450,7 +456,7 @@
         }
         function updateTime() {
             const now = new Date();
-            document.getElementById('serverTime').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
+            document.getElementById('serverTime').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
             document.getElementById('lastUpdate').textContent = now.toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
             // 运行时长 (从2026-02-02开始)
             const startDate = new Date('2026-02-02T00:00:00+08:00');
