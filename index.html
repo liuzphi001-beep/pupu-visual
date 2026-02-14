@@ -212,6 +212,7 @@
             </div>
             <div class="header-right">
                 <div class="status-pill"><span class="status-dot"></span><span>在线运行</span></div>
+                <div class="status-pill" style="background:rgba(168,85,247,0.1);border-color:var(--accent-purple);color:var(--accent-purple)"><span id="uptimeDisplay">已运行 11天</span></div>
                 <div class="cmd-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd> 快捷命令</div>
             </div>
         </header>
@@ -278,10 +279,10 @@
             <div class="card">
                 <div class="card-header"><span class="card-title">📋 活动记录</span></div>
                 <div class="timeline" id="timeline">
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">GitHub仓库创建</div><div class="timeline-time">02:01</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">每小时迭代任务</div><div class="timeline-time">02:05</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Dashboard V3.2</div><div class="timeline-time">02:06</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon info">🚀</div><div class="timeline-content"><div class="timeline-title">等待GitHub Pages部署</div><div class="timeline-time">now</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">每小时迭代任务</div><div class="timeline-time">02:11</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">添加运行时长显示</div><div class="timeline-time">02:11</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Dashboard V3.3</div><div class="timeline-time">02:11</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon info">🚀</div><div class="timeline-content"><div class="timeline-title">等待GitHub Pages</div><div class="timeline-time">now</div></div></div>
                 </div>
             </div>
             <div class="card">
@@ -330,7 +331,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V3.2</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V3.3</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -360,6 +361,12 @@
             const now = new Date();
             document.getElementById('serverTime').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
             document.getElementById('lastUpdate').textContent = now.toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+            // 运行时长 (从2026-02-02开始)
+            const startDate = new Date('2026-02-02T00:00:00+08:00');
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('uptimeDisplay').textContent = `已运行 ${days}天 ${hours}小时`;
         }
         function updateWeather(data) {
             if (data.current_weather) {
