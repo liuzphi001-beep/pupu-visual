@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V4.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -179,7 +179,28 @@
         .cron-schedule { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent-cyan); }
         .cron-status { font-size: 0.6rem; padding: 2px 6px; border-radius: 8px; background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
 
-        /* File Tree */
+        /* Keyboard shortcuts modal */
+        .shortcut-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center; }
+        .shortcut-modal.show { display: flex; }
+        .shortcut-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; max-width: 400px; width: 90%; animation: fadeInUp 0.3s ease; }
+        .shortcut-content h3 { margin-bottom: 16px; color: var(--accent-cyan); }
+        .shortcut-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color); }
+        .shortcut-row kbd { background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+        .close-modal { margin-top: 16px; width: 100%; padding: 10px; background: var(--accent-cyan); border: none; border-radius: 8px; color: var(--bg-primary); font-weight: 500; cursor: pointer; }
+
+        /* GitHub status */
+        .github-status { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--bg-secondary); border-radius: 8px; margin-top: 12px; }
+        .github-status .icon { font-size: 1.2rem; }
+        .github-status .info { flex: 1; }
+        .github-status .repo { font-size: 0.8rem; font-weight: 500; }
+        .github-status .status { font-size: 0.7rem; color: var(--accent-green); }
+
+        /* Activity timeline */
+        .activity-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* Version badge */
+        .version-badge { position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple)); padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; font-weight: 700; }
         .file-tree { max-height: 220px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
         .tree-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
         .tree-icon { color: var(--text-secondary); }
@@ -205,6 +226,22 @@
         .footer { text-align: center; padding: 24px 0; color: var(--text-secondary); font-size: 0.8rem; border-top: 1px solid var(--border-color); margin-top: 24px; }
         .footer a { color: var(--accent-cyan); text-decoration: none; }
 
+        /* Keyboard shortcuts modal */
+        .shortcut-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center; }
+        .shortcut-modal.show { display: flex; }
+        .shortcut-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; max-width: 400px; width: 90%; animation: fadeInUp 0.3s ease; }
+        .shortcut-content h3 { margin-bottom: 16px; color: var(--accent-cyan); }
+        .shortcut-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color); }
+        .shortcut-row kbd { background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+        .close-modal { margin-top: 16px; width: 100%; padding: 10px; background: var(--accent-cyan); border: none; border-radius: 8px; color: var(--bg-primary); font-weight: 500; cursor: pointer; }
+
+        /* GitHub status */
+        .github-status { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--bg-secondary); border-radius: 8px; margin-top: 12px; }
+        .github-status .icon { font-size: 1.2rem; }
+        .github-status .info { flex: 1; }
+        .github-status .repo { font-size: 0.8rem; font-weight: 500; }
+        .github-status .status { font-size: 0.7rem; color: var(--accent-green); }
+
         /* Responsive */
         @media (max-width: 1200px) { .dashboard { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } .header { flex-direction: column; gap: 16px; } }
@@ -221,6 +258,22 @@
         </div>
     </div>
     <div class="bg"></div>
+    
+    <!-- Keyboard Shortcuts Modal -->
+    <div class="shortcut-modal" id="shortcutModal" onclick="if(event.target===this)this.classList.remove('show')">
+        <div class="shortcut-content">
+            <h3>⌨️ 快捷键</h3>
+            <div class="shortcut-row"><span>打开此菜单</span><kbd>Ctrl</kbd>+<kbd>K</kbd></div>
+            <div class="shortcut-row"><span>刷新数据</span><kbd>Ctrl</kbd>+<kbd>R</kbd></div>
+            <div class="shortcut-row"><span>天气查询</span><kbd>W</kbd></div>
+            <div class="shortcut-row"><span>Skills列表</span><kbd>S</kbd></div>
+            <div class="shortcut-row"><span>定时任务</span><kbd>T</kbd></div>
+            <div class="shortcut-row"><span>记忆系统</span><kbd>M</kbd></div>
+            <div class="shortcut-row"><span>系统状态</span><kbd>I</kbd></div>
+            <button class="close-modal" onclick="document.getElementById('shortcutModal').classList.remove('show')">关闭</button>
+        </div>
+    </div>
+    
     <div class="container">
         <header class="header">
             <div class="header-left">
@@ -239,10 +292,10 @@
 
         <div class="dashboard">
             <div class="card stat-card">
-                <div class="card-header"><span class="card-title">⚡ Skills</span><span class="card-badge">63个</span></div>
-                <div class="stat-value" id="skillCount">34</div>
+                <div class="card-header"><span class="card-title">⚡ Skills</span><span class="card-badge">63+个</span></div>
+                <div class="stat-value" id="skillCount">63</div>
                 <div class="stat-label">已安装技能</div>
-                <div class="stat-trend up">↑ 较上周</div>
+                <div class="stat-trend up">↑ 实时同步</div>
             </div>
             <div class="card stat-card">
                 <div class="card-header"><span class="card-title">🧠 记忆</span></div>
@@ -297,10 +350,12 @@
 
         <div class="dashboard">
             <div class="card">
-                <div class="card-header"><span class="card-title">📋 活动记录</span></div>
+                <div class="card-header"><span class="card-title">📋 活动记录</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)"><span class="activity-dot"></span>实时</span></div>
                 <div class="timeline" id="timeline">
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">添加迭代计数器</div><div class="timeline-time">now</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Dashboard V3.8</div><div class="timeline-time">now</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Dashboard V4.0 升级</div><div class="timeline-time">刚刚</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">添加键盘快捷键支持</div><div class="timeline-time">刚刚</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Skills列表扩展至63+</div><div class="timeline-time">刚刚</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon info">📡</div><div class="timeline-content"><div class="timeline-title">每小时迭代机制运行中</div><div class="timeline-time">持续</div></div></div>
                 </div>
             </div>
             <div class="card">
@@ -349,7 +404,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V3.8</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V4.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -365,7 +420,15 @@
             { icon: '📰', name: 'article-collector' }, { icon: '🔎', name: 'knowledge-search' }, { icon: '📊', name: 'memory-review' },
             { icon: '🤖', name: 'minimax-mcp' }, { icon: '💬', name: 'conversation' }, { icon: '📈', name: 'search-stats' },
             { icon: '🏷️', name: 'tag-weight' }, { icon: '📦', name: 'skill-manager' }, { icon: '🐾', name: 'skillclaw' },
-            { icon: '💡', name: 'recommendation' }, { icon: '📖', name: 'moltbook' }, { icon: '🔧', name: 'github' }
+            { icon: '💡', name: 'recommendation' }, { icon: '📖', name: 'moltbook' }, { icon: '🔧', name: 'github' },
+            { icon: '🎮', name: '1password' }, { icon: '📓', name: 'apple-notes' }, { icon: '⏰', name: 'apple-reminders' },
+            { icon: '🐻', name: 'bear-notes' }, { icon: '📰', name: 'blogwatcher' }, { icon: '🔵', name: 'blucli' },
+            { icon: '💬', name: 'discord' }, { icon: '🎮', name: 'eightctl' }, { icon: '🍔', name: 'food-order' },
+            { icon: '✨', name: 'gemini' }, { icon: '🔍', name: 'gifgrep' }, { icon: '🗺️', name: 'goplaces' },
+            { icon: '📧', name: 'himalaya' }, { icon: '💬', name: 'imsg' }, { icon: '📍', name: 'local-places' },
+            { icon: '🎵', name: 'spotify-player' }, { icon: '📋', name: 'trello' }, { icon: '🎥', name: 'video-frames' },
+            { icon: '📞', name: 'voice-call' }, { icon: '🔊', name: 'wacli' }, { icon: '🎤', name: 'sag' },
+            { icon: '🐱', name: 'nano-banana-pro' }, { icon: '📄', name: 'nano-pdf' }, { icon: '📊', name: 'model-usage' }
         ];
         const weatherCodes = { 0:'晴朗',1:'晴间多云',2:'多云',3:'阴天',45:'雾',48:'霜雾',51:'小毛毛雨',53:'中毛毛雨',55:'大毛毛雨',61:'小雨',63:'中雨',65:'大雨',71:'小雪',73:'中雪',75:'大雪',80:'阵雨',95:'雷暴',96:'雷暴+冰雹' };
         const windDirs = ['北','东北','东','东南','南','西南','西','西北'];
@@ -416,6 +479,23 @@
             };
             alert(cmds[cmd] || '未知命令');
         }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('shortcutModal').classList.add('show');
+            }
+            if (e.ctrlKey && e.key === 'r') {
+                e.preventDefault();
+                location.reload();
+            }
+            if (!e.ctrlKey && !e.altKey) {
+                const keyMap = { 'w': 'weather', 's': 'skills', 't': 'cron', 'm': 'memory', 'i': 'system' };
+                if (keyMap[e.key]) executeCmd(keyMap[e.key]);
+            }
+        });
+        
         renderSkills();
         updateTime();
         fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&timezone=Asia/Shanghai').then(r=>r.json()).then(updateWeather).catch(()=>{});
