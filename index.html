@@ -8,6 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* Loading animation */
+        .loader { position: fixed; inset: 0; background: var(--bg-primary); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s; }
+        .loader.hidden { opacity: 0; pointer-events: none; }
+        .loader-content { text-align: center; }
+        .loader-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); display: inline-flex; align-items: center; justify-content: center; font-size: 36px; animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .loader-text { margin-top: 16px; color: var(--text-secondary); font-size: 0.9rem; }
+
         :root {
             --bg-primary: #030307;
             --bg-secondary: #08080d;
@@ -206,6 +214,12 @@
     </style>
 </head>
 <body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-avatar">🐾</div>
+            <div class="loader-text">正在加载...</div>
+        </div>
+    </div>
     <div class="bg"></div>
     <div class="container">
         <header class="header">
@@ -285,9 +299,8 @@
             <div class="card">
                 <div class="card-header"><span class="card-title">📋 活动记录</span></div>
                 <div class="timeline" id="timeline">
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">GitHub Pages已上线</div><div class="timeline-time">now</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Cron更新为每小时</div><div class="timeline-time">now</div></div></div>
-                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Dashboard V3.6</div><div class="timeline-time">now</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">添加页面加载动画</div><div class="timeline-time">now</div></div></div>
+                    <div class="timeline-item"><div class="timeline-icon success">✓</div><div class="timeline-content"><div class="timeline-title">Dashboard V3.7</div><div class="timeline-time">now</div></div></div>
                 </div>
             </div>
             <div class="card">
@@ -336,7 +349,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V3.6</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V3.7</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -356,6 +369,11 @@
         ];
         const weatherCodes = { 0:'晴朗',1:'晴间多云',2:'多云',3:'阴天',45:'雾',48:'霜雾',51:'小毛毛雨',53:'中毛毛雨',55:'大毛毛雨',61:'小雨',63:'中雨',65:'大雨',71:'小雪',73:'中雪',75:'大雪',80:'阵雨',95:'雷暴',96:'雷暴+冰雹' };
         const windDirs = ['北','东北','东','东南','南','西南','西','西北'];
+
+        // Hide loader when ready
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500);
+        });
 
         function renderSkills() {
             document.getElementById('skillsGrid').innerHTML = skills.map(s => `<div class="skill-item"><div class="icon">${s.icon}</div><div class="name">${s.name}</div></div>`).join('');
