@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V5.5 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V5.6 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -371,7 +371,8 @@
                 </div>
             </div>
             <div class="header-right">
-                <div class="status-pill"><span class="status-dot"></span><span>在线运行</span></div>
+                <div class="status-pill" id="activityPill" style="display:none"><span class="status-dot" style="background:var(--accent-cyan)"></span><span>刷新中...</span></div>
+                <div class="status-pill" id="statusPill"><span class="status-dot"></span><span>在线运行</span></div>
                 <div class="status-pill" style="background:rgba(168,85,247,0.1);border-color:var(--accent-purple);color:var(--accent-purple)"><span id="uptimeDisplay">已运行 11天</span></div>
                 <div class="cmd-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd> 快捷命令</div>
             </div>
@@ -552,7 +553,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V5.5</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V5.6</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -620,6 +621,10 @@
             if (!autoRefreshEnabled) return;
             
             try {
+                // Show activity indicator
+                document.getElementById('statusPill').style.display = 'none';
+                document.getElementById('activityPill').style.display = 'flex';
+                
                 // Refresh weather
                 const weatherRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&timezone=Asia/Shanghai');
                 const weatherData = await weatherRes.json();
@@ -632,6 +637,10 @@
                 console.log('✅ 数据已刷新:', now.toLocaleTimeString('zh-CN'));
             } catch (e) {
                 console.log('⚠️ 刷新失败:', e.message);
+            } finally {
+                // Hide activity indicator
+                document.getElementById('activityPill').style.display = 'none';
+                document.getElementById('statusPill').style.display = 'flex';
             }
         }
 
@@ -660,8 +669,7 @@
         function updateTime() {
             const now = new Date();
             document.getElementById('serverTime').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
-            document.getElementById('lastUpdate').textContent = now.toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
-            // 运行时长 (从2026-02-02开始)
+            document.getElementById('lastUpdate').textContent = now.toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
             const startDate = new Date('2026-02-02T00:00:00+08:00');
             const diff = now - startDate;
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
