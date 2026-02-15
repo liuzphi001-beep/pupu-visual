@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V4.3 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V4.4 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -255,6 +255,14 @@
         .quick-link:hover { border-color: var(--accent-cyan); transform: translateY(-2px); }
         .quick-link .icon { font-size: 0.9rem; }
         
+        /* About card */
+        .about-content { text-align: center; padding: 12px; }
+        .about-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px; box-shadow: 0 0 20px var(--glow-cyan); }
+        .about-name { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+        .about-desc { font-size: 0.75rem; color: var(--text-secondary); }
+        .about-tags { display: flex; justify-content: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+        .about-tag { font-size: 0.65rem; padding: 2px 8px; background: rgba(0, 255, 245, 0.1); color: var(--accent-cyan); border-radius: 10px; }
+        
         /* Responsive */
         @media (max-width: 1200px) { .dashboard { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } .header { flex-direction: column; gap: 16px; } }
@@ -429,6 +437,19 @@
                     <div class="memory-layer"><div class="layer-icon tools">🔧</div><div class="layer-info"><h4>TOOLS.md - 环境笔记</h4><p>配置与偏好</p></div></div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
+                <div class="about-content">
+                    <div class="about-avatar">🐾</div>
+                    <div class="about-name">噗噗</div>
+                    <div class="about-desc">AI服务器助手 · MiniMax-M2.5</div>
+                    <div class="about-tags">
+                        <span class="about-tag">活泼</span>
+                        <span class="about-tag">幽默</span>
+                        <span class="about-tag">谨慎</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="dashboard">
@@ -446,7 +467,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V4.3</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V4.4</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
