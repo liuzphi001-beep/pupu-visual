@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V4.6 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V5.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -277,6 +277,20 @@
         .memory-stat-label { color: var(--text-secondary); }
         .memory-stat-value { font-family: 'JetBrains Mono', monospace; color: var(--accent-cyan); }
         
+        /* Lock screen */
+        .lock-screen { position: fixed; inset: 0; background: var(--bg-primary); z-index: 99999; display: flex; align-items: center; justify-content: center; }
+        .lock-screen.hidden { display: none; }
+        .lock-content { text-align: center; max-width: 320px; padding: 40px; }
+        .lock-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); display: inline-flex; align-items: center; justify-content: center; font-size: 36px; margin-bottom: 20px; box-shadow: 0 0 40px var(--glow-cyan); animation: avatarPulse 3s ease-in-out infinite; }
+        .lock-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .lock-subtitle { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 24px; }
+        .lock-input { width: 100%; padding: 14px 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 1rem; text-align: center; outline: none; transition: all 0.3s; }
+        .lock-input:focus { border-color: var(--accent-cyan); box-shadow: 0 0 20px rgba(0, 255, 245, 0.2); }
+        .lock-input::placeholder { color: var(--text-secondary); }
+        .lock-error { color: var(--accent-red); font-size: 0.8rem; margin-top: 12px; display: none; }
+        .lock-error.show { display: block; }
+        .lock-hint { color: var(--text-secondary); font-size: 0.7rem; margin-top: 20px; }
+        
         /* Responsive */
         @media (max-width: 1200px) { .dashboard { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } .header { flex-direction: column; gap: 16px; } }
@@ -286,6 +300,18 @@
     </style>
 </head>
 <body>
+    <!-- Lock Screen -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-content">
+            <div class="lock-avatar">🔐</div>
+            <h1 class="lock-title">噗噗控制台</h1>
+            <p class="lock-subtitle">请输入安全码访问</p>
+            <input type="password" class="lock-input" id="lockInput" placeholder="输入安全码..." autocomplete="off">
+            <p class="lock-error" id="lockError">安全码错误，请重试</p>
+            <p class="lock-hint">🔒 访问权限保护中</p>
+        </div>
+    </div>
+
     <div class="loader" id="loader">
         <div class="loader-content">
             <div class="loader-avatar">🐾</div>
@@ -499,7 +525,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V4.6</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V5.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -595,6 +621,35 @@
         updateTime();
         fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&timezone=Asia/Shanghai').then(r=>r.json()).then(updateWeather).catch(()=>{});
         setInterval(updateTime, 30000);
+        // Lock screen logic
+        const SECURITY_CODE = 'pupu2026'; // Change this to your preferred code
+        const lockScreen = document.getElementById('lockScreen');
+        const lockInput = document.getElementById('lockInput');
+        const lockError = document.getElementById('lockError');
+        
+        // Check if already unlocked this session
+        if (sessionStorage.getItem('pupuUnlocked') === 'true') {
+            lockScreen.classList.add('hidden');
+        }
+        
+        lockInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const code = lockInput.value;
+                if (code === SECURITY_CODE) {
+                    sessionStorage.setItem('pupuUnlocked', 'true');
+                    lockScreen.classList.add('hidden');
+                } else {
+                    lockError.classList.add('show');
+                    lockInput.value = '';
+                    lockInput.focus();
+                }
+            }
+        });
+        
+        // Clear unlock state on page unload
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.removeItem('pupuUnlocked');
+        });
     </script>
 </body>
 </html>
