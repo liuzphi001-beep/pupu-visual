@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V4.5 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V4.6 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -271,6 +271,12 @@
         .highlight-title { font-size: 0.8rem; font-weight: 500; }
         .highlight-desc { font-size: 0.65rem; color: var(--text-secondary); }
         
+        /* Memory stats */
+        .memory-stats { display: flex; flex-direction: column; gap: 6px; }
+        .memory-stat-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.75rem; }
+        .memory-stat-label { color: var(--text-secondary); }
+        .memory-stat-value { font-family: 'JetBrains Mono', monospace; color: var(--accent-cyan); }
+        
         /* Responsive */
         @media (max-width: 1200px) { .dashboard { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } .header { flex-direction: column; gap: 16px; } }
@@ -455,6 +461,15 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header"><span class="card-title">💾 记忆统计</span></div>
+                <div class="memory-stats">
+                    <div class="memory-stat-row"><span class="memory-stat-label">长期记忆</span><span class="memory-stat-value">MEMORY.md</span></div>
+                    <div class="memory-stat-row"><span class="memory-stat-label">每日日志</span><span class="memory-stat-value">15+ 文件</span></div>
+                    <div class="memory-stat-row"><span class="memory-stat-label">错题本</span><span class="memory-stat-value">self-review</span></div>
+                    <div class="memory-stat-row"><span class="memory-stat-label">环境配置</span><span class="memory-stat-value">TOOLS.md</span></div>
+                </div>
+            </div>
+            <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
                 <div class="about-content">
                     <div class="about-avatar">🐾</div>
@@ -484,7 +499,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V4.5</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V4.6</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
