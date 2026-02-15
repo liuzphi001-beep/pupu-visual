@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V5.4 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V5.5 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -30,6 +30,32 @@
             --text-secondary: #6b6b80;
             --border-color: #1a1a24;
             --glow-cyan: rgba(0, 255, 245, 0.3);
+        }
+        
+        /* Light Mode */
+        body.light-mode {
+            --bg-primary: #f5f5f7;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --border-color: #d2d2d7;
+            --glow-cyan: rgba(0, 255, 245, 0.2);
+        }
+        body.light-mode .bg {
+            background: radial-gradient(ellipse at 20% 0%, rgba(0, 255, 245, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 100%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+        }
+        body.light-mode .header-title h1 {
+            background: linear-gradient(135deg, #007aff, #ff2d55);
+            -webkit-background-clip: text;
+        }
+        body.light-mode .avatar {
+            box-shadow: 0 0 30px rgba(0, 122, 255, 0.3);
+        }
+        body.light-mode .command-btn:hover {
+            border-color: #007aff;
+            background: rgba(0, 122, 255, 0.1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -394,6 +420,7 @@
                     <div class="command-btn" onclick="executeCmd('cron')"><div class="icon">⏰</div><div class="label">定时任务</div></div>
                     <div class="command-btn" onclick="executeCmd('memory')"><div class="icon">🧠</div><div class="label">记忆系统</div></div>
                     <div class="command-btn" onclick="executeCmd('system')"><div class="icon">💻</div><div class="label">系统状态</div></div>
+                    <div class="command-btn" onclick="toggleTheme()"><div class="icon" id="themeIcon">🌙</div><div class="label" id="themeLabel">切换主题</div></div>
                 </div>
             </div>
             <div class="card">
@@ -525,7 +552,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V5.4</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V5.5</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -620,6 +647,9 @@
             // Start auto refresh
             refreshAllData();
             setInterval(refreshAllData, REFRESH_INTERVAL);
+            
+            // Initialize theme
+            initTheme();
         });
 
         function renderSkills() {
@@ -669,6 +699,34 @@
                 system: '💻 系统: CPU ' + document.getElementById('cpuPercent').textContent + ', 内存 ' + document.getElementById('memPercent').textContent
             };
             alert(cmds[cmd] || '未知命令');
+        }
+        
+        // Theme toggle functionality
+        function toggleTheme() {
+            const isDark = document.body.classList.contains('light-mode');
+            if (isDark) {
+                // Switch to dark mode
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('pupuTheme', 'dark');
+                document.getElementById('themeIcon').textContent = '🌙';
+                document.getElementById('themeLabel').textContent = '切换主题';
+            } else {
+                // Switch to light mode
+                document.body.classList.add('light-mode');
+                localStorage.setItem('pupuTheme', 'light');
+                document.getElementById('themeIcon').textContent = '☀️';
+                document.getElementById('themeLabel').textContent = '亮色模式';
+            }
+        }
+        
+        // Load saved theme on startup
+        function initTheme() {
+            const savedTheme = localStorage.getItem('pupuTheme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeIcon').textContent = '☀️';
+                document.getElementById('themeLabel').textContent = '亮色模式';
+            }
         }
         
         // Keyboard shortcuts
