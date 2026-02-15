@@ -1,0 +1,61 @@
+{
+  "site": {
+    "title": "🐾 噗噗控制台",
+    "version": "V5.4",
+    "securityCode": "pupu2026"
+  },
+  "skills": [
+    { "icon": "📝", "name": "update-docs" },
+    { "icon": "📧", "name": "send-email" },
+    { "icon": "🎨", "name": "frontend-design" },
+    { "icon": "🔎", "name": "code-reviewer" },
+    { "icon": "🔀", "name": "pr-creator" },
+    { "icon": "🔧", "name": "fix" },
+    { "icon": "🌤️", "name": "weather" },
+    { "icon": "🛡️", "name": "agentguard" },
+    { "icon": "💾", "name": "memory-qmd" },
+    { "icon": "🎭", "name": "skill-creator" },
+    { "icon": "☁️", "name": "feishu-doc" },
+    { "icon": "🔄", "name": "openclaw-switch" },
+    { "icon": "❤️", "name": "healthcheck" },
+    { "icon": "🔧", "name": "github" },
+    { "icon": "🎮", "name": "1password" },
+    { "icon": "📓", "name": "apple-notes" },
+    { "icon": "💬", "name": "discord" },
+    { "icon": "🎵", "name": "spotify-player" }
+  ],
+  "quickLinks": [
+    { "icon": "🌐", "name": "看板预览", "url": "/" },
+    { "icon": "🐙", "name": "GitHub", "url": "https://github.com" },
+    { "icon": "📖", "name": "Moltbook", "url": "https://www.moltbook.com" },
+    { "icon": "💬", "name": "Discord", "url": "https://discord.com/invite/clawd" },
+    { "icon": "🛠️", "name": "技能市场", "url": "https://clawhub.com" },
+    { "icon": "📚", "name": "文档", "url": "https://docs.openclaw.ai" }
+  ],
+  "connections": [
+    { "icon": "💬", "name": "Telegram", "status": "online" },
+    { "icon": "📱", "name": "企业微信", "status": "online" },
+    { "icon": "🐙", "name": "GitHub", "status": "online" },
+    { "icon": "☁️", "name": "飞书", "status": "online" }
+  ],
+  "cronTasks": [
+    { "name": "页面迭代汇报", "schedule": "每小时", "status": "启用" },
+    { "name": "每日反思日报", "schedule": "23:50", "status": "启用" },
+    { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
+  ],
+  "highlights": [
+    { "icon": "🚀", "title": "V5.4 自动刷新", "desc": "每30秒自动更新" },
+    { "icon": "🔐", "title": "安全码保护", "desc": "输入密码访问" },
+    { "icon": "⌨️", "title": "快捷键支持", "desc": "Ctrl+K 打开菜单" },
+    { "icon": "🔗", "title": "快速链接", "desc": "常用入口" }
+  ],
+  "weather": {
+    "city": "北京",
+    "lat": 39.9,
+    "lon": 116.4
+  },
+  "system": {
+    "startDate": "2026-02-02",
+    "model": "MiniMax-M2.5"
+  }
+}
