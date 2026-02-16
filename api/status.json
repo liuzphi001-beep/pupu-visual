@@ -1,0 +1,14 @@
+{
+  "cpu": "0.0",
+  "memory": {
+    "total": 3655,
+    "used": 1343,
+    "percent": 36
+  },
+  "disk": 27,
+  "load": "0.17",
+  "uptime": "up 1 week, 5 days, 11 hours, 40 minutes",
+  "skills": 66,
+  "cron": 3,
+  "timestamp": "2026-02-16T00:01:06Z"
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V5.6 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V6.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -553,7 +553,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V5.6</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V6.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -656,6 +656,8 @@
             // Start auto refresh
             refreshAllData();
             setInterval(refreshAllData, REFRESH_INTERVAL);
+            fetchSystemStatus();
+            setInterval(fetchSystemStatus, 60000); // 每分钟更新系统数据
             
             // Initialize theme
             initTheme();
@@ -753,8 +755,33 @@
             }
         });
         
-        // Lock screen logic
-        const SECURITY_CODE = config.site?.securityCode || 'pupu2026';
+        // Fetch real system data
+        async function fetchSystemStatus() {
+            try {
+                const res = await fetch('api/status.json');
+                const data = await res.json();
+                
+                // Update system metrics
+                document.getElementById('loadAvg').textContent = data.load || '0.00';
+                document.getElementById('memPercent').textContent = data.memory.percent + '%';
+                document.getElementById('memBar').style.width = data.memory.percent + '%';
+                document.getElementById('cpuPercent').textContent = Math.round(parseFloat(data.cpu)) + '%';
+                document.getElementById('cpuBar').style.width = Math.min(parseFloat(data.cpu), 100) + '%';
+                document.getElementById('diskPercent').textContent = data.disk + '%';
+                document.getElementById('diskBar').style.width = data.disk + '%';
+                
+                // Update skills count
+                document.getElementById('skillCount').textContent = data.skills;
+                document.getElementById('skillTotal').textContent = data.skills + '个';
+                
+                // Update uptime
+                document.getElementById('uptimeDisplay').textContent = data.uptime;
+                
+                console.log('✅ 系统数据已更新:', data);
+            } catch (e) {
+                console.log('⚠️ 获取系统数据失败:', e.message);
+            }
+        }
         const lockScreen = document.getElementById('lockScreen');
         const lockInput = document.getElementById('lockInput');
         const lockError = document.getElementById('lockError');
