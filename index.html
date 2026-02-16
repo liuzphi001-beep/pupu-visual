@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V7.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V8.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -202,6 +202,27 @@
         .chart-row { display: flex; gap: 10px; margin-top: 10px; }
         .chart-box { flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 10px; }
         .chart-title { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 8px; }
+        
+        /* Notification Bell */
+        .notification-bell { position: relative; cursor: pointer; font-size: 1.3rem; padding: 8px; transition: transform 0.2s; }
+        .notification-bell:hover { transform: scale(1.1); }
+        .notification-badge { position: absolute; top: 0; right: 0; background: var(--accent-red); color: white; font-size: 0.6rem; padding: 2px 5px; border-radius: 10px; min-width: 16px; text-align: center; }
+        .notification-panel { display: none; position: absolute; top: 50px; right: 20px; width: 280px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .notification-panel.show { display: block; }
+        .notification-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; color: var(--accent-cyan); }
+        .notification-item { padding: 8px 0; border-bottom: 1px solid var(--border-color); font-size: 0.8rem; }
+        .notification-item:last-child { border-bottom: none; }
+        
+        /* Todo List */
+        .todo-input { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; outline: none; margin-bottom: 10px; }
+        .todo-input:focus { border-color: var(--accent-cyan); }
+        .todo-item { display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 6px; margin-bottom: 6px; font-size: 0.8rem; }
+        .todo-checkbox { width: 16px; height: 16px; border: 2px solid var(--accent-cyan); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .todo-checkbox.checked { background: var(--accent-cyan); }
+        .todo-text { flex: 1; }
+        .todo-text.done { text-decoration: line-through; color: var(--text-secondary); }
+        .todo-delete { cursor: pointer; color: var(--accent-red); opacity: 0.5; }
+        .todo-delete:hover { opacity: 1; }
         .cron-list { max-height: 220px; overflow-y: auto; }
         .cron-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color); }
         .cron-item:last-child { border-bottom: none; }
@@ -379,6 +400,15 @@
                 <div class="status-pill" id="statusPill"><span class="status-dot"></span><span>在线运行</span></div>
                 <div class="status-pill" style="background:rgba(168,85,247,0.1);border-color:var(--accent-purple);color:var(--accent-purple)"><span id="uptimeDisplay">已运行 11天</span></div>
                 <div class="cmd-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd> 快捷命令</div>
+                <div class="notification-bell" onclick="toggleNotifications()">🔔<span class="notification-badge" id="notifCount">0</span></div>
+                <div class="notification-panel" id="notifPanel">
+                    <div class="notification-title">📋 通知</div>
+                    <div id="notifList">
+                        <div class="notification-item">🎉 V8.0 新版本发布!</div>
+                        <div class="notification-item">📊 实时图表已上线</div>
+                        <div class="notification-item">✅ 系统运行正常</div>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -490,12 +520,12 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header"><span class="card-title">📝 当前任务</span></div>
-                <div class="task-list">
-                    <div class="task-item"><div class="task-check done">✓</div><div class="task-text done">每小时迭代机制</div><span class="task-tag done">完成</span></div>
-                    <div class="task-item"><div class="task-check done">✓</div><div class="task-text done">GitHub仓库部署</div><span class="task-tag done">完成</span></div>
-                    <div class="task-item"><div class="task-check done">✓</div><div class="task-text done">GitHub Pages上线</div><span class="task-tag done">完成</span></div>
-                    <div class="task-item"><div class="task-check done">✓</div><div class="task-text done">每小时迭代</div><span class="task-tag done">完成</span></div>
+                <div class="card-header"><span class="card-title">📝 待办事项</span></div>
+                <input type="text" class="todo-input" id="todoInput" placeholder="添加新任务... (回车添加)" onkeypress="addTodo(event)">
+                <div class="task-list" id="todoList">
+                    <div class="todo-item"><div class="todo-checkbox" onclick="toggleTodo(this)"></div><div class="todo-text">完善看板功能</div><div class="todo-delete" onclick="deleteTodo(this)">✕</div></div>
+                    <div class="todo-item"><div class="todo-checkbox checked" onclick="toggleTodo(this)"></div><div class="todo-text done">V6.0 真实监控</div><div class="todo-delete" onclick="deleteTodo(this)">✕</div></div>
+                    <div class="todo-item"><div class="todo-checkbox checked" onclick="toggleTodo(this)"></div><div class="todo-text done">V7.0 实时图表</div><div class="todo-delete" onclick="deleteTodo(this)">✕</div></div>
                 </div>
             </div>
             <div class="card">
@@ -562,7 +592,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V7.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V8.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -670,6 +700,7 @@
             
             // Initialize theme
             initTheme();
+            loadTodos();
             
             // Initialize charts
             initCharts();
@@ -748,6 +779,75 @@
                 document.body.classList.add('light-mode');
                 document.getElementById('themeIcon').textContent = '☀️';
                 document.getElementById('themeLabel').textContent = '亮色模式';
+            }
+        }
+        
+        // Notification functions
+        function toggleNotifications() {
+            const panel = document.getElementById('notifPanel');
+            panel.classList.toggle('show');
+        }
+        
+        // Close notification panel when clicking outside
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('notifPanel');
+            const bell = document.querySelector('.notification-bell');
+            if (panel && bell && !panel.contains(e.target) && !bell.contains(e.target)) {
+                panel.classList.remove('show');
+            }
+        });
+        
+        // Todo functions
+        function addTodo(e) {
+            if (e.key === 'Enter') {
+                const input = document.getElementById('todoInput');
+                const text = input.value.trim();
+                if (text) {
+                    const todoList = document.getElementById('todoList');
+                    const todoItem = document.createElement('div');
+                    todoItem.className = 'todo-item';
+                    todoItem.innerHTML = `<div class="todo-checkbox" onclick="toggleTodo(this)"></div><div class="todo-text">${text}</div><div class="todo-delete" onclick="deleteTodo(this)">✕</div>`;
+                    todoList.insertBefore(todoItem, todoList.firstChild);
+                    saveTodos();
+                    input.value = '';
+                }
+            }
+        }
+        
+        function toggleTodo(checkbox) {
+            checkbox.classList.toggle('checked');
+            checkbox.nextElementSibling.classList.toggle('done');
+            saveTodos();
+        }
+        
+        function deleteTodo(btn) {
+            btn.parentElement.remove();
+            saveTodos();
+        }
+        
+        function saveTodos() {
+            const todos = [];
+            document.querySelectorAll('.todo-item').forEach(item => {
+                todos.push({
+                    text: item.querySelector('.todo-text').textContent,
+                    done: item.querySelector('.todo-checkbox').classList.contains('checked')
+                });
+            });
+            localStorage.setItem('pupuTodos', JSON.stringify(todos));
+        }
+        
+        function loadTodos() {
+            const saved = localStorage.getItem('pupuTodos');
+            if (saved) {
+                const todos = JSON.parse(saved);
+                const todoList = document.getElementById('todoList');
+                todoList.innerHTML = '';
+                todos.forEach(todo => {
+                    const item = document.createElement('div');
+                    item.className = 'todo-item';
+                    item.innerHTML = `<div class="todo-checkbox ${todo.done ? 'checked' : ''}" onclick="toggleTodo(this)"></div><div class="todo-text ${todo.done ? 'done' : ''}">${todo.text}</div><div class="todo-delete" onclick="deleteTodo(this)">✕</div>`;
+                    todoList.appendChild(item);
+                });
             }
         }
         
