@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台",
-    "version": "V9.0",
+    "version": "V10.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -44,10 +44,10 @@
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
-    { "icon": "✨", "title": "V9.0 流畅动画", "desc": "平滑主题切换过渡" },
+    { "icon": "📜", "title": "V10.0 版本历史", "desc": "通知中心查看更新记录" },
+    { "icon": "✨", "title": "平滑动画", "desc": "主题切换流畅过渡" },
     { "icon": "🔔", "title": "通知中心", "desc": "铃铛+待办事项" },
-    { "icon": "📈", "title": "实时图表", "desc": "CPU/内存趋势" },
-    { "icon": "📊", "title": "真实监控", "desc": "实时系统数据" }
+    { "icon": "📈", "title": "实时图表", "desc": "CPU/内存趋势" }
   ],
   "weather": {
     "city": "北京",
