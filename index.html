@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V11.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V12.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -240,6 +240,12 @@
         .circular-progress .value { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 600; }
         .circular-progress .label { font-size: 0.65rem; color: var(--text-secondary); }
         .progress-grid { display: flex; justify-content: space-around; gap: 20px; }
+        
+        /* Search Box */
+        .search-box { position: relative; margin-bottom: 12px; }
+        .search-input { width: 100%; padding: 10px 12px 10px 36px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; outline: none; }
+        .search-input:focus { border-color: var(--accent-cyan); }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
         .cron-list { max-height: 220px; overflow-y: auto; }
         .cron-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color); }
         .cron-item:last-child { border-bottom: none; }
@@ -577,6 +583,10 @@
         <div class="dashboard">
             <div class="card" style="grid-column: span 2;">
                 <div class="card-header"><span class="card-title">⚡ Skills 技能库</span><span class="card-badge" id="skillTotal">63个</span></div>
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="skillSearch" placeholder="搜索技能..." onkeyup="filterSkills()">
+                </div>
                 <div class="skills-grid" id="skillsGrid"></div>
             </div>
             <div class="card" style="grid-column: span 2;">
@@ -628,7 +638,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V11.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V12.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -885,6 +895,21 @@
                     todoList.appendChild(item);
                 });
             }
+        }
+        
+        // Skill search function
+        function filterSkills() {
+            const input = document.getElementById('skillSearch');
+            const filter = input.value.toLowerCase();
+            const skills = document.querySelectorAll('.skill-item');
+            skills.forEach(skill => {
+                const name = skill.querySelector('.name').textContent.toLowerCase();
+                if (name.includes(filter)) {
+                    skill.style.display = '';
+                } else {
+                    skill.style.display = 'none';
+                }
+            });
         }
         
         // Keyboard shortcuts
