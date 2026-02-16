@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台",
-    "version": "V15.0",
+    "version": "V16.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -44,7 +44,7 @@
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
-    { "icon": "📥", "title": "V15.0 数据导出", "desc": "导出CSV/JSON" },
+    { "icon": "📥", "title": "V16.0 实时通知", "desc": "活动实时推送" },
     { "icon": "⚡", "title": "快捷操作", "desc": "一键访问常用链接" },
     { "icon": "🌍", "title": "世界时钟", "desc": "6个时区" },
     { "icon": "🔍", "title": "技能搜索", "desc": "快速过滤" }
@@ -57,5 +57,17 @@
   "system": {
     "startDate": "2026-02-02",
     "model": "MiniMax-M2.5"
-  }
+  },
+  "activities": [
+    { "icon": "🚀", "title": "V16.0 发布", "time": "刚刚", "type": "success" },
+    { "icon": "⚡", "title": "页面迭代", "time": "2小时前", "type": "info" },
+    { "icon": "📊", "title": "数据同步", "time": "3小时前", "type": "success" },
+    { "icon": "🧠", "title": "记忆更新", "time": "5小时前", "type": "info" },
+    { "icon": "📝", "title": "日报生成", "time": "昨天", "type": "success" }
+  ],
+  "notifications": [
+    { "id": 1, "title": "🎉 V16.0 发布!", "content": "实时通知系统已上线", "time": "刚刚", "read": false },
+    { "id": 2, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "1小时前", "read": true },
+    { "id": 3, "title": "⚡ 迭代完成", "content": "V15.0 → V16.0", "time": "2小时前", "read": true }
+  ]
 }
