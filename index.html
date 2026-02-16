@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V8.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V9.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -32,7 +32,6 @@
             --glow-cyan: rgba(0, 255, 245, 0.3);
         }
         
-        /* Light Mode */
         body.light-mode {
             --bg-primary: #f5f5f7;
             --bg-secondary: #ffffff;
@@ -41,10 +40,12 @@
             --text-secondary: #6e6e73;
             --border-color: #d2d2d7;
             --glow-cyan: rgba(0, 255, 245, 0.2);
+            transition: background-color 0.5s ease, color 0.3s ease;
         }
         body.light-mode .bg {
             background: radial-gradient(ellipse at 20% 0%, rgba(0, 255, 245, 0.15) 0%, transparent 50%),
                         radial-gradient(ellipse at 80% 100%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            transition: background 0.5s ease;
         }
         body.light-mode .header-title h1 {
             background: linear-gradient(135deg, #007aff, #ff2d55);
@@ -56,6 +57,9 @@
         body.light-mode .command-btn:hover {
             border-color: #007aff;
             background: rgba(0, 122, 255, 0.1);
+        }
+        body.light-mode .card {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -145,6 +149,8 @@
             border-radius: 10px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s;
         }
         .command-btn:hover { border-color: var(--accent-cyan); transform: translateY(-2px); }
+        .command-btn .icon { font-size: 1.5rem; margin-bottom: 6px; transition: transform 0.3s ease; }
+        .command-btn:hover .icon { transform: rotate(15deg) scale(1.1); }
         .command-btn .icon { font-size: 1.5rem; margin-bottom: 6px; }
         .command-btn .label { font-size: 0.8rem; color: var(--text-secondary); }
 
@@ -592,7 +598,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V8.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V9.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
