@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V6.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V7.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -197,7 +197,11 @@
         .task-tag.done { background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
         .task-tag.doing { background: rgba(168, 85, 247, 0.2); color: var(--accent-purple); }
 
-        /* Cron */
+        /* Charts */
+        .chart-container { position: relative; height: 100px; margin-top: 10px; }
+        .chart-row { display: flex; gap: 10px; margin-top: 10px; }
+        .chart-box { flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 10px; }
+        .chart-title { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 8px; }
         .cron-list { max-height: 220px; overflow-y: auto; }
         .cron-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color); }
         .cron-item:last-child { border-bottom: none; }
@@ -450,6 +454,11 @@
                 <div class="metric-bar"><div class="metric-bar-fill low" id="cpuBar" style="width: 8%"></div></div>
                 <div class="metric-row"><span class="metric-label">磁盘</span><span class="metric-value" id="diskPercent">27%</span></div>
                 <div class="metric-bar"><div class="metric-bar-fill low" id="diskBar" style="width: 27%"></div></div>
+                <!-- 图表区域 -->
+                <div class="chart-row">
+                    <div class="chart-box"><div class="chart-title">💾 内存</div><canvas id="memChart"></canvas></div>
+                    <div class="chart-box"><div class="chart-title">🖥️ CPU</div><canvas id="cpuChart"></canvas></div>
+                </div>
             </div>
             <div class="card">
                 <div class="card-header"><span class="card-title">🌤️ 天气</span><span>北京</span></div>
@@ -553,7 +562,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V6.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V7.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -661,6 +670,9 @@
             
             // Initialize theme
             initTheme();
+            
+            // Initialize charts
+            initCharts();
         });
 
         function renderSkills() {
@@ -755,7 +767,76 @@
             }
         });
         
-        // Fetch real system data
+        // Charts
+        let cpuChart, memChart;
+        const cpuHistory = new Array(10).fill(0);
+        const memHistory = new Array(10).fill(0);
+        
+        function initCharts() {
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { display: false, min: 0, max: 100 }
+                },
+                elements: {
+                    point: { radius: 0 },
+                    line: { tension: 0.4 }
+                }
+            };
+            
+            // CPU Chart
+            cpuChart = new Chart(document.getElementById('cpuChart'), {
+                type: 'line',
+                data: {
+                    labels: cpuHistory,
+                    datasets: [{
+                        data: cpuHistory,
+                        borderColor: '#00fff5',
+                        backgroundColor: 'rgba(0, 255, 245, 0.1)',
+                        fill: true,
+                        borderWidth: 2
+                    }]
+                },
+                options: chartOptions
+            });
+            
+            // Memory Chart
+            memChart = new Chart(document.getElementById('memChart'), {
+                type: 'line',
+                data: {
+                    labels: memHistory,
+                    datasets: [{
+                        data: memHistory,
+                        borderColor: '#a855f7',
+                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                        fill: true,
+                        borderWidth: 2
+                    }]
+                },
+                options: chartOptions
+            });
+        }
+        
+        function updateCharts(cpu, mem) {
+            cpuHistory.push(parseFloat(cpu) || 0);
+            memHistory.push(parseInt(mem) || 0);
+            cpuHistory.shift();
+            memHistory.shift();
+            
+            if (cpuChart) {
+                cpuChart.data.labels = cpuHistory.map((_, i) => i);
+                cpuChart.data.datasets[0].data = cpuHistory;
+                cpuChart.update('none');
+            }
+            if (memChart) {
+                memChart.data.labels = memHistory.map((_, i) => i);
+                memChart.data.datasets[0].data = memHistory;
+                memChart.update('none');
+            }
+        }
         async function fetchSystemStatus() {
             try {
                 const res = await fetch('api/status.json');
@@ -776,6 +857,9 @@
                 
                 // Update uptime
                 document.getElementById('uptimeDisplay').textContent = data.uptime;
+                
+                // Update charts
+                updateCharts(data.cpu, data.memory.percent);
                 
                 console.log('✅ 系统数据已更新:', data);
             } catch (e) {
