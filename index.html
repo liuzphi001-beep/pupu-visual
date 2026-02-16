@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V10.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V11.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -229,6 +229,17 @@
         .todo-text.done { text-decoration: line-through; color: var(--text-secondary); }
         .todo-delete { cursor: pointer; color: var(--accent-red); opacity: 0.5; }
         .todo-delete:hover { opacity: 1; }
+        
+        /* Circular Progress */
+        .circular-progress { position: relative; width: 80px; height: 80px; margin: 0 auto; }
+        .circular-progress svg { width: 80px; height: 80px; transform: rotate(-90deg); }
+        .circular-progress .bg { fill: none; stroke: var(--bg-secondary); stroke-width: 6; }
+        .circular-progress .progress { fill: none; stroke: var(--accent-cyan); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 220; stroke-dashoffset: 220; transition: stroke-dashoffset 0.5s ease; }
+        .circular-progress .progress.cpu { stroke: var(--accent-cyan); }
+        .circular-progress .progress.mem { stroke: var(--accent-purple); }
+        .circular-progress .value { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 600; }
+        .circular-progress .label { font-size: 0.65rem; color: var(--text-secondary); }
+        .progress-grid { display: flex; justify-content: space-around; gap: 20px; }
         .cron-list { max-height: 220px; overflow-y: auto; }
         .cron-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color); }
         .cron-item:last-child { border-bottom: none; }
@@ -491,11 +502,23 @@
             </div>
             <div class="card">
                 <div class="card-header"><span class="card-title">💻 系统状态</span></div>
-                <div class="metric-row"><span class="metric-label">内存</span><span class="metric-value" id="memPercent">42%</span></div>
-                <div class="metric-bar"><div class="metric-bar-fill medium" id="memBar" style="width: 42%"></div></div>
-                <div class="metric-row"><span class="metric-label">CPU</span><span class="metric-value" id="cpuPercent">8%</span></div>
-                <div class="metric-bar"><div class="metric-bar-fill low" id="cpuBar" style="width: 8%"></div></div>
-                <div class="metric-row"><span class="metric-label">磁盘</span><span class="metric-value" id="diskPercent">27%</span></div>
+                <!-- 圆形进度条 -->
+                <div class="progress-grid">
+                    <div class="circular-progress">
+                        <svg><circle class="bg" cx="40" cy="40" r="35"></circle><circle class="progress cpu" id="cpuCircle" cx="40" cy="40" r="35"></circle></svg>
+                        <div class="value"><span id="cpuPercent">0%</span></div>
+                    </div>
+                    <div class="circular-progress">
+                        <svg><circle class="bg" cx="40" cy="40" r="35"></circle><circle class="progress mem" id="memCircle" cx="40" cy="40" r="35"></circle></svg>
+                        <div class="value"><span id="memPercent">0%</span></div>
+                    </div>
+                </div>
+                <div style="display:flex;justify-content:space-around;margin-top:8px;font-size:0.7rem;color:var(--text-secondary)">
+                    <span>🖥️ CPU</span>
+                    <span>💾 内存</span>
+                </div>
+                <!-- 磁盘 -->
+                <div class="metric-row" style="margin-top:16px"><span class="metric-label">磁盘</span><span class="metric-value" id="diskPercent">27%</span></div>
                 <div class="metric-bar"><div class="metric-bar-fill low" id="diskBar" style="width: 27%"></div></div>
                 <!-- 图表区域 -->
                 <div class="chart-row">
@@ -605,7 +628,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V10.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V11.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -959,8 +982,20 @@
                 document.getElementById('loadAvg').textContent = data.load || '0.00';
                 document.getElementById('memPercent').textContent = data.memory.percent + '%';
                 document.getElementById('memBar').style.width = data.memory.percent + '%';
-                document.getElementById('cpuPercent').textContent = Math.round(parseFloat(data.cpu)) + '%';
+                
+                // Update CPU
+                const cpuVal = Math.round(parseFloat(data.cpu)) + '%';
+                document.getElementById('cpuPercent').textContent = cpuVal;
                 document.getElementById('cpuBar').style.width = Math.min(parseFloat(data.cpu), 100) + '%';
+                
+                // Update circular progress
+                const circumference = 2 * Math.PI * 35; // r=35
+                const cpuOffset = circumference - (parseFloat(data.cpu) / 100) * circumference;
+                const memOffset = circumference - (data.memory.percent / 100) * circumference;
+                document.getElementById('cpuCircle').style.strokeDashoffset = cpuOffset;
+                document.getElementById('memCircle').style.strokeDashoffset = memOffset;
+                
+                // Update disk
                 document.getElementById('diskPercent').textContent = data.disk + '%';
                 document.getElementById('diskBar').style.width = data.disk + '%';
                 
