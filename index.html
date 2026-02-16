@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V12.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V13.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -246,6 +246,12 @@
         .search-input { width: 100%; padding: 10px 12px 10px 36px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; outline: none; }
         .search-input:focus { border-color: var(--accent-cyan); }
         .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
+        
+        /* World Clock */
+        .world-clock { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .clock-item { text-align: center; padding: 8px; background: var(--bg-secondary); border-radius: 8px; }
+        .clock-city { font-size: 0.7rem; color: var(--text-secondary); }
+        .clock-time { font-size: 1rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
         .cron-list { max-height: 220px; overflow-y: auto; }
         .cron-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color); }
         .cron-item:last-child { border-bottom: none; }
@@ -540,6 +546,17 @@
                     <div class="weather-detail"><span>💨 <span id="windSpeed">20</span> km/h</span><span>📍 <span id="windDir">北</span></span></div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">🌍 世界时钟</span></div>
+                <div class="world-clock">
+                    <div class="clock-item"><div class="clock-city">北京</div><div class="clock-time" id="clockBeijing">--:--</div></div>
+                    <div class="clock-item"><div class="clock-city">东京</div><div class="clock-time" id="clockTokyo">--:--</div></div>
+                    <div class="clock-item"><div class="clock-city">伦敦</div><div class="clock-time" id="clockLondon">--:--</div></div>
+                    <div class="clock-item"><div class="clock-city">纽约</div><div class="clock-time" id="clockNewYork">--:--</div></div>
+                    <div class="clock-item"><div class="clock-city">悉尼</div><div class="clock-time" id="clockSydney">--:--</div></div>
+                    <div class="clock-item"><div class="clock-city">UTC</div><div class="clock-time" id="clockUtc">--:--</div></div>
+                </div>
+            </div>
         </div>
 
         <div class="dashboard">
@@ -638,7 +655,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V12.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V13.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -761,6 +778,17 @@
             const now = new Date();
             document.getElementById('serverTime').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
             document.getElementById('lastUpdate').textContent = now.toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+            
+            // Update world clocks
+            try {
+                document.getElementById('clockBeijing').textContent = now.toLocaleTimeString('zh-CN', {timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit'});
+                document.getElementById('clockTokyo').textContent = now.toLocaleTimeString('ja-JP', {timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit'});
+                document.getElementById('clockLondon').textContent = now.toLocaleTimeString('en-GB', {timeZone:'Europe/London',hour:'2-digit',minute:'2-digit'});
+                document.getElementById('clockNewYork').textContent = now.toLocaleTimeString('en-US', {timeZone:'America/New_York',hour:'2-digit',minute:'2-digit'});
+                document.getElementById('clockSydney').textContent = now.toLocaleTimeString('en-AU', {timeZone:'Australia/Sydney',hour:'2-digit',minute:'2-digit'});
+                document.getElementById('clockUtc').textContent = now.toLocaleTimeString('en-US', {timeZone:'UTC',hour:'2-digit',minute:'2-digit'});
+            } catch(e) {}
+            
             const startDate = new Date('2026-02-02T00:00:00+08:00');
             const diff = now - startDate;
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
