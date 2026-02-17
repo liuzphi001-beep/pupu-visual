@@ -345,6 +345,19 @@
         .connection-item.active { border: 1px solid var(--accent-green); }
         .connection-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); animation: pulse 2s infinite; }
         
+        /* Model status */
+        .model-status { display: flex; flex-direction: column; gap: 12px; }
+        .model-main { display: flex; align-items: center; gap: 12px; padding: 12px; background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(0,255,245,0.1)); border-radius: 12px; border: 1px solid rgba(168,85,247,0.3); }
+        .model-icon { font-size: 2rem; }
+        .model-info { flex: 1; }
+        .model-name { font-size: 1rem; font-weight: 600; background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .model-provider { font-size: 0.7rem; color: var(--text-secondary); }
+        .model-stats { display: flex; flex-direction: column; gap: 8px; }
+        .model-stat { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.75rem; }
+        .model-stat .stat-icon { font-size: 0.9rem; }
+        .model-stat .stat-label { color: var(--text-secondary); flex: 1; }
+        .model-stat .stat-value { font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--accent-cyan); }
+        
         /* Quick links */
         .quick-links { display: flex; flex-wrap: wrap; gap: 8px; }
         .quick-link { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; font-size: 0.75rem; text-decoration: none; color: var(--text-primary); transition: all 0.2s; }
@@ -522,8 +535,37 @@
                     <div class="connection-item active"><span class="icon">☁️</span><span>飞书</span><span class="connection-dot"></span></div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">🧠 模型状态</span><span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)">AI</span></div>
+                <div class="model-status">
+                    <div class="model-main">
+                        <span class="model-icon">🤖</span>
+                        <div class="model-info">
+                            <div class="model-name" id="modelName">MiniMax-M2.5</div>
+                            <div class="model-provider">minimax-portal</div>
+                        </div>
+                    </div>
+                    <div class="model-stats">
+                        <div class="model-stat">
+                            <span class="stat-icon">⚡</span>
+                            <span class="stat-label">版本</span>
+                            <span class="stat-value" id="openclawVersion">2026.2.9</span>
+                        </div>
+                        <div class="model-stat">
+                            <span class="stat-icon">🎯</span>
+                            <span class="stat-label">上下文</span>
+                            <span class="stat-value" id="contextUsage">0/200k</span>
+                        </div>
+                        <div class="model-stat">
+                            <span class="stat-icon">💭</span>
+                            <span class="stat-label">思考</span>
+                            <span class="stat-value" id="thinkingMode">off</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card" style="grid-column: span 2;">
-                <div class="card-header"><span class="card-title">✨ 今日亮点</span><span class="card-badge">2026-02-15</span></div>
+                <div class="card-header"><span class="card-title">✨ 今日亮点</span><span class="card-badge">2026-02-17</span></div>
                 <div class="highlight-grid">
                     <div class="highlight-item"><span class="highlight-icon">🚀</span><div class="highlight-info"><div class="highlight-title">V4.0-V4.4迭代</div><div class="highlight-desc">每小时自动升级</div></div></div>
                     <div class="highlight-item"><span class="highlight-icon">⌨️</span><div class="highlight-info"><div class="highlight-title">快捷键支持</div><div class="highlight-desc">Ctrl+K 打开菜单</div></div></div>
@@ -674,7 +716,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V15.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V16.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -1001,7 +1043,7 @@
         
         function exportData(type) {
             const data = {
-                version: 'V15.0',
+                version: 'V16.0',
                 timestamp: new Date().toISOString(),
                 cpu: document.getElementById('cpuPercent').textContent,
                 memory: document.getElementById('memPercent').textContent,
@@ -1156,6 +1198,14 @@
                 
                 // Update charts
                 updateCharts(data.cpu, data.memory.percent);
+                
+                // Update model info
+                if (data.model) {
+                    document.getElementById('modelName').textContent = data.model;
+                }
+                if (data.openclaw) {
+                    document.getElementById('openclawVersion').textContent = data.openclaw;
+                }
                 
                 console.log('✅ 系统数据已更新:', data);
             } catch (e) {

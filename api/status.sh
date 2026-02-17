@@ -18,6 +18,10 @@ SKILLS_TOTAL=$((SKILLS_LOCAL + SKILLS_GLOBAL))
 # 获取定时任务数
 CRON_COUNT=3
 
+# 获取OpenClaw状态
+OPENCLAW_VERSION=$(openclaw --version 2>/dev/null || echo "未知")
+MODEL=$(grep -o '"model":"[^"]*"' /root/.openclaw/config/openclaw.json 2>/dev/null | cut -d'"' -f4 || echo "MiniMax-M2.5")
+
 # 输出JSON
 echo "{"
 echo "  \"cpu\": \"$CPU\","
@@ -31,5 +35,7 @@ echo "  \"load\": \"$LOAD\","
 echo "  \"uptime\": \"$UPTIME\","
 echo "  \"skills\": $SKILLS_TOTAL,"
 echo "  \"cron\": $CRON_COUNT,"
+echo "  \"openclaw\": \"$OPENCLAW_VERSION\","
+echo "  \"model\": \"$MODEL\","
 echo "  \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
 echo "}"
