@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台",
-    "version": "V17.0",
+    "version": "V18.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -39,12 +39,12 @@
     { "icon": "☁️", "name": "飞书", "status": "online" }
   ],
   "cronTasks": [
-    { "name": "页面迭代汇报", "schedule": "每小时", "status": "启用" },
+    { "name": "页面迭代汇报", "schedule": "每2小时", "status": "启用" },
     { "name": "每日反思日报", "schedule": "23:50", "status": "启用" },
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
-    { "icon": "📊", "title": "V17.0 健康监控", "desc": "实时系统健康状态" },
+    { "icon": "📊", "title": "V18.0 快捷统计", "desc": "实时数据看板" },
     { "icon": "⚡", "title": "快捷操作", "desc": "一键访问常用链接" },
     { "icon": "🌍", "title": "世界时钟", "desc": "6个时区" },
     { "icon": "🔍", "title": "技能搜索", "desc": "快速过滤" }
@@ -59,21 +59,27 @@
     "model": "MiniMax-M2.5"
   },
   "activities": [
-    { "icon": "🚀", "title": "V17.0 发布", "time": "刚刚", "type": "success" },
-    { "icon": "📊", "title": "健康监控上线", "time": "刚刚", "type": "success" },
+    { "icon": "🚀", "title": "V18.0 发布", "time": "刚刚", "type": "success" },
+    { "icon": "📊", "title": "快捷统计上线", "time": "刚刚", "type": "success" },
     { "icon": "⚡", "title": "页面迭代", "time": "2小时前", "type": "info" },
-    { "icon": "📊", "title": "数据同步", "time": "3小时前", "type": "success" },
+    { "icon": "📊", "title": "健康监控", "time": "3小时前", "type": "success" },
     { "icon": "🧠", "title": "记忆更新", "time": "5小时前", "type": "info" }
   ],
   "notifications": [
-    { "id": 1, "title": "🎉 V17.0 发布!", "content": "健康监控系统已上线", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🎉 V16.0 发布!", "content": "实时通知系统已上线", "time": "1小时前", "read": true },
-    { "id": 3, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "2小时前", "read": true }
+    { "id": 1, "title": "🎉 V18.0 发布!", "content": "快捷统计面板已上线", "time": "刚刚", "read": false },
+    { "id": 2, "title": "🎉 V17.0 发布!", "content": "健康监控系统已上线", "time": "2小时前", "read": true },
+    { "id": 3, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "3小时前", "read": true }
   ],
   "health": {
-    "cpu": { "status": "normal", "value": "9%", "label": "正常" },
+    "cpu": { "status": "normal", "value": "38%", "label": "正常" },
     "memory": { "status": "normal", "value": "38%", "label": "正常" },
     "disk": { "status": "normal", "value": "28%", "label": "正常" },
-    "uptime": { "status": "normal", "value": "13天9小时", "label": "稳定" }
+    "uptime": { "status": "normal", "value": "13天11小时", "label": "稳定" }
+  },
+  "quickStats": {
+    "onlineUsers": 224,
+    "loadAverage": "0.38",
+    "diskUsage": "11G/40G",
+    "memoryUsage": "1.4G/3.6G"
   }
 }
