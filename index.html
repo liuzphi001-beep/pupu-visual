@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V20.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V21.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -378,6 +378,18 @@
         .cron-monitor-status { font-size: 0.65rem; padding: 4px 8px; border-radius: 6px; background: rgba(107, 107, 128, 0.2); color: var(--text-secondary); }
         .cron-monitor-status.active { background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
         
+        /* API health */
+        .api-health { display: flex; flex-direction: column; gap: 8px; }
+        .api-health-item { display: flex; align-items: center; gap: 10px; padding: 10px; background: var(--bg-secondary); border-radius: 10px; transition: all 0.2s; }
+        .api-health-item:hover { transform: translateX(4px); }
+        .api-health-icon { font-size: 1.2rem; }
+        .api-health-info { flex: 1; }
+        .api-health-name { font-size: 0.85rem; font-weight: 500; }
+        .api-health-url { font-size: 0.7rem; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; }
+        .api-health-status { width: 10px; height: 10px; border-radius: 50%; background: var(--text-secondary); }
+        .api-health-status.active { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+        .api-health-status.error { background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
+        
         /* Quick links */
         .quick-links { display: flex; flex-wrap: wrap; gap: 8px; }
         .quick-link { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; font-size: 0.75rem; text-decoration: none; color: var(--text-primary); transition: all 0.2s; }
@@ -646,6 +658,35 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">🌐 API状态</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)" id="apiStatusBadge">正常</span></div>
+                <div class="api-health">
+                    <div class="api-health-item">
+                        <div class="api-health-icon">📡</div>
+                        <div class="api-health-info">
+                            <div class="api-health-name">系统API</div>
+                            <div class="api-health-url">/api/status.json</div>
+                        </div>
+                        <div class="api-health-status active" id="apiStatusDot"></div>
+                    </div>
+                    <div class="api-health-item">
+                        <div class="api-health-icon">☁️</div>
+                        <div class="api-health-info">
+                            <div class="api-health-name">天气API</div>
+                            <div class="api-health-url">open-meteo.com</div>
+                        </div>
+                        <div class="api-health-status active" id="weatherApiStatus"></div>
+                    </div>
+                    <div class="api-health-item">
+                        <div class="api-health-icon">📊</div>
+                        <div class="api-health-info">
+                            <div class="api-health-name">数据同步</div>
+                            <div class="api-health-url" id="lastSyncTime">--</div>
+                        </div>
+                        <div class="api-health-status" id="syncStatus"></div>
+                    </div>
+                </div>
+            </div>
             <div class="card" style="grid-column: span 2;">
                 <div class="card-header"><span class="card-title">✨ 今日亮点</span><span class="card-badge">2026-02-18</span></div>
                 <div class="highlight-grid">
@@ -798,7 +839,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V20.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V21.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -1125,7 +1166,7 @@
         
         function exportData(type) {
             const data = {
-                version: 'V20.0',
+                version: 'V21.0',
                 timestamp: new Date().toISOString(),
                 cpu: document.getElementById('cpuPercent').textContent,
                 memory: document.getElementById('memPercent').textContent,
