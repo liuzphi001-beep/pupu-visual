@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V29.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V30.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -490,6 +490,15 @@
         
         /* Health Score */
         .health-score-display { display: flex; align-items: center; gap: 16px; }
+        
+        /* Usage Stats */
+        .usage-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .usage-item { display: flex; align-items: center; gap: 10px; padding: 10px; background: var(--bg-secondary); border-radius: 10px; transition: all 0.2s; }
+        .usage-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 255, 245, 0.1); }
+        .usage-icon { font-size: 1.3rem; }
+        .usage-info { flex: 1; }
+        .usage-label { font-size: 0.7rem; color: var(--text-secondary); }
+        .usage-value { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 600; color: var(--accent-cyan); }
         .health-score-circle { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
         .health-score-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
         .health-score-circle circle:last-child { transition: stroke-dashoffset 0.5s ease; }
@@ -981,6 +990,39 @@
                     <div class="sys-info-row">
                         <span class="sys-info-label">🤖 模型</span>
                         <span class="sys-info-value">MiniMax-M2.5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">📊 使用统计</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)">实时</span></div>
+                <div class="usage-stats" id="usageStats">
+                    <div class="usage-item">
+                        <div class="usage-icon">🔄</div>
+                        <div class="usage-info">
+                            <div class="usage-label">页面刷新</div>
+                            <div class="usage-value" id="pageRefreshes">0</div>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">⏱️</div>
+                        <div class="usage-info">
+                            <div class="usage-label">在线时长</div>
+                            <div class="usage-value" id="onlineTime">0分钟</div>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">🖱️</div>
+                        <div class="usage-info">
+                            <div class="usage-label">点击次数</div>
+                            <div class="usage-value" id="clickCount">0</div>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">⌨️</div>
+                        <div class="usage-info">
+                            <div class="usage-label">快捷键使用</div>
+                            <div class="usage-value" id="shortcutUse">0</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1756,6 +1798,58 @@
         function executeCmd(cmd) {
             alert('功能: ' + cmd);
         }
+        
+        // Usage statistics tracker
+        const usageStats = {
+            refreshes: parseInt(localStorage.getItem('pupuRefreshes') || '0'),
+            clicks: parseInt(localStorage.getItem('pupuClicks') || '0'),
+            shortcuts: parseInt(localStorage.getItem('pupuShortcuts') || '0'),
+            startTime: parseInt(localStorage.getItem('pupuStartTime')) || Date.now()
+        };
+        
+        function updateUsageStats() {
+            // Update display
+            document.getElementById('pageRefreshes').textContent = usageStats.refreshes;
+            document.getElementById('clickCount').textContent = usageStats.clicks;
+            document.getElementById('shortcutUse').textContent = usageStats.shortcuts;
+            
+            // Calculate online time
+            const onlineMs = Date.now() - usageStats.startTime;
+            const minutes = Math.floor(onlineMs / 60000);
+            const hours = Math.floor(minutes / 60);
+            const displayTime = hours > 0 ? `${hours}小时${minutes % 60}分钟` : `${minutes}分钟`;
+            document.getElementById('onlineTime').textContent = displayTime;
+        }
+        
+        // Track clicks
+        document.addEventListener('click', () => {
+            usageStats.clicks++;
+            localStorage.setItem('pupuClicks', usageStats.clicks);
+            updateUsageStats();
+        });
+        
+        // Track shortcut usage
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.altKey || e.metaKey) {
+                usageStats.shortcuts++;
+                localStorage.setItem('pupuShortcuts', usageStats.shortcuts);
+                updateUsageStats();
+            }
+        });
+        
+        // Track page refresh
+        let hasRefreshed = false;
+        window.addEventListener('beforeunload', () => {
+            if (!hasRefreshed) {
+                usageStats.refreshes++;
+                localStorage.setItem('pupuRefreshes', usageStats.refreshes);
+                localStorage.setItem('pupuStartTime', Date.now());
+            }
+        });
+        
+        // Initialize usage stats
+        updateUsageStats();
+        setInterval(updateUsageStats, 60000);
         
         updateTime();
         fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&timezone=Asia/Shanghai').then(r=>r.json()).then(updateWeather).catch(()=>{});
