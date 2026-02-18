@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V26.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V27.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -330,6 +330,8 @@
 
         /* Footer */
         .footer { text-align: center; padding: 24px 0; color: var(--text-secondary); font-size: 0.8rem; border-top: 1px solid var(--border-color); margin-top: 24px; }
+        .footer-status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); margin-right: 4px; animation: pulse 2s infinite; }
+        #footerStatus { color: var(--accent-green); margin-right: 8px; }
         .footer a { color: var(--accent-cyan); text-decoration: none; }
 
         /* Keyboard shortcuts modal */
@@ -986,7 +988,11 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V26.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>
+                <span class="footer-status-dot" id="footerStatusDot"></span>
+                <span id="footerStatus">系统正常</span>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V27.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+            </p>
         </footer>
     </div>
 
@@ -1313,7 +1319,7 @@
         
         function exportData(type) {
             const data = {
-                version: 'V26.0',
+                version: 'V27.0',
                 timestamp: new Date().toISOString(),
                 cpu: document.getElementById('cpuPercent').textContent,
                 memory: document.getElementById('memPercent').textContent,
