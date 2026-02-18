@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V24.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V25.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -266,7 +266,7 @@
         .clock-time { font-size: 1rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
         
         /* Quick Actions */
-        .quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .quick-actions { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
         .action-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
         .action-btn:hover { border-color: var(--accent-cyan); transform: translateY(-2px); }
         .action-btn .icon { font-size: 1.3rem; }
@@ -614,6 +614,7 @@
                     <div class="action-btn" onclick="window.open('https://docs.openclaw.ai','_blank')"><span class="icon">📚</span><span class="label">文档</span></div>
                     <div class="action-btn" onclick="location.reload()"><span class="icon">🔄</span><span class="label">刷新</span></div>
                     <div class="action-btn" onclick="toggleExport()"><span class="icon">📥</span><span class="label">导出</span></div>
+                    <div class="action-btn" onclick="window.open('https://clawhub.com','_blank')"><span class="icon">🛠️</span><span class="label">技能</span></div>
                     <div class="export-menu" id="exportMenu">
                         <div class="export-option" onclick="exportData('csv')">📊 CSV</div>
                         <div class="export-option" onclick="exportData('json')">📋 JSON</div>
@@ -983,7 +984,7 @@
         </div>
 
         <footer class="footer">
-            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V24.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
+            <p>🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V25.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a></p>
         </footer>
     </div>
 
@@ -1310,7 +1311,7 @@
         
         function exportData(type) {
             const data = {
-                version: 'V24.0',
+                version: 'V25.0',
                 timestamp: new Date().toISOString(),
                 cpu: document.getElementById('cpuPercent').textContent,
                 memory: document.getElementById('memPercent').textContent,
