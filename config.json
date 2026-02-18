@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V28.0",
-    "version": "V28.0",
+    "title": "🐾 噗噗控制台 V29.0",
+    "version": "V29.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -44,7 +44,7 @@
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
-    { "icon": "📊", "title": "V28.0 快捷统计", "desc": "实时数据展示" },
+    { "icon": "📊", "title": "V29.0 快捷统计", "desc": "实时数据展示" },
     { "icon": "🧠", "title": "模型状态", "desc": "实时AI模型监控" },
     { "icon": "⚡", "title": "快捷操作", "desc": "一键访问常用链接" },
     { "icon": "🌍", "title": "世界时钟", "desc": "6个时区" }
@@ -59,13 +59,13 @@
     "model": "MiniMax-M2.5"
   },
   "activities": [
-    { "icon": "🚀", "title": "V28.0 发布", "time": "刚刚", "type": "success" },
+    { "icon": "🚀", "title": "V29.0 发布", "time": "刚刚", "type": "success" },
     { "icon": "📊", "title": "快捷统计上线", "time": "刚刚", "type": "success" },
     { "icon": "🧠", "title": "模型状态上线", "time": "2小时前", "type": "success" },
     { "icon": "⚡", "title": "页面迭代", "time": "4小时前", "type": "info" }
   ],
   "notifications": [
-    { "id": 1, "title": "🎉 V28.0 发布!", "content": "快捷统计面板已上线", "time": "刚刚", "read": false },
+    { "id": 1, "title": "🎉 V29.0 发布!", "content": "快捷统计面板已上线", "time": "刚刚", "read": false },
     { "id": 2, "title": "🎉 V18.0 发布!", "content": "模型状态监控已上线", "time": "2小时前", "read": true },
     { "id": 3, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "4小时前", "read": true }
   ],
