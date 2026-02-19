@@ -532,6 +532,15 @@
         .no-alert-icon { font-size: 2rem; margin-bottom: 8px; }
         .no-alert-text { font-size: 0.9rem; color: var(--accent-green); }
         .no-alert-time { font-size: 0.7rem; color: var(--text-secondary); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+        
+        /* Sticky Note */
+        .sticky-note { display: flex; flex-direction: column; gap: 8px; }
+        .sticky-input { width: 100%; min-height: 80px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: inherit; font-size: 0.85rem; resize: none; }
+        .sticky-input:focus { outline: none; border-color: var(--accent-purple); }
+        .sticky-actions { display: flex; justify-content: space-between; align-items: center; }
+        .sticky-count { font-size: 0.7rem; color: var(--text-secondary); }
+        .sticky-save { padding: 4px 12px; background: var(--accent-purple); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+        .sticky-save:hover { opacity: 0.9; }
         .health-score-circle { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
         .health-score-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
         .health-score-circle circle:last-child { transition: stroke-dashoffset 0.5s ease; }
@@ -1227,6 +1236,16 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header"><span class="card-title">📝 快捷笔记</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">便签</span></div>
+                <div class="sticky-note" id="stickyNote">
+                    <textarea class="sticky-input" id="stickyInput" placeholder="在此记录快捷笔记..."></textarea>
+                    <div class="sticky-actions">
+                        <span class="sticky-count" id="stickyCount">0字</span>
+                        <button class="sticky-save" onclick="saveStickyNote()">保存</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
                 <div class="card-header"><span class="card-title">💾 记忆统计</span></div>
                 <div class="memory-stats">
                     <div class="memory-stat-row"><span class="memory-stat-label">长期记忆</span><span class="memory-stat-value">MEMORY.md</span></div>
@@ -1270,7 +1289,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V38.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V39.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1647,7 +1666,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V38.0',
+                version: 'V39.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
@@ -2178,6 +2197,32 @@
         // Initialize usage stats
         updateUsageStats();
         setInterval(updateUsageStats, 60000);
+        
+        // Sticky note functions
+        const stickyInput = document.getElementById('stickyInput');
+        const stickyCount = document.getElementById('stickyCount');
+        
+        if (stickyInput) {
+            stickyInput.value = localStorage.getItem('pupuStickyNote') || '';
+            updateStickyCount();
+            stickyInput.addEventListener('input', updateStickyCount);
+        }
+        
+        function updateStickyCount() {
+            if (stickyCount) stickyCount.textContent = (stickyInput?.value?.length || 0) + '字';
+        }
+        
+        function saveStickyNote() {
+            const note = stickyInput?.value || '';
+            localStorage.setItem('pupuStickyNote', note);
+            // Show save confirmation
+            const btn = document.querySelector('.sticky-save');
+            if (btn) {
+                const orig = btn.textContent;
+                btn.textContent = '已保存';
+                setTimeout(() => btn.textContent = orig, 1500);
+            }
+        }
         
         updateTime();
         fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&timezone=Asia/Shanghai').then(r=>r.json()).then(updateWeather).catch(()=>{});
