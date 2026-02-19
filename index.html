@@ -200,6 +200,9 @@
         .skill-item:hover { border-color: var(--accent-purple); transform: scale(1.02); }
         .skill-item .icon { font-size: 1rem; margin-bottom: 2px; }
         .skill-item .name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .skill-filters { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .skill-filter { padding: 4px 12px; background: var(--bg-secondary); border-radius: 20px; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border-color); }
+        .skill-filter:hover, .skill-filter.active { background: var(--accent-cyan); color: var(--bg-primary); border-color: var(--accent-cyan); }
 
         /* Tasks */
         .task-list { max-height: 220px; overflow-y: auto; }
@@ -1202,6 +1205,12 @@
                     <span class="search-icon">🔍</span>
                     <input type="text" class="search-input" id="skillSearch" placeholder="搜索技能..." onkeyup="filterSkills()">
                 </div>
+                <div class="skill-filters" id="skillFilters">
+                    <span class="skill-filter active" onclick="filterByCategory('all')">全部</span>
+                    <span class="skill-filter" onclick="filterByCategory('dev')">开发</span>
+                    <span class="skill-filter" onclick="filterByCategory('cloud')">云服务</span>
+                    <span class="skill-filter" onclick="filterByCategory('ai')">AI</span>
+                </div>
                 <div class="skills-grid" id="skillsGrid"></div>
             </div>
             <div class="card" style="grid-column: span 2;">
@@ -1258,7 +1267,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V36.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V37.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1585,6 +1594,31 @@
             });
         }
         
+        // Skill category filter
+        function filterByCategory(cat) {
+            const filters = document.querySelectorAll('.skill-filter');
+            filters.forEach(f => f.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            
+            const catMap = {
+                'dev': ['update-docs', 'send-email', 'frontend-design', 'code-reviewer', 'pr-creator', 'fix', 'github', 'docker-essentials', 'database-operations', 'skill-creator'],
+                'cloud': ['aws', 'vercel-deploy', 'deploy', 'feishu-doc', 'feishu-drive', 'openclaw-switch'],
+                'ai': ['weather', 'memory-qmd', 'healthcheck', 'agentguard', 'discord']
+            };
+            
+            let filtered = window.skills;
+            if (cat !== 'all' && catMap[cat]) {
+                filtered = filtered.filter(s => catMap[cat].includes(s.name));
+            }
+            
+            const search = document.getElementById('skillSearch')?.value.toLowerCase() || '';
+            if (search) {
+                filtered = filtered.filter(s => s.name.toLowerCase().includes(search));
+            }
+            
+            renderSkills(filtered);
+        }
+        
         // Export functions
         function toggleExport() {
             document.getElementById('exportMenu').classList.toggle('show');
@@ -1593,7 +1627,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V36.0',
+                version: 'V37.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
