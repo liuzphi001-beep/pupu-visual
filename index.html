@@ -630,8 +630,8 @@
 
         <div class="dashboard">
             <div class="card stat-card">
-                <div class="card-header"><span class="card-title">⚡ Skills</span><span class="card-badge">63+个</span></div>
-                <div class="stat-value" id="skillCount">56</div>
+                <div class="card-header"><span class="card-title">⚡ Skills</span><span class="card-badge">53+个</span></div>
+                <div class="stat-value" id="skillCount">53</div>
                 <div class="stat-label">已安装技能</div>
                 <div class="stat-trend up">↑ 实时同步</div>
             </div>
@@ -1263,6 +1263,24 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header"><span class="card-title">🏆 今日成就</span><span class="card-badge" style="background:rgba(251,191,36,0.2);color:var(--accent-gold)">NEW</span></div>
+                <div class="achievement-list" id="achievementList">
+                    <div class="achievement-item"><span class="achievement-icon">⚡</span><div class="achievement-info"><div class="achievement-title">每小时迭代完成</div><div class="achievement-desc">已自动运行</div></div></div>
+                    <div class="achievement-item"><span class="achievement-icon">🧠</span><div class="achievement-info"><div class="achievement-title">记忆系统稳定</div><div class="achievement-desc">5层架构正常</div></div></div>
+                    <div class="achievement-item"><span class="achievement-icon">🔄</span><div class="achievement-info"><div class="achievement-title">Cron任务</div><div class="achievement-desc">3个定时任务运行中</div></div></div>
+                    <div class="achievement-item"><span class="achievement-icon">💕</span><div class="achievement-info"><div class="achievement-title">服务在线</div><div class="achievement-desc">PostgreSQL + Redis</div></div></div>
+                </div>
+            </div>
+            <style>
+                .achievement-list { display: flex; flex-direction: column; gap: 8px; }
+                .achievement-item { display: flex; align-items: center; gap: 12px; padding: 10px; background: var(--bg-secondary); border-radius: 10px; transition: all 0.3s ease; }
+                .achievement-item:hover { transform: translateX(4px); background: rgba(0, 255, 245, 0.08); }
+                .achievement-icon { font-size: 1.4rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(0,255,245,0.2), rgba(168,85,247,0.2)); border-radius: 10px; }
+                .achievement-info { flex: 1; }
+                .achievement-title { font-size: 0.85rem; font-weight: 500; }
+                .achievement-desc { font-size: 0.7rem; color: var(--text-secondary); }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">💾 记忆统计</span></div>
                 <div class="memory-stats">
                     <div class="memory-stat-row"><span class="memory-stat-label">长期记忆</span><span class="memory-stat-value">MEMORY.md</span></div>
@@ -1318,7 +1336,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V44.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V45.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
