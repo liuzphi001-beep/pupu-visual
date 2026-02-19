@@ -541,6 +541,12 @@
         .sticky-count { font-size: 0.7rem; color: var(--text-secondary); }
         .sticky-save { padding: 4px 12px; background: var(--accent-purple); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
         .sticky-save:hover { opacity: 0.9; }
+        
+        /* Changelog */
+        .changelog { display: flex; flex-direction: column; gap: 6px; }
+        .changelog-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.75rem; }
+        .changelog-ver { padding: 2px 6px; background: var(--accent-purple); color: white; border-radius: 4px; font-size: 0.65rem; font-weight: 600; }
+        .changelog-desc { color: var(--text-secondary); }
         .health-score-circle { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
         .health-score-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
         .health-score-circle circle:last-child { transition: stroke-dashoffset 0.5s ease; }
@@ -1269,7 +1275,19 @@
             </div>
         </div>
 
+        </div>
+
         <div class="dashboard">
+            <div class="card">
+                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V39</span></div>
+                <div class="changelog" id="changelog">
+                    <div class="changelog-item"><span class="changelog-ver">V39</span><span class="changelog-desc">快捷笔记</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V38</span><span class="changelog-desc">技能收藏</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V37</span><span class="changelog-desc">分类筛选</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V36</span><span class="changelog-desc">系统信息</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V35</span><span class="changelog-desc">网络监控</span></div>
+                </div>
+            </div>
             <div class="card" style="grid-column: span 4;">
                 <div class="card-header"><span class="card-title">🔗 快速链接</span></div>
                 <div class="quick-links">
@@ -1289,7 +1307,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V39.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V40.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1666,7 +1684,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V39.0',
+                version: 'V40.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
