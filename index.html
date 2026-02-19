@@ -1098,6 +1098,14 @@
                         <span class="sys-info-value" id="openclawVer">2026.2.17</span>
                     </div>
                     <div class="sys-info-row">
+                        <span class="sys-info-label">📅 开机时间</span>
+                        <span class="sys-info-value" id="bootTime">2026-02-02</span>
+                    </div>
+                    <div class="sys-info-row">
+                        <span class="sys-info-label">⏱️ 运行时长</span>
+                        <span class="sys-info-value" id="runTime">17天 6小时</span>
+                    </div>
+                    <div class="sys-info-row">
                         <span class="sys-info-label">🤖 模型</span>
                         <span class="sys-info-value">MiniMax-M2.5</span>
                     </div>
@@ -1250,7 +1258,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V35.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V36.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1425,6 +1433,12 @@
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             document.getElementById('uptimeDisplay').textContent = `已运行 ${days}天 ${hours}小时`;
+            
+            // Update boot time and run time
+            const bootDate = new Date('2026-02-02T00:00:00+08:00');
+            const bootStr = bootDate.toLocaleString('zh-CN', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'});
+            if (document.getElementById('bootTime')) document.getElementById('bootTime').textContent = bootStr;
+            if (document.getElementById('runTime')) document.getElementById('runTime').textContent = `${days}天 ${hours}小时`;
         }
         function updateWeather(data) {
             if (data.current_weather) {
@@ -1579,7 +1593,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V35.0',
+                version: 'V36.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
