@@ -1316,7 +1316,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V41.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V42.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1712,7 +1712,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V41.0',
+                version: 'V42.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
@@ -2243,6 +2243,16 @@
         // Initialize usage stats
         updateUsageStats();
         setInterval(updateUsageStats, 60000);
+        
+        // Track last visit
+        const now = new Date();
+        const lastVisit = localStorage.getItem('pupuLastVisit');
+        localStorage.setItem('pupuLastVisit', now.toISOString());
+        if (lastVisit) {
+            const lastDate = new Date(lastVisit);
+            const diff = Math.floor((now - lastDate) / 60000);
+            console.log('上次访问: ' + (diff < 1 ? '刚刚' : diff + '分钟前'));
+        }
         
         // Sticky note functions
         const stickyInput = document.getElementById('stickyInput');
