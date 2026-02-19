@@ -1316,7 +1316,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V42.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V43.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1712,7 +1712,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V42.0',
+                version: 'V43.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
@@ -2253,6 +2253,17 @@
             const diff = Math.floor((now - lastDate) / 60000);
             console.log('上次访问: ' + (diff < 1 ? '刚刚' : diff + '分钟前'));
         }
+        
+        // Console stats
+        console.log('%c🐾 噗噗控制台 V43.0', 'font-size:16px;font-weight:bold;color:#00fff5');
+        console.log('总点击: ' + (parseInt(localStorage.getItem('pupuTotalClicks') || '0')));
+        console.log('收藏技能: ' + (JSON.parse(localStorage.getItem('pupuFavorites') || '[]')).length);
+        
+        // Track total clicks
+        document.addEventListener('click', () => {
+            const clicks = parseInt(localStorage.getItem('pupuTotalClicks') || '0');
+            localStorage.setItem('pupuTotalClicks', clicks + 1);
+        });
         
         // Sticky note functions
         const stickyInput = document.getElementById('stickyInput');
