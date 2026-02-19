@@ -703,6 +703,7 @@
                     <div class="export-menu" id="exportMenu">
                         <div class="export-option" onclick="exportData('csv')">📊 CSV</div>
                         <div class="export-option" onclick="exportData('json')">📋 JSON</div>
+                        <div class="export-option" onclick="exportData('report')">📝 报告</div>
                     </div>
                 </div>
             </div>
@@ -1184,7 +1185,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V32.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V33.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1511,30 +1512,98 @@
         }
         
         function exportData(type) {
-            const data = {
-                version: 'V29.0',
-                timestamp: new Date().toISOString(),
+            const now = new Date();
+            const baseData = {
+                version: 'V33.0',
+                timestamp: now.toISOString(),
+                exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
                 memory: document.getElementById('memPercent').textContent,
                 disk: document.getElementById('diskPercent').textContent,
                 uptime: document.getElementById('uptimeDisplay').textContent,
-                server: 'VM-0-17'
+                server: 'VM-0-17',
+                healthScore: document.getElementById('healthScoreValue')?.textContent || 'N/A'
             };
+            
+            // Usage stats
+            const usageData = {
+                pageRefreshes: localStorage.getItem('pupuRefreshes') || 0,
+                clicks: localStorage.getItem('pupuClicks') || 0,
+                shortcuts: localStorage.getItem('pupuShortcuts') || 0,
+                startTime: localStorage.getItem('pupuStartTime') || Date.now()
+            };
+            
+            // System info
+            const systemData = {
+                skills: document.getElementById('skillCount')?.textContent || 0,
+                load: document.getElementById('loadAvg')?.textContent || '0.00',
+                model: document.getElementById('modelName')?.textContent || 'MiniMax-M2.5'
+            };
+            
+            const data = { ...baseData, usage: usageData, system: systemData };
             
             if (type === 'json') {
                 const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'pupu-status.json';
+                a.download = `pupu-export-${now.toISOString().slice(0,10)}.json`;
                 a.click();
             } else if (type === 'csv') {
-                const csv = 'key,value\n' + Object.entries(data).map(([k,v]) => k + ',' + v).join('\n');
+                const rows = [
+                    'category,key,value',
+                    `system,version,${data.version}`,
+                    `system,timestamp,${data.timestamp}`,
+                    `system,cpu,${data.cpu}`,
+                    `system,memory,${data.memory}`,
+                    `system,disk,${data.disk}`,
+                    `system,uptime,${data.uptime}`,
+                    `system,server,${data.server}`,
+                    `system,healthScore,${data.healthScore}`,
+                    `usage,pageRefreshes,${usageData.pageRefreshes}`,
+                    `usage,clicks,${usageData.clicks}`,
+                    `usage,shortcuts,${usageData.shortcuts}`,
+                    `system,skills,${systemData.skills}`,
+                    `system,load,${systemData.load}`,
+                    `system,model,${systemData.model}`
+                ];
+                const csv = rows.join('\n');
                 const blob = new Blob([csv], {type: 'text/csv'});
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'pupu-status.csv';
+                a.download = `pupu-export-${now.toISOString().slice(0,10)}.csv`;
+                a.click();
+            } else if (type === 'report') {
+                const report = `
+🐾 噗噗控制台状态报告
+====================
+生成时间: ${now.toLocaleString('zh-CN')}
+版本: ${data.version}
+
+📊 系统状态
+- CPU: ${data.cpu}
+- 内存: ${data.memory}
+- 磁盘: ${data.disk}
+- 负载: ${systemData.load}
+- 健康评分: ${data.healthScore}
+
+🛠️ 系统信息
+- 服务器: ${data.server}
+- 运行时间: ${data.uptime}
+- Skills: ${systemData.skills}个
+- 模型: ${systemData.model}
+
+📈 使用统计
+- 页面刷新: ${usageData.pageRefreshes}次
+- 点击次数: ${usageData.clicks}次
+- 快捷键: ${usageData.shortcuts}次
+`.trim();
+                const blob = new Blob([report], {type: 'text/plain;charset=utf-8'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `pupu-report-${now.toISOString().slice(0,10)}.txt`;
                 a.click();
             }
             document.getElementById('exportMenu').classList.remove('show');
