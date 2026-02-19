@@ -344,6 +344,8 @@
         .footer-status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); margin-right: 4px; animation: pulse 2s infinite; }
         #footerStatus { color: var(--accent-green); margin-right: 8px; }
         .footer a { color: var(--accent-cyan); text-decoration: none; }
+        .footer-stats { margin-top: 8px; font-size: 0.7rem; display: flex; justify-content: center; gap: 16px; }
+        .footer-stats span { opacity: 0.7; }
 
         /* Keyboard shortcuts modal */
         .shortcut-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center; }
@@ -1316,7 +1318,12 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V43.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V44.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+            </p>
+            <p class="footer-stats" id="footerStats">
+                <span>👆 <span id="totalClicks">0</span>点击</span>
+                <span>⭐ <span id="totalFavs">0</span>收藏</span>
+                <span>📝 <span id="totalNotes">0</span>笔记</span>
             </p>
         </footer>
     </div>
@@ -1712,7 +1719,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V43.0',
+                version: 'V44.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
@@ -2255,9 +2262,17 @@
         }
         
         // Console stats
-        console.log('%c🐾 噗噗控制台 V43.0', 'font-size:16px;font-weight:bold;color:#00fff5');
+        console.log('%c🐾 噗噗控制台 V44.0', 'font-size:16px;font-weight:bold;color:#00fff5');
         console.log('总点击: ' + (parseInt(localStorage.getItem('pupuTotalClicks') || '0')));
         console.log('收藏技能: ' + (JSON.parse(localStorage.getItem('pupuFavorites') || '[]')).length);
+        
+        // Update footer stats
+        const updateFooterStats = () => {
+            if (document.getElementById('totalClicks')) document.getElementById('totalClicks').textContent = localStorage.getItem('pupuTotalClicks') || '0';
+            if (document.getElementById('totalFavs')) document.getElementById('totalFavs').textContent = (JSON.parse(localStorage.getItem('pupuFavorites') || '[]')).length;
+            if (document.getElementById('totalNotes')) document.getElementById('totalNotes').textContent = (localStorage.getItem('pupuStickyNote') || '').length;
+        };
+        updateFooterStats();
         
         // Track total clicks
         document.addEventListener('click', () => {
