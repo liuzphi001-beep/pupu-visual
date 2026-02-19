@@ -196,9 +196,11 @@
 
         /* Skills */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 6px; max-height: 220px; overflow-y: auto; }
-        .skill-item { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; padding: 8px; text-align: center; font-size: 0.75rem; transition: all 0.2s; }
+        .skill-item { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; padding: 8px; text-align: center; font-size: 0.75rem; transition: all 0.2s; position: relative; }
         .skill-item:hover { border-color: var(--accent-purple); transform: scale(1.02); }
         .skill-item .icon { font-size: 1rem; margin-bottom: 2px; }
+        .skill-item .favorite { position: absolute; top: 2px; right: 4px; font-size: 0.6rem; cursor: pointer; opacity: 0.3; }
+        .skill-item .favorite:hover, .skill-item .favorite.active { opacity: 1; }
         .skill-item .name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .skill-filters { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
         .skill-filter { padding: 4px 12px; background: var(--bg-secondary); border-radius: 20px; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border-color); }
@@ -1207,6 +1209,7 @@
                 </div>
                 <div class="skill-filters" id="skillFilters">
                     <span class="skill-filter active" onclick="filterByCategory('all')">全部</span>
+                    <span class="skill-filter" onclick="filterByCategory('fav')">⭐ 收藏</span>
                     <span class="skill-filter" onclick="filterByCategory('dev')">开发</span>
                     <span class="skill-filter" onclick="filterByCategory('cloud')">云服务</span>
                     <span class="skill-filter" onclick="filterByCategory('ai')">AI</span>
@@ -1267,7 +1270,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V37.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V38.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1418,7 +1421,11 @@
         });
 
         function renderSkills() {
-            document.getElementById('skillsGrid').innerHTML = skills.map(s => `<div class="skill-item"><div class="icon">${s.icon}</div><div class="name">${s.name}</div></div>`).join('');
+            const favs = JSON.parse(localStorage.getItem('pupuFavorites') || '[]');
+            document.getElementById('skillsGrid').innerHTML = skills.map(s => {
+                const isFav = favs.includes(s.name);
+                return `<div class="skill-item"><div class="favorite ${isFav?'active':''}" onclick="toggleFavorite('${s.name}')">${isFav?'⭐':'☆'}</div><div class="icon">${s.icon}</div><div class="name">${s.name}</div></div>`;
+            }).join('');
             document.getElementById('skillCount').textContent = skills.length;
             document.getElementById('skillTotal').textContent = skills.length + '个';
         }
@@ -1594,8 +1601,7 @@
             });
         }
         
-        // Skill category filter
-        function filterByCategory(cat) {
+                function filterByCategory(cat) {
             const filters = document.querySelectorAll('.skill-filter');
             filters.forEach(f => f.classList.remove('active'));
             if (event && event.target) event.target.classList.add('active');
@@ -1607,7 +1613,12 @@
             };
             
             let filtered = window.skills;
-            if (cat !== 'all' && catMap[cat]) {
+            
+            // Handle favorites
+            if (cat === 'fav') {
+                const favs = JSON.parse(localStorage.getItem('pupuFavorites') || '[]');
+                filtered = filtered.filter(s => favs.includes(s.name));
+            } else if (cat !== 'all' && catMap[cat]) {
                 filtered = filtered.filter(s => catMap[cat].includes(s.name));
             }
             
@@ -1616,7 +1627,16 @@
                 filtered = filtered.filter(s => s.name.toLowerCase().includes(search));
             }
             
-            renderSkills(filtered);
+            renderSkillsFiltered(filtered);
+        }
+        
+        function renderSkillsFiltered(filtered) {
+            const favs = JSON.parse(localStorage.getItem('pupuFavorites') || '[]');
+            document.getElementById('skillsGrid').innerHTML = filtered.map(s => {
+                const isFav = favs.includes(s.name);
+                return `<div class="skill-item"><div class="favorite ${isFav?'active':''}" onclick="toggleFavorite('${s.name}')">${isFav?'⭐':'☆'}</div><div class="icon">${s.icon}</div><div class="name">${s.name}</div></div>`;
+            }).join('');
+            document.getElementById('skillCount').textContent = filtered.length;
         }
         
         // Export functions
@@ -1627,7 +1647,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V37.0',
+                version: 'V38.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
