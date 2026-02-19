@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V45.0",
-    "version": "V45.0",
+    "title": "🐾 噗噗控制台 V46.0",
+    "version": "V46.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -44,10 +44,10 @@
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
+    { "icon": "📜", "title": "V46.0 实时日志", "desc": "新增日志控制台" },
     { "icon": "🏆", "title": "V45.0 今日成就", "desc": "新增成就展示区" },
     { "icon": "📊", "title": "V44.0 快捷统计", "desc": "实时数据展示" },
-    { "icon": "🧠", "title": "模型状态", "desc": "实时AI模型监控" },
-    { "icon": "⚡", "title": "快捷操作", "desc": "一键访问常用链接" }
+    { "icon": "🧠", "title": "模型状态", "desc": "实时AI模型监控" }
   ],
   "weather": {
     "city": "北京",
@@ -59,16 +59,17 @@
     "model": "MiniMax-M2.5"
   },
   "activities": [
+    { "icon": "📜", "title": "V46.0 实时日志发布", "time": "刚刚", "type": "success" },
     { "icon": "🏆", "title": "V45.0 今日成就发布", "time": "刚刚", "type": "success" },
-    { "icon": "🚀", "title": "V44.0 发布", "time": "刚刚", "type": "success" },
-    { "icon": "📊", "title": "快捷统计上线", "time": "2小时前", "type": "success" },
-    { "icon": "🧠", "title": "模型状态上线", "time": "4小时前", "type": "success" }
+    { "icon": "🚀", "title": "V44.0 发布", "time": "2小时前", "type": "success" },
+    { "icon": "📊", "title": "快捷统计上线", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "🏆 V45.0 发布!", "content": "今日成就展示区已上线", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🎉 V44.0 发布!", "content": "快捷统计面板已上线", "time": "刚刚", "read": true },
-    { "id": 3, "title": "🎉 V18.0 发布!", "content": "模型状态监控已上线", "time": "2小时前", "read": true },
-    { "id": 4, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "4小时前", "read": true }
+    { "id": 1, "title": "📜 V46.0 发布!", "content": "实时日志控制台已上线", "time": "刚刚", "read": false },
+    { "id": 2, "title": "🏆 V45.0 发布!", "content": "今日成就展示区已上线", "time": "刚刚", "read": true },
+    { "id": 3, "title": "🎉 V44.0 发布!", "content": "快捷统计面板已上线", "time": "刚刚", "read": true },
+    { "id": 4, "title": "🎉 V18.0 发布!", "content": "模型状态监控已上线", "time": "2小时前", "read": true },
+    { "id": 5, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "4小时前", "read": true }
   ],
   "health": {
     "cpu": { "status": "normal", "value": "38%", "label": "正常" },

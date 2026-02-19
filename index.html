@@ -1281,6 +1281,25 @@
                 .achievement-desc { font-size: 0.7rem; color: var(--text-secondary); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">📜 实时日志</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)">LIVE</span></div>
+                <div class="log-console" id="logConsole">
+                    <div class="log-line"><span class="log-time">--:--:--</span><span class="log-info">系统初始化完成</span></div>
+                    <div class="log-line"><span class="log-time">--:--:--</span><span class="log-success">Gateway连接正常</span></div>
+                    <div class="log-line"><span class="log-time">--:--:--</span><span class="log-info">Cron任务调度就绪</span></div>
+                    <div class="log-line"><span class="log-time">--:--:--</span><span class="log-success">看板渲染完成</span></div>
+                </div>
+            </div>
+            <style>
+                .log-console { max-height: 180px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; background: var(--bg-secondary); border-radius: 8px; padding: 10px; }
+                .log-line { display: flex; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--border-color); }
+                .log-line:last-child { border-bottom: none; }
+                .log-time { color: var(--text-secondary); flex-shrink: 0; }
+                .log-info { color: var(--accent-cyan); }
+                .log-success { color: var(--accent-green); }
+                .log-warning { color: var(--accent-gold); }
+                .log-error { color: var(--accent-red); }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">💾 记忆统计</span></div>
                 <div class="memory-stats">
                     <div class="memory-stat-row"><span class="memory-stat-label">长期记忆</span><span class="memory-stat-value">MEMORY.md</span></div>
@@ -1336,7 +1355,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V45.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V46.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
