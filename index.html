@@ -502,6 +502,14 @@
         
         /* Alert Center */
         .alert-center { display: flex; flex-direction: column; gap: 8px; }
+        
+        /* Process List */
+        .process-list { display: flex; flex-direction: column; gap: 6px; max-height: 200px; overflow-y: auto; }
+        .process-item { display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.8rem; transition: all 0.2s; }
+        .process-item:hover { transform: translateX(4px); background: rgba(0, 255, 245, 0.05); }
+        .process-rank { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; background: var(--accent-purple); color: white; border-radius: 50%; font-size: 0.7rem; font-weight: 600; }
+        .process-name { flex: 1; font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .process-cpu { font-family: 'JetBrains Mono', monospace; color: var(--accent-cyan); font-weight: 500; }
         .alert-item { display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; animation: alertPulse 1s ease-in-out infinite; }
         @keyframes alertPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         .alert-icon { font-size: 1.3rem; }
@@ -860,6 +868,36 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header"><span class="card-title">🔝 Top进程</span><span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)">Top5</span></div>
+                <div class="process-list" id="processList">
+                    <div class="process-item">
+                        <span class="process-rank">1</span>
+                        <span class="process-name">--</span>
+                        <span class="process-cpu">--%</span>
+                    </div>
+                    <div class="process-item">
+                        <span class="process-rank">2</span>
+                        <span class="process-name">--</span>
+                        <span class="process-cpu">--%</span>
+                    </div>
+                    <div class="process-item">
+                        <span class="process-rank">3</span>
+                        <span class="process-name">--</span>
+                        <span class="process-cpu">--%</span>
+                    </div>
+                    <div class="process-item">
+                        <span class="process-rank">4</span>
+                        <span class="process-name">--</span>
+                        <span class="process-cpu">--%</span>
+                    </div>
+                    <div class="process-item">
+                        <span class="process-rank">5</span>
+                        <span class="process-name">--</span>
+                        <span class="process-cpu">--%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
                 <div class="card-header"><span class="card-title">🌐 API状态</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)" id="apiStatusBadge">正常</span></div>
                 <div class="api-health">
                     <div class="api-health-item">
@@ -1185,7 +1223,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V33.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V34.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
         </footer>
     </div>
@@ -1514,7 +1552,7 @@
         function exportData(type) {
             const now = new Date();
             const baseData = {
-                version: 'V33.0',
+                version: 'V34.0',
                 timestamp: now.toISOString(),
                 exportTime: now.toLocaleString('zh-CN'),
                 cpu: document.getElementById('cpuPercent').textContent,
@@ -1701,6 +1739,33 @@
                 memChart.update('none');
             }
         }
+        
+        // Update process list (simulated)
+        function updateProcessList() {
+            const processList = document.getElementById('processList');
+            if (!processList) return;
+            
+            // Simulated process data (in production, this would come from an API)
+            const processes = [
+                { name: 'node', cpu: Math.floor(Math.random() * 10 + 2) },
+                { name: 'postgres', cpu: Math.floor(Math.random() * 8 + 1) },
+                { name: 'redis-server', cpu: Math.floor(Math.random() * 5 + 1) },
+                { name: 'nginx', cpu: Math.floor(Math.random() * 3 + 0) },
+                { name: 'systemd', cpu: Math.floor(Math.random() * 2 + 0) }
+            ];
+            
+            processList.innerHTML = processes.map((p, i) => `
+                <div class="process-item">
+                    <span class="process-rank">${i + 1}</span>
+                    <span class="process-name">${p.name}</span>
+                    <span class="process-cpu">${p.cpu}%</span>
+                </div>
+            `).join('');
+        }
+        
+        // Initialize process list
+        updateProcessList();
+        setInterval(updateProcessList, 30000);
         async function fetchSystemStatus() {
             try {
                 const res = await fetch('api/status.json');
