@@ -1403,6 +1403,26 @@
                 .unit-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">📱 二维码生成器</span></div>
+                <div class="qr-generator">
+                    <input type="text" class="qr-input" id="qrText" placeholder="输入文字或链接生成二维码" oninput="generateQR()">
+                    <div class="qr-output" id="qrOutput">
+                        <img id="qrImage" src="" alt="QR Code" style="display:none">
+                        <div class="qr-placeholder" id="qrPlaceholder">输入内容生成二维码</div>
+                    </div>
+                    <button class="qr-download" onclick="downloadQR()" style="display:none" id="qrDownloadBtn">下载二维码</button>
+                </div>
+            </div>
+            <style>
+                .qr-generator { display: flex; flex-direction: column; gap: 10px; }
+                .qr-input { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; }
+                .qr-output { display: flex; align-items: center; justify-content: center; min-height: 120px; background: var(--bg-secondary); border-radius: 8px; padding: 10px; }
+                .qr-output img { max-width: 120px; max-height: 120px; }
+                .qr-placeholder { color: var(--text-secondary); font-size: 0.8rem; }
+                .qr-download { padding: 8px 16px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500; }
+                .qr-download:hover { opacity: 0.9; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
                 <div class="about-content">
                     <div class="about-avatar">🐾</div>
@@ -1449,7 +1469,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V49.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V50.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
@@ -2495,6 +2515,39 @@
             }
             const result = unitConversions[type].fn(val);
             document.getElementById('unitResult').textContent = result.toFixed(2);
+        }
+        
+        // QR Code Generator functions
+        function generateQR() {
+            const text = document.getElementById('qrText').value.trim();
+            const qrImage = document.getElementById('qrImage');
+            const qrPlaceholder = document.getElementById('qrPlaceholder');
+            const qrDownloadBtn = document.getElementById('qrDownloadBtn');
+            
+            if (!text) {
+                qrImage.style.display = 'none';
+                qrPlaceholder.style.display = 'block';
+                qrPlaceholder.textContent = '输入内容生成二维码';
+                qrDownloadBtn.style.display = 'none';
+                return;
+            }
+            
+            // Using QR Server API
+            const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=' + encodeURIComponent(text);
+            qrImage.src = qrUrl;
+            qrImage.style.display = 'block';
+            qrPlaceholder.style.display = 'none';
+            qrDownloadBtn.style.display = 'block';
+        }
+        
+        function downloadQR() {
+            const qrImage = document.getElementById('qrImage');
+            if (!qrImage.src) return;
+            
+            const link = document.createElement('a');
+            link.href = qrImage.src;
+            link.download = 'pupu-qrcode.png';
+            link.click();
         }
         
         updateTime();
