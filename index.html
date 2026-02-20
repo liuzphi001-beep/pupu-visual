@@ -1508,6 +1508,24 @@
                 .pwd-btn:hover { opacity: 0.9; }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
+                <div class="milestone-timeline">
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V50.0</div><div class="milestone-desc">二维码生成器</div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V51.0</div><div class="milestone-desc">倒计时器</div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V52.0</div><div class="milestone-desc">字数统计</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V54.0</div><div class="milestone-desc">密码生成器</div></div></div>
+                </div>
+            </div>
+            <style>
+                .milestone-timeline { display: flex; flex-direction: column; gap: 8px; }
+                .milestone-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+                .milestone-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-color); flex-shrink: 0; }
+                .milestone-item.completed .milestone-dot { background: var(--accent-green); }
+                .milestone-item.current .milestone-dot { background: var(--accent-cyan); box-shadow: 0 0 8px var(--accent-cyan); }
+                .milestone-title { font-size: 0.8rem; font-weight: 600; }
+                .milestone-desc { font-size: 0.7rem; color: var(--text-secondary); }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
                 <div class="about-content">
                     <div class="about-avatar">🐾</div>
@@ -1554,7 +1572,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V54.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V55.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
