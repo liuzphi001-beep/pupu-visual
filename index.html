@@ -1480,6 +1480,34 @@
                 .quote-author { font-size: 0.75rem; color: var(--accent-cyan); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">🔐 密码生成器</span></div>
+                <div class="password-gen">
+                    <div class="password-display" id="passwordDisplay">点击生成</div>
+                    <div class="password-options">
+                        <label><input type="checkbox" id="pwdUpper" checked> 大写</label>
+                        <label><input type="checkbox" id="pwdLower" checked> 小写</label>
+                        <label><input type="checkbox" id="pwdNum" checked> 数字</label>
+                        <label><input type="checkbox" id="pwdSym"> 符号</label>
+                    </div>
+                    <div class="password-length">
+                        <span>长度:</span>
+                        <input type="range" id="pwdLength" min="6" max="32" value="16">
+                        <span id="pwdLengthVal">16</span>
+                    </div>
+                    <button class="pwd-btn" onclick="generatePassword()">生成密码</button>
+                </div>
+            </div>
+            <style>
+                .password-gen { display: flex; flex-direction: column; gap: 10px; }
+                .password-display { font-family: 'JetBrains Mono', monospace; font-size: 1rem; padding: 12px; background: var(--bg-secondary); border-radius: 8px; text-align: center; word-break: break-all; cursor: pointer; }
+                .password-options { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.8rem; }
+                .password-options label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+                .password-length { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
+                .password-length input { flex: 1; }
+                .pwd-btn { padding: 10px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
+                .pwd-btn:hover { opacity: 0.9; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
                 <div class="about-content">
                     <div class="about-avatar">🐾</div>
@@ -1526,7 +1554,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V53.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V54.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
@@ -2664,6 +2692,40 @@
             document.getElementById('numCount').textContent = (text.match(/[0-9]/g) || []).length;
             document.getElementById('spaceCount').textContent = (text.match(/\s/g) || []).length;
         }
+        
+        // Password Generator functions
+        function generatePassword() {
+            const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const lower = 'abcdefghijklmnopqrstuvwxyz';
+            const num = '0123456789';
+            const sym = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+            let chars = '';
+            if (document.getElementById('pwdUpper').checked) chars += upper;
+            if (document.getElementById('pwdLower').checked) chars += lower;
+            if (document.getElementById('pwdNum').checked) chars += num;
+            if (document.getElementById('pwdSym').checked) chars += sym;
+            if (!chars) chars = lower + num;
+            const len = parseInt(document.getElementById('pwdLength').value);
+            let pwd = '';
+            for (let i = 0; i < len; i++) {
+                pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('passwordDisplay').textContent = pwd;
+        }
+        
+        document.getElementById('pwdLength').addEventListener('input', function() {
+            document.getElementById('pwdLengthVal').textContent = this.value;
+        });
+        
+        document.getElementById('passwordDisplay').addEventListener('click', function() {
+            const pwd = this.textContent;
+            if (pwd && pwd !== '点击生成') {
+                navigator.clipboard.writeText(pwd).then(() => {
+                    this.textContent = '已复制!';
+                    setTimeout(() => this.textContent = pwd, 1000);
+                });
+            }
+        });
         
         updateTime();
         fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&timezone=Asia/Shanghai').then(r=>r.json()).then(updateWeather).catch(()=>{});
