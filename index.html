@@ -1526,6 +1526,18 @@
                 .milestone-desc { font-size: 0.7rem; color: var(--text-secondary); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">🕐 当前时间</span></div>
+                <div class="time-display">
+                    <div class="time-main" id="currentTime">--:--:--</div>
+                    <div class="time-date" id="currentDate">----/--/--</div>
+                </div>
+            </div>
+            <style>
+                .time-display { text-align: center; padding: 10px; }
+                .time-main { font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; color: var(--accent-cyan); font-weight: 600; }
+                .time-date { font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
                 <div class="about-content">
                     <div class="about-avatar">🐾</div>
@@ -1572,7 +1584,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V55.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V56.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
@@ -2730,6 +2742,15 @@
             }
             document.getElementById('passwordDisplay').textContent = pwd;
         }
+        
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = now.toLocaleTimeString('zh-CN', { hour12: false });
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN').replace(/\//g, '-');
+        }
+        
+        updateTime();
+        setInterval(updateTime, 1000);
         
         document.getElementById('pwdLength').addEventListener('input', function() {
             document.getElementById('pwdLengthVal').textContent = this.value;

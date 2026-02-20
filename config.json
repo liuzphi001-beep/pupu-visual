@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V55.0",
-    "version": "V55.0",
+    "title": "🐾 噗噗控制台 V56.0",
+    "version": "V56.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -44,10 +44,10 @@
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
+    { "icon": "🕐", "title": "V56.0 实时时钟", "desc": "显示当前时间" },
     { "icon": "📅", "title": "V55.0 本周里程碑", "desc": "版本演进展示" },
     { "icon": "🔐", "title": "V54.0 密码生成器", "desc": "安全随机密码" },
-    { "icon": "💬", "title": "V53.0 每日一言", "desc": "每日语录展示" },
-    { "icon": "📝", "title": "V52.0 字数统计", "desc": "字符汉字英文统计" }
+    { "icon": "💬", "title": "V53.0 每日一言", "desc": "每日语录展示" }
   ],
   "weather": {
     "city": "北京",
@@ -59,17 +59,17 @@
     "model": "MiniMax-M2.5"
   },
   "activities": [
+    { "icon": "🕐", "title": "V56.0 实时时钟发布", "time": "刚刚", "type": "success" },
     { "icon": "📅", "title": "V55.0 本周里程碑发布", "time": "刚刚", "type": "success" },
-    { "icon": "🔐", "title": "V54.0 密码生成器发布", "time": "刚刚", "type": "success" },
-    { "icon": "💬", "title": "V53.0 每日一言发布", "time": "2小时前", "type": "success" },
-    { "icon": "📝", "title": "V52.0 字数统计发布", "time": "4小时前", "type": "success" }
+    { "icon": "🔐", "title": "V54.0 密码生成器发布", "time": "2小时前", "type": "success" },
+    { "icon": "💬", "title": "V53.0 每日一言发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "📅 V55.0 发布!", "content": "本周里程碑已上线", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🔐 V54.0 发布!", "content": "密码生成器已上线", "time": "刚刚", "read": true },
-    { "id": 3, "title": "💬 V53.0 发布!", "content": "每日一言已上线", "time": "刚刚", "read": true },
-    { "id": 4, "title": "📝 V52.0 发布!", "content": "字数统计工具已上线", "time": "2小时前", "read": true },
-    { "id": 5, "title": "⏱️ V51.0 发布!", "content": "倒计时器已上线", "time": "4小时前", "read": true },
+    { "id": 1, "title": "🕐 V56.0 发布!", "content": "实时时钟已上线", "time": "刚刚", "read": false },
+    { "id": 2, "title": "📅 V55.0 发布!", "content": "本周里程碑已上线", "time": "刚刚", "read": true },
+    { "id": 3, "title": "🔐 V54.0 发布!", "content": "密码生成器已上线", "time": "刚刚", "read": true },
+    { "id": 4, "title": "💬 V53.0 发布!", "content": "每日一言已上线", "time": "2小时前", "read": true },
+    { "id": 5, "title": "📝 V52.0 发布!", "content": "字数统计工具已上线", "time": "4小时前", "read": true },
     { "id": 6, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "6小时前", "read": true }
   ],
   "health": {
