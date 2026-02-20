@@ -1176,6 +1176,24 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header"><span class="card-title">🖥️ 服务器详情</span><span class="card-badge" style="background:rgba(59,130,246,0.2);color:#3b82f6">INFO</span></div>
+                <div class="server-details">
+                    <div class="detail-item"><span class="detail-icon">🌏</span><div class="detail-info"><div class="detail-label">地理位置</div><div class="detail-value">中国·北京</div></div></div>
+                    <div class="detail-item"><span class="detail-icon">🏗️</span><div class="detail-info"><div class="detail-label">服务器架构</div><div class="detail-value">x86_64</div></div></div>
+                    <div class="detail-item"><span class="detail-icon">📦</span><div class="detail-info"><div class="detail-label">Node版本</div><div class="detail-value">v22.22.0</div></div></div>
+                    <div class="detail-item"><span class="detail-icon">🗄️</span><div class="detail-info"><div class="detail-label">数据库</div><div class="detail-value">PostgreSQL + Redis</div></div></div>
+                </div>
+            </div>
+            <style>
+                .server-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+                .detail-item { display: flex; align-items: center; gap: 10px; padding: 10px; background: var(--bg-secondary); border-radius: 10px; transition: all 0.2s; }
+                .detail-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15); }
+                .detail-icon { font-size: 1.3rem; }
+                .detail-info { flex: 1; }
+                .detail-label { font-size: 0.65rem; color: var(--text-secondary); }
+                .detail-value { font-size: 0.8rem; font-weight: 500; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">🌍 世界时钟</span></div>
                 <div class="world-clock">
                     <div class="clock-item"><div class="clock-city">北京</div><div class="clock-time" id="clockBeijing">--:--</div></div>
