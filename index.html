@@ -1346,6 +1346,35 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header"><span class="card-title">🎨 颜色选择器</span></div>
+                <div class="color-picker">
+                    <input type="color" class="color-input" id="colorInput" value="#00fff5" onchange="copyColor(this.value)">
+                    <div class="color-preview" id="colorPreview" style="background:#00fff5"></div>
+                    <div class="color-value" id="colorValue">#00fff5</div>
+                    <button class="color-copy" onclick="copyColor(document.getElementById('colorInput').value)">复制</button>
+                </div>
+                <div class="preset-colors">
+                    <div class="preset-color" style="background:#00fff5" onclick="selectColor('#00fff5')"></div>
+                    <div class="preset-color" style="background:#ff6b9d" onclick="selectColor('#ff6b9d')"></div>
+                    <div class="preset-color" style="background:#a855f7" onclick="selectColor('#a855f7')"></div>
+                    <div class="preset-color" style="background:#fbbf24" onclick="selectColor('#fbbf24')"></div>
+                    <div class="preset-color" style="background:#22c55e" onclick="selectColor('#22c55e')"></div>
+                    <div class="preset-color" style="background:#ef4444" onclick="selectColor('#ef4444')"></div>
+                    <div class="preset-color" style="background:#3b82f6" onclick="selectColor('#3b82f6')"></div>
+                    <div class="preset-color" style="background:#ffffff" onclick="selectColor('#ffffff')"></div>
+                </div>
+            </div>
+            <style>
+                .color-picker { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+                .color-input { width: 40px; height: 40px; border: none; cursor: pointer; background: none; }
+                .color-preview { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border-color); }
+                .color-value { flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+                .color-copy { padding: 6px 12px; background: var(--accent-purple); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
+                .preset-colors { display: flex; gap: 8px; flex-wrap: wrap; }
+                .preset-color { width: 28px; height: 28px; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
+                .preset-color:hover { transform: scale(1.1); border-color: var(--accent-cyan); }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
                 <div class="about-content">
                     <div class="about-avatar">🐾</div>
@@ -1392,7 +1421,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V47.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V48.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
@@ -2399,6 +2428,22 @@
                 document.getElementById('calcDisplay').value = 'Error';
                 calcExpression = '';
             }
+        }
+        
+        // Color Picker functions
+        function selectColor(color) {
+            document.getElementById('colorInput').value = color;
+            document.getElementById('colorPreview').style.background = color;
+            document.getElementById('colorValue').textContent = color;
+        }
+        function copyColor(color) {
+            navigator.clipboard.writeText(color).then(() => {
+                const btn = document.querySelector('.color-copy');
+                if (btn) {
+                    btn.textContent = '已复制';
+                    setTimeout(() => btn.textContent = '复制', 1500);
+                }
+            });
         }
         
         updateTime();
