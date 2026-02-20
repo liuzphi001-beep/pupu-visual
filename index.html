@@ -1446,6 +1446,28 @@
                 .timer-btn:hover { opacity: 0.9; transform: scale(1.02); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">📝 字数统计</span></div>
+                <div class="char-counter">
+                    <textarea class="counter-input" id="counterInput" placeholder="输入文字统计字数..." oninput="countChars()"></textarea>
+                    <div class="counter-stats">
+                        <div class="counter-item"><span class="counter-label">字符</span><span class="counter-value" id="charCount">0</span></div>
+                        <div class="counter-item"><span class="counter-label">汉字</span><span class="counter-value" id="cnCount">0</span></div>
+                        <div class="counter-item"><span class="counter-label">英文</span><span class="counter-value" id="enCount">0</span></div>
+                        <div class="counter-item"><span class="counter-label">数字</span><span class="counter-value" id="numCount">0</span></div>
+                        <div class="counter-item"><span class="counter-label">空格</span><span class="counter-value" id="spaceCount">0</span></div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .char-counter { display: flex; flex-direction: column; gap: 10px; }
+                .counter-input { width: 100%; min-height: 80px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; resize: none; }
+                .counter-input:focus { border-color: var(--accent-cyan); outline: none; }
+                .counter-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+                .counter-item { text-align: center; padding: 8px; background: var(--bg-secondary); border-radius: 6px; }
+                .counter-label { display: block; font-size: 0.65rem; color: var(--text-secondary); }
+                .counter-value { display: block; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent-cyan); font-weight: 600; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
                 <div class="about-content">
                     <div class="about-avatar">🐾</div>
@@ -1492,7 +1514,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V51.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V52.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
@@ -2619,6 +2641,16 @@
             const secs = timerSeconds % 60;
             document.getElementById('timerDisplay').textContent = 
                 String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+        }
+        
+        // Character Counter functions
+        function countChars() {
+            const text = document.getElementById('counterInput').value;
+            document.getElementById('charCount').textContent = text.length;
+            document.getElementById('cnCount').textContent = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+            document.getElementById('enCount').textContent = (text.match(/[a-zA-Z]/g) || []).length;
+            document.getElementById('numCount').textContent = (text.match(/[0-9]/g) || []).length;
+            document.getElementById('spaceCount').textContent = (text.match(/\s/g) || []).length;
         }
         
         updateTime();
