@@ -1375,6 +1375,34 @@
                 .preset-color:hover { transform: scale(1.1); border-color: var(--accent-cyan); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">🔄 单位转换器</span></div>
+                <div class="unit-converter">
+                    <select class="unit-select" id="unitType" onchange="updateUnitConverter()">
+                        <option value="temp">温度</option>
+                        <option value="length">长度</option>
+                        <option value="weight">重量</option>
+                    </select>
+                    <div class="unit-inputs">
+                        <input type="number" class="unit-input" id="unitFrom" placeholder="输入数值" oninput="convertUnit()">
+                        <span class="unit-arrow">→</span>
+                        <div class="unit-result" id="unitResult">0</div>
+                    </div>
+                    <div class="unit-labels">
+                        <span id="unitFromLabel">°C</span>
+                        <span id="unitToLabel">°F</span>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .unit-converter { display: flex; flex-direction: column; gap: 10px; }
+                .unit-select { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; }
+                .unit-inputs { display: flex; align-items: center; gap: 10px; }
+                .unit-input { flex: 1; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
+                .unit-arrow { color: var(--accent-cyan); font-size: 1.2rem; }
+                .unit-result { flex: 1; padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; font-size: 1rem; text-align: center; }
+                .unit-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
                 <div class="about-content">
                     <div class="about-avatar">🐾</div>
@@ -1421,7 +1449,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V48.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V49.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
@@ -2444,6 +2472,29 @@
                     setTimeout(() => btn.textContent = '复制', 1500);
                 }
             });
+        }
+        
+        // Unit Converter functions
+        const unitConversions = {
+            temp: { from: '°C', to: '°F', fn: v => v * 9/5 + 32 },
+            length: { from: '米', to: '英尺', fn: v => v * 3.281 },
+            weight: { from: 'kg', to: '磅', fn: v => v * 2.205 }
+        };
+        function updateUnitConverter() {
+            const type = document.getElementById('unitType').value;
+            document.getElementById('unitFromLabel').textContent = unitConversions[type].from;
+            document.getElementById('unitToLabel').textContent = unitConversions[type].to;
+            convertUnit();
+        }
+        function convertUnit() {
+            const type = document.getElementById('unitType').value;
+            const val = parseFloat(document.getElementById('unitFrom').value);
+            if (isNaN(val)) {
+                document.getElementById('unitResult').textContent = '0';
+                return;
+            }
+            const result = unitConversions[type].fn(val);
+            document.getElementById('unitResult').textContent = result.toFixed(2);
         }
         
         updateTime();
