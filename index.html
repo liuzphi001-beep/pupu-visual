@@ -1300,6 +1300,43 @@
                 .log-error { color: var(--accent-red); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">🧮 迷你计算器</span></div>
+                <div class="mini-calc">
+                    <input type="text" class="calc-display" id="calcDisplay" readonly>
+                    <div class="calc-buttons">
+                        <button class="calc-btn" onclick="calcInput('7')">7</button>
+                        <button class="calc-btn" onclick="calcInput('8')">8</button>
+                        <button class="calc-btn" onclick="calcInput('9')">9</button>
+                        <button class="calc-btn ops" onclick="calcInput('/')">/</button>
+                        <button class="calc-btn" onclick="calcInput('4')">4</button>
+                        <button class="calc-btn" onclick="calcInput('5')">5</button>
+                        <button class="calc-btn" onclick="calcInput('6')">6</button>
+                        <button class="calc-btn ops" onclick="calcInput('*')">*</button>
+                        <button class="calc-btn" onclick="calcInput('1')">1</button>
+                        <button class="calc-btn" onclick="calcInput('2')">2</button>
+                        <button class="calc-btn" onclick="calcInput('3')">3</button>
+                        <button class="calc-btn ops" onclick="calcInput('-')">-</button>
+                        <button class="calc-btn" onclick="calcInput('0')">0</button>
+                        <button class="calc-btn" onclick="calcInput('.')">.</button>
+                        <button class="calc-btn clear" onclick="calcClear()">C</button>
+                        <button class="calc-btn ops" onclick="calcInput('+')">+</button>
+                        <button class="calc-btn equals" onclick="calcEqual()">=</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .mini-calc { display: flex; flex-direction: column; gap: 8px; }
+                .calc-display { width: 100%; padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; text-align: right; }
+                .calc-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+                .calc-btn { padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+                .calc-btn:hover { border-color: var(--accent-cyan); background: rgba(0,255,245,0.1); }
+                .calc-btn.ops { background: rgba(168,85,247,0.2); color: var(--accent-purple); }
+                .calc-btn.ops:hover { background: rgba(168,85,247,0.3); }
+                .calc-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+                .calc-btn.equals { grid-column: span 2; background: var(--accent-cyan); color: var(--bg-primary); font-weight: 600; }
+                .calc-btn.equals:hover { opacity: 0.9; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">💾 记忆统计</span></div>
                 <div class="memory-stats">
                     <div class="memory-stat-row"><span class="memory-stat-label">长期记忆</span><span class="memory-stat-value">MEMORY.md</span></div>
@@ -1355,7 +1392,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V46.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V47.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👆 <span id="totalClicks">0</span>点击</span>
@@ -2340,6 +2377,27 @@
                 const orig = btn.textContent;
                 btn.textContent = '已保存';
                 setTimeout(() => btn.textContent = orig, 1500);
+            }
+        }
+        
+        // Mini Calculator functions
+        let calcExpression = '';
+        function calcInput(val) {
+            calcExpression += val;
+            document.getElementById('calcDisplay').value = calcExpression;
+        }
+        function calcClear() {
+            calcExpression = '';
+            document.getElementById('calcDisplay').value = '';
+        }
+        function calcEqual() {
+            try {
+                const result = eval(calcExpression);
+                document.getElementById('calcDisplay').value = result;
+                calcExpression = result.toString();
+            } catch(e) {
+                document.getElementById('calcDisplay').value = 'Error';
+                calcExpression = '';
             }
         }
         
