@@ -1480,6 +1480,18 @@
                 .quote-author { font-size: 0.75rem; color: var(--accent-cyan); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">📜 历史上的今天</span></div>
+                <div class="history-today" id="historyToday">
+                    <div class="history-item"><span class="history-year">2003</span><span class="history-event">首个JavaScript框架AJAX正式发布</span></div>
+                </div>
+            </div>
+            <style>
+                .history-today { display: flex; flex-direction: column; gap: 8px; max-height: 120px; overflow-y: auto; }
+                .history-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.75rem; }
+                .history-year { background: var(--accent-purple); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 600; white-space: nowrap; }
+                .history-event { color: var(--text-primary); line-height: 1.4; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">🔐 密码生成器</span></div>
                 <div class="password-gen">
                     <div class="password-display" id="passwordDisplay">点击生成</div>
@@ -2742,6 +2754,44 @@
             }
             document.getElementById('passwordDisplay').textContent = pwd;
         }
+        
+        // History Today - On This Day in Tech History
+        const techHistory = [
+            { year: 2003, event: "首个JavaScript框架AJAX正式发布" },
+            { year: 1991, event: "万维网(WWW)首次公开发布" },
+            { year: 1969, event: "ARPANET诞生，互联网前身" },
+            { year: 1995, event: "Java语言正式发布" },
+            { year: 1994, event: "Netscape浏览器发布" },
+            { year: 2008, event: "Android系统正式发布" },
+            { year: 2007, event: "iPhone首次发布" },
+            { year: 1990, event: "World Wide Web浏览器诞生" },
+            { year: 1989, event: "Tim Berners-Lee发明万维网" },
+            { year: 1983, event: "TCP/IP协议成为互联网标准" },
+            { year: 1993, event: "Mosaic浏览器发布" },
+            { year: 1998, event: "Google公司成立" },
+            { year: 2004, event: "Facebook上线" },
+            { year: 2005, event: "YouTube成立" },
+            { year: 2016, event: "AlphaGo击败李世石" }
+        ];
+        
+        function renderHistoryToday() {
+            const container = document.getElementById('historyToday');
+            if (!container) return;
+            
+            // Shuffle and pick 3 random events
+            const shuffled = [...techHistory].sort(() => Math.random() - 0.5);
+            const events = shuffled.slice(0, 3);
+            
+            container.innerHTML = events.map(e => `
+                <div class="history-item">
+                    <span class="history-year">${e.year}</span>
+                    <span class="history-event">${e.event}</span>
+                </div>
+            `).join('');
+        }
+        
+        // Initialize history today on load
+        renderHistoryToday();
         
         function updateTime() {
             const now = new Date();
