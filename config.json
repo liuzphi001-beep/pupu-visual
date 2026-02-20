@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V50.0",
-    "version": "V50.0",
+    "title": "🐾 噗噗控制台 V51.0",
+    "version": "V51.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -44,10 +44,10 @@
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
+    { "icon": "⏱️", "title": "V51.0 倒计时器", "desc": "实用计时工具" },
     { "icon": "📱", "title": "V50.0 二维码生成器", "desc": "快速生成二维码" },
     { "icon": "🔄", "title": "V49.0 单位转换器", "desc": "温度长度重量转换" },
-    { "icon": "🎨", "title": "V48.0 颜色选择器", "desc": "新增取色工具" },
-    { "icon": "🧮", "title": "V47.0 迷你计算器", "desc": "新增实用工具" }
+    { "icon": "🎨", "title": "V48.0 颜色选择器", "desc": "新增取色工具" }
   ],
   "weather": {
     "city": "北京",
@@ -59,17 +59,17 @@
     "model": "MiniMax-M2.5"
   },
   "activities": [
+    { "icon": "⏱️", "title": "V51.0 倒计时器发布", "time": "刚刚", "type": "success" },
     { "icon": "📱", "title": "V50.0 二维码生成器发布", "time": "刚刚", "type": "success" },
-    { "icon": "🔄", "title": "V49.0 单位转换器发布", "time": "刚刚", "type": "success" },
-    { "icon": "🎨", "title": "V48.0 颜色选择器发布", "time": "2小时前", "type": "success" },
-    { "icon": "🧮", "title": "V47.0 迷你计算器发布", "time": "4小时前", "type": "success" }
+    { "icon": "🔄", "title": "V49.0 单位转换器发布", "time": "2小时前", "type": "success" },
+    { "icon": "🎨", "title": "V48.0 颜色选择器发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "📱 V50.0 发布!", "content": "二维码生成器已上线", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🔄 V49.0 发布!", "content": "单位转换器已上线", "time": "刚刚", "read": true },
-    { "id": 3, "title": "🎨 V48.0 发布!", "content": "颜色选择器已上线", "time": "刚刚", "read": true },
-    { "id": 4, "title": "🧮 V47.0 发布!", "content": "迷你计算器已上线", "time": "2小时前", "read": true },
-    { "id": 5, "title": "📜 V46.0 发布!", "content": "实时日志控制台已上线", "time": "4小时前", "read": true },
+    { "id": 1, "title": "⏱️ V51.0 发布!", "content": "倒计时器已上线", "time": "刚刚", "read": false },
+    { "id": 2, "title": "📱 V50.0 发布!", "content": "二维码生成器已上线", "time": "刚刚", "read": true },
+    { "id": 3, "title": "🔄 V49.0 发布!", "content": "单位转换器已上线", "time": "刚刚", "read": true },
+    { "id": 4, "title": "🎨 V48.0 发布!", "content": "颜色选择器已上线", "time": "2小时前", "read": true },
+    { "id": 5, "title": "🧮 V47.0 发布!", "content": "迷你计算器已上线", "time": "4小时前", "read": true },
     { "id": 6, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "6小时前", "read": true }
   ],
   "health": {
