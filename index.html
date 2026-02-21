@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V31.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V32.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1647,6 +1647,41 @@
                 .pet-timeinfo { font-size: 0.8rem; color: var(--text-secondary); }
             </style>
             <div class="card">
+                <div class="card-header"><span class="card-title">📊 本周迭代统计</span><span class="card-badge" style="background:rgba(0,255,245,0.2);color:var(--accent-cyan)">W8</span></div>
+                <div class="week-stats">
+                    <div class="week-stat-item">
+                        <div class="week-stat-icon">🔄</div>
+                        <div class="week-stat-info">
+                            <div class="week-stat-value" id="weekIterations">0</div>
+                            <div class="week-stat-label">本周迭代</div>
+                        </div>
+                    </div>
+                    <div class="week-stat-item">
+                        <div class="week-stat-icon">⏱️</div>
+                        <div class="week-stat-info">
+                            <div class="week-stat-value" id="weekUptime">0h</div>
+                            <div class="week-stat-label">运行时长</div>
+                        </div>
+                    </div>
+                    <div class="week-stat-item">
+                        <div class="week-stat-icon">⚡</div>
+                        <div class="week-stat-info">
+                            <div class="week-stat-value" id="weekSkills">0</div>
+                            <div class="week-stat-label">活跃技能</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .week-stats { display: flex; flex-direction: column; gap: 10px; }
+                .week-stat-item { display: flex; align-items: center; gap: 12px; padding: 10px; background: var(--bg-secondary); border-radius: 10px; transition: all 0.2s; }
+                .week-stat-item:hover { transform: translateX(4px); background: rgba(0, 255, 245, 0.08); }
+                .week-stat-icon { font-size: 1.5rem; }
+                .week-stat-info { flex: 1; }
+                .week-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); }
+                .week-stat-label { font-size: 0.7rem; color: var(--text-secondary); }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">⏱️ 本次会话</span></div>
                 <div class="session-timer">
                     <div class="session-icon">⏱️</div>
@@ -1892,6 +1927,14 @@
             if (countBadge) countBadge.textContent = favSkills.length;
         }
         function updateTime() {
+            // Get week number
+            function getWeekNumber(d) {
+                d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+                var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+                var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+                return weekNo;
+            }
             const now = new Date();
             document.getElementById('serverTime').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
             document.getElementById('lastUpdate').textContent = now.toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
@@ -1911,6 +1954,12 @@
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             document.getElementById('uptimeDisplay').textContent = `已运行 ${days}天 ${hours}小时`;
+            
+            // Update week stats
+            const weekNum = getWeekNumber(now);
+            document.getElementById('weekIterations').textContent = localStorage.getItem('pupuWeekIter') || '0';
+            document.getElementById('weekUptime').textContent = hours + 'h';
+            document.getElementById('weekSkills').textContent = '58';
             
             // Update boot time and run time
             const bootDate = new Date('2026-02-02T00:00:00+08:00');
