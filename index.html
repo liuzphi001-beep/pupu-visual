@@ -1619,6 +1619,7 @@
                 · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V56.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
+                <span>👁️ <span id="pageViews">0</span>浏览</span>
                 <span>👆 <span id="totalClicks">0</span>点击</span>
                 <span>⭐ <span id="totalFavs">0</span>收藏</span>
                 <span>📝 <span id="totalNotes">0</span>笔记</span>
@@ -2560,15 +2561,20 @@
         }
         
         // Console stats
-        console.log('%c🐾 噗噗控制台 V44.0', 'font-size:16px;font-weight:bold;color:#00fff5');
+        console.log('%c🐾 噗噗控制台 V60.0', 'font-size:16px;font-weight:bold;color:#00fff5');
         console.log('总点击: ' + (parseInt(localStorage.getItem('pupuTotalClicks') || '0')));
         console.log('收藏技能: ' + (JSON.parse(localStorage.getItem('pupuFavorites') || '[]')).length);
+        
+        // Track page views (auto-increment on each visit)
+        const pageViews = parseInt(localStorage.getItem('pupuPageViews') || '0') + 1;
+        localStorage.setItem('pupuPageViews', pageViews);
         
         // Update footer stats
         const updateFooterStats = () => {
             if (document.getElementById('totalClicks')) document.getElementById('totalClicks').textContent = localStorage.getItem('pupuTotalClicks') || '0';
             if (document.getElementById('totalFavs')) document.getElementById('totalFavs').textContent = (JSON.parse(localStorage.getItem('pupuFavorites') || '[]')).length;
             if (document.getElementById('totalNotes')) document.getElementById('totalNotes').textContent = (localStorage.getItem('pupuStickyNote') || '').length;
+            if (document.getElementById('pageViews')) document.getElementById('pageViews').textContent = localStorage.getItem('pupuPageViews') || '0';
         };
         updateFooterStats();
         
