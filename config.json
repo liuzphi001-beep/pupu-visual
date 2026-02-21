@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V63.0",
-    "version": "V63.0",
+    "title": "🐾 噗噗控制台 V64.0",
+    "version": "V64.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -44,10 +44,10 @@
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
+    { "icon": "⚡", "title": "V64.0 快速命令", "desc": "命令行式快捷操作" },
     { "icon": "📅", "title": "V63.0 农历显示", "desc": "显示农历日期" },
     { "icon": "🐾", "title": "V62.0 萌宠时钟", "desc": "根据时段显示不同状态" },
-    { "icon": "💕", "title": "V61.0 噗噗心情", "desc": "根据负载显示心情" },
-    { "icon": "👁️", "title": "V60.0 访问统计", "desc": "追踪页面浏览量" }
+    { "icon": "💕", "title": "V61.0 噗噗心情", "desc": "根据负载显示心情" }
   ],
   "weather": {
     "city": "北京",
@@ -59,17 +59,17 @@
     "model": "MiniMax-M2.5"
   },
   "activities": [
+    { "icon": "⚡", "title": "V64.0 快速命令发布", "time": "刚刚", "type": "success" },
     { "icon": "📅", "title": "V63.0 农历显示发布", "time": "刚刚", "type": "success" },
-    { "icon": "🐾", "title": "V62.0 萌宠时钟发布", "time": "刚刚", "type": "success" },
-    { "icon": "💕", "title": "V61.0 噗噗心情发布", "time": "2小时前", "type": "success" },
-    { "icon": "👁️", "title": "V60.0 访问统计发布", "time": "4小时前", "type": "success" }
+    { "icon": "🐾", "title": "V62.0 萌宠时钟发布", "time": "2小时前", "type": "success" },
+    { "icon": "💕", "title": "V61.0 噗噗心情发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "📅 V63.0 发布!", "content": "农历显示已上线", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🐾 V62.0 发布!", "content": "萌宠时钟已上线", "time": "刚刚", "read": true },
-    { "id": 3, "title": "💕 V61.0 发布!", "content": "噗噗心情已上线", "time": "刚刚", "read": true },
-    { "id": 4, "title": "👁️ V60.0 发布!", "content": "访问统计已上线", "time": "2小时前", "read": true },
-    { "id": 5, "title": "📅 V59.0 发布!", "content": "星期显示已上线", "time": "4小时前", "read": true },
+    { "id": 1, "title": "⚡ V64.0 发布!", "content": "快速命令已上线", "time": "刚刚", "read": false },
+    { "id": 2, "title": "📅 V63.0 发布!", "content": "农历显示已上线", "time": "刚刚", "read": true },
+    { "id": 3, "title": "🐾 V62.0 发布!", "content": "萌宠时钟已上线", "time": "刚刚", "read": true },
+    { "id": 4, "title": "💕 V61.0 发布!", "content": "噗噗心情已上线", "time": "2小时前", "read": true },
+    { "id": 5, "title": "👁️ V60.0 发布!", "content": "访问统计已上线", "time": "4小时前", "read": true },
     { "id": 6, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "6小时前", "read": true }
   ],
   "health": {

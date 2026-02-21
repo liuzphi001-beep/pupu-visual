@@ -736,7 +736,18 @@
                     <div class="command-btn" onclick="executeCmd('system')"><div class="icon">💻</div><div class="label">系统状态</div></div>
                     <div class="command-btn" onclick="toggleTheme()"><div class="icon" id="themeIcon">🌙</div><div class="label" id="themeLabel">切换主题</div></div>
                 </div>
+                <div class="quick-cmd">
+                    <input type="text" class="quick-cmd-input" id="quickCmdInput" placeholder="输入命令... (回车执行)" onkeypress="runQuickCmd(event)">
+                    <div class="quick-cmd-result" id="quickCmdResult"></div>
+                </div>
             </div>
+            <style>
+                .quick-cmd { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); }
+                .quick-cmd-input { width: 100%; padding: 10px 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; outline: none; }
+                .quick-cmd-input:focus { border-color: var(--accent-cyan); }
+                .quick-cmd-result { margin-top: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.8rem; color: var(--text-secondary); display: none; }
+                .quick-cmd-result.show { display: block; }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">⚡ 快捷操作</span></div>
                 <div class="quick-actions">
@@ -2584,6 +2595,37 @@
         
         function executeCmd(cmd) {
             alert('功能: ' + cmd);
+        }
+        
+        // Quick command runner
+        function runQuickCmd(e) {
+            if (e.key === 'Enter') {
+                const input = document.getElementById('quickCmdInput');
+                const result = document.getElementById('quickCmdResult');
+                const cmd = input.value.trim().toLowerCase();
+                
+                if (!cmd) return;
+                
+                const commands = {
+                    'help': '可用命令: help, time, date, version, weather, cpu, memory, skills, clear',
+                    'time': '当前时间: ' + new Date().toLocaleTimeString('zh-CN'),
+                    'date': '当前日期: ' + new Date().toLocaleDateString('zh-CN'),
+                    'version': '看板版本: V64.0',
+                    'weather': '天气: ' + document.getElementById('weatherTemp').textContent + ' ' + document.getElementById('weatherDesc').textContent,
+                    'cpu': 'CPU: ' + document.getElementById('cpuPercent').textContent,
+                    'memory': '内存: ' + document.getElementById('memPercent').textContent,
+                    'skills': 'Skills: ' + document.getElementById('skillCount').textContent + '个',
+                    'clear': (input.value = '', result.classList.remove('show'), '')
+                };
+                
+                if (commands[cmd]) {
+                    result.textContent = '> ' + cmd + '\n' + commands[cmd];
+                    result.classList.add('show');
+                } else {
+                    result.textContent = '未知命令: ' + cmd + '\n输入 "help" 查看可用命令';
+                    result.classList.add('show');
+                }
+            }
         }
         
         // Usage statistics tracker
