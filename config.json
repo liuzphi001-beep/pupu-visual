@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V67.0",
-    "version": "V67.0",
+    "title": "🐾 噗噗控制台 V68.0",
+    "version": "V68.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -44,10 +44,10 @@
     { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
   ],
   "highlights": [
+    { "icon": "🌬️", "title": "V68.0 空气质量", "desc": "显示AQI和PM2.5" },
     { "icon": "⌨️", "title": "V67.0 键盘快捷键", "desc": "显示可用快捷键" },
     { "icon": "⏱️", "title": "V66.0 会话计时", "desc": "显示本次看板访问时长" },
-    { "icon": "💡", "title": "V65.0 每日小贴士", "desc": "每日实用技巧提示" },
-    { "icon": "⚡", "title": "V64.0 快速命令", "desc": "命令行式快捷操作" }
+    { "icon": "💡", "title": "V65.0 每日小贴士", "desc": "每日实用技巧提示" }
   ],
   "weather": {
     "city": "北京",
@@ -59,17 +59,17 @@
     "model": "MiniMax-M2.5"
   },
   "activities": [
+    { "icon": "🌬️", "title": "V68.0 空气质量发布", "time": "刚刚", "type": "success" },
     { "icon": "⌨️", "title": "V67.0 键盘快捷键发布", "time": "刚刚", "type": "success" },
-    { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "刚刚", "type": "success" },
-    { "icon": "💡", "title": "V65.0 每日小贴士发布", "time": "2小时前", "type": "success" },
-    { "icon": "⚡", "title": "V64.0 快速命令发布", "time": "4小时前", "type": "success" }
+    { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "2小时前", "type": "success" },
+    { "icon": "💡", "title": "V65.0 每日小贴士发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "⌨️ V67.0 发布!", "content": "键盘快捷键已上线", "time": "刚刚", "read": false },
-    { "id": 2, "title": "⏱️ V66.0 发布!", "content": "会话计时已上线", "time": "刚刚", "read": true },
-    { "id": 3, "title": "💡 V65.0 发布!", "content": "每日小贴士已上线", "time": "刚刚", "read": true },
-    { "id": 4, "title": "⚡ V64.0 发布!", "content": "快速命令已上线", "time": "2小时前", "read": true },
-    { "id": 5, "title": "📅 V63.0 发布!", "content": "农历显示已上线", "time": "4小时前", "read": true },
+    { "id": 1, "title": "🌬️ V68.0 发布!", "content": "空气质量已上线", "time": "刚刚", "read": false },
+    { "id": 2, "title": "⌨️ V67.0 发布!", "content": "键盘快捷键已上线", "time": "刚刚", "read": true },
+    { "id": 3, "title": "⏱️ V66.0 发布!", "content": "会话计时已上线", "time": "刚刚", "read": true },
+    { "id": 4, "title": "💡 V65.0 发布!", "content": "每日小贴士已上线", "time": "2小时前", "read": true },
+    { "id": 5, "title": "⚡ V64.0 发布!", "content": "快速命令已上线", "time": "4小时前", "read": true },
     { "id": 6, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "6小时前", "read": true }
   ],
   "health": {
