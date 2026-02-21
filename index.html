@@ -1525,10 +1525,20 @@
                     <div class="quote-author">— Donald Knuth</div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">💡 每日小贴士</span></div>
+                <div class="daily-tip" id="dailyTip">
+                    <div class="tip-icon">💡</div>
+                    <div class="tip-text">使用 Ctrl+K 可以快速打开快捷键菜单</div>
+                </div>
+            </div>
             <style>
                 .daily-quote { text-align: center; padding: 15px; background: linear-gradient(135deg, rgba(0,255,245,0.1), rgba(168,85,247,0.1)); border-radius: 12px; border: 1px solid rgba(0,255,245,0.2); }
                 .quote-text { font-size: 0.95rem; color: var(--text-primary); line-height: 1.6; margin-bottom: 10px; font-style: italic; }
                 .quote-author { font-size: 0.75rem; color: var(--accent-cyan); }
+                .daily-tip { display: flex; align-items: center; gap: 12px; padding: 12px; background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.1)); border-radius: 12px; border: 1px solid rgba(251,191,36,0.2); }
+                .tip-icon { font-size: 1.5rem; }
+                .tip-text { font-size: 0.85rem; color: var(--text-primary); line-height: 1.4; }
             </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📜 历史上的今天</span></div>
@@ -2948,6 +2958,31 @@
         
         // Initialize history today on load
         renderHistoryToday();
+        
+        // Daily Tips
+        const dailyTips = [
+            '使用 Ctrl+K 可以快速打开快捷键菜单',
+            '点击技能上的星标可以收藏常用技能',
+            '输入 help 查看快速命令帮助',
+            '天气数据每30秒自动刷新',
+            '页面浏览量会自动统计',
+            '点击密码生成器的密码可复制',
+            '按 W 键可快速查看天气',
+            '系统状态每分钟自动更新',
+            '世界时钟实时显示各地时间',
+            '使用主题切换按钮可切换亮色/暗色模式'
+        ];
+        
+        function renderDailyTip() {
+            const tipContainer = document.getElementById('dailyTip');
+            if (!tipContainer) return;
+            // Use date as seed for consistent daily tip
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+            const tipIndex = dayOfYear % dailyTips.length;
+            tipContainer.querySelector('.tip-text').textContent = dailyTips[tipIndex];
+        }
+        renderDailyTip();
         
         // Simple lunar calendar calculation
         const lunarInfo = [
