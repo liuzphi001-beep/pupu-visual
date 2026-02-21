@@ -1585,11 +1585,20 @@
                     <div class="time-weekday" id="currentWeekday">星期一</div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">🐾 萌宠时钟</span></div>
+                <div class="pet-clock">
+                    <div class="pet-icon" id="petIcon">🐱</div>
+                    <div class="pet-greeting" id="petGreeting">你好呀！</div>
+                    <div class="pet-timeinfo" id="petTimeInfo">现在是早晨</div>
+                </div>
+            </div>
             <style>
-                .time-display { text-align: center; padding: 10px; }
-                .time-main { font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; color: var(--accent-cyan); font-weight: 600; }
-                .time-date { font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px; }
-                .time-weekday { font-size: 1rem; color: var(--accent-purple); margin-top: 8px; font-weight: 500; }
+                .pet-clock { text-align: center; padding: 10px; }
+                .pet-icon { font-size: 3rem; margin-bottom: 8px; animation: petBounce 3s ease-in-out infinite; }
+                @keyframes petBounce { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-5px) rotate(-5deg); } 75% { transform: translateY(-5px) rotate(5deg); } }
+                .pet-greeting { font-size: 1.1rem; font-weight: 600; color: var(--accent-cyan); margin-bottom: 4px; }
+                .pet-timeinfo { font-size: 0.8rem; color: var(--text-secondary); }
             </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">👤 关于噗噗</span></div>
@@ -2903,6 +2912,37 @@
             document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN').replace(/\//g, '-');
             const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
             document.getElementById('currentWeekday').textContent = weekdays[now.getDay()];
+            
+            // Update pet clock
+            updatePetClock(now);
+        }
+        
+        // Pet clock function
+        function updatePetClock(now) {
+            const hour = now.getHours();
+            const petIcon = document.getElementById('petIcon');
+            const petGreeting = document.getElementById('petGreeting');
+            const petTimeInfo = document.getElementById('petTimeInfo');
+            
+            let pet, greeting, timeInfo;
+            
+            if (hour >= 5 && hour < 8) {
+                pet = '🌅'; greeting = '早上好！'; timeInfo = '清晨时光';
+            } else if (hour >= 8 && hour < 12) {
+                pet = '☀️'; greeting = '上午好！'; timeInfo = '工作学习中';
+            } else if (hour >= 12 && hour < 14) {
+                pet = '🍱'; greeting = '中午好！'; timeInfo = '午餐时间到';
+            } else if (hour >= 14 && hour < 18) {
+                pet = '🌤️'; greeting = '下午好！'; timeInfo = '继续加油~';
+            } else if (hour >= 18 && hour < 22) {
+                pet = '🌙'; greeting = '晚上好！'; timeInfo = '放松一下吧';
+            } else {
+                pet = '🌙'; greeting = '夜深了~'; timeInfo = '早点休息哦';
+            }
+            
+            if (petIcon) petIcon.textContent = pet;
+            if (petGreeting) petGreeting.textContent = greeting;
+            if (petTimeInfo) petTimeInfo.textContent = timeInfo;
         }
         
         updateTime();
