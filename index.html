@@ -794,6 +794,28 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header"><span class="card-title">💕 噗噗心情</span><span class="card-badge" style="background:rgba(236,72,153,0.2);color:#ec4899" id="moodBadge">开心</span></div>
+                <div class="mood-display">
+                    <div class="mood-icon" id="moodIcon">😺</div>
+                    <div class="mood-text" id="moodText">服务器状态良好，我也很开心！</div>
+                    <div class="mood-factors">
+                        <div class="mood-factor"><span>CPU</span><span id="moodCpu">正常</span></div>
+                        <div class="mood-factor"><span>内存</span><span id="moodMem">正常</span></div>
+                        <div class="mood-factor"><span>负载</span><span id="moodLoad">低</span></div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .mood-display { text-align: center; padding: 10px; }
+                .mood-icon { font-size: 3rem; margin-bottom: 10px; animation: moodBounce 2s ease-in-out infinite; }
+                @keyframes moodBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+                .mood-text { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px; }
+                .mood-factors { display: flex; justify-content: center; gap: 16px; }
+                .mood-factor { display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; }
+                .mood-factor span:first-child { color: var(--text-secondary); }
+                .mood-factor span:last-child { color: var(--accent-green); font-weight: 600; margin-top: 4px; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">🛠️ 服务状态</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)">2/2</span></div>
                 <div class="services-grid">
                     <div class="service-item">
@@ -2381,6 +2403,62 @@
             
             // Update alert center
             checkAlerts(cpu, mem, disk);
+            
+            // Update mood based on system status
+            updateMood(cpu, mem);
+        }
+        
+        // Mood update function
+        function updateMood(cpu, mem) {
+            const moodIcon = document.getElementById('moodIcon');
+            const moodText = document.getElementById('moodText');
+            const moodBadge = document.getElementById('moodBadge');
+            const moodCpu = document.getElementById('moodCpu');
+            const moodMem = document.getElementById('moodMem');
+            const moodLoad = document.getElementById('moodLoad');
+            
+            const cpuNum = parseFloat(cpu);
+            const memNum = parseInt(mem);
+            
+            // Update mood factors display
+            if (moodCpu) moodCpu.textContent = cpuNum <= 50 ? '优秀' : cpuNum <= 80 ? '正常' : '繁忙';
+            if (moodMem) moodMem.textContent = memNum <= 50 ? '充足' : memNum <= 75 ? '正常' : '紧张';
+            if (moodLoad) moodLoad.textContent = cpuNum <= 0.5 ? '低' : cpuNum <= 1 ? '正常' : '高';
+            
+            // Determine mood
+            if (cpuNum <= 50 && memNum <= 50) {
+                if (moodIcon) moodIcon.textContent = '😺';
+                if (moodText) moodText.textContent = '服务器状态良好，我也很开心！';
+                if (moodBadge) {
+                    moodBadge.textContent = '开心';
+                    moodBadge.style.background = 'rgba(236,72,153,0.2)';
+                    moodBadge.style.color = '#ec4899';
+                }
+            } else if (cpuNum <= 80 && memNum <= 75) {
+                if (moodIcon) moodIcon.textContent = '🙂';
+                if (moodText) moodText.textContent = '一切正常运行中~';
+                if (moodBadge) {
+                    moodBadge.textContent = '正常';
+                    moodBadge.style.background = 'rgba(34,197,94,0.2)';
+                    moodBadge.style.color = 'var(--accent-green)';
+                }
+            } else if (cpuNum <= 90 && memNum <= 85) {
+                if (moodIcon) moodIcon.textContent = '😐';
+                if (moodText) moodText.textContent = '负载有点高，需要关注...';
+                if (moodBadge) {
+                    moodBadge.textContent = '忙碌';
+                    moodBadge.style.background = 'rgba(251,191,36,0.2)';
+                    moodBadge.style.color = 'var(--accent-gold)';
+                }
+            } else {
+                if (moodIcon) moodIcon.textContent = '😰';
+                if (moodText) moodText.textContent = '服务器负载很高！需要紧急处理！';
+                if (moodBadge) {
+                    moodBadge.textContent = '紧张';
+                    moodBadge.style.background = 'rgba(239,68,68,0.2)';
+                    moodBadge.style.color = 'var(--accent-red)';
+                }
+            }
         }
         
         // Alert checking function
