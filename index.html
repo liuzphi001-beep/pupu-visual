@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V38.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V39.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1451,7 +1451,17 @@
                 <div class="today-goals">
                     <div class="goal-item"><div class="goal-check">✅</div><div class="goal-text">完成看板V38.0迭代</div></div>
                     <div class="goal-item"><div class="goal-check">✅</div><div class="goal-text">推送GitHub</div></div>
-                    <div class="goal-item"><div class="goal-check">🔄</div><div class="goal-text">优化用户体验</div></div>
+                    <div class="goal-item"><div class="goal-check">✅</div><div class="goal-text">优化用户体验</div></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">📝 快捷笔记</span><span class="card-badge" style="background:rgba(251,191,36,0.2);color:var(--accent-gold)">点击保存</span></div>
+                <div class="quick-note">
+                    <textarea class="note-input" id="quickNote" placeholder="在这里记录想法..."></textarea>
+                    <div class="note-actions">
+                        <button class="note-btn" onclick="saveNote()">💾 保存</button>
+                        <button class="note-btn" onclick="clearNote()">🗑️ 清除</button>
+                    </div>
                 </div>
             </div>
             <style>
@@ -1460,6 +1470,14 @@
                 .goal-item:hover { transform: translateX(4px); }
                 .goal-check { font-size: 1.1rem; }
                 .goal-text { font-size: 0.85rem; }
+            </style>
+            <style>
+                .quick-note { display: flex; flex-direction: column; gap: 10px; }
+                .note-input { width: 100%; min-height: 80px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; resize: vertical; outline: none; }
+                .note-input:focus { border-color: var(--accent-gold); }
+                .note-actions { display: flex; gap: 10px; }
+                .note-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+                .note-btn:hover { background: var(--accent-gold); color: var(--bg-primary); }
             </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">🧮 迷你计算器</span></div>
@@ -2119,6 +2137,26 @@
                 document.getElementById('windDir').textContent = windDirs[Math.round(w.winddirection/45)%8];
             }
         }
+        function saveNote() {
+            const note = document.getElementById('quickNote').value;
+            if (note.trim()) {
+                localStorage.setItem('pupuQuickNote', note);
+                alert('💾 笔记已保存!');
+            } else {
+                alert('⚠️ 请输入内容');
+            }
+        }
+        function clearNote() {
+            document.getElementById('quickNote').value = '';
+            localStorage.removeItem('pupuQuickNote');
+        }
+        // Load saved note on page load
+        window.addEventListener('load', function() {
+            const savedNote = localStorage.getItem('pupuQuickNote');
+            if (savedNote) {
+                document.getElementById('quickNote').value = savedNote;
+            }
+        });
         function openTool(tool) {
             const toolMap = {
                 'calc': '🧮 计算器已打开 - 请使用页面中的计算器功能',
