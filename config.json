@@ -78,7 +78,7 @@
     "cpu": { "status": "normal", "value": "38%", "label": "正常" },
     "memory": { "status": "normal", "value": "38%", "label": "正常" },
     "disk": { "status": "normal", "value": "28%", "label": "正常" },
-    "uptime": { "status": "normal", "value": "13天11小时", "label": "稳定" }
+    "uptime": { "status": "normal", "value": "19天", "label": "稳定" }
   },
   "quickStats": {
     "onlineUsers": 224,
