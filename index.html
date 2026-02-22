@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V41.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V42.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1533,6 +1533,34 @@
                 .alert-icon { font-size: 1rem; }
                 .alert-text { flex: 1; }
             </style>
+            <div class="card">
+                <div class="card-header"><span class="card-title">😊 心情状态</span><span class="card-badge" style="background:rgba(236,72,153,0.2);color:var(--accent-pink)">开心</span></div>
+                <div class="mood-selector">
+                    <div class="mood-item" onclick="setMood('😄')">😄</div>
+                    <div class="mood-item" onclick="setMood('😊')">😊</div>
+                    <div class="mood-item" onclick="setMood('😐')">😐</div>
+                    <div class="mood-item" onclick="setMood('😔')">😔</div>
+                    <div class="mood-item" onclick="setMood('🤔')">🤔</div>
+                </div>
+            </div>
+            <style>
+                .mood-selector { display: flex; justify-content: space-around; padding: 10px; }
+                .mood-item { font-size: 1.8rem; cursor: pointer; transition: all 0.2s; padding: 5px; border-radius: 10px; }
+                .mood-item:hover { transform: scale(1.2); background: var(--bg-secondary); }
+            </style>
+            <script>
+                function setMood(emoji) {
+                    localStorage.setItem('pupuMood', emoji);
+                    alert('心情已设置为: ' + emoji);
+                }
+                // Load saved mood on page load
+                window.addEventListener('load', function() {
+                    const savedMood = localStorage.getItem('pupuMood');
+                    if (savedMood) {
+                        document.querySelector('.mood-selector').setAttribute('data-mood', savedMood);
+                    }
+                });
+            </script>
             <div class="card">
                 <div class="card-header"><span class="card-title">🧮 迷你计算器</span></div>
                 <div class="mini-calc">
