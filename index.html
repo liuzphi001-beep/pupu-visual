@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V32.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V33.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1037,6 +1037,36 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">📈 性能趋势</span><span class="card-badge" style="background:rgba(0,255,245,0.2);color:var(--accent-cyan)">24h</span></div>
+                <div class="perf-trend">
+                    <div class="perf-item">
+                        <div class="perf-label">CPU趋势</div>
+                        <div class="perf-bar"><div class="perf-bar-fill" id="cpuTrend" style="width:15%"></div></div>
+                        <div class="perf-value" id="cpuTrendValue">15%</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-label">内存趋势</div>
+                        <div class="perf-bar"><div class="perf-bar-fill mem" id="memTrend" style="width:38%"></div></div>
+                        <div class="perf-value" id="memTrendValue">38%</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-label">负载趋势</div>
+                        <div class="perf-bar"><div class="perf-bar-fill load" id="loadTrend" style="width:5%"></div></div>
+                        <div class="perf-value" id="loadTrendValue">0.05</div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .perf-trend { display: flex; flex-direction: column; gap: 12px; }
+                .perf-item { display: flex; align-items: center; gap: 10px; }
+                .perf-label { font-size: 0.8rem; color: var(--text-secondary); width: 70px; }
+                .perf-bar { flex: 1; height: 8px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden; }
+                .perf-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green)); border-radius: 4px; transition: width 0.5s ease; }
+                .perf-bar-fill.mem { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
+                .perf-bar-fill.load { background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan)); }
+                .perf-value { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-cyan); width: 45px; text-align: right; }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">🌐 网络连接</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)" id="connBadge">活跃</span></div>
                 <div class="conn-list" id="connList">
