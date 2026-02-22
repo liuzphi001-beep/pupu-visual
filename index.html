@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V34.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V35.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1808,6 +1808,27 @@
                     <a href="https://www.moltbook.com/c/agents" target="_blank" class="quick-link"><span class="icon">⚡</span>Agents</a>
                 </div>
             </div>
+            <div class="card" style="grid-column: span 4;">
+                <div class="card-header"><span class="card-title">🛠️ 常用工具</span><span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)">8个</span></div>
+                <div class="tools-grid">
+                    <div class="tool-item" onclick="openTool('calc')"><span class="tool-icon">🧮</span><span class="tool-name">计算器</span></div>
+                    <div class="tool-item" onclick="openTool('qr')"><span class="tool-icon">📱</span><span class="tool-name">二维码</span></div>
+                    <div class="tool-item" onclick="openTool('timer')"><span class="tool-icon">⏱️</span><span class="tool-name">倒计时</span></div>
+                    <div class="tool-item" onclick="openTool('pwd')"><span class="tool-icon">🔐</span><span class="tool-name">密码生成</span></div>
+                    <div class="tool-item" onclick="openTool('color')"><span class="tool-icon">🎨</span><span class="tool-name">取色器</span></div>
+                    <div class="tool-item" onclick="openTool('unit')"><span class="tool-icon">🔄</span><span class="tool-name">单位转换</span></div>
+                    <div class="tool-item" onclick="openTool('char')"><span class="tool-icon">📝</span><span class="tool-name">字数统计</span></div>
+                    <div class="tool-item" onclick="openTool('quote')"><span class="tool-icon">💬</span><span class="tool-name">每日一言</span></div>
+                </div>
+            </div>
+            <style>
+                .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+                .tool-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 8px; background: var(--bg-secondary); border-radius: 10px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+                .tool-item:hover { border-color: var(--accent-purple); transform: translateY(-3px); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2); }
+                .tool-icon { font-size: 1.5rem; }
+                .tool-name { font-size: 0.75rem; color: var(--text-secondary); }
+                .tool-item:hover .tool-name { color: var(--accent-purple); }
+            </style>
         </div>
 
         <footer class="footer">
@@ -2047,6 +2068,19 @@
                 document.getElementById('windSpeed').textContent = w.windspeed;
                 document.getElementById('windDir').textContent = windDirs[Math.round(w.winddirection/45)%8];
             }
+        }
+        function openTool(tool) {
+            const toolMap = {
+                'calc': '🧮 计算器已打开 - 请使用页面中的计算器功能',
+                'qr': '📱 二维码生成器已打开 - 请使用页面中的二维码生成器功能',
+                'timer': '⏱️ 倒计时器已打开 - 请使用页面中的倒计时功能',
+                'pwd': '🔐 密码生成器已打开 - 请使用页面中的密码生成器功能',
+                'color': '🎨 取色器已打开 - 请使用页面中的颜色选择器功能',
+                'unit': '🔄 单位转换器已打开 - 请使用页面中的单位转换器功能',
+                'char': '📝 字数统计已打开 - 请使用页面中的字数统计功能',
+                'quote': '💬 每日一言已打开 - 请查看页面中的每日一言'
+            };
+            alert(toolMap[tool] || '未知工具');
         }
         function executeCmd(cmd) {
             if (cmd === 'refresh') {
