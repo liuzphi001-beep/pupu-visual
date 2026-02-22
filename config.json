@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V68.0",
-    "version": "V68.0",
+    "title": "🐾 噗噗控制台 V69.0",
+    "version": "V69.0",
     "securityCode": "pupu2026"
   },
   "skills": [
@@ -11,18 +11,19 @@
     { "icon": "🔎", "name": "code-reviewer" },
     { "icon": "🔀", "name": "pr-creator" },
     { "icon": "🔧", "name": "fix" },
-    { "icon": "🌤️", "name": "weather" },
-    { "icon": "🛡️", "name": "agentguard" },
-    { "icon": "💾", "name": "memory-qmd" },
-    { "icon": "🎭", "name": "skill-creator" },
-    { "icon": "☁️", "name": "feishu-doc" },
-    { "icon": "🔄", "name": "openclaw-switch" },
-    { "icon": "❤️", "name": "healthcheck" },
-    { "icon": "🔧", "name": "github" },
-    { "icon": "🎮", "name": "1password" },
-    { "icon": "📓", "name": "apple-notes" },
-    { "icon": "💬", "name": "discord" },
-    { "icon": "🎵", "name": "spotify-player" }
+    { "icon": "🛠️", "name": "code" },
+    { "icon": "🗄️", "name": "database-operations" },
+    { "icon": "🚀", "name": "deploy-agent" },
+    { "icon": "🐳", "name": "docker-compose" },
+    { "icon": "📦", "name": "docker-essentials" },
+    { "icon": "🔍", "name": "find-skills" },
+    { "icon": "🎭", "name": "frontend-code-review" },
+    { "icon": "📊", "name": "github-repo-stats" },
+    { "icon": "🤖", "name": "minimax-mcp" },
+    { "icon": "🚂", "name": "railway-deploy" },
+    { "icon": "▲", "name": "vercel-deploy" },
+    { "icon": "☁️", "name": "aws" },
+    { "icon": "⚡", "name": "cache-components" }
   ],
   "quickLinks": [
     { "icon": "🌐", "name": "看板预览", "url": "/" },
@@ -40,14 +41,14 @@
   ],
   "cronTasks": [
     { "name": "页面迭代汇报", "schedule": "每2小时", "status": "启用" },
-    { "name": "每日反思日报", "schedule": "23:50", "status": "启用" },
-    { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" }
+    { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" },
+    { "name": "每日反思日报", "schedule": "23:50", "status": "启用" }
   ],
   "highlights": [
+    { "icon": "📊", "title": "V69.0 Skills同步", "desc": "同步19个Workspace Skills" },
     { "icon": "🌬️", "title": "V68.0 空气质量", "desc": "显示AQI和PM2.5" },
     { "icon": "⌨️", "title": "V67.0 键盘快捷键", "desc": "显示可用快捷键" },
-    { "icon": "⏱️", "title": "V66.0 会话计时", "desc": "显示本次看板访问时长" },
-    { "icon": "💡", "title": "V65.0 每日小贴士", "desc": "每日实用技巧提示" }
+    { "icon": "⏱️", "title": "V66.0 会话计时", "desc": "显示本次看板访问时长" }
   ],
   "weather": {
     "city": "北京",
@@ -56,19 +57,20 @@
   },
   "system": {
     "startDate": "2026-02-02",
-    "model": "MiniMax-M2.5"
+    "model": "MiniMax-M2.5",
+    "skillsCount": 19
   },
   "activities": [
+    { "icon": "📊", "title": "V69.0 Skills同步", "time": "刚刚", "type": "success" },
     { "icon": "🌬️", "title": "V68.0 空气质量发布", "time": "刚刚", "type": "success" },
-    { "icon": "⌨️", "title": "V67.0 键盘快捷键发布", "time": "刚刚", "type": "success" },
-    { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "2小时前", "type": "success" },
-    { "icon": "💡", "title": "V65.0 每日小贴士发布", "time": "4小时前", "type": "success" }
+    { "icon": "⌨️", "title": "V67.0 键盘快捷键发布", "time": "2小时前", "type": "success" },
+    { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "🌬️ V68.0 发布!", "content": "空气质量已上线", "time": "刚刚", "read": false },
-    { "id": 2, "title": "⌨️ V67.0 发布!", "content": "键盘快捷键已上线", "time": "刚刚", "read": true },
-    { "id": 3, "title": "⏱️ V66.0 发布!", "content": "会话计时已上线", "time": "刚刚", "read": true },
-    { "id": 4, "title": "💡 V65.0 发布!", "content": "每日小贴士已上线", "time": "2小时前", "read": true },
+    { "id": 1, "title": "📊 V69.0 发布!", "content": "Skills同步更新，共19个技能", "time": "刚刚", "read": false },
+    { "id": 2, "title": "🌬️ V68.0 发布!", "content": "空气质量已上线", "time": "刚刚", "read": true },
+    { "id": 3, "title": "⌨️ V67.0 发布!", "content": "键盘快捷键已上线", "time": "刚刚", "read": true },
+    { "id": 4, "title": "⏱️ V66.0 发布!", "content": "会话计时已上线", "time": "2小时前", "read": true },
     { "id": 5, "title": "⚡ V64.0 发布!", "content": "快速命令已上线", "time": "4小时前", "read": true },
     { "id": 6, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "6小时前", "read": true }
   ],
@@ -82,6 +84,7 @@
     "onlineUsers": 224,
     "loadAverage": "0.38",
     "diskUsage": "11G/40G",
-    "memoryUsage": "1.4G/3.6G"
+    "memoryUsage": "1.4G/3.6G",
+    "skillsCount": 19
   }
 }
