@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V37.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V38.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1445,6 +1445,21 @@
                 .log-success { color: var(--accent-green); }
                 .log-warning { color: var(--accent-gold); }
                 .log-error { color: var(--accent-red); }
+            </style>
+            <div class="card">
+                <div class="card-header"><span class="card-title">🎯 今日目标</span><span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)">3项</span></div>
+                <div class="today-goals">
+                    <div class="goal-item"><div class="goal-check">✅</div><div class="goal-text">完成看板V38.0迭代</div></div>
+                    <div class="goal-item"><div class="goal-check">✅</div><div class="goal-text">推送GitHub</div></div>
+                    <div class="goal-item"><div class="goal-check">🔄</div><div class="goal-text">优化用户体验</div></div>
+                </div>
+            </div>
+            <style>
+                .today-goals { display: flex; flex-direction: column; gap: 10px; }
+                .goal-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--bg-secondary); border-radius: 8px; transition: all 0.2s; }
+                .goal-item:hover { transform: translateX(4px); }
+                .goal-check { font-size: 1.1rem; }
+                .goal-text { font-size: 0.85rem; }
             </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">🧮 迷你计算器</span></div>
