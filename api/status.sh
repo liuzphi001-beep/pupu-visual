@@ -10,9 +10,18 @@ DISK_USED=$(df -h / | tail -1 | awk '{print $5}' | cut -d'%' -f1)
 LOAD=$(uptime | awk -F'load average:' '{print $2}' | cut -d',' -f1 | xargs)
 UPTIME=$(uptime -p)
 
+# 获取在线用户数
+ONLINE_USERS=$(who | wc -l)
+
+# 获取网络延迟 (ping百度)
+API_LATENCY=$(ping -c 1 -W 1 baidu.com 2>/dev/null | grep "time=" | awk -F'time=' '{print $2}' | awk '{print $1}' | cut -d'.' -f1)
+if [ -z "$API_LATENCY" ]; then
+    API_LATENCY=0
+fi
+
 # 获取Skills数量
 SKILLS_LOCAL=$(ls /root/.openclaw/skills/ 2>/dev/null | wc -l)
-SKILLS_GLOBAL=$(ls /root/.nvm/versions/node/v22.22.0/lib/node_modules/openclaw/skills/ 2>/dev/null | wc -l)
+SKILLS_GLOBAL=$(ls ~/.nvm/versions/node/v22.22.0/lib/node_modules/openclaw/skills/ 2>/dev/null | wc -l)
 SKILLS_TOTAL=$((SKILLS_LOCAL + SKILLS_GLOBAL))
 
 # 获取定时任务数
@@ -33,6 +42,8 @@ echo "  },"
 echo "  \"disk\": $DISK_USED,"
 echo "  \"load\": \"$LOAD\","
 echo "  \"uptime\": \"$UPTIME\","
+echo "  \"onlineUsers\": $ONLINE_USERS,"
+echo "  \"apiLatency\": $API_LATENCY,"
 echo "  \"skills\": $SKILLS_TOTAL,"
 echo "  \"cron\": $CRON_COUNT,"
 echo "  \"openclaw\": \"$OPENCLAW_VERSION\","

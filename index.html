@@ -672,6 +672,12 @@
                 <div class="stat-trend" id="serverDate">--</div>
             </div>
             <div class="card stat-card">
+                <div class="card-header"><span class="card-title">📡 网络</span></div>
+                <div class="stat-value" style="font-size:1.8rem" id="onlineUsers">--</div>
+                <div class="stat-label">在线用户</div>
+                <div class="stat-trend" id="connectionStatus">优秀</div>
+            </div>
+            <div class="card stat-card">
                 <div class="card-header"><span class="card-title">📊 概览</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)">正常</span></div>
                 <div class="overview-dashboard">
                     <div class="overview-ring">
@@ -2032,6 +2038,11 @@
             const server = config.server || {};
             document.getElementById('serverLocation').textContent = server.location || '北京';
             document.getElementById('serverTimezone').textContent = 'UTC' + (server.timezoneOffset || '+8');
+            
+            // Network status
+            const network = config.network || {};
+            document.getElementById('onlineUsers').textContent = network.onlineUsers || '--';
+            document.getElementById('connectionStatus').textContent = network.connectionStatus || '优秀';
             
             // Update server time every second
             function updateServerTime() {
