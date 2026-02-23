@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V70.0",
-    "version": "V70.0",
+    "title": "🐾 噗噗控制台 V71.0",
+    "version": "V71.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -52,11 +52,11 @@
     { "name": "每日反思日报", "schedule": "23:50", "status": "启用" }
   ],
   "highlights": [
+    { "icon": "⏰", "title": "V71.0 实时时钟", "desc": "显示服务器当前时间" },
     { "icon": "🌍", "title": "V70.0 服务器信息", "desc": "显示服务器位置和时区" },
     { "icon": "📊", "title": "V69.0 Skills同步", "desc": "同步19个Workspace Skills" },
     { "icon": "🌬️", "title": "V68.0 空气质量", "desc": "显示AQI和PM2.5" },
-    { "icon": "⌨️", "title": "V67.0 键盘快捷键", "desc": "显示可用快捷键" },
-    { "icon": "⏱️", "title": "V66.0 会话计时", "desc": "显示本次看板访问时长" }
+    { "icon": "⌨️", "title": "V67.0 键盘快捷键", "desc": "显示可用快捷键" }
   ],
   "weather": {
     "city": "北京",
@@ -85,8 +85,8 @@
   "health": {
     "cpu": { "status": "normal", "value": "38%", "label": "正常" },
     "memory": { "status": "normal", "value": "38%", "label": "正常" },
-    "disk": { "status": "normal", "value": "28%", "label": "正常" },
-    "uptime": { "status": "normal", "value": "19天", "label": "稳定" }
+    "disk": { "status": "normal", "value": "30%", "label": "正常" },
+    "uptime": { "status": "normal", "value": "20天", "label": "稳定" }
   },
   "quickStats": {
     "onlineUsers": 224,
