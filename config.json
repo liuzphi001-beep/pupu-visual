@@ -1,8 +1,15 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V69.0",
-    "version": "V69.0",
+    "title": "🐾 噗噗控制台 V70.0",
+    "version": "V70.0",
     "securityCode": "pupu2026"
+  },
+  "server": {
+    "location": "北京",
+    "region": "华北",
+    "provider": "OpenCloudOS",
+    "timezone": "Asia/Shanghai",
+    "timezoneOffset": "+8"
   },
   "skills": [
     { "icon": "📝", "name": "update-docs" },
@@ -45,6 +52,7 @@
     { "name": "每日反思日报", "schedule": "23:50", "status": "启用" }
   ],
   "highlights": [
+    { "icon": "🌍", "title": "V70.0 服务器信息", "desc": "显示服务器位置和时区" },
     { "icon": "📊", "title": "V69.0 Skills同步", "desc": "同步19个Workspace Skills" },
     { "icon": "🌬️", "title": "V68.0 空气质量", "desc": "显示AQI和PM2.5" },
     { "icon": "⌨️", "title": "V67.0 键盘快捷键", "desc": "显示可用快捷键" },

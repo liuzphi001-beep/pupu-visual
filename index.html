@@ -660,6 +660,12 @@
                 <div class="stat-trend">OpenCloudOS</div>
             </div>
             <div class="card stat-card">
+                <div class="card-header"><span class="card-title">🌍 位置</span></div>
+                <div class="stat-value" style="font-size:1.4rem" id="serverLocation">--</div>
+                <div class="stat-label">服务器位置</div>
+                <div class="stat-trend" id="serverTimezone">UTC+8</div>
+            </div>
+            <div class="card stat-card">
                 <div class="card-header"><span class="card-title">📊 概览</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)">正常</span></div>
                 <div class="overview-dashboard">
                     <div class="overview-ring">
@@ -2015,6 +2021,11 @@
             // Set site info
             document.title = config.site?.title || '🐾 噗噗控制台';
             document.getElementById('version').textContent = config.site?.version || 'V5.2';
+            
+            // Server location info
+            const server = config.server || {};
+            document.getElementById('serverLocation').textContent = server.location || '北京';
+            document.getElementById('serverTimezone').textContent = 'UTC' + (server.timezoneOffset || '+8');
             
             // Skills
             const skills = config.skills || [];
