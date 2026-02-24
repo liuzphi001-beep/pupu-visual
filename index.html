@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V42.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V57.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -618,7 +618,7 @@
             <div class="header-right">
                 <div class="status-pill" id="activityPill" style="display:none"><span class="status-dot" style="background:var(--accent-cyan)"></span><span>刷新中...</span></div>
                 <div class="status-pill" id="statusPill"><span class="status-dot"></span><span>在线运行</span></div>
-                <div class="status-pill" style="background:rgba(168,85,247,0.1);border-color:var(--accent-purple);color:var(--accent-purple)"><span id="uptimeDisplay">已运行 11天</span></div>
+                <div class="status-pill" style="background:rgba(168,85,247,0.1);border-color:var(--accent-purple);color:var(--accent-purple)"><span id="uptimeDisplay">已运行 21天</span></div>
                 <div class="cmd-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd> 快捷命令</div>
                 <div class="notification-bell" onclick="toggleNotifications()">🔔<span class="notification-badge" id="notifCount">0</span></div>
                 <div class="notification-panel" id="notifPanel">
@@ -630,8 +630,8 @@
 
         <div class="dashboard">
             <div class="card stat-card">
-                <div class="card-header"><span class="card-title">⚡ Skills</span><span class="card-badge">53+个</span></div>
-                <div class="stat-value" id="skillCount">53</div>
+                <div class="card-header"><span class="card-title">⚡ Skills</span><span class="card-badge">60+个</span></div>
+                <div class="stat-value" id="skillCount">60</div>
                 <div class="stat-label">已安装技能</div>
                 <div class="stat-trend up">↑ 实时同步</div>
             </div>
@@ -1439,7 +1439,7 @@
 
         <div class="dashboard">
             <div class="card" style="grid-column: span 2;">
-                <div class="card-header"><span class="card-title">⚡ Skills 技能库</span><span class="card-badge" id="skillTotal">63个</span></div>
+                <div class="card-header"><span class="card-title">⚡ Skills 技能库</span><span class="card-badge" id="skillTotal">60个</span></div>
                 <div class="search-box">
                     <span class="search-icon">🔍</span>
                     <input type="text" class="search-input" id="skillSearch" placeholder="搜索技能..." onkeyup="filterSkills()">
@@ -1963,6 +1963,7 @@
             <div class="card">
                 <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V40</span></div>
                 <div class="changelog" id="changelog">
+                    <div class="changelog-item"><span class="changelog-ver">V57</span><span class="changelog-desc">每小时自动迭代优化</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V40</span><span class="changelog-desc">运行时长统计</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V39</span><span class="changelog-desc">快捷笔记</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V38</span><span class="changelog-desc">技能收藏</span></div>
@@ -2010,7 +2011,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V56.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V57.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👁️ <span id="pageViews">0</span>浏览</span>
