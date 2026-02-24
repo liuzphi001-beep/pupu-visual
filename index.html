@@ -753,6 +753,8 @@
                     <div class="command-btn" onclick="executeCmd('memory')"><div class="icon">🧠</div><div class="label">记忆系统</div></div>
                     <div class="command-btn" onclick="executeCmd('system')"><div class="icon">💻</div><div class="label">系统状态</div></div>
                     <div class="command-btn" onclick="toggleTheme()"><div class="icon" id="themeIcon">🌙</div><div class="label" id="themeLabel">切换主题</div></div>
+                    <div class="command-btn" onclick="quickBackup()"><div class="icon">💾</div><div class="label">快速备份</div></div>
+                    <div class="command-btn" onclick="quickScreenshot()"><div class="icon">📸</div><div class="label">截图看板</div></div>
                 </div>
                 <div class="quick-cmd">
                     <input type="text" class="quick-cmd-input" id="quickCmdInput" placeholder="输入命令... (回车执行)" onkeypress="runQuickCmd(event)">
@@ -2350,6 +2352,31 @@
                 document.getElementById('themeIcon').textContent = '☀️';
                 document.getElementById('themeLabel').textContent = '亮色模式';
             }
+        }
+        
+        // Quick backup function
+        function quickBackup() {
+            const timestamp = new Date().toLocaleString('zh-CN');
+            const backupData = {
+                version: document.getElementById('version').textContent,
+                theme: localStorage.getItem('pupuTheme'),
+                iterations: localStorage.getItem('pupuIterations'),
+                note: localStorage.getItem('pupuQuickNote'),
+                backupTime: timestamp
+            };
+            const blob = new Blob([JSON.stringify(backupData, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'pupu-backup-' + Date.now() + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            alert('💾 备份已下载!\n时间: ' + timestamp);
+        }
+        
+        // Quick screenshot function (prints page)
+        function quickScreenshot() {
+            window.print();
         }
         
         // Load saved theme on startup
