@@ -2170,6 +2170,15 @@
                     }
                 } catch(e) { console.log('Cron stats unavailable'); }
                 
+                // Fetch GitHub stats (if API available)
+                try {
+                    const ghRes = await fetch('api/github.sh');
+                    const ghData = await ghRes.json();
+                    if (ghData.repo !== undefined) {
+                        console.log('GitHub status:', ghData.branch, ghData.dirty ? '(dirty)' : '(clean)');
+                    }
+                } catch(e) { console.log('GitHub stats unavailable'); }
+                
                 // Update last refresh time
                 const now = new Date();
                 document.getElementById('lastUpdate').textContent = now.toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
