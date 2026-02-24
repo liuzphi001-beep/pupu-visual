@@ -1626,10 +1626,10 @@
             <div class="card">
                 <div class="card-header"><span class="card-title">💾 记忆统计</span></div>
                 <div class="memory-stats">
-                    <div class="memory-stat-row"><span class="memory-stat-label">长期记忆</span><span class="memory-stat-value">MEMORY.md</span></div>
-                    <div class="memory-stat-row"><span class="memory-stat-label">每日日志</span><span class="memory-stat-value">15+ 文件</span></div>
-                    <div class="memory-stat-row"><span class="memory-stat-label">错题本</span><span class="memory-stat-value">self-review</span></div>
-                    <div class="memory-stat-row"><span class="memory-stat-label">环境配置</span><span class="memory-stat-value">TOOLS.md</span></div>
+                    <div class="memory-stat-row"><span class="memory-stat-label">长期记忆</span><span class="memory-stat-value" id="memLongTerm">MEMORY.md</span></div>
+                    <div class="memory-stat-row"><span class="memory-stat-label">每日日志</span><span class="memory-stat-value" id="memDaily">23 文件</span></div>
+                    <div class="memory-stat-row"><span class="memory-stat-label">错题本</span><span class="memory-stat-value" id="memReview">self-review</span></div>
+                    <div class="memory-stat-row"><span class="memory-stat-label">核心文件</span><span class="memory-stat-value" id="memCore">3 文件</span></div>
                 </div>
             </div>
             <div class="card">
@@ -2150,6 +2150,16 @@
                 const weatherRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&hourly=relativehumidity_2m,surface_pressure&timezone=Asia/Shanghai');
                 const weatherData = await weatherRes.json();
                 updateWeather(weatherData);
+                
+                // Fetch memory stats (if API available)
+                try {
+                    const memRes = await fetch('api/memory.sh');
+                    const memData = await memRes.json();
+                    if (memData.daily !== undefined) {
+                        document.getElementById('memDaily').textContent = memData.daily + ' 文件';
+                        document.getElementById('memCore').textContent = memData.coreFiles + ' 文件';
+                    }
+                } catch(e) { console.log('Memory stats unavailable'); }
                 
                 // Update last refresh time
                 const now = new Date();
