@@ -2161,6 +2161,15 @@
                     }
                 } catch(e) { console.log('Memory stats unavailable'); }
                 
+                // Fetch cron stats (if API available)
+                try {
+                    const cronRes = await fetch('api/cron.sh');
+                    const cronData = await cronRes.json();
+                    if (cronData.total !== undefined) {
+                        console.log('Cron status:', cronData);
+                    }
+                } catch(e) { console.log('Cron stats unavailable'); }
+                
                 // Update last refresh time
                 const now = new Date();
                 document.getElementById('lastUpdate').textContent = now.toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
