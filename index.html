@@ -1275,7 +1275,12 @@
                 <div class="weather-display">
                     <div class="weather-main"><span class="weather-icon">☁️</span><span class="weather-temp" id="weatherTemp">6.7°C</span></div>
                     <div class="weather-desc" id="weatherDesc">多云</div>
-                    <div class="weather-detail"><span>💨 <span id="windSpeed">20</span> km/h</span><span>📍 <span id="windDir">北</span></span></div>
+                    <div class="weather-detail">
+                        <span>💨 <span id="windSpeed">20</span> km/h</span>
+                        <span>📍 <span id="windDir">北</span></span>
+                        <span>💧 <span id="humidity">45</span>%</span>
+                        <span>🌡️ <span id="pressure">1013</span> hPa</span>
+                    </div>
                 </div>
             </div>
             <div class="card">
@@ -2139,8 +2144,8 @@
                 document.getElementById('statusPill').style.display = 'none';
                 document.getElementById('activityPill').style.display = 'flex';
                 
-                // Refresh weather
-                const weatherRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&timezone=Asia/Shanghai');
+                // Refresh weather (with hourly data for humidity & pressure)
+                const weatherRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&hourly=relativehumidity_2m,surface_pressure&timezone=Asia/Shanghai');
                 const weatherData = await weatherRes.json();
                 updateWeather(weatherData);
                 
@@ -2257,6 +2262,19 @@
                 document.getElementById('weatherDesc').textContent = weatherCodes[w.weathercode] || '未知';
                 document.getElementById('windSpeed').textContent = w.windspeed;
                 document.getElementById('windDir').textContent = windDirs[Math.round(w.winddirection/45)%8];
+            }
+            // Enhanced weather data (humidity & pressure)
+            if (data.hourly && data.hourly.relativehumidity_2m) {
+                const idx = data.hourly.time.findIndex(t => new Date(t) <= new Date());
+                if (idx >= 0) {
+                    document.getElementById('humidity').textContent = data.hourly.relativehumidity_2m[idx] || '--';
+                }
+            }
+            if (data.hourly && data.hourly.surface_pressure) {
+                const idx = data.hourly.time.findIndex(t => new Date(t) <= new Date());
+                if (idx >= 0) {
+                    document.getElementById('pressure').textContent = data.hourly.surface_pressure[idx] || '--';
+                }
             }
         }
         function saveNote() {
@@ -3479,7 +3497,7 @@
         });
         
         updateTime();
-        fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&timezone=Asia/Shanghai').then(r=>r.json()).then(updateWeather).catch(()=>{});
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=116.4&current_weather=true&hourly=relativehumidity_2m,surface_pressure&timezone=Asia/Shanghai').then(r=>r.json()).then(updateWeather).catch(()=>{});
         setInterval(updateTime, 30000);
     </script>
 </body>

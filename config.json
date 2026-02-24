@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V72.0",
-    "version": "V72.0",
+    "title": "🐾 噗噗控制台 V73.0",
+    "version": "V73.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "💧", "title": "V73.0 增强天气", "desc": "显示湿度/风力/气压" },
     { "icon": "📡", "title": "V72.0 网络状态", "desc": "显示在线用户和API延迟" },
     { "icon": "⏰", "title": "V71.0 实时时钟", "desc": "显示服务器当前时间" },
     { "icon": "🌍", "title": "V70.0 服务器信息", "desc": "显示服务器位置和时区" },
