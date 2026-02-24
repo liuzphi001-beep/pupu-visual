@@ -2402,6 +2402,30 @@
             alert('💾 备份已下载!\n时间: ' + timestamp);
         }
         
+        // Full export function
+        function fullExport() {
+            const exportData = {
+                title: document.title,
+                version: document.getElementById('version').textContent,
+                exportTime: new Date().toISOString(),
+                memory: {
+                    iterations: localStorage.getItem('pupuIterations'),
+                    note: localStorage.getItem('pupuQuickNote'),
+                    theme: localStorage.getItem('pupuTheme')
+                },
+                system: {
+                    uptime: document.getElementById('uptimeText')?.textContent || 'N/A',
+                    load: document.getElementById('loadAvg')?.textContent || 'N/A'
+                }
+            };
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], {type: 'application/json'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'pupu-full-export-' + Date.now() + '.json';
+            a.click();
+            alert('📤 完整导出已下载!');
+        }
+        
         // Quick screenshot function (prints page)
         function quickScreenshot() {
             window.print();
