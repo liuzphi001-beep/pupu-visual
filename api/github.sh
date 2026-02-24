@@ -13,6 +13,9 @@ LAST_PUSH=$(git log -1 --format='%ci' origin/main 2>/dev/null || echo "unknown")
 BRANCH=$(git branch --show-current 2>/dev/null || echo "main")
 COMMITS_AHEAD=$(git rev-list HEAD --not origin/main --count 2>/dev/null || echo 0)
 
+# 获取最近5个提交
+COMMITS=$(git log --oneline -5 --format='%h|%s' 2>/dev/null | tr '\n' ',')
+
 echo "{"
 echo "  \"repo\": \"$REPO\","
 echo "  \"branch\": \"$BRANCH\","
@@ -20,5 +23,6 @@ echo "  \"dirty\": $IS_DIRTY,"
 echo "  \"ahead\": $COMMITS_AHEAD,"
 echo "  \"lastCommit\": \"$LAST_COMMIT\","
 echo "  \"lastPush\": \"$LAST_PUSH\","
+echo "  \"commits\": \"$COMMITS\","
 echo "  \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
 echo "}"
