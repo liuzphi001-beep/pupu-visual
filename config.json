@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V81.0",
-    "version": "V81.0",
+    "title": "🐾 噗噗控制台 V82.0",
+    "version": "V82.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "⚡", "title": "V82.0 命令增强", "desc": "快捷命令优化" },
     { "icon": "📈", "title": "V81.0 看板统计", "desc": "展示访问和操作统计" },
     { "icon": "📤", "title": "V80.0 数据导出", "desc": "导出完整看板数据" },
     { "icon": "📝", "title": "V79.0 提交记录", "desc": "展示最近Git提交" },
