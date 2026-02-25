@@ -20,9 +20,9 @@ if [ -z "$API_LATENCY" ]; then
 fi
 
 # 获取Skills数量
-SKILLS_LOCAL=$(ls /root/.openclaw/skills/ 2>/dev/null | wc -l)
-SKILLS_GLOBAL=$(ls ~/.nvm/versions/node/v22.22.0/lib/node_modules/openclaw/skills/ 2>/dev/null | wc -l)
-SKILLS_TOTAL=$((SKILLS_LOCAL + SKILLS_GLOBAL))
+SKILLS_GLOBAL=$(ls ~/.nvm/versions/node/v22.22.0/lib/node_modules/openclaw/skills/ 2>/dev/null | grep -v node_modules | wc -l)
+SKILLS_EXTENSION=$(ls ~/.openclaw/extensions/*/skills/*/SKILL.md 2>/dev/null | wc -l)
+SKILLS_TOTAL=$((SKILLS_GLOBAL + SKILLS_EXTENSION))
 
 # 获取定时任务数
 CRON_COUNT=3

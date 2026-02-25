@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V82.0",
-    "version": "V82.0",
+    "title": "🐾 噗噗控制台 V83.0",
+    "version": "V83.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "🔢", "title": "V83.0 Skills同步", "desc": "同步62个Skills（含扩展）" },
     { "icon": "⚡", "title": "V82.0 命令增强", "desc": "快捷命令优化" },
     { "icon": "📈", "title": "V81.0 看板统计", "desc": "展示访问和操作统计" },
     { "icon": "📤", "title": "V80.0 数据导出", "desc": "导出完整看板数据" },
@@ -82,7 +83,9 @@
   "system": {
     "startDate": "2026-02-02",
     "model": "MiniMax-M2.5",
-    "skillsCount": 19
+    "skillsCount": 62,
+    "builtinSkills": 58,
+    "extensionSkills": 4
   },
   "activities": [
     { "icon": "📊", "title": "V69.0 Skills同步", "time": "刚刚", "type": "success" },
@@ -105,10 +108,10 @@
     "uptime": { "status": "normal", "value": "20天", "label": "稳定" }
   },
   "quickStats": {
-    "onlineUsers": 224,
-    "loadAverage": "0.38",
-    "diskUsage": "11G/40G",
+    "onlineUsers": 225,
+    "loadAverage": "0.01",
+    "diskUsage": "12G/40G",
     "memoryUsage": "1.4G/3.6G",
-    "skillsCount": 19
+    "skillsCount": 62
   }
 }
