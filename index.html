@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V90.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V97.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1549,6 +1549,16 @@
                     <div class="alert-item info"><span class="alert-icon">ℹ️</span><span class="alert-text">系统运行正常</span></div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">📜 告警历史</span><span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)" id="alertHistoryCount">0条</span></div>
+                <div class="alert-history" id="alertHistory">
+                    <div class="alert-history-empty" id="alertHistoryEmpty">暂无告警记录</div>
+                </div>
+                <div class="alert-history-actions">
+                    <button class="alert-history-btn" onclick="clearAlertHistory()">🗑️ 清空</button>
+                    <button class="alert-history-btn" onclick="addTestAlert()">➕ 测试</button>
+                </div>
+            </div>
             <style>
                 .system-alerts { display: flex; flex-direction: column; gap: 8px; }
                 .alert-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.85rem; }
@@ -1557,6 +1567,23 @@
                 .alert-item.error { border-left: 3px solid var(--accent-red); }
                 .alert-icon { font-size: 1rem; }
                 .alert-text { flex: 1; }
+                
+                /* Alert History */
+                .alert-history { max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+                .alert-history-empty { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.8rem; }
+                .alert-history-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.75rem; transition: all 0.2s; }
+                .alert-history-item:hover { transform: translateX(4px); }
+                .alert-history-item.critical { border-left: 3px solid var(--accent-red); }
+                .alert-history-item.warning { border-left: 3px solid var(--accent-gold); }
+                .alert-history-item.info { border-left: 3px solid var(--accent-cyan); }
+                .alert-history-item.success { border-left: 3px solid var(--accent-green); }
+                .alert-history-icon { font-size: 1rem; flex-shrink: 0; }
+                .alert-history-content { flex: 1; min-width: 0; }
+                .alert-history-title { font-weight: 500; margin-bottom: 2px; }
+                .alert-history-time { font-size: 0.65rem; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; }
+                .alert-history-actions { display: flex; gap: 8px; margin-top: 10px; }
+                .alert-history-btn { flex: 1; padding: 6px 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
+                .alert-history-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
             </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">😊 心情状态</span><span class="card-badge" style="background:rgba(236,72,153,0.2);color:var(--accent-pink)">开心</span></div>
@@ -2044,7 +2071,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V90.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V97.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👁️ <span id="pageViews">0</span>浏览</span>
@@ -2543,6 +2570,91 @@
                 });
             }
         }
+        
+        // Alert History Functions
+        function getAlertHistory() {
+            return JSON.parse(localStorage.getItem('pupuAlertHistory') || '[]');
+        }
+        
+        function saveAlertHistory(alerts) {
+            // Keep only last 50 alerts
+            const trimmed = alerts.slice(0, 50);
+            localStorage.setItem('pupuAlertHistory', JSON.stringify(trimmed));
+        }
+        
+        function addAlert(type, title, message) {
+            const alerts = getAlertHistory();
+            const newAlert = {
+                id: Date.now(),
+                type: type,
+                title: title,
+                message: message,
+                time: new Date().toLocaleString('zh-CN')
+            };
+            alerts.unshift(newAlert);
+            saveAlertHistory(alerts);
+            renderAlertHistory();
+        }
+        
+        function renderAlertHistory() {
+            const alerts = getAlertHistory();
+            const container = document.getElementById('alertHistory');
+            const countBadge = document.getElementById('alertHistoryCount');
+            
+            if (!container) return;
+            
+            countBadge.textContent = alerts.length + '条';
+            
+            if (alerts.length === 0) {
+                container.innerHTML = '<div class="alert-history-empty">暂无告警记录</div>';
+                return;
+            }
+            
+            const iconMap = {
+                'critical': '🚨',
+                'warning': '⚠️',
+                'info': 'ℹ️',
+                'success': '✅'
+            };
+            
+            container.innerHTML = alerts.slice(0, 10).map(alert => `
+                <div class="alert-history-item ${alert.type}">
+                    <span class="alert-history-icon">${iconMap[alert.type] || 'ℹ️'}</span>
+                    <div class="alert-history-content">
+                        <div class="alert-history-title">${alert.title}</div>
+                        <div class="alert-history-time">${alert.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function clearAlertHistory() {
+            if (confirm('确定要清空告警历史吗？')) {
+                localStorage.removeItem('pupuAlertHistory');
+                renderAlertHistory();
+            }
+        }
+        
+        function addTestAlert() {
+            const types = ['critical', 'warning', 'info', 'success'];
+            const titles = ['CPU告警', '内存告警', '系统通知', '服务恢复'];
+            const messages = ['CPU使用率过高', '内存使用率超过80%', '定时任务已执行', '服务状态正常'];
+            
+            const idx = Math.floor(Math.random() * 4);
+            addAlert(types[idx], titles[idx], messages[idx]);
+        }
+        
+        // Auto-add some alerts on first load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                renderAlertHistory();
+                // Add initial alert if none exist
+                const alerts = getAlertHistory();
+                if (alerts.length === 0) {
+                    addAlert('success', '系统初始化', '看板已成功加载');
+                }
+            }, 1000);
+        });
         
         // Skill search function
         function filterSkills() {
