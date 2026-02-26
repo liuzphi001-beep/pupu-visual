@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V84.0",
-    "version": "V84.0",
+    "title": "🐾 噗噗控制台 V85.0",
+    "version": "V85.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "📈", "title": "V85.0 负载优化", "desc": "更新系统负载显示" },
     { "icon": "📊", "title": "V84.0 运行统计", "desc": "展示系统运行天数和负载" },
     { "icon": "🔢", "title": "V83.0 Skills同步", "desc": "同步62个Skills（含扩展）" },
     { "icon": "⚡", "title": "V82.0 命令增强", "desc": "快捷命令优化" },
@@ -110,7 +111,7 @@
   },
   "quickStats": {
     "onlineUsers": 225,
-    "loadAverage": "0.01",
+    "loadAverage": "0.08",
     "diskUsage": "12G/40G",
     "memoryUsage": "1.4G/3.6G",
     "skillsCount": 62
