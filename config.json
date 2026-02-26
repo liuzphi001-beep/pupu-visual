@@ -106,14 +106,14 @@
     { "id": 6, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "6小时前", "read": true }
   ],
   "health": {
-    "cpu": { "status": "normal", "value": "38%", "label": "正常" },
-    "memory": { "status": "normal", "value": "38%", "label": "正常" },
+    "cpu": { "status": "normal", "value": "35%", "label": "正常" },
+    "memory": { "status": "normal", "value": "42%", "label": "正常" },
     "disk": { "status": "normal", "value": "30%", "label": "正常" },
     "uptime": { "status": "normal", "value": "22天", "label": "稳定" }
   },
   "quickStats": {
     "onlineUsers": 225,
-    "loadAverage": "0.04",
+    "loadAverage": "0.35",
     "diskUsage": "12G/40G",
     "memoryUsage": "1.5G/3.6G",
     "skillsCount": 62
