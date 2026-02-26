@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V87.0",
-    "version": "V87.0",
+    "title": "🐾 噗噗控制台 V89.0",
+    "version": "V89.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,7 +57,8 @@
     "apiLatency": 12
   },
   "highlights": [
-    { "icon": "🔄", "title": "V87.0 状态同步", "desc": "实时同步系统状态" },
+    { "icon": "🔔", "title": "V89.0 状态同步", "desc": "实时系统状态更新" },
+    { "icon": "🔄", "title": "V88.0 状态同步", "desc": "实时同步系统状态" },
     { "icon": "📊", "title": "V86.0 Cron详情", "desc": "展示定时任务详细信息" },
     { "icon": "📈", "title": "V85.0 负载优化", "desc": "更新系统负载显示" },
     { "icon": "📊", "title": "V84.0 运行统计", "desc": "展示系统运行天数和负载" },
@@ -113,7 +114,7 @@
   },
   "quickStats": {
     "onlineUsers": 225,
-    "loadAverage": "0.35",
+    "loadAverage": "0.00",
     "diskUsage": "12G/40G",
     "memoryUsage": "1.5G/3.6G",
     "skillsCount": 62
