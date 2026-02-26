@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V97.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V98.0 - Jarvis Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1559,6 +1559,19 @@
                     <button class="alert-history-btn" onclick="addTestAlert()">➕ 测试</button>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">📈 健康趋势</span><span class="card-badge" style="background:rgba(0,255,245,0.2);color:var(--accent-cyan)" id="healthTrendCount">0条</span></div>
+                <div class="health-trend" id="healthTrend">
+                    <div class="health-trend-empty">记录健康数据趋势</div>
+                </div>
+                <div class="health-trend-chart" id="healthTrendChart">
+                    <canvas id="healthTrendCanvas"></canvas>
+                </div>
+                <div class="health-trend-actions">
+                    <button class="health-trend-btn" onclick="recordHealthSnapshot()">📊 记录</button>
+                    <button class="health-trend-btn" onclick="clearHealthTrend()">🗑️ 清空</button>
+                </div>
+            </div>
             <style>
                 .system-alerts { display: flex; flex-direction: column; gap: 8px; }
                 .alert-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.85rem; }
@@ -1584,6 +1597,22 @@
                 .alert-history-actions { display: flex; gap: 8px; margin-top: 10px; }
                 .alert-history-btn { flex: 1; padding: 6px 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
                 .alert-history-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+                
+                /* Health Trend */
+                .health-trend { max-height: 120px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+                .health-trend-empty { text-align: center; padding: 15px; color: var(--text-secondary); font-size: 0.75rem; }
+                .health-trend-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.7rem; }
+                .health-trend-time { font-family: 'JetBrains Mono', monospace; color: var(--text-secondary); font-size: 0.65rem; }
+                .health-trend-values { display: flex; gap: 8px; flex: 1; }
+                .health-trend-val { display: flex; align-items: center; gap: 3px; }
+                .health-trend-val.cpu { color: var(--accent-cyan); }
+                .health-trend-val.mem { color: var(--accent-purple); }
+                .health-trend-val.disk { color: var(--accent-gold); }
+                .health-trend-chart { height: 60px; margin: 8px 0; }
+                .health-trend-chart canvas { width: 100%; height: 100%; }
+                .health-trend-actions { display: flex; gap: 8px; }
+                .health-trend-btn { flex: 1; padding: 6px 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
+                .health-trend-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
             </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">😊 心情状态</span><span class="card-badge" style="background:rgba(236,72,153,0.2);color:var(--accent-pink)">开心</span></div>
@@ -2071,7 +2100,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V97.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V98.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👁️ <span id="pageViews">0</span>浏览</span>
@@ -2653,8 +2682,140 @@
                 if (alerts.length === 0) {
                     addAlert('success', '系统初始化', '看板已成功加载');
                 }
+                // Initialize health trend
+                renderHealthTrend();
+                initHealthTrendChart();
             }, 1000);
         });
+        
+        // Health Trend Functions
+        function getHealthTrend() {
+            return JSON.parse(localStorage.getItem('pupuHealthTrend') || '[]');
+        }
+        
+        function saveHealthTrend(trend) {
+            const trimmed = trend.slice(0, 100);
+            localStorage.setItem('pupuHealthTrend', JSON.stringify(trimmed));
+        }
+        
+        function recordHealthSnapshot() {
+            const trend = getHealthTrend();
+            const cpu = parseFloat(document.getElementById('cpuPercent')?.textContent) || 0;
+            const mem = parseFloat(document.getElementById('memPercent')?.textContent) || 0;
+            const disk = parseFloat(document.getElementById('diskPercent')?.textContent) || 0;
+            
+            const snapshot = {
+                id: Date.now(),
+                time: new Date().toLocaleString('zh-CN', {month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'}),
+                cpu: cpu,
+                mem: mem,
+                disk: disk,
+                score: Math.round(100 - (cpu * 0.3 + mem * 0.3 + disk * 0.2))
+            };
+            
+            trend.unshift(snapshot);
+            saveHealthTrend(trend);
+            renderHealthTrend();
+            updateHealthTrendChart();
+        }
+        
+        function renderHealthTrend() {
+            const trend = getHealthTrend();
+            const container = document.getElementById('healthTrend');
+            const countBadge = document.getElementById('healthTrendCount');
+            
+            if (!container) return;
+            
+            countBadge.textContent = trend.length + '条';
+            
+            if (trend.length === 0) {
+                container.innerHTML = '<div class="health-trend-empty">点击"记录"保存健康快照</div>';
+                return;
+            }
+            
+            container.innerHTML = trend.slice(0, 5).map(t => `
+                <div class="health-trend-item">
+                    <span class="health-trend-time">${t.time}</span>
+                    <div class="health-trend-values">
+                        <span class="health-trend-val cpu">CPU ${t.cpu}%</span>
+                        <span class="health-trend-val mem">MEM ${t.mem}%</span>
+                        <span class="health-trend-val disk">DISK ${t.disk}%</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function clearHealthTrend() {
+            if (confirm('确定要清空健康趋势记录吗？')) {
+                localStorage.removeItem('pupuHealthTrend');
+                renderHealthTrend();
+                updateHealthTrendChart();
+            }
+        }
+        
+        // Health Trend Chart
+        let healthTrendChart = null;
+        
+        function initHealthTrendChart() {
+            const canvas = document.getElementById('healthTrendCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            healthTrendChart = {
+                draw: function() {
+                    const trend = getHealthTrend();
+                    if (trend.length < 2) return;
+                    
+                    const data = trend.slice(0, 10).reverse();
+                    const width = canvas.width = canvas.offsetWidth * 2;
+                    const height = canvas.height = canvas.offsetHeight * 2;
+                    ctx.scale(2, 2);
+                    
+                    const w = width / 2;
+                    const h = height / 2;
+                    
+                    // Clear
+                    ctx.clearRect(0, 0, w, h);
+                    
+                    // Draw grid
+                    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                    ctx.lineWidth = 0.5;
+                    for (let i = 0; i <= 4; i++) {
+                        const y = (h / 4) * i;
+                        ctx.beginPath();
+                        ctx.moveTo(0, y);
+                        ctx.lineTo(w, y);
+                        ctx.stroke();
+                    }
+                    
+                    // Draw lines
+                    const colors = {cpu: '#00fff5', mem: '#a855f7', disk: '#fbbf24'};
+                    const keys = ['cpu', 'mem', 'disk'];
+                    
+                    keys.forEach(key => {
+                        ctx.strokeStyle = colors[key];
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        data.forEach((d, i) => {
+                            const x = (i / (data.length - 1)) * w;
+                            const y = h - (d[key] / 100) * h;
+                            if (i === 0) ctx.moveTo(x, y);
+                            else ctx.lineTo(x, y);
+                        });
+                        ctx.stroke();
+                    });
+                }
+            };
+            
+            // Initial draw
+            setTimeout(() => healthTrendChart?.draw(), 500);
+        }
+        
+        function updateHealthTrendChart() {
+            if (healthTrendChart) {
+                healthTrendChart.draw();
+            }
+        }
         
         // Skill search function
         function filterSkills() {

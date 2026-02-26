@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V97.0",
-    "version": "V97.0",
+    "title": "🐾 噗噗控制台 V98.0",
+    "version": "V98.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "📈", "title": "V98.0 健康趋势", "desc": "记录健康数据趋势图表" },
     { "icon": "📜", "title": "V97.0 告警历史", "desc": "记录和展示历史告警" },
     { "icon": "⚡", "title": "V96.0 状态同步", "desc": "实时系统状态更新" },
     { "icon": "🔔", "title": "V95.0 状态同步", "desc": "实时系统状态更新" },
