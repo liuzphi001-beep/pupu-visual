@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V104.0",
-    "version": "V104.0",
+    "title": "🐾 噗噗控制台 V105.0",
+    "version": "V105.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,7 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
-    { "icon": "🕐", "title": "V104.0 运行计时器", "desc": "实时显示服务器运行天数时分秒" },
+    { "icon": "🕐", "title": "V105.0 Git状态", "desc": "显示最新Git提交信息" },
     { "icon": "💊", "title": "V100.0 健康详情", "desc": "展示运行天数、负载、内存、磁盘详细信息" },
     { "icon": "🔌", "title": "V99.0 连接监控", "desc": "实时监控Telegram等连接状态" },
     { "icon": "📈", "title": "V98.0 健康趋势", "desc": "记录健康数据趋势图表" },
@@ -99,7 +99,7 @@
     "extensionSkills": 14
   },
   "activities": [
-    { "icon": "🕐", "title": "V104.0 运行计时器", "time": "刚刚", "type": "success" },
+    { "icon": "🕐", "title": "V105.0 Git状态", "time": "刚刚", "type": "success" },
     { "icon": "💊", "title": "V100.0 健康详情", "time": "刚刚", "type": "success" },
     { "icon": "🔌", "title": "V99.0 连接监控", "time": "刚刚", "type": "success" },
     { "icon": "📊", "title": "V69.0 Skills同步", "time": "刚刚", "type": "success" },
@@ -108,7 +108,7 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "🕐 V101.0 发布!", "content": "运行时间计数器上线，实时显示服务器运行时长", "time": "刚刚", "read": false },
+    { "id": 1, "title": "🐙 V105.0 发布!", "content": "Git状态显示上线，实时显示最新提交信息", "time": "刚刚", "read": false },
     { "id": 2, "title": "💊 V100.0 发布!", "content": "健康详情功能上线，运行天数/负载/内存/磁盘", "time": "刚刚", "read": true },
     { "id": 2, "title": "🔌 V99.0 发布!", "content": "连接状态监控，支持Telegram/企业微信/GitHub/飞书", "time": "刚刚", "read": true },
     { "id": 2, "title": "📊 V69.0 发布!", "content": "Skills同步更新，共19个技能", "time": "刚刚", "read": true },
