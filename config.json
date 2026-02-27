@@ -94,9 +94,9 @@
   "system": {
     "startDate": "2026-02-02",
     "model": "MiniMax-M2.5",
-    "skillsCount": 62,
-    "builtinSkills": 58,
-    "extensionSkills": 4
+    "skillsCount": 66,
+    "builtinSkills": 52,
+    "extensionSkills": 14
   },
   "activities": [
     { "icon": "🕐", "title": "V102.0 秒级时间", "time": "刚刚", "type": "success" },
