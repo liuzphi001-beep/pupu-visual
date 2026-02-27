@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V101.0",
-    "version": "V101.0",
+    "title": "🐾 噗噗控制台 V102.0",
+    "version": "V102.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,7 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
-    { "icon": "🕐", "title": "V101.0 连接时间戳", "desc": "显示连接状态最后检查时间" },
+    { "icon": "🕐", "title": "V102.0 秒级时间", "desc": "服务器时间显示秒数，精确到每一秒" },
     { "icon": "💊", "title": "V100.0 健康详情", "desc": "展示运行天数、负载、内存、磁盘详细信息" },
     { "icon": "🔌", "title": "V99.0 连接监控", "desc": "实时监控Telegram等连接状态" },
     { "icon": "📈", "title": "V98.0 健康趋势", "desc": "记录健康数据趋势图表" },
@@ -99,7 +99,7 @@
     "extensionSkills": 4
   },
   "activities": [
-    { "icon": "🕐", "title": "V101.0 连接时间戳", "time": "刚刚", "type": "success" },
+    { "icon": "🕐", "title": "V102.0 秒级时间", "time": "刚刚", "type": "success" },
     { "icon": "💊", "title": "V100.0 健康详情", "time": "刚刚", "type": "success" },
     { "icon": "🔌", "title": "V99.0 连接监控", "time": "刚刚", "type": "success" },
     { "icon": "📊", "title": "V69.0 Skills同步", "time": "刚刚", "type": "success" },
