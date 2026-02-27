@@ -3458,13 +3458,15 @@
                 if (!cmd) return;
                 
                 const commands = {
-                    'help': '可用命令: help, time, date, version, weather, cpu, memory, skills, clear',
+                    'help': '可用命令: help, time, date, version, weather, cpu, memory, disk, uptime, skills, clear',
                     'time': '当前时间: ' + new Date().toLocaleTimeString('zh-CN'),
                     'date': '当前日期: ' + new Date().toLocaleDateString('zh-CN'),
-                    'version': '看板版本: V64.0',
-                    'weather': '天气: ' + document.getElementById('weatherTemp').textContent + ' ' + document.getElementById('weatherDesc').textContent,
-                    'cpu': 'CPU: ' + document.getElementById('cpuPercent').textContent,
-                    'memory': '内存: ' + document.getElementById('memPercent').textContent,
+                    'version': '看板版本: V107.0',
+                    'weather': '天气: ' + (document.getElementById('weatherTemp')?.textContent || '--') + ' ' + (document.getElementById('weatherDesc')?.textContent || '--'),
+                    'cpu': 'CPU: ' + (document.getElementById('cpuPercent')?.textContent || '--'),
+                    'memory': '内存: ' + (document.getElementById('memPercent')?.textContent || '--'),
+                    'disk': '磁盘: ' + (document.getElementById('diskPercent')?.textContent || '--') + ' ' + (document.getElementById('diskUsage')?.textContent || '--'),
+                    'uptime': '运行时间: ' + (document.getElementById('uptimeDisplay')?.textContent || document.getElementById('uptimeCounter')?.textContent || '--'),
                     'skills': 'Skills: ' + document.getElementById('skillCount').textContent + '个',
                     'clear': (input.value = '', result.classList.remove('show'), '')
                 };
