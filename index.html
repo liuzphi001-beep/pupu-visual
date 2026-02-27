@@ -643,10 +643,10 @@
                 <div class="stat-trend up">13 文件</div>
             </div>
             <div class="card stat-card">
-                <div class="card-header"><span class="card-title">🔄 迭代</span></div>
-                <div class="stat-value" id="iterCount">--</div>
-                <div class="stat-label">迭代次数</div>
-                <div class="stat-trend up">每小时自动</div>
+                <div class="card-header"><span class="card-title">⏱️ 运行</span></div>
+                <div class="stat-value" id="uptimeCounter" style="font-size:1.1rem">--</div>
+                <div class="stat-label">服务器运行时长</div>
+                <div class="stat-trend">自动计数</div>
             </div>
             <div class="card stat-card">
                 <div class="card-header"><span class="card-title">📊 负载</span></div>
@@ -2165,6 +2165,21 @@
                 document.getElementById('serverTime').textContent = hours + ':' + minutes + ':' + seconds;
                 document.getElementById('serverDate').textContent = now.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
             }
+            
+            // Uptime counter
+            const bootTime = new Date('2026-02-03T20:20:28Z');
+            function updateUptime() {
+                const now = new Date();
+                const diff = now - bootTime;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('uptimeCounter').textContent = days + '天 ' + hours + '时 ' + mins + '分 ' + secs + '秒';
+            }
+            updateUptime();
+            setInterval(updateUptime, 1000);
+            
             updateServerTime();
             setInterval(updateServerTime, 1000);
             
