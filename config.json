@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V98.0",
-    "version": "V98.0",
+    "title": "🐾 噗噗控制台 V99.0",
+    "version": "V99.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -41,10 +41,10 @@
     { "icon": "📚", "name": "文档", "url": "https://docs.openclaw.ai" }
   ],
   "connections": [
-    { "icon": "💬", "name": "Telegram", "status": "online" },
-    { "icon": "📱", "name": "企业微信", "status": "online" },
-    { "icon": "🐙", "name": "GitHub", "status": "online" },
-    { "icon": "☁️", "name": "飞书", "status": "online" }
+    { "icon": "💬", "name": "Telegram", "status": "offline", "detail": "网络问题" },
+    { "icon": "📱", "name": "企业微信", "status": "online", "detail": "正常运行" },
+    { "icon": "🐙", "name": "GitHub", "status": "online", "detail": "正常运行" },
+    { "icon": "☁️", "name": "飞书", "status": "online", "detail": "正常运行" }
   ],
   "cronTasks": [
     { "name": "页面迭代汇报", "schedule": "每2小时", "status": "启用" },
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "🔌", "title": "V99.0 连接监控", "desc": "实时监控Telegram等连接状态" },
     { "icon": "📈", "title": "V98.0 健康趋势", "desc": "记录健康数据趋势图表" },
     { "icon": "📜", "title": "V97.0 告警历史", "desc": "记录和展示历史告警" },
     { "icon": "⚡", "title": "V96.0 状态同步", "desc": "实时系统状态更新" },
@@ -96,13 +97,15 @@
     "extensionSkills": 4
   },
   "activities": [
+    { "icon": "🔌", "title": "V99.0 连接监控", "time": "刚刚", "type": "success" },
     { "icon": "📊", "title": "V69.0 Skills同步", "time": "刚刚", "type": "success" },
     { "icon": "🌬️", "title": "V68.0 空气质量发布", "time": "刚刚", "type": "success" },
     { "icon": "⌨️", "title": "V67.0 键盘快捷键发布", "time": "2小时前", "type": "success" },
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "📊 V69.0 发布!", "content": "Skills同步更新，共19个技能", "time": "刚刚", "read": false },
+    { "id": 1, "title": "🔌 V99.0 发布!", "content": "连接状态监控，支持Telegram/企业微信/GitHub/飞书", "time": "刚刚", "read": false },
+    { "id": 2, "title": "📊 V69.0 发布!", "content": "Skills同步更新，共19个技能", "time": "刚刚", "read": true },
     { "id": 2, "title": "🌬️ V68.0 发布!", "content": "空气质量已上线", "time": "刚刚", "read": true },
     { "id": 3, "title": "⌨️ V67.0 发布!", "content": "键盘快捷键已上线", "time": "刚刚", "read": true },
     { "id": 4, "title": "⏱️ V66.0 发布!", "content": "会话计时已上线", "time": "2小时前", "read": true },

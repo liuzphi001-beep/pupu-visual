@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V98.0 - Jarvis Dashboard</title>
+    <title>🐾 噗噗控制台 V99.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1956,12 +1956,26 @@
                     <div class="session-time" id="sessionTime">00:00:00</div>
                     <div class="session-label">本次看板访问时长</div>
                 </div>
+                <div class="session-stats">
+                    <div class="session-stat-item">
+                        <span class="session-stat-label">访问次数</span>
+                        <span class="session-stat-value" id="totalVisits">0</span>
+                    </div>
+                    <div class="session-stat-item">
+                        <span class="session-stat-label">总使用</span>
+                        <span class="session-stat-value" id="totalTime">0分钟</span>
+                    </div>
+                </div>
             </div>
             <style>
                 .session-timer { text-align: center; padding: 10px; }
                 .session-icon { font-size: 2rem; margin-bottom: 8px; }
                 .session-time { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; color: var(--accent-cyan); font-weight: 600; }
                 .session-label { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; }
+                .session-stats { display: flex; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+                .session-stat-item { flex: 1; text-align: center; padding: 8px; background: var(--bg-secondary); border-radius: 8px; }
+                .session-stat-label { display: block; font-size: 0.65rem; color: var(--text-secondary); }
+                .session-stat-value { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent-purple); font-weight: 600; margin-top: 4px; }
             </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📊 运行时长统计</span><span class="card-badge" style="background:rgba(0,255,245,0.2);color:var(--accent-cyan)">历史</span></div>
@@ -2100,7 +2114,7 @@
             <p>
                 <span class="footer-status-dot" id="footerStatusDot"></span>
                 <span id="footerStatus">系统正常</span>
-                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V98.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
+                · 🤖 由 <a href="https://github.com/liuzphi001-beep/pupu-visual" target="_blank">OpenClaw</a> 驱动 · <span id="version">V99.0</span> · <span id="lastUpdate">--</span> · <a href="https://liuzphi001-beep.github.io/pupu-visual" target="_blank">🌐 在线预览</a>
             </p>
             <p class="footer-stats" id="footerStats">
                 <span>👁️ <span id="pageViews">0</span>浏览</span>
@@ -2165,7 +2179,7 @@
             
             // Connections
             const conns = config.connections || [];
-            document.querySelector('.connection-grid').innerHTML = conns.map(c => `<div class="connection-item active"><span class="icon">${c.icon}</span><span>${c.name}</span><span class="connection-dot"></span></div>`).join('');
+            document.querySelector('.connection-grid').innerHTML = conns.map(c => `<div class="connection-item ${c.status === 'online' ? 'active' : ''}"><span class="icon">${c.icon}</span><span>${c.name}</span><span class="connection-dot" title="${c.detail || ''}"></span></div>`).join('');
             
             // Cron tasks
             const crons = config.cronTasks || [];
@@ -3853,8 +3867,24 @@
         
         updateTime();
         
-        // Session timer
+        // Session timer with usage tracking
         const sessionStart = Date.now();
+        
+        // Initialize usage stats
+        function initUsageStats() {
+            const visits = parseInt(localStorage.getItem('pupuTotalVisits') || '0');
+            const totalMinutes = parseInt(localStorage.getItem('pupuTotalMinutes') || '0');
+            
+            // Update total visits
+            localStorage.setItem('pupuTotalVisits', (visits + 1).toString());
+            
+            // Update UI
+            const visitEl = document.getElementById('totalVisits');
+            const timeEl = document.getElementById('totalTime');
+            if (visitEl) visitEl.textContent = visits + 1;
+            if (timeEl) timeEl.textContent = totalMinutes + '分钟';
+        }
+        
         function updateSessionTimer() {
             const elapsed = Date.now() - sessionStart;
             const hours = Math.floor(elapsed / 3600000);
@@ -3862,7 +3892,18 @@
             const seconds = Math.floor((elapsed % 60000) / 1000);
             const timeStr = [hours, minutes, seconds].map(n => n.toString().padStart(2, '0')).join(':');
             document.getElementById('sessionTime').textContent = timeStr;
+            
+            // Save session time every minute
+            if (seconds === 0 && minutes > 0) {
+                const totalMinutes = parseInt(localStorage.getItem('pupuTotalMinutes') || '0');
+                localStorage.setItem('pupuTotalMinutes', (totalMinutes + 1).toString());
+                const timeEl = document.getElementById('totalTime');
+                if (timeEl) timeEl.textContent = (totalMinutes + 1) + '分钟';
+            }
         }
+        
+        // Initialize on load
+        initUsageStats();
         updateSessionTimer();
         setInterval(updateSessionTimer, 1000);
         
