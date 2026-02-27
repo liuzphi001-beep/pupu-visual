@@ -4,23 +4,23 @@
     "total": 3655,
     "used": 1640,
     "percent": 44,
-    "available": 2003,
-    "buffers": 1741,
-    "cached": 2002
+    "available": 2007,
+    "buffers": 1763,
+    "cached": 2007
   },
   "disk": 38,
   "load": "0.08",
-  "uptime": "up 3 weeks, 3 days, 7 hours, 45 minutes",
+  "uptime": "up 3 weeks, 3 days, 9 hours, 30 minutes",
   "onlineUsers": 2,
   "apiLatency": 0,
   "network": {
-    "rx": 12246276036,
-    "tx": 12428565365
+    "rx": 12260446814,
+    "tx": 12444499020
   },
-  "processes": 153,
+  "processes": 152,
   "skills": 56,
   "cron": 3,
   "openclaw": "2026.2.26",
   "model": "",
-  "timestamp": "2026-02-27T20:05:43Z"
+  "timestamp": "2026-02-27T21:50:40Z"
 }

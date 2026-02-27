@@ -95,9 +95,9 @@
   "system": {
     "startDate": "2026-02-02",
     "model": "MiniMax-M2.5",
-    "skillsCount": 66,
+    "skillsCount": 56,
     "builtinSkills": 52,
-    "extensionSkills": 14,
+    "extensionSkills": 4,
     "processes": 152,
     "networkRx": "12.2GB",
     "networkTx": "12.4GB"
@@ -132,10 +132,10 @@
   },
   "quickStats": {
     "onlineUsers": 228,
-    "loadAverage": "0.01",
-    "diskUsage": "14G/40G",
-    "memoryUsage": "1.8G/3.6G",
-    "skillsCount": 66,
+    "loadAverage": "0.00",
+    "diskUsage": "15G/40G",
+    "memoryUsage": "1.6G/3.6G",
+    "skillsCount": 56,
     "uptime": "24天1小时",
     "sessions": 13,
     "model": "MiniMax-M2.5",
