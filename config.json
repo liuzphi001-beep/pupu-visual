@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V99.0",
-    "version": "V99.0",
+    "title": "🐾 噗噗控制台 V100.0",
+    "version": "V100.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "💊", "title": "V100.0 健康详情", "desc": "展示运行天数、负载、内存、磁盘详细信息" },
     { "icon": "🔌", "title": "V99.0 连接监控", "desc": "实时监控Telegram等连接状态" },
     { "icon": "📈", "title": "V98.0 健康趋势", "desc": "记录健康数据趋势图表" },
     { "icon": "📜", "title": "V97.0 告警历史", "desc": "记录和展示历史告警" },
@@ -97,6 +98,7 @@
     "extensionSkills": 4
   },
   "activities": [
+    { "icon": "💊", "title": "V100.0 健康详情", "time": "刚刚", "type": "success" },
     { "icon": "🔌", "title": "V99.0 连接监控", "time": "刚刚", "type": "success" },
     { "icon": "📊", "title": "V69.0 Skills同步", "time": "刚刚", "type": "success" },
     { "icon": "🌬️", "title": "V68.0 空气质量发布", "time": "刚刚", "type": "success" },
@@ -104,7 +106,8 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "🔌 V99.0 发布!", "content": "连接状态监控，支持Telegram/企业微信/GitHub/飞书", "time": "刚刚", "read": false },
+    { "id": 1, "title": "💊 V100.0 发布!", "content": "健康详情功能上线，运行天数/负载/内存/磁盘", "time": "刚刚", "read": false },
+    { "id": 2, "title": "🔌 V99.0 发布!", "content": "连接状态监控，支持Telegram/企业微信/GitHub/飞书", "time": "刚刚", "read": true },
     { "id": 2, "title": "📊 V69.0 发布!", "content": "Skills同步更新，共19个技能", "time": "刚刚", "read": true },
     { "id": 2, "title": "🌬️ V68.0 发布!", "content": "空气质量已上线", "time": "刚刚", "read": true },
     { "id": 3, "title": "⌨️ V67.0 发布!", "content": "键盘快捷键已上线", "time": "刚刚", "read": true },
@@ -113,16 +116,17 @@
     { "id": 6, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "6小时前", "read": true }
   ],
   "health": {
-    "cpu": { "status": "normal", "value": "35%", "label": "正常" },
-    "memory": { "status": "normal", "value": "42%", "label": "正常" },
-    "disk": { "status": "normal", "value": "30%", "label": "正常" },
-    "uptime": { "status": "normal", "value": "22天", "label": "稳定" }
+    "cpu": { "status": "normal", "value": "1%", "label": "优秀", "load": "0.00" },
+    "memory": { "status": "normal", "value": "47%", "label": "正常", "used": "1.7G", "total": "3.6G" },
+    "disk": { "status": "normal", "value": "35%", "label": "正常", "used": "14G", "total": "40G" },
+    "uptime": { "status": "normal", "value": "23天15小时", "label": "稳定" }
   },
   "quickStats": {
-    "onlineUsers": 225,
-    "loadAverage": "0.04",
-    "diskUsage": "12G/40G",
-    "memoryUsage": "1.5G/3.6G",
-    "skillsCount": 62
+    "onlineUsers": 227,
+    "loadAverage": "0.00",
+    "diskUsage": "14G/40G",
+    "memoryUsage": "1.7G/3.6G",
+    "skillsCount": 66,
+    "uptime": "23天15小时"
   }
 }
