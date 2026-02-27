@@ -369,6 +369,7 @@
         .connection-item .icon { font-size: 1rem; }
         .connection-item.active { border: 1px solid var(--accent-green); }
         .connection-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); animation: pulse 2s infinite; }
+        .connection-dot.offline { background: var(--accent-red); animation: none; }
         
         /* Services grid */
         .services-grid { display: flex; flex-direction: column; gap: 8px; }
@@ -836,7 +837,7 @@
             <div class="card">
                 <div class="card-header"><span class="card-title">🔗 连接状态</span><span class="card-badge" style="background:rgba(34,197,94,0.2);color:var(--accent-green)"><span class="connection-dot"></span>在线</span></div>
                 <div class="connection-grid">
-                    <div class="connection-item active"><span class="icon">💬</span><span>Telegram</span><span class="connection-dot"></span></div>
+                    <div class="connection-item"><span class="icon">💬</span><span>Telegram</span><span class="connection-dot offline" title="代理未配置"></span></div>
                     <div class="connection-item active"><span class="icon">📱</span><span>企业微信</span><span class="connection-dot"></span></div>
                     <div class="connection-item active"><span class="icon">🐙</span><span>GitHub</span><span class="connection-dot"></span></div>
                     <div class="connection-item active"><span class="icon">☁️</span><span>飞书</span><span class="connection-dot"></span></div>
@@ -2179,7 +2180,7 @@
             
             // Connections
             const conns = config.connections || [];
-            document.querySelector('.connection-grid').innerHTML = conns.map(c => `<div class="connection-item ${c.status === 'online' ? 'active' : ''}"><span class="icon">${c.icon}</span><span>${c.name}</span><span class="connection-dot" title="${c.detail || ''}"></span></div>`).join('');
+            document.querySelector('.connection-grid').innerHTML = conns.map(c => `<div class="connection-item ${c.status === 'online' ? 'active' : ''}"><span class="icon">${c.icon}</span><span>${c.name}</span><span class="connection-dot ${c.status === 'online' ? '' : 'offline'}" title="${c.detail || ''} ${c.lastChecked || ''}"></span></div>`).join('');
             
             // Cron tasks
             const crons = config.cronTasks || [];
