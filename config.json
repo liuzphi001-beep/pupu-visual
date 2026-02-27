@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V110.0",
-    "version": "V110.0",
+    "title": "🐾 噗噗控制台 V111.0",
+    "version": "V111.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "🌐", "title": "V111.0 网络监控", "desc": "新增网络流量实时监控" },
     { "icon": "📤", "title": "V110.0 导出修复", "desc": "修复导出功能版本号" },
     { "icon": "💊", "title": "V100.0 健康详情", "desc": "展示运行天数、负载、内存、磁盘详细信息" },
     { "icon": "🔌", "title": "V99.0 连接监控", "desc": "实时监控Telegram等连接状态" },
@@ -96,9 +97,13 @@
     "model": "MiniMax-M2.5",
     "skillsCount": 66,
     "builtinSkills": 52,
-    "extensionSkills": 14
+    "extensionSkills": 14,
+    "processes": 152,
+    "networkRx": "12.2GB",
+    "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "🌐", "title": "V111.0 网络监控", "time": "刚刚", "type": "success" },
     { "icon": "📤", "title": "V110.0 导出修复", "time": "刚刚", "type": "success" },
     { "icon": "💊", "title": "V100.0 健康详情", "time": "刚刚", "type": "success" },
     { "icon": "🔌", "title": "V99.0 连接监控", "time": "刚刚", "type": "success" },
@@ -108,7 +113,8 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "📤 V110.0 发布!", "content": "导出功能版本号修复为V109.0", "time": "刚刚", "read": false },
+    { "id": 1, "title": "🌐 V111.0 发布!", "content": "新增网络流量实时监控功能", "time": "刚刚", "read": false },
+    { "id": 2, "title": "📤 V110.0 发布!", "content": "导出功能版本号修复为V109.0", "time": "刚刚", "read": false },
     { "id": 2, "title": "💊 V100.0 发布!", "content": "健康详情功能上线，运行天数/负载/内存/磁盘", "time": "刚刚", "read": true },
     { "id": 2, "title": "🔌 V99.0 发布!", "content": "连接状态监控，支持Telegram/企业微信/GitHub/飞书", "time": "刚刚", "read": true },
     { "id": 2, "title": "📊 V69.0 发布!", "content": "Skills同步更新，共19个技能", "time": "刚刚", "read": true },
@@ -132,6 +138,9 @@
     "skillsCount": 66,
     "uptime": "24天1小时",
     "sessions": 13,
-    "model": "MiniMax-M2.5"
+    "model": "MiniMax-M2.5",
+    "networkRx": "12.2GB",
+    "networkTx": "12.4GB",
+    "processes": 152
   }
 }

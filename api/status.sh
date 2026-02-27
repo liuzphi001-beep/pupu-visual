@@ -31,19 +31,39 @@ CRON_COUNT=3
 OPENCLAW_VERSION=$(openclaw --version 2>/dev/null || echo "未知")
 MODEL=$(grep -o '"model":"[^"]*"' /root/.openclaw/config/openclaw.json 2>/dev/null | cut -d'"' -f4 || echo "MiniMax-M2.5")
 
+# 获取网络流量 (字节)
+NET_RX=$(cat /sys/class/net/eth0/statistics/rx_bytes 2>/dev/null || echo 0)
+NET_TX=$(cat /sys/class/net/eth0/statistics/tx_bytes 2>/dev/null || echo 0)
+
+# 获取进程数
+PROCESS_COUNT=$(ps aux | wc -l)
+
+# 获取内存详情
+MEM_AVAILABLE=$(free -m | grep Mem | awk '{print $7}')
+MEM_BUFFERS=$(free -m | grep Mem | awk '{print $6}')
+MEM_CACHED=$(free -m | grep -E "^Mem:" | awk '{print $7}')
+
 # 输出JSON
 echo "{"
 echo "  \"cpu\": \"$CPU\","
 echo "  \"memory\": {"
 echo "    \"total\": $MEM_TOTAL,"
 echo "    \"used\": $MEM_USED,"
-echo "    \"percent\": $MEM_PERCENT"
+echo "    \"percent\": $MEM_PERCENT,"
+echo "    \"available\": $MEM_AVAILABLE,"
+echo "    \"buffers\": $MEM_BUFFERS,"
+echo "    \"cached\": $MEM_CACHED"
 echo "  },"
 echo "  \"disk\": $DISK_USED,"
 echo "  \"load\": \"$LOAD\","
 echo "  \"uptime\": \"$UPTIME\","
 echo "  \"onlineUsers\": $ONLINE_USERS,"
 echo "  \"apiLatency\": $API_LATENCY,"
+echo "  \"network\": {"
+echo "    \"rx\": $NET_RX,"
+echo "    \"tx\": $NET_TX"
+echo "  },"
+echo "  \"processes\": $PROCESS_COUNT,"
 echo "  \"skills\": $SKILLS_TOTAL,"
 echo "  \"cron\": $CRON_COUNT,"
 echo "  \"openclaw\": \"$OPENCLAW_VERSION\","
