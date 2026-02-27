@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V105.0",
-    "version": "V105.0",
+    "title": "🐾 噗噗控制台 V106.0",
+    "version": "V106.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -47,9 +47,9 @@
     { "icon": "☁️", "name": "飞书", "status": "online", "detail": "正常运行", "lastChecked": "2026-02-27 05:47 UTC" }
   ],
   "cronTasks": [
-    { "name": "页面迭代汇报", "schedule": "每2小时", "status": "启用" },
-    { "name": "Moltbook心跳", "schedule": "每5小时", "status": "启用" },
-    { "name": "每日反思日报", "schedule": "23:50", "status": "启用" }
+    { "name": "页面迭代汇报", "schedule": "每2小时", "status": "运行中", "next": "2小时后", "last": "刚刚" },
+    { "name": "Moltbook心跳", "schedule": "每5小时", "status": "运行中", "next": "4小时后", "last": "1小时前" },
+    { "name": "每日反思日报", "schedule": "23:50", "status": "就绪", "next": "4小时后", "last": "20小时前" }
   ],
   "network": {
     "onlineUsers": 225,
@@ -57,7 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
-    { "icon": "🕐", "title": "V105.0 Git状态", "desc": "显示最新Git提交信息" },
+    { "icon": "⏰", "title": "V106.0 Cron详情", "desc": "显示定时任务下次运行和最后运行时间" },
     { "icon": "💊", "title": "V100.0 健康详情", "desc": "展示运行天数、负载、内存、磁盘详细信息" },
     { "icon": "🔌", "title": "V99.0 连接监控", "desc": "实时监控Telegram等连接状态" },
     { "icon": "📈", "title": "V98.0 健康趋势", "desc": "记录健康数据趋势图表" },
@@ -99,7 +99,7 @@
     "extensionSkills": 14
   },
   "activities": [
-    { "icon": "🕐", "title": "V105.0 Git状态", "time": "刚刚", "type": "success" },
+    { "icon": "⏰", "title": "V106.0 Cron详情", "time": "刚刚", "type": "success" },
     { "icon": "💊", "title": "V100.0 健康详情", "time": "刚刚", "type": "success" },
     { "icon": "🔌", "title": "V99.0 连接监控", "time": "刚刚", "type": "success" },
     { "icon": "📊", "title": "V69.0 Skills同步", "time": "刚刚", "type": "success" },
@@ -108,7 +108,7 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "🐙 V105.0 发布!", "content": "Git状态显示上线，实时显示最新提交信息", "time": "刚刚", "read": false },
+    { "id": 1, "title": "⏰ V106.0 发布!", "content": "Cron任务详情上线，显示下次运行和最后运行时间", "time": "刚刚", "read": false },
     { "id": 2, "title": "💊 V100.0 发布!", "content": "健康详情功能上线，运行天数/负载/内存/磁盘", "time": "刚刚", "read": true },
     { "id": 2, "title": "🔌 V99.0 发布!", "content": "连接状态监控，支持Telegram/企业微信/GitHub/飞书", "time": "刚刚", "read": true },
     { "id": 2, "title": "📊 V69.0 发布!", "content": "Skills同步更新，共19个技能", "time": "刚刚", "read": true },
