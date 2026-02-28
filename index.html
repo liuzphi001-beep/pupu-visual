@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V122.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V123.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1877,13 +1877,69 @@
                 .pwd-btn { padding: 10px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
                 .pwd-btn:hover { opacity: 0.9; }
             </style>
+            <!-- UUID生成器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🎲 UUID生成器</span></div>
+                <div class="uuid-gen">
+                    <div class="uuid-display" id="uuidDisplay" onclick="copyToClipboard(this.textContent)">点击生成</div>
+                    <div class="uuid-options">
+                        <label><input type="checkbox" id="uuidV4" checked> V4随机</label>
+                        <label><input type="checkbox" id="uuidUpper"> 大写</label>
+                    </div>
+                    <div class="uuid-btns">
+                        <button class="uuid-btn" onclick="generateUUID()">🎲 生成</button>
+                        <button class="uuid-btn" onclick="generateUUID(5)">5个</button>
+                        <button class="uuid-btn" onclick="copyToClipboard(document.getElementById('uuidDisplay').textContent)">📋 复制</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .uuid-gen { display: flex; flex-direction: column; gap: 10px; }
+                .uuid-display { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; padding: 12px; background: var(--bg-secondary); border-radius: 8px; text-align: center; word-break: break-all; cursor: pointer; transition: all 0.2s; }
+                .uuid-display:hover { border-color: var(--accent-purple); background: rgba(168,85,247,0.1); }
+                .uuid-options { display: flex; gap: 12px; font-size: 0.8rem; }
+                .uuid-options label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+                .uuid-btns { display: flex; gap: 8px; }
+                .uuid-btn { flex: 1; padding: 8px; background: var(--accent-purple); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+                .uuid-btn:hover { opacity: 0.9; transform: scale(1.02); }
+            </style>
+            <!-- Base64编码解码 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔤 Base64工具</span></div>
+                <div class="base64-tool">
+                    <div class="base64-mode">
+                        <button class="base64-mode-btn active" id="base64EncodeBtn" onclick="setBase64Mode('encode')">编码</button>
+                        <button class="base64-mode-btn" id="base64DecodeBtn" onclick="setBase64Mode('decode')">解码</button>
+                    </div>
+                    <textarea class="base64-input" id="base64Input" placeholder="输入内容..." oninput="processBase64()"></textarea>
+                    <div class="base64-output" id="base64Output">结果将显示在这里</div>
+                    <div class="base64-actions">
+                        <button class="base64-btn" onclick="processBase64()">🔄 转换</button>
+                        <button class="base64-btn" onclick="copyToClipboard(document.getElementById('base64Output').textContent)">📋 复制</button>
+                        <button class="base64-btn clear" onclick="document.getElementById('base64Input').value='';document.getElementById('base64Output').textContent='结果将显示在这里'">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .base64-tool { display: flex; flex-direction: column; gap: 10px; }
+                .base64-mode { display: flex; gap: 8px; }
+                .base64-mode-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+                .base64-mode-btn.active { background: var(--accent-cyan); color: var(--bg-primary); border-color: var(--accent-cyan); }
+                .base64-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .base64-output { min-height: 40px; padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-all; }
+                .base64-actions { display: flex; gap: 8px; }
+                .base64-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
+                .base64-btn:hover { border-color: var(--accent-cyan); }
+                .base64-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V50.0</div><div class="milestone-desc">二维码生成器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V51.0</div><div class="milestone-desc">倒计时器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V52.0</div><div class="milestone-desc">字数统计</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V54.0</div><div class="milestone-desc">密码生成器</div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V54.0</div><div class="milestone-desc">密码生成器</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V55.0</div><div class="milestone-desc">UUID+Base64</div></div></div>
                 </div>
             </div>
             <style>
@@ -2036,8 +2092,9 @@
 
         <div class="dashboard">
             <div class="card">
-                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V40</span></div>
+                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V55</span></div>
                 <div class="changelog" id="changelog">
+                    <div class="changelog-item"><span class="changelog-ver">V55</span><span class="changelog-desc">UUID+Base64工具</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V90</span><span class="changelog-desc">V90里程碑</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V89</span><span class="changelog-desc">持续迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V88</span><span class="changelog-desc">心跳迭代</span></div>
@@ -3763,6 +3820,62 @@
                 pwd += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             document.getElementById('passwordDisplay').textContent = pwd;
+        }
+        
+        // UUID Generator functions
+        function generateUUID(count = 1) {
+            const isUpper = document.getElementById('uuidUpper').checked;
+            let uuids = [];
+            for (let i = 0; i < count; i++) {
+                let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    const r = Math.random() * 16 | 0;
+                    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+                uuids.push(isUpper ? uuid.toUpperCase() : uuid);
+            }
+            document.getElementById('uuidDisplay').textContent = uuids.join('\n');
+        }
+        
+        // Base64 tool functions
+        let base64Mode = 'encode';
+        function setBase64Mode(mode) {
+            base64Mode = mode;
+            document.getElementById('base64EncodeBtn').classList.toggle('active', mode === 'encode');
+            document.getElementById('base64DecodeBtn').classList.toggle('active', mode === 'decode');
+            processBase64();
+        }
+        function processBase64() {
+            const input = document.getElementById('base64Input').value;
+            const output = document.getElementById('base64Output');
+            if (!input) {
+                output.textContent = '结果将显示在这里';
+                return;
+            }
+            try {
+                if (base64Mode === 'encode') {
+                    output.textContent = btoa(unescape(encodeURIComponent(input)));
+                } else {
+                    output.textContent = decodeURIComponent(escape(atob(input)));
+                }
+            } catch (e) {
+                output.textContent = '解码错误: 输入不是有效的Base64';
+            }
+        }
+        
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已复制到剪贴板!');
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('已复制到剪贴板!');
+            });
         }
         
         // History Today - On This Day in Tech History
