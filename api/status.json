@@ -2,25 +2,25 @@
   "cpu": "0.0",
   "memory": {
     "total": 3655,
-    "used": 1628,
+    "used": 1626,
     "percent": 44,
-    "available": 2020,
-    "buffers": 1913,
-    "cached": 2020
+    "available": 2022,
+    "buffers": 1924,
+    "cached": 2022
   },
   "disk": 39,
-  "load": "0.00",
-  "uptime": "up 3 weeks, 4 days, 3 hours, 21 minutes",
+  "load": "0.45",
+  "uptime": "up 3 weeks, 4 days, 4 hours, 21 minutes",
   "onlineUsers": 0,
-  "apiLatency": 2,
+  "apiLatency": 0,
   "network": {
-    "rx": 12399722184,
-    "tx": 12669741154
+    "rx": 12407389206,
+    "tx": 12692695329
   },
-  "processes": 148,
+  "processes": 147,
   "skills": 56,
   "cron": 3,
   "openclaw": "2026.2.26",
   "model": "",
-  "timestamp": "2026-02-28T15:41:34Z"
+  "timestamp": "2026-02-28T16:41:50Z"
 }
