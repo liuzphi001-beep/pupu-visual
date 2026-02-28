@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V113.0",
-    "version": "V113.0",
+    "title": "🐾 噗噗控制台 V114.0",
+    "version": "V114.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "⏰", "title": "V114.0 Cron监控", "desc": "新增定时任务状态监控" },
     { "icon": "🔔", "title": "V113.0 服务监控", "desc": "新增关键服务状态监控" },
     { "icon": "📊", "title": "V112.0 Top进程", "desc": "显示CPU/内存占用最高的进程" },
     { "icon": "🌐", "title": "V111.0 网络监控", "desc": "新增网络流量实时监控" },
@@ -105,6 +106,7 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "⏰", "title": "V114.0 Cron监控", "time": "刚刚", "type": "success" },
     { "icon": "🔔", "title": "V113.0 服务监控", "time": "刚刚", "type": "success" },
     { "icon": "📊", "title": "V112.0 Top进程", "time": "刚刚", "type": "success" },
     { "icon": "🌐", "title": "V111.0 网络监控", "time": "刚刚", "type": "success" },
@@ -117,7 +119,8 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "🔔 V113.0 发布!", "content": "新增服务状态监控功能", "time": "刚刚", "read": false },
+    { "id": 1, "title": "⏰ V114.0 发布!", "content": "新增定时任务状态监控功能", "time": "刚刚", "read": false },
+    { "id": 2, "title": "🔔 V113.0 发布!", "content": "新增服务状态监控功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "📊 V112.0 发布!", "content": "新增Top进程监控功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "🌐 V111.0 发布!", "content": "新增网络流量实时监控功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "📤 V110.0 发布!", "content": "导出功能版本号修复为V109.0", "time": "刚刚", "read": false },
