@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V121.0",
-    "version": "V121.0",
+    "title": "🐾 噗噗控制台 V122.0",
+    "version": "V122.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "📊", "title": "V122.0 看板汇总", "desc": "新增一键获取所有关键数据" },
     { "icon": "❤️", "title": "V121.0 健康监控", "desc": "新增系统健康状态监控" },
     { "icon": "🐳", "title": "V120.0 服务详情", "desc": "新增系统服务和容器详情" },
     { "icon": "🌐", "title": "V119.0 网络详情", "desc": "新增网络连接详情监控" },
@@ -113,6 +114,7 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "📊", "title": "V122.0 看板汇总", "time": "刚刚", "type": "success" },
     { "icon": "❤️", "title": "V121.0 健康监控", "time": "刚刚", "type": "success" },
     { "icon": "🐳", "title": "V120.0 服务详情", "time": "刚刚", "type": "success" },
     { "icon": "🌐", "title": "V119.0 网络详情", "time": "刚刚", "type": "success" },
@@ -133,7 +135,8 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "❤️ V121.0 发布!", "content": "新增系统健康状态监控功能", "time": "刚刚", "read": false },
+    { "id": 1, "title": "📊 V122.0 发布!", "content": "新增看板汇总API功能", "time": "刚刚", "read": false },
+    { "id": 2, "title": "❤️ V121.0 发布!", "content": "新增系统健康状态监控功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "🐳 V120.0 发布!", "content": "新增系统服务和容器详情功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "🌐 V119.0 发布!", "content": "新增网络连接详情监控功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "💾 V118.0 发布!", "content": "新增系统备份状态监控功能", "time": "刚刚", "read": false },
