@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V123.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V124.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1932,6 +1932,58 @@
                 .base64-btn:hover { border-color: var(--accent-cyan); }
                 .base64-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
+            <!-- URL编码解码 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔗 URL工具</span></div>
+                <div class="url-tool">
+                    <div class="url-mode">
+                        <button class="url-mode-btn active" id="urlEncodeBtn" onclick="setUrlMode('encode')">编码</button>
+                        <button class="url-mode-btn" id="urlDecodeBtn" onclick="setUrlMode('decode')">解码</button>
+                    </div>
+                    <textarea class="url-input" id="urlInput" placeholder="输入URL或字符串..." oninput="processUrl()"></textarea>
+                    <div class="url-output" id="urlOutput">结果将显示在这里</div>
+                    <div class="url-actions">
+                        <button class="url-btn" onclick="processUrl()">🔄 转换</button>
+                        <button class="url-btn" onclick="copyToClipboard(document.getElementById('urlOutput').textContent)">📋 复制</button>
+                        <button class="url-btn clear" onclick="document.getElementById('urlInput').value='';document.getElementById('urlOutput').textContent='结果将显示在这里'">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .url-tool { display: flex; flex-direction: column; gap: 10px; }
+                .url-mode { display: flex; gap: 8px; }
+                .url-mode-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+                .url-mode-btn.active { background: var(--accent-gold); color: var(--bg-primary); border-color: var(--accent-gold); }
+                .url-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .url-output { min-height: 40px; padding: 10px; background: rgba(251,191,36,0.1); border: 1px solid var(--accent-gold); border-radius: 8px; color: var(--accent-gold); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-all; }
+                .url-actions { display: flex; gap: 8px; }
+                .url-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
+                .url-btn:hover { border-color: var(--accent-gold); }
+                .url-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
+            <!-- JSON格式化 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📋 JSON工具</span></div>
+                <div class="json-tool">
+                    <textarea class="json-input" id="jsonInput" placeholder="输入JSON字符串..." oninput="processJson()"></textarea>
+                    <div class="json-output" id="jsonOutput">格式化后的JSON将显示在这里</div>
+                    <div class="json-actions">
+                        <button class="json-btn" onclick="processJson()">✨ 格式化</button>
+                        <button class="json-btn" onclick="minifyJson()">➖ 压缩</button>
+                        <button class="json-btn" onclick="validateJson()">✅ 验证</button>
+                        <button class="json-btn clear" onclick="document.getElementById('jsonInput').value='';document.getElementById('jsonOutput').textContent='格式化后的JSON将显示在这里'">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .json-tool { display: flex; flex-direction: column; gap: 10px; }
+                .json-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; resize: vertical; }
+                .json-output { min-height: 60px; padding: 10px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; color: var(--accent-green); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; word-break: break-all; max-height: 150px; overflow-y: auto; }
+                .json-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+                .json-btn { padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
+                .json-btn:hover { border-color: var(--accent-green); }
+                .json-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -1939,7 +1991,8 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V51.0</div><div class="milestone-desc">倒计时器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V52.0</div><div class="milestone-desc">字数统计</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V54.0</div><div class="milestone-desc">密码生成器</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V55.0</div><div class="milestone-desc">UUID+Base64</div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V55.0</div><div class="milestone-desc">UUID+Base64</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V56.0</div><div class="milestone-desc">URL+JSON</div></div></div>
                 </div>
             </div>
             <style>
@@ -2092,8 +2145,9 @@
 
         <div class="dashboard">
             <div class="card">
-                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V55</span></div>
+                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V56</span></div>
                 <div class="changelog" id="changelog">
+                    <div class="changelog-item"><span class="changelog-ver">V56</span><span class="changelog-desc">URL+JSON工具</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V55</span><span class="changelog-desc">UUID+Base64工具</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V90</span><span class="changelog-desc">V90里程碑</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V89</span><span class="changelog-desc">持续迭代</span></div>
@@ -3860,6 +3914,76 @@
                 }
             } catch (e) {
                 output.textContent = '解码错误: 输入不是有效的Base64';
+            }
+        }
+        
+        // URL tool functions
+        let urlMode = 'encode';
+        function setUrlMode(mode) {
+            urlMode = mode;
+            document.getElementById('urlEncodeBtn').classList.toggle('active', mode === 'encode');
+            document.getElementById('urlDecodeBtn').classList.toggle('active', mode === 'decode');
+            processUrl();
+        }
+        function processUrl() {
+            const input = document.getElementById('urlInput').value;
+            const output = document.getElementById('urlOutput');
+            if (!input) {
+                output.textContent = '结果将显示在这里';
+                return;
+            }
+            try {
+                if (urlMode === 'encode') {
+                    output.textContent = encodeURIComponent(input);
+                } else {
+                    output.textContent = decodeURIComponent(input);
+                }
+            } catch (e) {
+                output.textContent = '解码错误: 输入不是有效的URL编码';
+            }
+        }
+        
+        // JSON tool functions
+        function processJson() {
+            const input = document.getElementById('jsonInput').value;
+            const output = document.getElementById('jsonOutput');
+            if (!input) {
+                output.textContent = '格式化后的JSON将显示在这里';
+                return;
+            }
+            try {
+                const obj = JSON.parse(input);
+                output.textContent = JSON.stringify(obj, null, 2);
+            } catch (e) {
+                output.textContent = 'JSON格式错误: ' + e.message;
+            }
+        }
+        function minifyJson() {
+            const input = document.getElementById('jsonInput').value;
+            const output = document.getElementById('jsonOutput');
+            if (!input) {
+                output.textContent = '格式化后的JSON将显示在这里';
+                return;
+            }
+            try {
+                const obj = JSON.parse(input);
+                output.textContent = JSON.stringify(obj);
+            } catch (e) {
+                output.textContent = 'JSON格式错误: ' + e.message;
+            }
+        }
+        function validateJson() {
+            const input = document.getElementById('jsonInput').value;
+            const output = document.getElementById('jsonOutput');
+            if (!input) {
+                output.textContent = '格式化后的JSON将显示在这里';
+                return;
+            }
+            try {
+                JSON.parse(input);
+                output.textContent = '✅ JSON格式正确!';
+            } catch (e) {
+                output.textContent = '❌ JSON格式错误: ' + e.message;
             }
         }
         
