@@ -1,0 +1,38 @@
+{
+  "cronJobs": [
+    {"name":"pupu-daily-sync","schedule":"0 3 * * *","status":"active","desc":"每日同步"},
+    {"name":"pupu-health-check","schedule":"0 9 * * 1","status":"active","desc":"周一体检"},
+    {"name":"pupu-daily-reflection","schedule":"0 22 * * *","status":"active","desc":"每日反思"},
+    {"name":"pupu-version-weekly","schedule":"5 3 * * 1","status":"inactive","desc":"周版本"},
+    {"name":"pupu-version-monthly","schedule":"10 3 1 *","status":"inactive","desc":"月版本"},
+    {"name":"pupu-monitor","schedule":"0 * * * *","status":"active","desc":"每小时监控"},
+    {"name":"pupu-daily-email","schedule":"0 22 * * *","status":"active","desc":"每日邮件"},
+    {"name":"pupu-qmd-index","schedule":"0 3 * * *","status":"active","desc":"QMD索引"},
+    {"name":"pupu-memory-daily","schedule":"0 10 * * *","status":"active","desc":"每日记忆"},
+    {"name":"pupu-security-scan","schedule":"0 0 * * *","status":"active","desc":"安全扫描"}
+  ],
+  "recentLogs": [
+    {"file":"pupu-alert.log","lastLine":"[2026-02-04 14:38:02] [WARNING] 监控告警: 最近7天无Skills备份"}
+    {"file":"pupu-cos-sync.log","lastLine":"[2026-02-04 08:40:00] ========================================"}
+    {"file":"pupu-daily-iteration.log","lastLine":""}
+    {"file":"pupu-daily-report.log","lastLine":"[2026-02-07 23:51:29] ========== 完成 =========="}
+    {"file":"pupu-daily-sync.log","lastLine":"[2026-02-28 03:00:01]   📂 同步workspace目录..."}
+    {"file":"pupu-email.log","lastLine":"✅ 每日邮件报告发送完成！"}
+    {"file":"pupu-full-sync.log","lastLine":"[2026-02-04 10:20:01] ========================================"}
+    {"file":"pupu-health-report.log","lastLine":"[2026-02-23 09:00:01] 🔍 2. 核心记忆文件检查"}
+    {"file":"pupu-memory-daily.log","lastLine":"QMD索引: 未知"}
+    {"file":"pupu-model.log","lastLine":"[2026-02-03 11:16:55]    ✅ 选择模型: minimax"}
+    {"file":"pupu-monitor.log","lastLine":"[2026-02-28 10:00:01] "}
+    {"file":"pupu-qmd-index.log","lastLine":"❌ QMD未安装，无法更新索引"}
+    {"file":"pupu-reflection.log","lastLine":"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━�"}
+    {"file":"pupu-security-scan.log","lastLine":"========================================"}
+    {"file":"pupu-version.log","lastLine":"[2026-02-23 03:05:01]   ✅ 每周版本创建成功: backup-weekly-2026-W09"}
+
+  ],
+  "summary": {
+    "totalCronJobs": 11,
+    "monitoredTasks": 10,
+    "logFiles": 15
+  },
+  "timestamp": "2026-02-28T02:20:28Z"
+}
