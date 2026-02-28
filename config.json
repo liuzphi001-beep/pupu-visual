@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V118.0",
-    "version": "V118.0",
+    "title": "🐾 噗噗控制台 V119.0",
+    "version": "V119.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "🌐", "title": "V119.0 网络详情", "desc": "新增网络连接详情监控" },
     { "icon": "💾", "title": "V118.0 备份监控", "desc": "新增系统备份状态监控" },
     { "icon": "📜", "title": "V117.0 日志分析", "desc": "新增系统日志分析功能" },
     { "icon": "🖥️", "title": "V116.0 硬件监控", "desc": "新增CPU/内存/网络硬件详情" },
@@ -110,6 +111,7 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "🌐", "title": "V119.0 网络详情", "time": "刚刚", "type": "success" },
     { "icon": "💾", "title": "V118.0 备份监控", "time": "刚刚", "type": "success" },
     { "icon": "📜", "title": "V117.0 日志分析", "time": "刚刚", "type": "success" },
     { "icon": "🖥️", "title": "V116.0 硬件监控", "time": "刚刚", "type": "success" },
@@ -127,7 +129,8 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
-    { "id": 1, "title": "💾 V118.0 发布!", "content": "新增系统备份状态监控功能", "time": "刚刚", "read": false },
+    { "id": 1, "title": "🌐 V119.0 发布!", "content": "新增网络连接详情监控功能", "time": "刚刚", "read": false },
+    { "id": 2, "title": "💾 V118.0 发布!", "content": "新增系统备份状态监控功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "📜 V117.0 发布!", "content": "新增系统日志分析功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "🖥️ V116.0 发布!", "content": "新增硬件状态监控功能", "time": "刚刚", "read": false },
     { "id": 2, "title": "🔒 V115.0 发布!", "content": "新增系统安全状态监控功能", "time": "刚刚", "read": false },
