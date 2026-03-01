@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V129.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V130.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2137,6 +2137,35 @@
                 .colorconv-btn { flex: 1; padding: 8px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; transition: all 0.2s; }
                 .colorconv-btn:hover { opacity: 0.9; }
             </style>
+            <!-- Markdown预览 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📝 Markdown预览</span></div>
+                <div class="md-tool">
+                    <textarea class="md-input" id="mdInput" placeholder="输入Markdown文本..." oninput="previewMd()"></textarea>
+                    <div class="md-preview" id="mdPreview">预览区域</div>
+                    <div class="md-actions">
+                        <button class="md-btn" onclick="previewMd()">🔄 预览</button>
+                        <button class="md-btn" onclick="insertMd('**', '**')">B</button>
+                        <button class="md-btn" onclick="insertMd('*', '*')">I</button>
+                        <button class="md-btn" onclick="insertMd('`', '`')">&lt;&gt;</button>
+                        <button class="md-btn" onclick="insertMd('[', '](url)')">🔗</button>
+                        <button class="md-btn clear" onclick="document.getElementById('mdInput').value='';document.getElementById('mdPreview').innerHTML='预览区域'">🗑️</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .md-tool { display: flex; flex-direction: column; gap: 10px; }
+                .md-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .md-preview { min-height: 60px; padding: 10px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; font-size: 0.85rem; color: var(--text-primary); max-height: 150px; overflow-y: auto; line-height: 1.6; }
+                .md-preview h1, .md-preview h2, .md-preview h3 { margin: 5px 0; color: var(--accent-cyan); }
+                .md-preview code { background: var(--bg-secondary); padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+                .md-preview pre { background: var(--bg-secondary); padding: 10px; border-radius: 6px; overflow-x: auto; }
+                .md-preview a { color: var(--accent-cyan); }
+                .md-actions { display: flex; gap: 6px; }
+                .md-btn { padding: 8px 12px; background: var(--accent-green); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600; }
+                .md-btn:hover { opacity: 0.9; }
+                .md-btn.clear { background: rgba(239,68,68,0.3); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -2148,7 +2177,9 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V56.0</div><div class="milestone-desc">URL+JSON</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V57.0</div><div class="milestone-desc">时间戳工具</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V62.0</div><div class="milestone-desc">Markdown预览</div></div></div>
                 </div>
             </div>
             <style>
@@ -4363,6 +4394,37 @@
             const hex = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
             document.getElementById('colorInput').value = hex;
             convertColor();
+        }
+        
+        // Markdown preview functions
+        function previewMd() {
+            const md = document.getElementById('mdInput').value;
+            if (!md) {
+                document.getElementById('mdPreview').innerHTML = '预览区域';
+                return;
+            }
+            let html = md
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+                .replace(/\*(.*)\*/gim, '<em>$1</em>')
+                .replace(/`([^`]+)`/gim, '<code>$1</code>')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
+                .replace(/^\* (.*$)/gim, '<li>$1</li>')
+                .replace(/\n/gim, '<br>');
+            document.getElementById('mdPreview').innerHTML = html;
+        }
+        
+        function insertMd(before, after) {
+            const input = document.getElementById('mdInput');
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const text = input.value;
+            const selected = text.substring(start, end);
+            input.value = text.substring(0, start) + before + selected + after + text.substring(end);
+            input.focus();
+            previewMd();
         }
         
         // Simple MD5 implementation using pure JS
