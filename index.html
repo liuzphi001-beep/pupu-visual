@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V130.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V131.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2165,6 +2165,36 @@
                 .md-btn { padding: 8px 12px; background: var(--accent-green); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600; }
                 .md-btn:hover { opacity: 0.9; }
                 .md-btn.clear { background: rgba(239,68,68,0.3); }
+            </style>
+            <!-- 文本统计工具 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📊 文本统计</span></div>
+                <div class="textstats-tool">
+                    <textarea class="textstats-input" id="textStatsInput" placeholder="输入文本进行统计..." oninput="calcTextStats()"></textarea>
+                    <div class="textstats-results" id="textStatsResults">
+                        <div class="textstat-item"><span class="textstat-label">字符</span><span class="textstat-value" id="tsChars">0</span></div>
+                        <div class="textstat-item"><span class="textstat-label">汉字</span><span class="textstat-value" id="tsChinese">0</span></div>
+                        <div class="textstat-item"><span class="textstat-label">英文</span><span class="textstat-value" id="tsEnglish">0</span></div>
+                        <div class="textstat-item"><span class="textstat-label">数字</span><span class="textstat-value" id="tsNumbers">0</span></div>
+                        <div class="textstat-item"><span class="textstat-label">空格</span><span class="textstat-value" id="tsSpaces">0</span></div>
+                        <div class="textstat-item"><span class="textstat-label">行数</span><span class="textstat-value" id="tsLines">0</span></div>
+                    </div>
+                    <div class="textstats-actions">
+                        <button class="textstats-btn" onclick="calcTextStats()">🔄 统计</button>
+                        <button class="textstats-btn" onclick="document.getElementById('textStatsInput').value='';clearTextStats()">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .textstats-tool { display: flex; flex-direction: column; gap: 10px; }
+                .textstats-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; resize: vertical; }
+                .textstats-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+                .textstat-item { display: flex; flex-direction: column; align-items: center; padding: 8px; background: var(--bg-secondary); border-radius: 6px; }
+                .textstat-label { font-size: 0.65rem; color: var(--text-secondary); }
+                .textstat-value { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent-cyan); font-weight: 600; }
+                .textstats-actions { display: flex; gap: 8px; }
+                .textstats-btn { flex: 1; padding: 10px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; }
+                .textstats-btn:hover { opacity: 0.9; }
             </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
@@ -4425,6 +4455,28 @@
             input.value = text.substring(0, start) + before + selected + after + text.substring(end);
             input.focus();
             previewMd();
+        }
+        
+        // Text statistics functions
+        function calcTextStats() {
+            const text = document.getElementById('textStatsInput').value;
+            if (!text) { clearTextStats(); return; }
+            
+            document.getElementById('tsChars').textContent = text.length;
+            document.getElementById('tsChinese').textContent = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+            document.getElementById('tsEnglish').textContent = (text.match(/[a-zA-Z]/g) || []).length;
+            document.getElementById('tsNumbers').textContent = (text.match(/[0-9]/g) || []).length;
+            document.getElementById('tsSpaces').textContent = (text.match(/\s/g) || []).length;
+            document.getElementById('tsLines').textContent = text.split('\n').length;
+        }
+        
+        function clearTextStats() {
+            document.getElementById('tsChars').textContent = '0';
+            document.getElementById('tsChinese').textContent = '0';
+            document.getElementById('tsEnglish').textContent = '0';
+            document.getElementById('tsNumbers').textContent = '0';
+            document.getElementById('tsSpaces').textContent = '0';
+            document.getElementById('tsLines').textContent = '0';
         }
         
         // Simple MD5 implementation using pure JS
