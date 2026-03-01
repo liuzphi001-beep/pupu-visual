@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V136.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V137.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2251,6 +2251,27 @@
                 .lorem-actions { display: flex; gap: 8px; }
                 .lorem-copy { flex: 1; padding: 10px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
             </style>
+            <!-- 键盘测试 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">⌨️ 键盘测试</span></div>
+                <div class="keyboard-test">
+                    <div class="key-display" id="keyDisplay">请按下键盘...</div>
+                    <div class="key-info">
+                        <div class="key-item"><span>按键:</span><span id="keyName">-</span></div>
+                        <div class="key-item"><span>代码:</span><span id="keyCode">-</span></div>
+                        <div class="key-item"><span>KeyCode:</span><span id="keyCodeNum">-</span></div>
+                    </div>
+                    <div class="key-pressed" id="keyPressed">已按下的键: </div>
+                </div>
+            </div>
+            <style>
+                .keyboard-test { display: flex; flex-direction: column; gap: 10px; }
+                .key-display { padding: 20px; background: var(--bg-secondary); border: 2px solid var(--accent-cyan); border-radius: 12px; text-align: center; font-size: 2rem; font-weight: 700; color: var(--accent-cyan); min-height: 70px; display: flex; align-items: center; justify-content: center; }
+                .key-info { display: flex; gap: 10px; }
+                .key-item { flex: 1; padding: 8px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.75rem; display: flex; justify-content: space-between; }
+                .key-item span:last-child { font-family: 'JetBrains Mono', monospace; color: var(--accent-purple); }
+                .key-pressed { padding: 10px; background: rgba(168,85,247,0.1); border-radius: 6px; font-size: 0.8rem; color: var(--text-secondary); min-height: 30px; }
+            </style>
             <!-- 文本统计工具 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">📊 文本统计</span></div>
@@ -2573,10 +2594,10 @@
                     <div class="changelog-item"><span class="changelog-ver">V68</span><span class="changelog-desc">持续迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V67</span><span class="changelog-desc">心跳迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V66</span><span class="changelog-desc">定时迭代</span></div>
-                    <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">心跳迭代</span></div>
-                    <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">持续迭代</span></div>
-                    <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">Emoji选择器</span></div>
-                    <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">持续迭代</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V66</span><span class="changelog-desc">心跳迭代</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V66</span><span class="changelog-desc">持续迭代</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V66</span><span class="changelog-desc">Emoji选择器</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V66</span><span class="changelog-desc">持续迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V62</span><span class="changelog-desc">稳定迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V61</span><span class="changelog-desc">持续迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V60</span><span class="changelog-desc">里程碑版本</span></div>
@@ -4630,6 +4651,26 @@
         
         // Initialize emoji grid
         showEmojiCat('smileys');
+        
+        // Keyboard test
+        let pressedKeys = [];
+        document.addEventListener('keydown', function(e) {
+            document.getElementById('keyDisplay').textContent = e.key === ' ' ? 'SPACE' : e.key;
+            document.getElementById('keyName').textContent = e.key;
+            document.getElementById('keyCode').textContent = e.code;
+            document.getElementById('keyCodeNum').textContent = e.keyCode;
+            
+            if (!pressedKeys.includes(e.key)) {
+                pressedKeys.push(e.key);
+                if (pressedKeys.length > 10) pressedKeys.shift();
+                document.getElementById('keyPressed').textContent = '已按下的键: ' + pressedKeys.join(' + ');
+            }
+            e.preventDefault();
+        });
+        
+        document.addEventListener('keyup', function(e) {
+            // Keep key in the list but could add more logic
+        });
         
         // Lorem Ipsum generator
         const loremWords = ['lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud', 'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo', 'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate', 'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint', 'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia', 'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'];
