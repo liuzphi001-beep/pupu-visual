@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V135.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V136.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2222,6 +2222,35 @@
                 .base-btn { flex: 1; padding: 8px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; }
                 .base-btn:hover { opacity: 0.9; }
             </style>
+            <!-- Lorem Ipsum生成器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📄 Lorem Ipsum</span></div>
+                <div class="lorem-tool">
+                    <div class="lorem-options">
+                        <select class="lorem-type" id="loremType" onchange="generateLorem()">
+                            <option value="words">单词</option>
+                            <option value="sentences" selected>句子</option>
+                            <option value="paragraphs">段落</option>
+                        </select>
+                        <input type="number" class="lorem-count" id="loremCount" value="3" min="1" max="20">
+                        <button class="lorem-btn" onclick="generateLorem()">生成</button>
+                    </div>
+                    <div class="lorem-result" id="loremResult">点击生成获取占位文本</div>
+                    <div class="lorem-actions">
+                        <button class="lorem-copy" onclick="copyToClipboard(document.getElementById('loremResult').textContent)">📋 复制</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .lorem-tool { display: flex; flex-direction: column; gap: 10px; }
+                .lorem-options { display: flex; gap: 8px; }
+                .lorem-type { flex: 1; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; }
+                .lorem-count { width: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); text-align: center; }
+                .lorem-btn { padding: 10px 20px; background: var(--accent-purple); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+                .lorem-result { padding: 15px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; color: var(--text-primary); line-height: 1.6; min-height: 60px; }
+                .lorem-actions { display: flex; gap: 8px; }
+                .lorem-copy { flex: 1; padding: 10px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+            </style>
             <!-- 文本统计工具 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">📊 文本统计</span></div>
@@ -2353,7 +2382,7 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Emoji选择器</div></div></div></div></div><div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V65.0</div><div class="milestone-desc">进制转换器</div></div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Emoji选择器</div></div></div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V65.0</div><div class="milestone-desc">Lorem Ipsum</div></div></div></div></div><div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V65.0</div><div class="milestone-desc">进制转换器</div></div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">简繁体转换</div></div></div></div>
                     <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Unicode工具</div></div></div></div>
                 </div>
@@ -4601,6 +4630,46 @@
         
         // Initialize emoji grid
         showEmojiCat('smileys');
+        
+        // Lorem Ipsum generator
+        const loremWords = ['lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud', 'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo', 'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate', 'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint', 'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia', 'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'];
+        
+        function generateLorem() {
+            const type = document.getElementById('loremType').value;
+            const count = parseInt(document.getElementById('loremCount').value) || 1;
+            let result = '';
+            
+            if (type === 'words') {
+                for (let i = 0; i < count; i++) {
+                    result += loremWords[Math.floor(Math.random() * loremWords.length)] + ' ';
+                }
+                result = result.trim();
+            } else if (type === 'sentences') {
+                for (let i = 0; i < count; i++) {
+                    let sentence = '';
+                    const wordCount = Math.floor(Math.random() * 10) + 8;
+                    for (let j = 0; j < wordCount; j++) {
+                        sentence += loremWords[Math.floor(Math.random() * loremWords.length)] + ' ';
+                    }
+                    result += sentence.charAt(0).toUpperCase() + sentence.slice(1).trim() + '. ';
+                }
+            } else {
+                for (let p = 0; p < count; p++) {
+                    let para = '';
+                    const sentCount = Math.floor(Math.random() * 4) + 3;
+                    for (let i = 0; i < sentCount; i++) {
+                        let sentence = '';
+                        const wordCount = Math.floor(Math.random() * 10) + 8;
+                        for (let j = 0; j < wordCount; j++) {
+                            sentence += loremWords[Math.floor(Math.random() * loremWords.length)] + ' ';
+                        }
+                        para += sentence.charAt(0).toUpperCase() + sentence.slice(1).trim() + '. ';
+                    }
+                    result += para.trim() + '\n\n';
+                }
+            }
+            document.getElementById('loremResult').textContent = result.trim();
+        }
         
         // Base converter functions
         function convertBase() {
