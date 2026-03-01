@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V133.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V134.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2166,6 +2166,30 @@
                 .md-btn:hover { opacity: 0.9; }
                 .md-btn.clear { background: rgba(239,68,68,0.3); }
             </style>
+            <!-- Emoji选择器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">😀 Emoji选择器</span></div>
+                <div class="emoji-tool">
+                    <div class="emoji-categories">
+                        <button class="emoji-cat active" onclick="showEmojiCat('smileys')">😀</button>
+                        <button class="emoji-cat" onclick="showEmojiCat('animals')">🐱</button>
+                        <button class="emoji-cat" onclick="showEmojiCat('food')">🍔</button>
+                        <button class="emoji-cat" onclick="showEmojiCat('travel')">🚗</button>
+                    </div>
+                    <div class="emoji-grid" id="emojiGrid"></div>
+                    <div class="emoji-result" id="emojiResult">点击选择一个Emoji</div>
+                </div>
+            </div>
+            <style>
+                .emoji-tool { display: flex; flex-direction: column; gap: 10px; }
+                .emoji-categories { display: flex; gap: 6px; justify-content: center; }
+                .emoji-cat { padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; }
+                .emoji-cat:hover, .emoji-cat.active { background: var(--accent-cyan); border-color: var(--accent-cyan); }
+                .emoji-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; max-height: 100px; overflow-y: auto; padding: 8px; background: var(--bg-secondary); border-radius: 8px; }
+                .emoji-item { font-size: 1.3rem; text-align: center; padding: 4px; cursor: pointer; border-radius: 4px; }
+                .emoji-item:hover { background: rgba(0,255,245,0.2); transform: scale(1.2); }
+                .emoji-result { padding: 10px; background: rgba(236,72,153,0.1); border: 1px solid var(--accent-pink); border-radius: 8px; text-align: center; font-size: 1.5rem; }
+            </style>
             <!-- 文本统计工具 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">📊 文本统计</span></div>
@@ -2297,7 +2321,7 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Emoji选择器</div></div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">简繁体转换</div></div></div></div>
                     <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Unicode工具</div></div></div></div>
                 </div>
@@ -2490,7 +2514,8 @@
                     <div class="changelog-item"><span class="changelog-ver">V66</span><span class="changelog-desc">定时迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">心跳迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V64</span><span class="changelog-desc">持续迭代</span></div>
-                    <div class="changelog-item"><span class="changelog-ver">V63</span><span class="changelog-desc">持续迭代</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V64</span><span class="changelog-desc">Emoji选择器</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V64</span><span class="changelog-desc">持续迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V62</span><span class="changelog-desc">稳定迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V61</span><span class="changelog-desc">持续迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V60</span><span class="changelog-desc">里程碑版本</span></div>
@@ -4515,6 +4540,35 @@
             document.getElementById('colorInput').value = hex;
             convertColor();
         }
+        
+        // Emoji picker functions
+        const emojiData = {
+            smileys: ['😀','😃','😄','😁','😆','😅','🤣','😂','🙂','🙃','😉','😊','😇','🥰','😍','🤩','😘','😗','☺','😚','😙','🥲','😋','😛','😜','🤪','😝','🤑','🤗','🤭','🤫','🤔','🤐','🤨','😐','😑','😶','😏','😒','🙄','😬','🤥','😌','😔','😪','🤤','😴','😷','🤒','🤕','🤢','🤮','🤧','🥵','🥶','🥴','😵','🤯','🤠','🥳','🥸','😎','🤓','🧐','😕','😟','🙁','☹','😮','😯','😲','😳','🥺','😦','😧','😨','😰','😥','😢','😭','😱','😖','😣','😞','😓','😩','😫','🥱','😤','😡','😠','🤬','😈','👿','💀','☠','💩','🤡','👹','👺','👻','👽','👾','🤖'],
+            animals: ['🐱','🐶','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','🦟','🦗','🕷','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🦐','🦞','🦀','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🐊','🐅','🐆','🦓','🦍','🦧','🦣','🐘','🦛','🦏','🐪','🐫','🦒','🦘','🦬','🐃','🐂','🐄','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🐩','🦮','🐈','🐓','🦃','🦚','🦜','🦢','🦩','🕊','🐇','🦝','🦨','🦡','🦫','🦦','🦥','🐁','🐀','🐿','🦔'],
+            food: ['🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍈','🍒','🍑','🥭','🍍','🥥','🥝','🍅','🍆','🥑','🥦','🥬','🥒','🌶','🫑','🌽','🥕','🫒','🧄','🧅','🥔','🍠','🥐','🥯','🍞','🥖','🥨','🧀','🥚','🍳','🧈','🥞','🧇','🥓','🥩','🍗','🍖','🦴','🌭','🍔','🍟','🍕','🫓','🥪','🥙','🧆','🌮','🌯','🫔','🥗','🥘','🫕','🍝','🍜','🍲','🍛','🍣','🍱','🥟','🦪','🍤','🍙','🍚','🍘','🍥','🥠','🥮','🍢','🍡','🍧','🍨','🍦','🥧','🧁','🍰','🎂','🍮','🍭','🍬','🍫','🍿','🍩','🍪','🌰','🥜','🍯','🥛','🍼','☕','🫖','🍵','🧃','🥤','🧋','🍶','🍺','🍻','🥂','🍷','🥃','🍸','🍹','🧉','🍾','🧊'],
+            travel: ['🚗','🚕','🚙','🚌','🚎','🏎','🚓','🚑','🚒','🚐','🛻','🚚','🚛','🚜','🏍','🛵','🚲','🛴','🛺','🚨','🚔','🚍','🚘','🚖','🚡','🚠','🚟','🚃','🚋','🚞','🚝','🚄','🚅','🚈','🚂','🚆','🚇','🚊','🚉','✈','🛫','🛬','🛩','💺','🛰','🚀','🛸','🚁','🛶','⛵','🚤','🛥','🛳','⛴','🚢','⚓','🪝','⛽','🚧','🚦','🚥','🚏','🗺️','🗿','🗽','🗼','🏰','🏯','🏟','🎡','🎢','🎠','⛲','⛱','🏖','🏝','🏜','🌋','⛰','🏔','🗻','🏕','⛺','🛖','🏠','🏡','🏘','🏚','🏗','🏭','🏢','🏬','🏣','🏤','🏥','🏦','🏨','🏪','🏫','🏩','💒','🏛','⛪','🕌','🕍','🛕','🕋','⛩']
+        };
+        
+        function showEmojiCat(cat) {
+            const grid = document.getElementById('emojiGrid');
+            grid.innerHTML = '';
+            const emojis = emojiData[cat] || emojiData.smileys;
+            emojis.forEach(e => {
+                const span = document.createElement('span');
+                span.className = 'emoji-item';
+                span.textContent = e;
+                span.onclick = () => {
+                    document.getElementById('emojiResult').textContent = e;
+                    copyToClipboard(e);
+                };
+                grid.appendChild(span);
+            });
+            document.querySelectorAll('.emoji-cat').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        // Initialize emoji grid
+        showEmojiCat('smileys');
         
         // Simplified/Traditional Chinese conversion
         let s2tMode = 'toTraditional';
