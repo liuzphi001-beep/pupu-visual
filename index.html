@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V138.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V139.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2332,6 +2332,24 @@
                 .jwt-btn:hover { opacity: 0.9; }
                 .jwt-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
+            <!-- 屏幕信息检测 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🖥️ 屏幕信息</span></div>
+                <div class="screen-info">
+                    <div class="screen-item"><span class="screen-label">屏幕分辨率</span><span class="screen-value" id="screenRes">-</span></div>
+                    <div class="screen-item"><span class="screen-label">可用区域</span><span class="screen-value" id="screenAvail">-</span></div>
+                    <div class="screen-item"><span class="screen-label">窗口大小</span><span class="screen-value" id="windowSize">-</span></div>
+                    <div class="screen-item"><span class="screen-label">设备像素比</span><span class="screen-value" id="devicePixel">-</span></div>
+                    <div class="screen-item"><span class="screen-label">颜色深度</span><span class="screen-value" id="colorDepth">-</span></div>
+                    <div class="screen-item"><span class="screen-label">在线状态</span><span class="screen-value" id="onlineStatus">-</span></div>
+                </div>
+            </div>
+            <style>
+                .screen-info { display: flex; flex-direction: column; gap: 8px; }
+                .screen-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg-secondary); border-radius: 8px; }
+                .screen-label { font-size: 0.8rem; color: var(--text-secondary); }
+                .screen-value { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent-cyan); }
+            </style>
             <!-- Unicode转义 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">🔣 Unicode工具</span></div>
@@ -2403,7 +2421,7 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Emoji选择器</div></div></div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V65.0</div><div class="milestone-desc">Lorem Ipsum</div></div></div></div></div><div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V65.0</div><div class="milestone-desc">进制转换器</div></div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Emoji选择器</div></div></div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V65.0</div><div class="milestone-desc">Lorem Ipsum</div></div></div></div></div><div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V65.0</div><div class="milestone-desc">进制转换器</div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V66.0</div><div class="milestone-desc">屏幕信息</div></div></div></div></div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">简繁体转换</div></div></div></div>
                     <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Unicode工具</div></div></div></div>
                 </div>
@@ -4877,6 +4895,18 @@
             document.getElementById('jwtPayload').textContent = '-';
             document.getElementById('jwtSignature').textContent = '-';
         }
+        
+        // Screen info functions
+        function updateScreenInfo() {
+            document.getElementById('screenRes').textContent = screen.width + ' x ' + screen.height;
+            document.getElementById('screenAvail').textContent = screen.availWidth + ' x ' + screen.availHeight;
+            document.getElementById('windowSize').textContent = window.innerWidth + ' x ' + window.innerHeight;
+            document.getElementById('devicePixel').textContent = window.devicePixelRatio || 1;
+            document.getElementById('colorDepth').textContent = screen.colorDepth + '-bit';
+            document.getElementById('onlineStatus').textContent = navigator.onLine ? '在线' : '离线';
+        }
+        updateScreenInfo();
+        window.addEventListener('resize', updateScreenInfo);
         
         // Unicode tool functions
         let unicodeMode = 'encode';
