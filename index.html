@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V132.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V133.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2255,6 +2255,35 @@
                 .unicode-btn:hover { border-color: var(--accent-red); }
                 .unicode-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
+            <!-- 简繁体转换 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔄 简繁体转换</span></div>
+                <div class="s2t-tool">
+                    <div class="s2t-mode">
+                        <button class="s2t-mode-btn active" id="s2tToTrad" onclick="setS2tMode('toTraditional')">简体→繁体</button>
+                        <button class="s2t-mode-btn" id="s2tToSimp" onclick="setS2tMode('toSimplified')">繁体→简体</button>
+                    </div>
+                    <textarea class="s2t-input" id="s2tInput" placeholder="输入文字..." oninput="convertS2t()"></textarea>
+                    <div class="s2t-output" id="s2tOutput">转换结果</div>
+                    <div class="s2t-actions">
+                        <button class="s2t-btn" onclick="convertS2t()">🔄 转换</button>
+                        <button class="s2t-btn" onclick="copyToClipboard(document.getElementById('s2tOutput').textContent)">📋 复制</button>
+                        <button class="s2t-btn clear" onclick="document.getElementById('s2tInput').value='';document.getElementById('s2tOutput').textContent='转换结果'">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .s2t-tool { display: flex; flex-direction: column; gap: 10px; }
+                .s2t-mode { display: flex; gap: 8px; }
+                .s2t-mode-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+                .s2t-mode-btn.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
+                .s2t-input { width: 100%; min-height: 50px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; resize: vertical; }
+                .s2t-output { min-height: 40px; padding: 10px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; color: var(--accent-green); font-size: 0.85rem; word-break: break-all; }
+                .s2t-actions { display: flex; gap: 8px; }
+                .s2t-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
+                .s2t-btn:hover { border-color: var(--accent-green); }
+                .s2t-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -2269,6 +2298,7 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
                     <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">简繁体转换</div></div></div></div>
                     <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Unicode工具</div></div></div></div>
                 </div>
             </div>
@@ -4484,6 +4514,111 @@
             const hex = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
             document.getElementById('colorInput').value = hex;
             convertColor();
+        }
+        
+        // Simplified/Traditional Chinese conversion
+        let s2tMode = 'toTraditional';
+        const s2tMap = {
+            '与': '與', '为': '為', '两': '兩', '个': '個', '么': '麼',
+            '义': '義', '乐': '樂', '习': '習', '乡': '鄉', '书': '書',
+            '买': '買', '乱': '亂', '争': '爭', '产': '產', '亨': '亳',
+            '仆': '僕', '仇': '讎', '仆': '僕', '价': '價', '份': '份',
+            '伙': '夥', '伴': '伴', '会': '會', '伞': '傘', '伟': '偉',
+            '传': '傳', '伤': '傷', '伫': '佇', '体': '體', '余': '餘',
+            '作业': '作業', '来': '來', '例': '例', '侠': '俠', '侣': '侶',
+            '侧': '側', '侨': '僑', '佩': '佩', '货': '貨', '侵': '侵',
+            '俘': '俘', '保': '保', '信': '信', '俩': '倆', '修': '修',
+            '俱': '俱', '债': '債', '倾': '傾', '偎': '偎', '偶': '偶',
+            '偷': '偷', '偿': '償', '傅': '傅', '傍': '傍', '傑': '杰',
+            '傘': '伞', '備': '备', '嬰': '婴', '學': '学', '寧': '宁',
+            '屬': '属', '層': '层', '岡': '冈', '島': '岛', '帥': '帅',
+            '帶': '带', '幣': '币', '師': '师', '庫': '库', '廁': '厕',
+            '廠': '厂', '廈': '厦', '廣': '广', '廬': '庐', '廳': '厅',
+            '張': '张', '強': '强', '彎': '弯', '彖': '彖', '後': '后',
+            '徑': '径', '從': '从', '復': '复', '徵': '征', '徹': '彻',
+            '心': '心', '志': '志', '忙': '忙', '忧': '憂', '快': '快',
+            '怅': '悵', '怦': '怦', '性': '性', '怪': '怪', '恆': '恒',
+            '恽': '惲', '息': '息', '悦': '悅', '惱': '恼', '惊': '驚',
+            '惨': '慘', '惩': '懲', '敏感': '敏感', '愈': '愈', '愉': '愉',
+            '慍': '慍', '慵': '慵', '慶': '庆', '慷': '慷', '憋': '憋',
+            '戚': '慼', ' Gri': ' Gri', 'ji': 'ji', '應': '应', '忝': '忝',
+            '怀': '懷', '态': '態', '懾': '慑', '戀': '恋', '拋': '抛',
+            '拚': '拚', '抢': '搶', '护': '護', '报': '報', '擬': '拟',
+            '擴': '扩', '攝': '摄', '支': '支', '收': '收', '敝': '敝',
+            '效': '效', '敌': '敵', '敏': '敏', '救': '救', '敕': '敕',
+            '敖': '敖', '敗': '败', '敘': '叙', '敵': '敌', '敷': '敷',
+            '數': '数', '斂': '敛', '斃': '毙', '文': '文', '斋': '齊',
+            '斐': '斐', '斗': '鬥', '料': '料', '斡': '斡', '斤': '斤',
+            '斥': '斥', '斧': '斧', '斬': '斩', '斷': '断', '於': '于',
+            '既': '既', '既有': '既有', '舊': '旧', '時': '时', '晉': '晋',
+            '暉': '晖', '暢': '畅', '暫': '暂', '暱': '昵', '曉': '晓',
+            '暸': '暸', '晔': '曄', '晕': '暈', '晖': '暉', '會': '会',
+            '月': '月', '有': '有朋': '有朋', '朋': '友', '友': '情',
+            '望': '望', '朝': '朝', '期': '期', '木': '末', '未': '来',
+            '本': '本', '札': '札', '朴': '樸', '机': '機', '朽': '朽',
+            '杀': '殺', '杂': '雜', '权': '權', '条': '條', '来': '來',
+            '杨': '楊', '极': '極', '板': '板', '松': '鬆', '枕': '枕',
+            '林': '林', '枝': '枝', '枪': '槍', '枫': '楓', '树': '樹',
+            '桥': '橋', '桦': '樺', '检': '檢', '梨': '梨', '棄': '弃',
+            '棉': '棉', '棋': '棋', '棍': '棍', '椎': '椎', '棉': '綿',
+            '棧': '栈', '椒': '椒', '櫻': '樱', '橋': '桥', '櫃': '柜',
+            '欽': '钦', '欽': '钦', '款': '款', '歟': '歟', '歡': '欢',
+            '止': '正', '步': '步', '武': '武', '歪': '歪', '歲': '岁',
+            '歷': '历', '歸': '归', '死': '死', '殘': '残', '殤': '殇',
+            '殺': '杀', '車': '车', '軍': '军', '軌': '轨', '軒': '轩',
+            '軟': '软', '載': '载', '轎': '轿', '較': '较', '迭': '迭',
+            '迴': '回', '邏': '逻', '邊': '边', '邱': '邱', '邵': '邵',
+            '邸': '邸', '郭': '郭', '都': '都', '鄉': '乡', '邸': '郟',
+            '郵': '邮', '鄭': '郑', '郜': '郜', '郁': '鬱', '郝': '郝',
+            '郡': '郡', '部': '部', '郭': '郭', '都': '都', '鄉': '鄉',
+            '醫': '医', '醜': '丑', '醣': '糖', '醵': '醵', '釀': '酿',
+            '采': '採', '釋': '释', '鈴': '铃', '鋁': '铝', '銅': '铜',
+            '銹': '锈', '錢': '钱', '鋒': '锋', '鋼': '钢', '錄': '录',
+            '錶': '表', '鏈': '链', '鏟': '铲', '鏡': '镜', '鐺': '铛',
+            '鐵': '铁', '鐸': '铎', '鐲': '镯', '長': '长', '門': '门',
+            '閂': '闩', '閃': '闪', '閉': '闭', '開': '开', '閤': '閤',
+            '間': '间', '閱': '阅', '闘': '鬥', '陽': '阳', '陰': '阴',
+            '陳': '陈', '陸': '陆', '陳': '陈', '陵': '陵', '陶': '陶',
+            '陷': '陷', '隊': '队', '階': '阶', '雨': '雨', '雲': '云',
+            '電': '电', '震': '震', '霧': '雾', '靈': '灵', '青': '青',
+            '靜': '静', '面': '面', '革': '革', '鞦': '秋', '韁': '缰',
+            '韋': '韦', '韜': '韬', '頁': '页', '項': '项', '順': '顺',
+            '須': '须', '頓': '顿', '頊': '玊', '預': '预', '頑': '顽',
+            '頓': '顿', '頊': '頊', '領': '领', '頌': '颂', '頸': '颈',
+            '題': '题', '額': '额', '顎': '颚', '嚇': '吓', '嚴': '严',
+            '嘗': '尝', '嘩': '哗', '嘆': '叹', '嗎': '吗', '噓': '嘘',
+            '嗚': '呜', '嗎': '吗', '嗩': '嗩', '號': '号', '嘆': '嘆',
+            '嘔': '呕', '齊': '齐', '龍': '龙', '龜': '龟', '龠': '龠'
+        };
+        
+        function setS2tMode(mode) {
+            s2tMode = mode;
+            document.getElementById('s2tToTrad').classList.toggle('active', mode === 'toTraditional');
+            document.getElementById('s2tToSimp').classList.toggle('active', mode === 'toSimplified');
+            convertS2t();
+        }
+        
+        function convertS2t() {
+            let input = document.getElementById('s2tInput').value;
+            const output = document.getElementById('s2tOutput');
+            if (!input) {
+                output.textContent = '转换结果';
+                return;
+            }
+            
+            let result = input;
+            if (s2tMode === 'toTraditional') {
+                // Simplified to Traditional
+                for (let key in s2tMap) {
+                    result = result.split(key).join(s2tMap[key]);
+                }
+            } else {
+                // Traditional to Simplified (reverse)
+                for (let key in s2tMap) {
+                    result = result.split(s2tMap[key]).join(key);
+                }
+            }
+            output.textContent = result;
         }
         
         // JWT decoder functions
