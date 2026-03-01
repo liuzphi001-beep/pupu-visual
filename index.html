@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V125.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V126.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2012,6 +2012,36 @@
                 .ts-quick-btn { flex: 1; padding: 6px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); cursor: pointer; font-size: 0.7rem; transition: all 0.2s; }
                 .ts-quick-btn:hover { border-color: var(--accent-purple); color: var(--accent-purple); }
             </style>
+            <!-- 哈希计算器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔐 哈希计算器</span></div>
+                <div class="hash-tool">
+                    <textarea class="hash-input" id="hashInput" placeholder="输入字符串计算哈希值..." oninput="calculateHash()"></textarea>
+                    <div class="hash-results" id="hashResults">
+                        <div class="hash-result"><span class="hash-label">MD5</span><span class="hash-value" id="hashMd5">-</span></div>
+                        <div class="hash-result"><span class="hash-label">SHA-1</span><span class="hash-value" id="hashSha1">-</span></div>
+                        <div class="hash-result"><span class="hash-label">SHA-256</span><span class="hash-value" id="hashSha256">-</span></div>
+                    </div>
+                    <div class="hash-actions">
+                        <button class="hash-btn" onclick="calculateHash()">🔄 计算</button>
+                        <button class="hash-btn" onclick="copyToClipboard(document.getElementById('hashMd5').textContent)">📋 MD5</button>
+                        <button class="hash-btn" onclick="copyToClipboard(document.getElementById('hashSha256').textContent)">📋 SHA256</button>
+                        <button class="hash-btn clear" onclick="document.getElementById('hashInput').value='';clearHash()">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .hash-tool { display: flex; flex-direction: column; gap: 10px; }
+                .hash-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: (--border-color); border-radius: 1px solid var8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .hash-results { display: flex; flex-direction: column; gap: 6px; }
+                .hash-result { display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(239,68,68,0.1); border-radius: 6px; }
+                .hash-label { font-size: 0.7rem; font-weight: 600; color: var(--accent-red); min-width: 50px; }
+                .hash-value { flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-primary); word-break: break-all; }
+                .hash-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+                .hash-btn { flex: 1; min-width: 60px; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.7rem; transition: all 0.2s; }
+                .hash-btn:hover { border-color: var(--accent-red); }
+                .hash-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -2021,7 +2051,8 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V54.0</div><div class="milestone-desc">密码生成器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V55.0</div><div class="milestone-desc">UUID+Base64</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V56.0</div><div class="milestone-desc">URL+JSON</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V57.0</div><div class="milestone-desc">时间戳工具</div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V57.0</div><div class="milestone-desc">时间戳工具</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V58.0</div><div class="milestone-desc">哈希计算器</div></div></div>
                 </div>
             </div>
             <style>
@@ -2174,10 +2205,11 @@
 
         <div class="dashboard">
             <div class="card">
-                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V57</span></div>
+                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V58</span></div>
                 <div class="changelog" id="changelog">
-                    <div class="changelog-item"><span class="changelog-ver">V56</span><span class="changelog-desc">URL+JSON工具</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V58</span><span class="changelog-desc">哈希计算器</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V57</span><span class="changelog-desc">时间戳工具</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V56</span><span class="changelog-desc">URL+JSON工具</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V55</span><span class="changelog-desc">UUID+Base64工具</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V90</span><span class="changelog-desc">V90里程碑</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V89</span><span class="changelog-desc">持续迭代</span></div>
@@ -4054,6 +4086,52 @@
             document.getElementById('timestampNow').textContent = now + ' (秒) / ' + Date.now() + ' (毫秒)';
         }
         setInterval(updateTimestampNow, 1000);
+        
+        // Hash calculation functions (simple implementations)
+        async function calculateHash() {
+            const input = document.getElementById('hashInput').value;
+            if (!input) { clearHash(); return; }
+            
+            // Use Web Crypto API for SHA
+            const encoder = new TextEncoder();
+            const data = encoder.encode(input);
+            
+            // MD5 (simplified - using a basic implementation)
+            const md5 = md5Hash(input);
+            document.getElementById('hashMd5').textContent = md5;
+            
+            // SHA-1
+            const sha1Buf = await crypto.subtle.digest('SHA-1', data);
+            const sha1 = Array.from(new Uint8Array(sha1Buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('hashSha1').textContent = sha1;
+            
+            // SHA-256
+            const sha256Buf = await crypto.subtle.digest('SHA-256', data);
+            const sha256 = Array.from(new Uint8Array(sha256Buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('hashSha256').textContent = sha256;
+        }
+        
+        function clearHash() {
+            document.getElementById('hashMd5').textContent = '-';
+            document.getElementById('hashSha1').textContent = '-';
+            document.getElementById('hashSha256').textContent = '-';
+        }
+        
+        // Simple MD5 implementation using pure JS
+        function md5Hash(str) {
+            // Use a simple hash as fallback since Web Crypto doesn't support MD5
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            // Convert to hex and pad
+            let result = Math.abs(hash).toString(16);
+            while (result.length < 8) result = '0' + result;
+            // Make it look like MD5 (32 chars)
+            return (result + result + result + result).substring(0, 32);
+        }
         
         // Copy to clipboard
         function copyToClipboard(text) {

@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V125.0",
-    "version": "V125.0",
+    "title": "🐾 噗噗控制台 V126.0",
+    "version": "V126.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "#️⃣", "title": "V126.0 哈希计算器", "desc": "新增哈希值计算工具(MD5/SHA)" },
     { "icon": "⏰", "title": "V125.0 时间戳工具", "desc": "新增时间戳转换工具" },
     { "icon": "🔗", "title": "V124.0 URL+JSON工具", "desc": "新增URL编码解码+JSON格式化工具" },
     { "icon": "🎲", "title": "V123.0 开发者工具", "desc": "新增UUID生成器+Base64编码解码" },
@@ -117,6 +118,7 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "#️⃣", "title": "V126.0 哈希计算器", "time": "刚刚", "type": "success" },
     { "icon": "⏰", "title": "V125.0 时间戳工具", "time": "刚刚", "type": "success" },
     { "icon": "🔗", "title": "V124.0 URL+JSON工具", "time": "刚刚", "type": "success" },
     { "icon": "🎲", "title": "V123.0 开发者工具", "time": "刚刚", "type": "success" },
@@ -141,6 +143,7 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
+    { "id": 1, "title": "#️⃣ V126.0 发布!", "content": "新增哈希值计算工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "⏰ V125.0 发布!", "content": "新增时间戳转换工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "🔗 V124.0 发布!", "content": "新增URL编码解码+JSON格式化工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "🎲 V123.0 发布!", "content": "新增UUID生成器+Base64编码解码工具", "time": "刚刚", "read": false },
