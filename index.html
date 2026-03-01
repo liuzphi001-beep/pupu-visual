@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V127.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V128.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2068,6 +2068,39 @@
                 .diff-btn:hover { border-color: #3b82f6; }
                 .diff-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
+            <!-- 随机数生成器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🎲 随机数生成</span></div>
+                <div class="random-tool">
+                    <div class="random-range">
+                        <input type="number" class="random-input" id="randMin" placeholder="最小值" value="1">
+                        <span>~</span>
+                        <input type="number" class="random-input" id="randMax" placeholder="最大值" value="100">
+                    </div>
+                    <div class="random-count">
+                        <label>生成数量:</label>
+                        <input type="number" id="randCount" value="1" min="1" max="100">
+                    </div>
+                    <div class="random-result" id="randResult">点击生成按钮</div>
+                    <div class="random-actions">
+                        <button class="random-btn" onclick="generateRandom()">🎲 生成</button>
+                        <button class="random-btn" onclick="generateRandom(1,1000)">1-1000</button>
+                        <button class="random-btn" onclick="generateRandom(1,6)">🎲 骰子</button>
+                        <button class="random-btn" onclick="copyToClipboard(document.getElementById('randResult').textContent)">📋 复制</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .random-tool { display: flex; flex-direction: column; gap: 10px; }
+                .random-range { display: flex; align-items: center; gap: 8px; }
+                .random-input { flex: 1; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; text-align: center; }
+                .random-count { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+                .random-count input { width: 60px; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); text-align: center; }
+                .random-result { padding: 15px; background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(168,85,247,0.1)); border-radius: 8px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--accent-pink); font-weight: 600; }
+                .random-actions { display: flex; gap: 6px; }
+                .random-btn { flex: 1; padding: 10px; background: var(--accent-pink); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
+                .random-btn:hover { opacity: 0.9; transform: scale(1.02); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -2078,7 +2111,8 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V55.0</div><div class="milestone-desc">UUID+Base64</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V56.0</div><div class="milestone-desc">URL+JSON</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V57.0</div><div class="milestone-desc">时间戳工具</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
+                    <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
                 </div>
             </div>
             <style>
@@ -2231,8 +2265,10 @@
 
         <div class="dashboard">
             <div class="card">
-                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V58</span></div>
+                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V60</span></div>
                 <div class="changelog" id="changelog">
+                    <div class="changelog-item"><span class="changelog-ver">V60</span><span class="changelog-desc">随机数生成器</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V59</span><span class="changelog-desc">字符串差异比较</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V58</span><span class="changelog-desc">哈希计算器</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V57</span><span class="changelog-desc">时间戳工具</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V56</span><span class="changelog-desc">URL+JSON工具</span></div>
@@ -4201,6 +4237,20 @@
             document.getElementById('diffText1').value = '';
             document.getElementById('diffText2').value = '';
             document.getElementById('diffResult').textContent = '差异结果将显示在这里';
+        }
+        
+        // Random number generator functions
+        function generateRandom(min, max) {
+            if (min === undefined) {
+                min = parseInt(document.getElementById('randMin').value) || 1;
+                max = parseInt(document.getElementById('randMax').value) || 100;
+            }
+            const count = parseInt(document.getElementById('randCount').value) || 1;
+            const results = [];
+            for (let i = 0; i < count; i++) {
+                results.push(Math.floor(Math.random() * (max - min + 1)) + min);
+            }
+            document.getElementById('randResult').textContent = results.join(', ');
         }
         
         // Simple MD5 implementation using pure JS
