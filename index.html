@@ -2196,6 +2196,36 @@
                 .textstats-btn { flex: 1; padding: 10px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; }
                 .textstats-btn:hover { opacity: 0.9; }
             </style>
+            <!-- JWT解码器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🎫 JWT解码器</span></div>
+                <div class="jwt-tool">
+                    <textarea class="jwt-input" id="jwtInput" placeholder="输入JWT令牌..." oninput="decodeJwt()"></textarea>
+                    <div class="jwt-result" id="jwtResult">
+                        <div class="jwt-section"><span class="jwt-label">Header</span><pre class="jwt-content" id="jwtHeader">-</pre></div>
+                        <div class="jwt-section"><span class="jwt-label">Payload</span><pre class="jwt-content" id="jwtPayload">-</pre></div>
+                        <div class="jwt-section"><span class="jwt-label">Signature</span><pre class="jwt-content" id="jwtSignature">-</pre></div>
+                    </div>
+                    <div class="jwt-actions">
+                        <button class="jwt-btn" onclick="decodeJwt()">🔄 解码</button>
+                        <button class="jwt-btn" onclick="copyToClipboard(document.getElementById('jwtHeader').textContent)">📋 Header</button>
+                        <button class="jwt-btn" onclick="copyToClipboard(document.getElementById('jwtPayload').textContent)">📋 Payload</button>
+                        <button class="jwt-btn clear" onclick="document.getElementById('jwtInput').value='';clearJwt()">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .jwt-tool { display: flex; flex-direction: column; gap: 10px; }
+                .jwt-input { width: 100%; min-height: 50px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; resize: vertical; }
+                .jwt-result { display: flex; flex-direction: column; gap: 8px; max-height: 150px; overflow-y: auto; }
+                .jwt-section { display: flex; flex-direction: column; gap: 4px; }
+                .jwt-label { font-size: 0.7rem; font-weight: 600; color: var(--accent-gold); }
+                .jwt-content { margin: 0; padding: 8px; background: rgba(251,191,36,0.1); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-primary); white-space: pre-wrap; word-break: break-all; }
+                .jwt-actions { display: flex; gap: 6px; }
+                .jwt-btn { flex: 1; padding: 8px; background: var(--accent-gold); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; transition: all 0.2s; }
+                .jwt-btn:hover { opacity: 0.9; }
+                .jwt-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -2209,7 +2239,7 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V62.0</div><div class="milestone-desc">Markdown预览</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div>
                 </div>
             </div>
             <style>
@@ -4424,6 +4454,35 @@
             const hex = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
             document.getElementById('colorInput').value = hex;
             convertColor();
+        }
+        
+        // JWT decoder functions
+        function decodeJwt() {
+            const token = document.getElementById('jwtInput').value.trim();
+            if (!token) { clearJwt(); return; }
+            
+            try {
+                const parts = token.split('.');
+                if (parts.length !== 3) {
+                    document.getElementById('jwtResult').innerHTML = '<div class="jwt-error">无效的JWT格式</div>';
+                    return;
+                }
+                
+                const header = JSON.parse(atob(parts[0].replace(/-/g, '+').replace(/_/g, '/')));
+                const payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+                
+                document.getElementById('jwtHeader').textContent = JSON.stringify(header, null, 2);
+                document.getElementById('jwtPayload').textContent = JSON.stringify(payload, null, 2);
+                document.getElementById('jwtSignature').textContent = parts[2].substring(0, 50) + '...';
+            } catch (e) {
+                document.getElementById('jwtResult').innerHTML = '<div class="jwt-error">解码失败: ' + e.message + '</div>';
+            }
+        }
+        
+        function clearJwt() {
+            document.getElementById('jwtHeader').textContent = '-';
+            document.getElementById('jwtPayload').textContent = '-';
+            document.getElementById('jwtSignature').textContent = '-';
         }
         
         // Markdown preview functions
