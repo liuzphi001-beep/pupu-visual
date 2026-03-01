@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V128.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V129.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2101,6 +2101,42 @@
                 .random-btn { flex: 1; padding: 10px; background: var(--accent-pink); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
                 .random-btn:hover { opacity: 0.9; transform: scale(1.02); }
             </style>
+            <!-- 颜色代码转换器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🎨 颜色代码转换</span></div>
+                <div class="colorconv-tool">
+                    <div class="colorconv-input">
+                        <input type="text" class="colorconv-text" id="colorInput" placeholder="输入颜色(HEX/RGB/HSL)..." oninput="convertColor()">
+                        <input type="color" class="colorconv-picker" id="colorPicker" value="#00fff5" onchange="convertColor()">
+                    </div>
+                    <div class="colorconv-results" id="colorResults">
+                        <div class="color-result"><span class="color-label">HEX</span><span class="color-value" id="resHex">#00fff5</span></div>
+                        <div class="color-result"><span class="color-label">RGB</span><span class="color-value" id="resRgb">rgb(0, 255, 245)</span></div>
+                        <div class="color-result"><span class="color-label">HSL</span><span class="color-value" id="resHsl">hsl(177, 100%, 50%)</span></div>
+                    </div>
+                    <div class="color-preview" id="colorPreview" style="background:#00fff5"></div>
+                    <div class="colorconv-actions">
+                        <button class="colorconv-btn" onclick="convertColor()">🔄 转换</button>
+                        <button class="colorconv-btn" onclick="copyToClipboard(document.getElementById('resHex').textContent)">📋 HEX</button>
+                        <button class="colorconv-btn" onclick="copyToClipboard(document.getElementById('resRgb').textContent)">📋 RGB</button>
+                        <button class="colorconv-btn" onclick="randomColor()">🎲 随机色</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .colorconv-tool { display: flex; flex-direction: column; gap: 10px; }
+                .colorconv-input { display: flex; gap: 8px; }
+                .colorconv-text { flex: 1; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+                .colorconv-picker { width: 40px; height: 40px; border: none; border-radius: 8px; cursor: pointer; }
+                .colorconv-results { display: flex; flex-direction: column; gap: 6px; }
+                .color-result { display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 6px; }
+                .color-label { font-size: 0.7rem; font-weight: 600; color: var(--accent-cyan); min-width: 35px; }
+                .color-value { flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-primary); }
+                .color-preview { height: 30px; border-radius: 6px; border: 1px solid var(--border-color); }
+                .colorconv-actions { display: flex; gap: 6px; }
+                .colorconv-btn { flex: 1; padding: 8px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; transition: all 0.2s; }
+                .colorconv-btn:hover { opacity: 0.9; }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -2112,7 +2148,7 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V56.0</div><div class="milestone-desc">URL+JSON</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V57.0</div><div class="milestone-desc">时间戳工具</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
                 </div>
             </div>
             <style>
@@ -2265,7 +2301,10 @@
 
         <div class="dashboard">
             <div class="card">
-                <div class="card-header"><span class="card-title">📋 更新日志</span><span class="card-badge" style="background:rgba(168,85,257,0.2);color:var(--accent-purple)">V60</span></div>
+                <div class="card-header"><span class="card-title">📋 更新日志</span></div>
+                <div class="changelog" id="changelog">
+                    <div class="changelog-item"><span class="changelog-ver">V61</span><span class="changelog-desc">颜色代码转换</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V60</span></div>
                 <div class="changelog" id="changelog">
                     <div class="changelog-item"><span class="changelog-ver">V60</span><span class="changelog-desc">随机数生成器</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V59</span><span class="changelog-desc">字符串差异比较</span></div>
@@ -4251,6 +4290,79 @@
                 results.push(Math.floor(Math.random() * (max - min + 1)) + min);
             }
             document.getElementById('randResult').textContent = results.join(', ');
+        }
+        
+        // Color converter functions
+        function convertColor() {
+            let input = document.getElementById('colorInput').value.trim();
+            let color = input;
+            
+            // If input is empty or not a valid color, use picker
+            if (!input || !isValidColor(input)) {
+                color = document.getElementById('colorPicker').value;
+                document.getElementById('colorInput').value = color;
+            }
+            
+            // Convert to RGB
+            const rgb = hexToRgb(color);
+            if (rgb) {
+                document.getElementById('resHex').textContent = color.startsWith('#') ? color : rgbToHex(rgb.r, rgb.g, rgb.b);
+                document.getElementById('resRgb').textContent = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+                
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                document.getElementById('resHsl').textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+                
+                document.getElementById('colorPreview').style.background = color;
+                document.getElementById('colorPicker').value = rgbToHex(rgb.r, rgb.g, rgb.b);
+            }
+        }
+        
+        function isValidColor(str) {
+            const s = new Option().style;
+            s.color = str;
+            return s.color !== '';
+        }
+        
+        function hexToRgb(hex) {
+            // Handle shorthand #RGB
+            if (hex.length === 4) {
+                hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
+            }
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+        
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+        }
+        
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+        }
+        
+        function randomColor() {
+            const hex = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+            document.getElementById('colorInput').value = hex;
+            convertColor();
         }
         
         // Simple MD5 implementation using pure JS
