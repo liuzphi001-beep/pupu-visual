@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V131.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V132.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2226,6 +2226,35 @@
                 .jwt-btn:hover { opacity: 0.9; }
                 .jwt-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
+            <!-- Unicode转义 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔣 Unicode工具</span></div>
+                <div class="unicode-tool">
+                    <div class="unicode-mode">
+                        <button class="unicode-mode-btn active" id="unicodeEncodeBtn" onclick="setUnicodeMode('encode')">转义</button>
+                        <button class="unicode-mode-btn" id="unicodeDecodeBtn" onclick="setUnicodeMode('decode')">反转义</button>
+                    </div>
+                    <textarea class="unicode-input" id="unicodeInput" placeholder="输入文本..." oninput="processUnicode()"></textarea>
+                    <div class="unicode-output" id="unicodeOutput">结果将显示在这里</div>
+                    <div class="unicode-actions">
+                        <button class="unicode-btn" onclick="processUnicode()">🔄 转换</button>
+                        <button class="unicode-btn" onclick="copyToClipboard(document.getElementById('unicodeOutput').textContent)">📋 复制</button>
+                        <button class="unicode-btn clear" onclick="document.getElementById('unicodeInput').value='';document.getElementById('unicodeOutput').textContent='结果将显示在这里'">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .unicode-tool { display: flex; flex-direction: column; gap: 10px; }
+                .unicode-mode { display: flex; gap: 8px; }
+                .unicode-mode-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+                .unicode-mode-btn.active { background: var(--accent-red); color: white; border-color: var(--accent-red); }
+                .unicode-input { width: 100%; min-height: 50px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .unicode-output { min-height: 40px; padding: 10px; background: rgba(239,68,68,0.1); border: 1px solid var(--accent-red); border-radius: 8px; color: var(--accent-red); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; word-break: break-all; }
+                .unicode-actions { display: flex; gap: 8px; }
+                .unicode-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
+                .unicode-btn:hover { border-color: var(--accent-red); }
+                .unicode-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -2239,7 +2268,8 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Unicode工具</div></div></div></div>
                 </div>
             </div>
             <style>
@@ -4483,6 +4513,43 @@
             document.getElementById('jwtHeader').textContent = '-';
             document.getElementById('jwtPayload').textContent = '-';
             document.getElementById('jwtSignature').textContent = '-';
+        }
+        
+        // Unicode tool functions
+        let unicodeMode = 'encode';
+        function setUnicodeMode(mode) {
+            unicodeMode = mode;
+            document.getElementById('unicodeEncodeBtn').classList.toggle('active', mode === 'encode');
+            document.getElementById('unicodeDecodeBtn').classList.toggle('active', mode === 'decode');
+            processUnicode();
+        }
+        function processUnicode() {
+            const input = document.getElementById('unicodeInput').value;
+            const output = document.getElementById('unicodeOutput');
+            if (!input) {
+                output.textContent = '结果将显示在这里';
+                return;
+            }
+            try {
+                if (unicodeMode === 'encode') {
+                    // Encode to Unicode escape sequences
+                    let result = '';
+                    for (let i = 0; i < input.length; i++) {
+                        const code = input.charCodeAt(i);
+                        if (code > 127) {
+                            result += '\\u' + code.toString(16).padStart(4, '0');
+                        } else {
+                            result += input[i];
+                        }
+                    }
+                    output.textContent = result;
+                } else {
+                    // Decode Unicode escape sequences
+                    output.textContent = input.replace(/\\u([0-9a-fA-F]{4})/g, (match, hex) => String.fromCharCode(parseInt(hex, 16)));
+                }
+            } catch (e) {
+                output.textContent = '转换错误: ' + e.message;
+            }
         }
         
         // Markdown preview functions
