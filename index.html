@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V134.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V135.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2190,6 +2190,38 @@
                 .emoji-item:hover { background: rgba(0,255,245,0.2); transform: scale(1.2); }
                 .emoji-result { padding: 10px; background: rgba(236,72,153,0.1); border: 1px solid var(--accent-pink); border-radius: 8px; text-align: center; font-size: 1.5rem; }
             </style>
+            <!-- 进制转换器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔢 进制转换器</span></div>
+                <div class="base-tool">
+                    <div class="base-input">
+                        <input type="text" class="base-text" id="baseInput" placeholder="输入数字..." oninput="convertBase()">
+                    </div>
+                    <div class="base-results">
+                        <div class="base-result"><span class="base-label">10进制</span><span class="base-value" id="resDec">-</span></div>
+                        <div class="base-result"><span class="base-label">2进制</span><span class="base-value" id="resBin">-</span></div>
+                        <div class="base-result"><span class="base-label">16进制</span><span class="base-value" id="resHex">-</span></div>
+                        <div class="base-result"><span class="base-label">8进制</span><span class="base-value" id="resOct">-</span></div>
+                    </div>
+                    <div class="base-actions">
+                        <button class="base-btn" onclick="convertBase()">🔄 转换</button>
+                        <button class="base-btn" onclick="copyToClipboard(document.getElementById('resDec').textContent)">📋 10进制</button>
+                        <button class="base-btn" onclick="copyToClipboard(document.getElementById('resHex').textContent)">📋 16进制</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .base-tool { display: flex; flex-direction: column; gap: 10px; }
+                .base-input { display: flex; gap: 8px; }
+                .base-text { flex: 1; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
+                .base-results { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+                .base-result { display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 6px; }
+                .base-label { font-size: 0.7rem; font-weight: 600; color: var(--accent-cyan); min-width: 45px; }
+                .base-value { flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-primary); word-break: break-all; }
+                .base-actions { display: flex; gap: 6px; }
+                .base-btn { flex: 1; padding: 8px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; }
+                .base-btn:hover { opacity: 0.9; }
+            </style>
             <!-- 文本统计工具 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">📊 文本统计</span></div>
@@ -2321,7 +2353,7 @@
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V59.0</div><div class="milestone-desc">哈希计算器</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V60.0</div><div class="milestone-desc">随机数生成</div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V61.0</div><div class="milestone-desc">颜色代码转换</div></div></div>
-                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Emoji选择器</div></div></div></div>
+                    <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V63.0</div><div class="milestone-desc">Markdown预览</div></div></div><div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Emoji选择器</div></div></div></div></div><div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V65.0</div><div class="milestone-desc">进制转换器</div></div></div></div>
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">简繁体转换</div></div></div></div>
                     <div class="milestone-item current"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V64.0</div><div class="milestone-desc">Unicode工具</div></div></div></div>
                 </div>
@@ -2513,9 +2545,9 @@
                     <div class="changelog-item"><span class="changelog-ver">V67</span><span class="changelog-desc">心跳迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V66</span><span class="changelog-desc">定时迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">心跳迭代</span></div>
-                    <div class="changelog-item"><span class="changelog-ver">V64</span><span class="changelog-desc">持续迭代</span></div>
-                    <div class="changelog-item"><span class="changelog-ver">V64</span><span class="changelog-desc">Emoji选择器</span></div>
-                    <div class="changelog-item"><span class="changelog-ver">V64</span><span class="changelog-desc">持续迭代</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">持续迭代</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">Emoji选择器</span></div>
+                    <div class="changelog-item"><span class="changelog-ver">V65</span><span class="changelog-desc">持续迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V62</span><span class="changelog-desc">稳定迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V61</span><span class="changelog-desc">持续迭代</span></div>
                     <div class="changelog-item"><span class="changelog-ver">V60</span><span class="changelog-desc">里程碑版本</span></div>
@@ -4569,6 +4601,38 @@
         
         // Initialize emoji grid
         showEmojiCat('smileys');
+        
+        // Base converter functions
+        function convertBase() {
+            const input = document.getElementById('baseInput').value.trim();
+            if (!input) {
+                document.getElementById('resDec').textContent = '-';
+                document.getElementById('resBin').textContent = '-';
+                document.getElementById('resHex').textContent = '-';
+                document.getElementById('resOct').textContent = '-';
+                return;
+            }
+            // Try to detect base
+            let num = parseInt(input);
+            if (isNaN(num)) {
+                // Try hex
+                if (input.startsWith('0x') || input.startsWith('0X')) {
+                    num = parseInt(input, 16);
+                } else if (input.startsWith('0b') || input.startsWith('0B')) {
+                    num = parseInt(input, 2);
+                } else if (input.startsWith('0o') || input.startsWith('0O')) {
+                    num = parseInt(input, 8);
+                } else {
+                    num = parseInt(input, 10);
+                }
+            }
+            if (!isNaN(num)) {
+                document.getElementById('resDec').textContent = num.toString(10);
+                document.getElementById('resBin').textContent = '0b' + num.toString(2);
+                document.getElementById('resHex').textContent = '0x' + num.toString(16).toUpperCase();
+                document.getElementById('resOct').textContent = '0o' + num.toString(8);
+            }
+        }
         
         // Simplified/Traditional Chinese conversion
         let s2tMode = 'toTraditional';
