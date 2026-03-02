@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V141.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V142.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2421,6 +2421,26 @@
                 .ip-input { flex: 1; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; }
                 .ip-btn { padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
                 .ip-result { padding: 15px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.8rem; line-height: 1.6; min-height: 60px; }
+            </style>
+            <!-- ASCII码表 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔢 ASCII码表</span></div>
+                <div class="ascii-tool">
+                    <div class="ascii-grid" id="asciiGrid"></div>
+                    <div class="ascii-input-wrap">
+                        <input type="text" class="ascii-input" id="asciiInput" placeholder="输入字符或数字..." oninput="lookupAscii()">
+                    </div>
+                    <div class="ascii-result" id="asciiResult">输入字符查看ASCII码</div>
+                </div>
+            </div>
+            <style>
+                .ascii-tool { display: flex; flex-direction: column; gap: 10px; }
+                .ascii-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; max-height: 100px; overflow-y: auto; padding: 8px; background: var(--bg-secondary); border-radius: 8px; font-family: monospace; font-size: 0.7rem; }
+                .ascii-item { padding: 4px; text-align: center; cursor: pointer; border-radius: 3px; }
+                .ascii-item:hover { background: var(--accent-cyan); color: var(--bg-primary); }
+                .ascii-input-wrap { display: flex; gap: 8px; }
+                .ascii-input { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem; }
+                .ascii-result { padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; font-family: monospace; font-size: 0.8rem; }
             </style>
             <!-- 简繁体转换 -->
             <div class="card">
@@ -5066,6 +5086,34 @@
                 } else { result.textContent = '查询失败，请检查网络'; }
             }
         }
+        
+        // ASCII table functions
+        function initAsciiTable() {
+            const grid = document.getElementById('asciiGrid');
+            for (let i = 32; i < 127; i++) {
+                const span = document.createElement('span');
+                span.className = 'ascii-item';
+                span.textContent = String.fromCharCode(i) + ' ' + i;
+                span.onclick = () => {
+                    document.getElementById('asciiInput').value = String.fromCharCode(i);
+                    lookupAscii();
+                };
+                grid.appendChild(span);
+            }
+        }
+        function lookupAscii() {
+            const input = document.getElementById('asciiInput').value;
+            const result = document.getElementById('asciiResult');
+            if (!input) { result.textContent = '输入字符查看ASCII码'; return; }
+            const char = input[0];
+            const code = char.charCodeAt(0);
+            if (code <= 127) {
+                result.innerHTML = '字符: ' + char + '<br>十进制: ' + code + '<br>十六进制: ' + code.toString(16).toUpperCase() + '<br>八进制: ' + code.toString(8);
+            } else {
+                result.textContent = '字符超出ASCII范围(0-127)';
+            }
+        }
+        initAsciiTable();
         
         document.getElementById('cronInput').addEventListener('input', parseAndShowCron);
         parseAndShowCron();
