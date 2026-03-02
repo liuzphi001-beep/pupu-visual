@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V157.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V158.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2687,7 +2687,37 @@
                 .quote-author { font-size: 0.8rem; color: var(--text-secondary); }
             </style>
             
-<div class="card">
+
+            <div class="card">
+                <div class="card-header"><span class="card-title">📊 数据单位转换</span></div>
+                <div class="unitconv-tool">
+                    <div class="unitconv-row">
+                        <select class="unitconv-type" id="unitType" onchange="convertUnit()">
+                            <option value="data">数据大小</option>
+                            <option value="length">长度</option>
+                            <option value="weight">重量</option>
+                            <option value="temp">温度</option>
+                        </select>
+                    </div>
+                    <div class="unitconv-inputs">
+                        <input type="number" class="unit-input" id="unitInput" placeholder="输入数值" oninput="convertUnit()">
+                        <select class="unit-select" id="unitFrom" onchange="convertUnit()"></select>
+                        <span>→</span>
+                        <select class="unit-select" id="unitTo" onchange="convertUnit()"></select>
+                    </div>
+                    <div class="unitconv-result" id="unitResult">0 B</div>
+                </div>
+            </div>
+            <style>
+                .unitconv-tool { display: flex; flex-direction: column; gap: 10px; }
+                .unitconv-row { display: flex; gap: 8px; }
+                .unitconv-type { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); }
+                .unitconv-inputs { display: flex; align-items: center; gap: 8px; }
+                .unit-input { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); }
+                .unit-select { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); }
+                .unitconv-result { padding: 12px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; text-align: center; font-size: 1.1rem; color: var(--accent-green); font-weight: bold; }
+            </style>
+            <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V50.0</div><div class="milestone-desc">二维码生成器</div></div></div>
@@ -4919,6 +4949,46 @@
                 document.getElementById('unitResult').textContent = result.toFixed(4);
             }
         }
+        
+        // Unit Converter
+        const unitData = {
+            data: { B: 1, KB: 1024, MB: 1024*1024, GB: 1024*1024*1024, TB: 1024*1024*1024*1024 },
+            length: { mm: 1, cm: 10, m: 1000, km: 1000000, in: 25.4, ft: 304.8, yd: 914.4, mi: 1609344 },
+            weight: { mg: 1, g: 1000, kg: 1000000, t: 1000000000, oz: 28349.5, lb: 453592 },
+            temp: { C: 'C', F: 'F', K: 'K' }
+        };
+        function initUnits() {
+            const type = document.getElementById('unitType').value;
+            const from = document.getElementById('unitFrom'), to = document.getElementById('unitTo');
+            const units = Object.keys(unitData[type]);
+            from.innerHTML = units.map(u => '<option value="'+u+'">'+u+'</option>').join('');
+            to.innerHTML = units.map(u => '<option value="'+u+'">'+u+'</option>').join('');
+            if (units.length > 1) to.value = units[1];
+        }
+        document.getElementById('unitType').addEventListener('change', initUnits);
+        function convertUnit() {
+            const type = document.getElementById('unitType').value;
+            const val = parseFloat(document.getElementById('unitInput').value);
+            const from = document.getElementById('unitFrom').value;
+            const to = document.getElementById('unitTo').value;
+            const result = document.getElementById('unitResult');
+            if (isNaN(val)) { result.textContent = '-'; return; }
+            if (type === 'temp') {
+                let celsius;
+                if (from === 'C') celsius = val;
+                else if (from === 'F') celsius = (val-32)*5/9;
+                else celsius = val - 273.15;
+                let res;
+                if (to === 'C') res = celsius;
+                else if (to === 'F') res = celsius * 9/5 + 32;
+                else res = celsius + 273.15;
+                result.textContent = res.toFixed(2) + ' ' + to;
+            } else {
+                const base = val * unitData[type][from] / unitData[type][to];
+                result.textContent = base.toPrecision(6) + ' ' + to;
+            }
+        }
+        initUnits();
         
         // Color converter functions
         function convertColor() {
