@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V139.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V140.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2378,6 +2378,31 @@
                 .unicode-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
                 .unicode-btn:hover { border-color: var(--accent-red); }
                 .unicode-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
+            <!-- Cron表达式解析 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">⏰ Cron解析</span></div>
+                <div class="cron-parser-tool">
+                    <input type="text" class="cron-input" id="cronInput" placeholder="* * * * *" value="0 * * * *">
+                    <div class="cron-desc" id="cronDesc">每小时整点执行</div>
+                    <div class="cron-examples">
+                        <span class="cron-example" onclick="setCron('* * * * *')">每分钟</span>
+                        <span class="cron-example" onclick="setCron('0 * * * *')">每小时</span>
+                        <span class="cron-example" onclick="setCron('0 0 * * *')">每天</span>
+                        <span class="cron-example" onclick="setCron('0 0 * * 0')">每周</span>
+                        <span class="cron-example" onclick="setCron('0 0 1 * *')">每月</span>
+                    </div>
+                    <div class="cron-result" id="cronResult">下次执行: -</div>
+                </div>
+            </div>
+            <style>
+                .cron-parser-tool { display: flex; flex-direction: column; gap: 10px; }
+                .cron-input { width: 100%; padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 1rem; text-align: center; }
+                .cron-desc { padding: 10px; background: rgba(168,85,247,0.1); border: 1px solid var(--accent-purple); border-radius: 8px; text-align: center; font-size: 0.85rem; color: var(--accent-purple); }
+                .cron-examples { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+                .cron-example { padding: 6px 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
+                .cron-example:hover { border-color: var(--accent-purple); color: var(--accent-purple); }
+                .cron-result { padding: 10px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; text-align: center; font-size: 0.85rem; color: var(--accent-green); }
             </style>
             <!-- 简繁体转换 -->
             <div class="card">
@@ -4944,6 +4969,69 @@
                 output.textContent = '转换错误: ' + e.message;
             }
         }
+        
+        // Cron parser functions
+        function parseCron(cron) {
+            const parts = cron.trim().split(/\s+/);
+            if (parts.length !== 5) return '格式错误 (需要5个字段)';
+            
+            const [min, hour, day, month, dow] = parts;
+            let desc = '';
+            
+            if (min === '*' && hour === '*' && day === '*' && month === '*' && dow === '*') {
+                desc = '每分钟执行';
+            } else if (min !== '*' && hour === '*' && day === '*' && month === '*' && dow === '*') {
+                desc = `每小时第 ${min} 分钟执行`;
+            } else if (min !== '*' && hour !== '*' && day === '*' && month === '*' && dow === '*') {
+                desc = `每天 ${hour}:${min.padStart(2, '0')} 执行`;
+            } else if (min !== '*' && hour !== '*' && day !== '*' && month === '*' && dow === '*') {
+                desc = `每月 ${day} 日 ${hour}:${min.padStart(2, '0')} 执行`;
+            } else if (min !== '*' && hour !== '*' && day === '*' && month === '*' && dow !== '*') {
+                const dowNames = ['周日','周一','周二','周三','周四','周五','周六'];
+                desc = `每周 ${dowNames[dow] || dow} ${hour}:${min.padStart(2, '0')} 执行`;
+            } else {
+                desc = '自定义Cron表达式';
+            }
+            
+            return desc;
+        }
+        
+        function getNextCronRun(cron) {
+            const parts = cron.trim().split(/\s+/);
+            if (parts.length !== 5) return '无效的Cron表达式';
+            
+            const now = new Date();
+            let next = new Date(now);
+            next.setSeconds(0);
+            next.setMilliseconds(0);
+            
+            const [min, hour, day, month, dow] = parts;
+            
+            // Simple next run calculation
+            if (min !== '*') next.setMinutes(parseInt(min));
+            if (hour !== '*') next.setHours(parseInt(hour));
+            
+            if (next <= now) {
+                next.setMinutes(0);
+                next.setHours(next.getHours() + 1);
+            }
+            
+            return next.toLocaleString('zh-CN');
+        }
+        
+        function setCron(expr) {
+            document.getElementById('cronInput').value = expr;
+            parseAndShowCron();
+        }
+        
+        function parseAndShowCron() {
+            const cron = document.getElementById('cronInput').value;
+            document.getElementById('cronDesc').textContent = parseCron(cron);
+            document.getElementById('cronResult').textContent = '下次执行: ' + getNextCronRun(cron);
+        }
+        
+        document.getElementById('cronInput').addEventListener('input', parseAndShowCron);
+        parseAndShowCron();
         
         // Markdown preview functions
         function previewMd() {
