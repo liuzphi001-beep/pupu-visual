@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V142.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V143.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2441,6 +2441,34 @@
                 .ascii-input-wrap { display: flex; gap: 8px; }
                 .ascii-input { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem; }
                 .ascii-result { padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; font-family: monospace; font-size: 0.8rem; }
+            </style>
+            <!-- 键盘测试 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">⌨️ 键盘测试</span></div>
+                <div class="keyboard-test">
+                    <div class="kb-display" id="kbDisplay">按下键盘任意键...</div>
+                    <div class="kb-info">
+                        <div class="kb-item"><span class="kb-label">键码:</span><span class="kb-value" id="kbCode">-</span></div>
+                        <div class="kb-item"><span class="kb-label">键名:</span><span class="kb-value" id="kbKey">-</span></div>
+                        <div class="kb-item"><span class="kb-label">按键:</span><span class="kb-value" id="kbWhich">-</span></div>
+                    </div>
+                    <div class="kb-keys">
+                        <div class="kb-key" id="kbShift">Shift</div>
+                        <div class="kb-key" id="kbCtrl">Ctrl</div>
+                        <div class="kb-key" id="kbAlt">Alt</div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .keyboard-test { display: flex; flex-direction: column; gap: 10px; }
+                .kb-display { padding: 20px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; text-align: center; font-size: 1.2rem; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+                .kb-info { display: flex; gap: 10px; flex-wrap: wrap; }
+                .kb-item { flex: 1; min-width: 80px; padding: 8px; background: var(--bg-secondary); border-radius: 6px; display: flex; gap: 6px; font-size: 0.75rem; }
+                .kb-label { color: var(--text-secondary); }
+                .kb-value { color: var(--accent-cyan); font-family: monospace; }
+                .kb-keys { display: flex; gap: 8px; justify-content: center; }
+                .kb-key { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.75rem; color: var(--text-secondary); }
+                .kb-key.active { background: var(--accent-cyan); color: var(--bg-primary); border-color: var(--accent-cyan); }
             </style>
             <!-- 简繁体转换 -->
             <div class="card">
@@ -5086,6 +5114,17 @@
                 } else { result.textContent = '查询失败，请检查网络'; }
             }
         }
+        
+        // Keyboard Test
+        document.addEventListener('keydown', function(e) {
+            document.getElementById('kbDisplay').textContent = e.key || 'Unknown';
+            document.getElementById('kbCode').textContent = e.code || '-';
+            document.getElementById('kbKey').textContent = e.key || '-';
+            document.getElementById('kbWhich').textContent = e.which || '-';
+            document.getElementById('kbShift').classList.toggle('active', e.shiftKey);
+            document.getElementById('kbCtrl').classList.toggle('active', e.ctrlKey);
+            document.getElementById('kbAlt').classList.toggle('active', e.altKey);
+        });
         
         // ASCII table functions
         function initAsciiTable() {
