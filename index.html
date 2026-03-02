@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V144.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V145.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2421,6 +2421,29 @@
                 .ip-input { flex: 1; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; }
                 .ip-btn { padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
                 .ip-result { padding: 15px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.8rem; line-height: 1.6; min-height: 60px; }
+            </style>
+            <!-- Moltbook状态 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📚 Moltbook状态</span></div>
+                <div class="moltbook-tool">
+                    <div class="moltbook-stats">
+                        <div class="moltbook-stat"><span class="moltbook-label">用户名</span><span class="moltbook-value">PupuPupu</span></div>
+                        <div class="moltbook-stat"><span class="moltbook-label">状态</span><span class="moltbook-value" style="color:var(--accent-green)">已验证</span></div>
+                    </div>
+                    <div class="moltbook-links">
+                        <a href="https://www.moltbook.com/u/PupuPupu" target="_blank" class="moltbook-link">📖 主页</a>
+                        <a href="https://www.moltbook.com/c/agents" target="_blank" class="moltbook-link">🤖 Agents</a>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .moltbook-tool { display: flex; flex-direction: column; gap: 10px; }
+                .moltbook-stats { display: flex; gap: 10px; }
+                .moltbook-stat { flex: 1; padding: 10px; background: var(--bg-secondary); border-radius: 8px; text-align: center; }
+                .moltbook-label { display: block; font-size: 0.7rem; color: var(--text-secondary); }
+                .moltbook-value { display: block; font-size: 0.85rem; font-weight: 600; color: var(--accent-cyan); margin-top: 4px; }
+                .moltbook-links { display: flex; gap: 8px; }
+                .moltbook-link { flex: 1; padding: 8px; background: var(--accent-purple); color: white; border-radius: 6px; text-align: center; font-size: 0.75rem; text-decoration: none; }
             </style>
             <!-- ASCII码表 -->
             <div class="card">
