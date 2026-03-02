@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V152.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V153.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2583,6 +2583,33 @@
                 .s2t-btn:hover { border-color: var(--accent-green); }
                 .s2t-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
+            
+            <div class="card">
+                <div class="card-header"><span class="card-title">🍅 番茄钟</span></div>
+                <div class="pomodoro-tool">
+                    <div class="pomodoro-timer" id="pomodoroTimer">25:00</div>
+                    <div class="pomodoro-modes">
+                        <button class="pomo-btn active" onclick="setPomodoro(25)">工作</button>
+                        <button class="pomo-btn" onclick="setPomodoro(5)">短休</button>
+                        <button class="pomo-btn" onclick="setPomodoro(15)">长休</button>
+                    </div>
+                    <div class="pomodoro-controls">
+                        <button class="pomo-ctrl" onclick="startPomodoro()">▶ 开始</button>
+                        <button class="pomo-ctrl" onclick="pausePomodoro()">⏸ 暂停</button>
+                        <button class="pomo-ctrl reset" onclick="resetPomodoro()">↺ 重置</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .pomodoro-tool { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+                .pomodoro-timer { font-size: 3rem; font-weight: bold; color: var(--accent-red); font-family: monospace; }
+                .pomodoro-modes { display: flex; gap: 8px; }
+                .pomo-btn { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; cursor: pointer; font-size: 0.8rem; }
+                .pomo-btn.active { background: var(--accent-red); color: white; border-color: var(--accent-red); }
+                .pomodoro-controls { display: flex; gap: 8px; }
+                .pomo-ctrl { padding: 8px 16px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; }
+                .pomo-ctrl.reset { background: var(--bg-secondary); color: var(--text-primary); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -4741,6 +4768,42 @@
                 results.push(Math.floor(Math.random() * (max - min + 1)) + min);
             }
             document.getElementById('randResult').textContent = results.join(', ');
+        }
+        
+        // Pomodoro Timer
+        let pomodoroInterval = null;
+        let pomodoroTime = 25 * 60;
+        function setPomodoro(min) {
+            pomodoroTime = min * 60;
+            updatePomodoroDisplay();
+            document.querySelectorAll('.pomo-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        function updatePomodoroDisplay() {
+            const m = Math.floor(pomodoroTime / 60).toString().padStart(2, '0');
+            const s = (pomodoroTime % 60).toString().padStart(2, '0');
+            document.getElementById('pomodoroTimer').textContent = m + ':' + s;
+        }
+        function startPomodoro() {
+            if (pomodoroInterval) return;
+            pomodoroInterval = setInterval(() => {
+                pomodoroTime--;
+                updatePomodoroDisplay();
+                if (pomodoroTime <= 0) {
+                    clearInterval(pomodoroInterval);
+                    pomodoroInterval = null;
+                    alert('时间到！');
+                }
+            }, 1000);
+        }
+        function pausePomodoro() {
+            clearInterval(pomodoroInterval);
+            pomodoroInterval = null;
+        }
+        function resetPomodoro() {
+            pausePomodoro();
+            pomodoroTime = 25 * 60;
+            updatePomodoroDisplay();
         }
         
         // Color converter functions
