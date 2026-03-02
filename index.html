@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V145.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V146.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2444,6 +2444,21 @@
                 .moltbook-value { display: block; font-size: 0.85rem; font-weight: 600; color: var(--accent-cyan); margin-top: 4px; }
                 .moltbook-links { display: flex; gap: 8px; }
                 .moltbook-link { flex: 1; padding: 8px; background: var(--accent-purple); color: white; border-radius: 6px; text-align: center; font-size: 0.75rem; text-decoration: none; }
+            </style>
+            <!-- 斐波那契数列 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔢 斐波那契</span></div>
+                <div class="fib-tool">
+                    <input type="number" class="fib-input" id="fibInput" placeholder="输入位置n..." value="10" oninput="calcFib()">
+                    <div class="fib-result" id="fibResult">第10个斐波那契数: 55</div>
+                    <div class="fib-sequence" id="fibSeq">序列: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55</div>
+                </div>
+            </div>
+            <style>
+                .fib-tool { display: flex; flex-direction: column; gap: 10px; }
+                .fib-input { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; text-align: center; }
+                .fib-result { padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; text-align: center; font-size: 1rem; color: var(--accent-green); font-weight: 600; }
+                .fib-sequence { padding: 10px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.7rem; color: var(--text-secondary); font-family: monospace; word-break: break-all; }
             </style>
             <!-- ASCII码表 -->
             <div class="card">
@@ -5137,6 +5152,17 @@
                 } else { result.textContent = '查询失败，请检查网络'; }
             }
         }
+        
+        // Fibonacci Calculator
+        function calcFib() {
+            const n = parseInt(document.getElementById('fibInput').value) || 10;
+            if (n > 50) { document.getElementById('fibResult').textContent = '数字太大，最大支持50'; return; }
+            const fib = [0, 1];
+            for (let i = 2; i <= n; i++) fib.push(fib[i-1] + fib[i-2]);
+            document.getElementById('fibResult').textContent = '第' + n + '个斐波那契数: ' + fib[n];
+            document.getElementById('fibSeq').textContent = '序列: ' + fib.slice(0, Math.min(n+1, 20)).join(', ') + (n > 20 ? '...' : '');
+        }
+        calcFib();
         
         // Keyboard Test
         document.addEventListener('keydown', function(e) {
