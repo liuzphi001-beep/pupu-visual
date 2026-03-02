@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V165.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V166.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -3064,10 +3064,11 @@
                     <div class="tool-item" onclick="openTool('unit')"><span class="tool-icon">🔄</span><span class="tool-name">单位转换</span></div>
                     <div class="tool-item" onclick="openTool('char')"><span class="tool-icon">📝</span><span class="tool-name">字数统计</span></div>
                     <div class="tool-item" onclick="openTool('quote')"><span class="tool-icon">💬</span><span class="tool-name">每日一言</span></div>
+                    <div class="tool-item" onclick="openTool('days')"><span class="tool-icon">📅</span><span class="tool-name">纪念日</span></div>
                 </div>
             </div>
             <style>
-                .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+                .tools-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
                 .tool-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 8px; background: var(--bg-secondary); border-radius: 10px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
                 .tool-item:hover { border-color: var(--accent-purple); transform: translateY(-3px); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2); }
                 .tool-icon { font-size: 1.5rem; }
@@ -3422,7 +3423,8 @@
                 'color': '🎨 取色器已打开 - 请使用页面中的颜色选择器功能',
                 'unit': '🔄 单位转换器已打开 - 请使用页面中的单位转换器功能',
                 'char': '📝 字数统计已打开 - 请使用页面中的字数统计功能',
-                'quote': '💬 每日一言已打开 - 请查看页面中的每日一言'
+                'quote': '💬 每日一言已打开 - 请查看页面中的每日一言',
+                'days': '📅 纪念日已打开 - 请查看页面中的倒计时功能'
             };
             alert(toolMap[tool] || '未知工具');
         }
