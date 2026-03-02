@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V159.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V160.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2730,6 +2730,23 @@
                 .freq-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.85rem; resize: vertical; }
                 .freq-results { padding: 10px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.75rem; max-height: 100px; overflow-y: auto; }
             </style>
+            <!-- 打字速度测试 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">⌨️ 打字测速</span></div>
+                <div class="typetest-tool">
+                    <div class="typetest-text" id="typetestText">点击开始测试...</div>
+                    <textarea class="typetest-input" id="typetestInput" placeholder="请输入上方显示的文字..." disabled></textarea>
+                    <div class="typetest-result" id="typetestResult">速度: - 字/分钟</div>
+                    <button class="typetest-btn" onclick="startTypetest()">▶ 开始</button>
+                </div>
+            </div>
+            <style>
+                .typetest-tool { display: flex; flex-direction: column; gap: 8px; }
+                .typetest-text { padding: 10px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.9rem; text-align: center; min-height: 40px; }
+                .typetest-input { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); resize: none; font-size: 0.85rem; }
+                .typetest-result { padding: 8px; background: rgba(59,130,246,0.1); border-radius: 8px; text-align: center; font-size: 0.85rem; }
+                .typetest-btn { padding: 10px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -5011,7 +5028,27 @@
         }
         initUnits();
         
-        // Color converter functions
+
+        // Typing Speed Test
+        const typeTestTexts = ['你好世界', '这是一个测试', '打字速度测试', '加油加油', '努力工作中'];
+        let typeStartTime = null;
+        
+        function startTypetest() {
+            const text = typeTestTexts[Math.floor(Math.random() * typeTestTexts.length)];
+            document.getElementById('typetestText').textContent = text;
+            document.getElementById('typetestInput').value = '';
+            document.getElementById('typetestInput').disabled = false;
+            document.getElementById('typetestInput').focus();
+            typeStartTime = Date.now();
+            document.getElementById('typetestInput').oninput = function() {
+                if (this.value === text) {
+                    const time = (Date.now() - typeStartTime) / 1000 / 60;
+                    const wpm = Math.round(text.length / time);
+                    document.getElementById('typetestResult').textContent = '速度: ' + wpm + ' 字/分钟';
+                    this.disabled = true;
+                }
+            };
+        }        // Color converter functions
         function convertColor() {
             let input = document.getElementById('colorInput').value.trim();
             let color = input;
