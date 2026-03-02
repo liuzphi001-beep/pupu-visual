@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V162.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V163.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2598,9 +2598,11 @@
                         <button class="pomo-ctrl" onclick="pausePomodoro()">⏸ 暂停</button>
                         <button class="pomo-ctrl reset" onclick="resetPomodoro()">↺ 重置</button>
                     </div>
+                    <div class="pomodoro-counter">专注次数: <span id="pomoCount">0</span></div>
                 </div>
             </div>
             <style>
+                .pomodoro-counter { font-size: 0.8rem; color: var(--text-secondary); }
                 .pomodoro-tool { display: flex; flex-direction: column; align-items: center; gap: 12px; }
                 .pomodoro-timer { font-size: 3rem; font-weight: bold; color: var(--accent-red); font-family: monospace; }
                 .pomodoro-modes { display: flex; gap: 8px; }
@@ -4984,7 +4986,9 @@
                 if (pomodoroTime <= 0) {
                     clearInterval(pomodoroInterval);
                     pomodoroInterval = null;
-                    alert('时间到！');
+                    const cnt = document.getElementById('pomoCount');
+                    cnt.textContent = parseInt(cnt.textContent) + 1;
+                    alert('时间到！专注 +1');
                 }
             }, 1000);
         }
