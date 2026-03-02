@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V149.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V150.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -5349,7 +5349,17 @@
             }
         }
         
-        // Copy to clipboard
+        function calcBMI() {
+    const h = parseFloat(document.getElementById('bmiHeight').value);
+    const w = parseFloat(document.getElementById('bmiWeight').value);
+    const result = document.getElementById('bmiResult');
+    if (!h || !w) { result.textContent = '请输入身高和体重'; return; }
+    const bmi = w / ((h/100) ** 2);
+    let status = bmi < 18.5 ? '偏瘦' : bmi < 24 ? '正常' : bmi < 28 ? '偏胖' : '肥胖';
+    result.innerHTML = 'BMI: <span style="color:var(--accent-cyan)">' + bmi.toFixed(1) + '</span> (' + status + ')';
+}
+
+// Copy to clipboard
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert('已复制到剪贴板!');
