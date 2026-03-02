@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V155.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V156.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2638,6 +2638,41 @@
                 .unit-result { flex: 1; padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; color: var(--accent-cyan); text-align: center; font-weight: bold; }
                 .unit-labels { text-align: center; font-size: 0.8rem; color: var(--text-secondary); }
             </style>
+            
+            <div class="card">
+                <div class="card-header"><span class="card-title">🧮 计算器</span></div>
+                <div class="calc-tool">
+                    <input type="text" class="calc-display" id="calcDisplay" readonly>
+                    <div class="calc-btns">
+                        <button class="calc-btn" onclick="calcInput("7")">7</button>
+                        <button class="calc-btn" onclick="calcInput("8")">8</button>
+                        <button class="calc-btn" onclick="calcInput("9")">9</button>
+                        <button class="calc-btn op" onclick="calcInput("/")">/</button>
+                        <button class="calc-btn" onclick="calcInput("4")">4</button>
+                        <button class="calc-btn" onclick="calcInput("5")">5</button>
+                        <button class="calc-btn" onclick="calcInput("6")">6</button>
+                        <button class="calc-btn op" onclick="calcInput("*")">×</button>
+                        <button class="calc-btn" onclick="calcInput("1")">1</button>
+                        <button class="calc-btn" onclick="calcInput("2")">2</button>
+                        <button class="calc-btn" onclick="calcInput("3")">3</button>
+                        <button class="calc-btn op" onclick="calcInput("-")">-</button>
+                        <button class="calc-btn" onclick="calcInput("0")">0</button>
+                        <button class="calc-btn" onclick="calcInput(".")</button>
+                        <button class="calc-btn equal" onclick="calcEqual()">=</button>
+                        <button class="calc-btn op" onclick="calcInput("+")">+</button>
+                    </div>
+                    <button class="calc-clear" onclick="calcClear()">C 清除</button>
+                </div>
+            </div>
+            <style>
+                .calc-tool { display: flex; flex-direction: column; gap: 8px; }
+                .calc-display { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; text-align: right; font-size: 1.2rem; font-family: monospace; }
+                .calc-btns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+                .calc-btn { padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; font-size: 1rem; }
+                .calc-btn.op { background: var(--accent-cyan); color: var(--bg-primary); }
+                .calc-btn.equal { background: var(--accent-green); color: white; }
+                .calc-clear { padding: 10px; background: var(--accent-red); color: white; border: none; border-radius: 6px; cursor: pointer; }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -4833,6 +4868,17 @@
             pomodoroTime = 25 * 60;
             updatePomodoroDisplay();
         }
+        
+        // Calculator functions
+        function calcInput(val) {
+            document.getElementById('calcDisplay').value += val;
+        }
+        function calcEqual() {
+            try {
+                document.getElementById('calcDisplay').value = eval(document.getElementById('calcDisplay').value);
+            } catch { document.getElementById('calcDisplay').value = 'Error'; }
+        }
+        function calcClear() { document.getElementById('calcDisplay').value = ''; }
         
         // Unit Converter
         const unitConversions = {
