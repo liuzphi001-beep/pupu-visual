@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V168.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V169.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1877,6 +1877,64 @@
                 .pwd-btn { padding: 10px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
                 .pwd-btn:hover { opacity: 0.9; }
             </style>
+            <!-- JSON路径提取 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔍 JSON路径提取</span></div>
+                <div class="jsonpath-tool">
+                    <input type="text" class="jsonpath-input" id="jsonpathQuery" placeholder="输入JSON Path，如 $.store.book[*].author 或 $..price">
+                    <textarea class="jsonpath-json" id="jsonpathJson" placeholder='输入JSON，如 {"store":{"book":[{"author":"张三"}]}}'></textarea>
+                    <button class="jsonpath-btn" onclick="extractJsonPath()">🔍 提取</button>
+                    <div class="jsonpath-result" id="jsonpathResult">提取结果将显示在这里</div>
+                </div>
+            </div>
+            <style>
+                .jsonpath-tool { display: flex; flex-direction: column; gap: 8px; }
+                .jsonpath-input { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--accent-pink); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+                .jsonpath-json { width: 100%; min-height: 80px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; resize: vertical; }
+                .jsonpath-btn { padding: 10px; background: var(--accent-pink); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s; }
+                .jsonpath-btn:hover { opacity: 0.9; transform: scale(1.02); }
+                .jsonpath-result { min-height: 40px; padding: 10px; background: rgba(255,107,157,0.1); border: 1px solid var(--accent-pink); border-radius: 8px; color: var(--accent-pink); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; word-break: break-all; max-height: 100px; overflow-y: auto; }
+            </style>
+            <script>
+                function extractJsonPath() {
+                    const query = document.getElementById('jsonpathQuery').value.trim();
+                    const jsonStr = document.getElementById('jsonpathJson').value.trim();
+                    const resultEl = document.getElementById('jsonpathResult');
+                    if (!jsonStr) { resultEl.textContent = '请输入JSON内容'; return; }
+                    try {
+                        const json = JSON.parse(jsonStr);
+                        if (!query) { resultEl.textContent = JSON.stringify(json, null, 2); return; }
+                        // 简单实现：支持 $.key 和 $..key
+                        let result;
+                        if (query.startsWith('$..')) {
+                            const key = query.slice(2);
+                            result = findDeepValues(json, key);
+                        } else if (query.startsWith('$.')) {
+                            const keys = query.slice(2).split('.');
+                            result = json;
+                            for (const k of keys) {
+                                if (k.includes('[')) {
+                                    const [arrKey, idx] = k.replace(']', '').split('[');
+                                    if (arrKey) result = result?.[arrKey];
+                                    if (idx !== undefined) result = result?.[parseInt(idx)];
+                                } else {
+                                    result = result?.[k];
+                                }
+                            }
+                        } else {
+                            result = json[query];
+                        }
+                        resultEl.textContent = JSON.stringify(result, null, 2);
+                    } catch (e) { resultEl.textContent = '错误: ' + e.message; }
+                }
+                function findDeepValues(obj, key, results = []) {
+                    if (obj && typeof obj === 'object') {
+                        if (obj.hasOwnProperty(key)) results.push(obj[key]);
+                        Object.values(obj).forEach(v => findDeepValues(v, key, results));
+                    }
+                    return results;
+                }
+            </script>
             <!-- UUID生成器 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">🎲 UUID生成器</span></div>
