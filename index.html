@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V161.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V162.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2607,6 +2607,26 @@
                 .pomo-btn { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; cursor: pointer; font-size: 0.8rem; }
                 .pomo-btn.active { background: var(--accent-red); color: white; border-color: var(--accent-red); }
                 .pomodoro-controls { display: flex; gap: 8px; }
+            <div class="card">
+                <div class="card-header"><span class="card-title">⌨️ 打字速度测试</span></div>
+                <div class="typing-tool">
+                    <div class="typing-text" id="typingText">点击开始按钮开始测试</div>
+                    <textarea class="typing-input" id="typingInput" placeholder="请输入上方显示的文本..." oninput="checkTyping()"></textarea>
+                    <div class="typing-stats">
+                        <span>速度: <b id="typingSpeed">0</b> 字/分</span>
+                        <span>正确率: <b id="typingAccuracy">0</b>%</span>
+                    </div>
+                    <button class="typing-btn" onclick="startTypingTest()">🚀 开始测试</button>
+                </div>
+            </div>
+            <style>
+                .typing-tool { display: flex; flex-direction: column; gap: 10px; }
+                .typing-text { padding: 15px; background: var(--bg-secondary); border-radius: 8px; font-size: 1rem; line-height: 1.8; min-height: 60px; }
+                .typing-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; resize: none; }
+                .typing-stats { display: flex; gap: 20px; justify-content: center; font-size: 0.85rem; }
+                .typing-btn { padding: 10px; background: var(--accent-green); color: white; border: none; border-radius: 8px; cursor: pointer; }
+            </style>
+            
                 .pomo-ctrl { padding: 8px 16px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; }
                 .pomo-ctrl.reset { background: var(--bg-secondary); color: var(--text-primary); }
             </style>
@@ -4976,6 +4996,29 @@
             pausePomodoro();
             pomodoroTime = 25 * 60;
             updatePomodoroDisplay();
+        }
+        
+        // Typing Speed Test
+        const typingTexts = ['你好，我是噗噗，一个AI助手', '今天天气真不错，适合写代码', '保持专注，持续进步', '代码改变世界'];
+        let typingStartTime = null;
+        function startTypingTest() {
+            const text = typingTexts[Math.floor(Math.random() * typingTexts.length)];
+            document.getElementById('typingText').textContent = text;
+            document.getElementById('typingInput').value = '';
+            document.getElementById('typingInput').disabled = false;
+            document.getElementById('typingInput').focus();
+            typingStartTime = Date.now();
+        }
+        function checkTyping() {
+            const text = document.getElementById('typingText').textContent;
+            const input = document.getElementById('typingInput').value;
+            const elapsed = (Date.now() - typingStartTime) / 1000 / 60;
+            if (elapsed > 0) {
+                const wpm = Math.round(input.length / elapsed);
+                const accuracy = text.length > 0 ? Math.round((input.length / text.length) * 100) : 0;
+                document.getElementById('typingSpeed').textContent = wpm;
+                document.getElementById('typingAccuracy').textContent = Math.min(100, accuracy);
+            }
         }
         
         // Focus Timer
