@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V148.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V149.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1902,6 +1902,39 @@
                 .uuid-btns { display: flex; gap: 8px; }
                 .uuid-btn { flex: 1; padding: 8px; background: var(--accent-purple); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
                 .uuid-btn:hover { opacity: 0.9; transform: scale(1.02); }
+            </style>
+            <!-- 迷你计算器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🧮 迷你计算器</span></div>
+                <div class="mini-calc">
+                    <input type="text" class="calc-display" id="calcDisplay" readonly>
+                    <div class="calc-btns">
+                        <button class="calc-btn" onclick="calcInput('7')">7</button>
+                        <button class="calc-btn" onclick="calcInput('8')">8</button>
+                        <button class="calc-btn" onclick="calcInput('9')">9</button>
+                        <button class="calc-btn op" onclick="calcInput('/')">/</button>
+                        <button class="calc-btn" onclick="calcInput('4')">4</button>
+                        <button class="calc-btn" onclick="calcInput('5')">5</button>
+                        <button class="calc-btn" onclick="calcInput('6')">6</button>
+                        <button class="calc-btn op" onclick="calcInput('*')">*</button>
+                        <button class="calc-btn" onclick="calcInput('1')">1</button>
+                        <button class="calc-btn" onclick="calcInput('2')">2</button>
+                        <button class="calc-btn" onclick="calcInput('3')">3</button>
+                        <button class="calc-btn op" onclick="calcInput('-')">-</button>
+                        <button class="calc-btn" onclick="calcInput('0')">0</button>
+                        <button class="calc-btn" onclick="calcInput('.')">.</button>
+                        <button class="calc-btn equal" onclick="calcResult()">=</button>
+                        <button class="calc-btn op" onclick="calcInput('+')">+</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .mini-calc { display: flex; flex-direction: column; gap: 8px; }
+                .calc-display { width: 100%; padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; text-align: right; }
+                .calc-btns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+                .calc-btn { padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 1rem; cursor: pointer; }
+                .calc-btn.op { background: var(--accent-purple); color: white; border-color: var(--accent-purple); }
+                .calc-btn.equal { background: var(--accent-cyan); color: var(--bg-primary); border-color: var(--accent-cyan); }
             </style>
             <!-- Base64编码解码 -->
             <div class="card">
@@ -5297,6 +5330,23 @@
             while (result.length < 8) result = '0' + result;
             // Make it look like MD5 (32 chars)
             return (result + result + result + result).substring(0, 32);
+        }
+        
+        // Mini Calculator
+        let calcExpr = '';
+        function calcInput(val) {
+            calcExpr += val;
+            document.getElementById('calcDisplay').value = calcExpr;
+        }
+        function calcResult() {
+            try {
+                const result = eval(calcExpr);
+                document.getElementById('calcDisplay').value = result;
+                calcExpr = result.toString();
+            } catch(e) {
+                document.getElementById('calcDisplay').value = 'Error';
+                calcExpr = '';
+            }
         }
         
         // Copy to clipboard
