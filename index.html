@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V160.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V161.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2747,6 +2747,33 @@
                 .typetest-result { padding: 8px; background: rgba(59,130,246,0.1); border-radius: 8px; text-align: center; font-size: 0.85rem; }
                 .typetest-btn { padding: 10px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; }
             </style>
+            
+            <div class="card">
+                <div class="card-header"><span class="card-title">🎯 专注计时器</span></div>
+                <div class="focus-tool">
+                    <div class="focus-modes">
+                        <button class="focus-btn active" onclick="setFocusMode(25)">🍅 25分钟</button>
+                        <button class="focus-btn" onclick="setFocusMode(50)">⏰ 50分钟</button>
+                        <button class="focus-btn" onclick="setFocusMode(90)">🎯 90分钟</button>
+                    </div>
+                    <div class="focus-timer" id="focusTimer">25:00</div>
+                    <div class="focus-actions">
+                        <button class="focus-start" onclick="startFocus()">▶</button>
+                        <button class="focus-pause" onclick="pauseFocus()">⏸</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .focus-tool { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+                .focus-modes { display: flex; gap: 6px; }
+                .focus-btn { padding: 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; font-size: 0.75rem; cursor: pointer; }
+                .focus-btn.active { background: var(--accent-cyan); color: var(--bg-primary); }
+                .focus-timer { font-size: 2.5rem; font-weight: bold; color: var(--accent-cyan); }
+                .focus-actions { display: flex; gap: 10px; }
+                .focus-start, .focus-pause { width: 40px; height: 40px; border-radius: 50%; border: none; font-size: 1.2rem; cursor: pointer; }
+                .focus-start { background: var(--accent-green); }
+                .focus-pause { background: var(--accent-gold); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -4949,6 +4976,37 @@
             pausePomodoro();
             pomodoroTime = 25 * 60;
             updatePomodoroDisplay();
+        }
+        
+        // Focus Timer
+        let focusInterval = null;
+        let focusTime = 25 * 60;
+        function setFocusMode(min) {
+            focusTime = min * 60;
+            updateFocusDisplay();
+            document.querySelectorAll('.focus-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        function updateFocusDisplay() {
+            const m = Math.floor(focusTime / 60).toString().padStart(2, '0');
+            const s = (focusTime % 60).toString().padStart(2, '0');
+            document.getElementById('focusTimer').textContent = m + ':' + s;
+        }
+        function startFocus() {
+            if (focusInterval) return;
+            focusInterval = setInterval(() => {
+                focusTime--;
+                updateFocusDisplay();
+                if (focusTime <= 0) {
+                    clearInterval(focusInterval);
+                    focusInterval = null;
+                    alert('专注时间结束！');
+                }
+            }, 1000);
+        }
+        function pauseFocus() {
+            clearInterval(focusInterval);
+            focusInterval = null;
         }
         
         // Calculator functions
