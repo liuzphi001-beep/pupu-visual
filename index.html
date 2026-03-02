@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V156.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V157.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2673,7 +2673,21 @@
                 .calc-btn.equal { background: var(--accent-green); color: white; }
                 .calc-clear { padding: 10px; background: var(--accent-red); color: white; border: none; border-radius: 6px; cursor: pointer; }
             </style>
+            
             <div class="card">
+                <div class="card-header"><span class="card-title">💡 每日一句</span></div>
+                <div class="daily-quote" id="dailyQuote">
+                    <div class="quote-text">"代码是写给人看的，顺便能在机器上运行。"</div>
+                    <div class="quote-author">— Donald Knuth</div>
+                </div>
+            </div>
+            <style>
+                .daily-quote { text-align: center; padding: 15px; }
+                .quote-text { font-size: 1rem; font-style: italic; color: var(--accent-cyan); margin-bottom: 10px; }
+                .quote-author { font-size: 0.8rem; color: var(--text-secondary); }
+            </style>
+            
+<div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
                     <div class="milestone-item completed"><div class="milestone-dot"></div><div class="milestone-content"><div class="milestone-title">V50.0</div><div class="milestone-desc">二维码生成器</div></div></div>
