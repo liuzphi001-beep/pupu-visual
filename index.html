@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V166.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V167.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2819,6 +2819,14 @@
                 .toggle-label { font-size: 0.85rem; }
                 .focus-tips { font-size: 0.75rem; color: var(--text-secondary); text-align: center; }
             </style>
+            
+            <div class="card">
+                <div class="card-header"><span class="card-title">💡 每日提示</span></div>
+                <div class="daily-tip" id="dailyTip">加载中...</div>
+            </div>
+            <style>
+                .daily-tip { padding: 15px; background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(236,72,153,0.1)); border-radius: 8px; font-size: 0.9rem; line-height: 1.6; text-align: center; }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -5291,7 +5299,21 @@
             event.target.classList.add('active');
         }
         
-        // Initialize emoji grid
+        
+        // Daily Tips
+        const tips = [
+            '💕 记得定期备份重要数据哦！',
+            '🎯 设定目标，让每一天都有意义',
+            '🧠 学习新技能永远不晚',
+            '💪 保持好奇心，探索未知',
+            '⏰ 合理安排时间，高效工作',
+            '🌟 每一次尝试都是成长',
+            '🎨 创造力让生活更有趣',
+            '📚 阅读让视野更开阔'
+        ];
+        document.getElementById('dailyTip').textContent = tips[Math.floor(Math.random() * tips.length)];
+
+// Initialize emoji grid
         showEmojiCat('smileys');
         
         // Keyboard test
