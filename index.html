@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V153.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V154.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2610,6 +2610,34 @@
                 .pomo-ctrl { padding: 8px 16px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; }
                 .pomo-ctrl.reset { background: var(--bg-secondary); color: var(--text-primary); }
             </style>
+            
+            <div class="card">
+                <div class="card-header"><span class="card-title">📏 单位转换</span></div>
+                <div class="unit-tool">
+                    <select class="unit-select" id="unitType" onchange="convertUnit()">
+                        <option value="length">长度</option>
+                        <option value="weight">重量</option>
+                        <option value="temp">温度</option>
+                        <option value="data">数据</option>
+                    </select>
+="unit-inputs                    <div class">
+                        <input type="number" class="unit-input" id="unitInput" placeholder="输入数值" oninput="convertUnit()">
+                        <span id="unitFrom">→</span>
+                        <span class="unit-result" id="unitResult">0</span>
+                    </div>
+                    <div class="unit-labels">
+                        <span id="unitLabel1">米</span> = <span id="unitLabel2">英尺</span>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .unit-tool { display: flex; flex-direction: column; gap: 10px; }
+                .unit-select { padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); }
+                .unit-inputs { display: flex; align-items: center; gap: 10px; }
+                .unit-input { flex: 1; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); }
+                .unit-result { flex: 1; padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; color: var(--accent-cyan); text-align: center; font-weight: bold; }
+                .unit-labels { text-align: center; font-size: 0.8rem; color: var(--text-secondary); }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -4804,6 +4832,32 @@
             pausePomodoro();
             pomodoroTime = 25 * 60;
             updatePomodoroDisplay();
+        }
+        
+        // Unit Converter
+        const unitConversions = {
+            length: { units: ['米', '厘米', '毫米', '英尺', '英寸', '码'], factors: [1, 0.01, 0.001, 0.3048, 0.0254, 0.9144] },
+            weight: { units: ['千克', '克', '磅', '盎司'], factors: [1, 0.001, 0.453592, 0.0283495] },
+            data: { units: ['字节', 'KB', 'MB', 'GB', 'TB'], factors: [1, 1024, 1048576, 1073741824, 1099511627776] }
+        };
+        function convertUnit() {
+            const type = document.getElementById('unitType').value;
+            const input = parseFloat(document.getElementById('unitInput').value);
+            if (isNaN(input)) { document.getElementById('unitResult').textContent = '0'; return; }
+            
+            if (type === 'temp') {
+                const c = input;
+                document.getElementById('unitLabel1').textContent = '摄氏度';
+                document.getElementById('unitLabel2').textContent = '华氏度';
+                document.getElementById('unitResult').textContent = (c * 9/5 + 32).toFixed(2);
+            } else {
+                const conv = unitConversions[type];
+                const meters = input * conv.factors[0];
+                const result = meters / conv.factors[1];
+                document.getElementById('unitLabel1').textContent = conv.units[0];
+                document.getElementById('unitLabel2').textContent = conv.units[1];
+                document.getElementById('unitResult').textContent = result.toFixed(4);
+            }
         }
         
         // Color converter functions
