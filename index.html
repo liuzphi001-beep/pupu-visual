@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V164.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V165.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2796,6 +2796,29 @@
                 .focus-start { background: var(--accent-green); }
                 .focus-pause { background: var(--accent-gold); }
             </style>
+            
+            <div class="card">
+                <div class="card-header"><span class="card-title">🎯 专注模式</span></div>
+                <div class="focus-tool">
+                    <label class="focus-toggle">
+                        <input type="checkbox" id="focusMode" onchange="toggleFocusMode()">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">开启专注模式</span>
+                    </label>
+                    <div class="focus-tips" id="focusTips">专注模式可隐藏侧边栏，减少干扰</div>
+                </div>
+            </div>
+            <style>
+                .focus-tool { display: flex; flex-direction: column; gap: 10px; padding: 10px; }
+                .focus-toggle { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+                .focus-toggle input { display: none; }
+                .toggle-slider { width: 50px; height: 26px; background: var(--bg-secondary); border-radius: 13px; position: relative; transition: 0.3s; }
+                .toggle-slider:before { content: ""; position: absolute; width: 20px; height: 20px; background: var(--text-secondary); border-radius: 50%; top: 3px; left: 3px; transition: 0.3s; }
+                .focus-toggle input:checked + .toggle-slider { background: var(--accent-cyan); }
+                .focus-toggle input:checked + .toggle-slider:before { transform: translateX(24px); background: white; }
+                .toggle-label { font-size: 0.85rem; }
+                .focus-tips { font-size: 0.75rem; color: var(--text-secondary); text-align: center; }
+            </style>
             <div class="card">
                 <div class="card-header"><span class="card-title">📅 本周里程碑</span></div>
                 <div class="milestone-timeline">
@@ -5000,6 +5023,20 @@
             pausePomodoro();
             pomodoroTime = 25 * 60;
             updatePomodoroDisplay();
+        }
+        
+        // Focus Mode
+        function toggleFocusMode() {
+            const enabled = document.getElementById('focusMode').checked;
+            document.body.classList.toggle('focus-active', enabled);
+            document.getElementById('focusTips').textContent = enabled ? '专注模式已开启，侧边栏已隐藏' : '专注模式可隐藏侧边栏，减少干扰';
+            if (enabled) {
+                document.querySelectorAll('.sidebar, .left-panel').forEach(el => el.style.display = 'none');
+                document.querySelector('.main-content').style.marginLeft = '0';
+            } else {
+                document.querySelectorAll('.sidebar, .left-panel').forEach(el => el.style.display = '');
+                document.querySelector('.main-content').style.marginLeft = '';
+            }
         }
         
         // Typing Speed Test
