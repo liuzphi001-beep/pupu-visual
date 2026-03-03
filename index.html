@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V177.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V178.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2318,6 +2318,48 @@
                 .base64-btn:hover { border-color: var(--accent-cyan); }
                 .base64-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
+            <!-- 进制转换器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔢 进制转换器</span></div>
+                <div class="base-tool">
+                    <div class="base-row">
+                        <label>十进制</label>
+                        <input type="text" id="base10" placeholder="10" oninput="convertBase('10')">
+                    </div>
+                    <div class="base-row">
+                        <label>十六进制</label>
+                        <input type="text" id="base16" placeholder="FF" oninput="convertBase('16')">
+                    </div>
+                    <div class="base-row">
+                        <label>二进制</label>
+                        <input type="text" id="base2" placeholder="11111111" oninput="convertBase('2')">
+                    </div>
+                    <div class="base-row">
+                        <label>八进制</label>
+                        <input type="text" id="base8" placeholder="377" oninput="convertBase('8')">
+                    </div>
+                </div>
+            </div>
+            <style>
+                .base-tool { display: flex; flex-direction: column; gap: 8px; }
+                .base-row { display: flex; align-items: center; gap: 8px; }
+                .base-row label { width: 60px; font-size: 0.75rem; color: var(--text-secondary); }
+                .base-row input { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--accent-red); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+            </style>
+            <script>
+                function convertBase(from) {
+                    const v = document.getElementById('base' + from).value.trim();
+                    if (!v) return;
+                    try {
+                        let dec = parseInt(v, from === '10' ? 10 : from === '16' ? 16 : from === '2' ? 2 : 8);
+                        if (isNaN(dec)) return;
+                        if (from !== '10') document.getElementById('base10').value = dec;
+                        if (from !== '16') document.getElementById('base16').value = dec.toString(16).toUpperCase();
+                        if (from !== '2') document.getElementById('base2').value = dec.toString(2);
+                        if (from !== '8') document.getElementById('base8').value = dec.toString(8);
+                    } catch(e) {}
+                }
+            </script>
             <!-- URL编码解码 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">🔗 URL工具</span></div>
