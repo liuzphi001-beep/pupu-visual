@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V170.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V171.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2009,6 +2009,56 @@
                 function hslToRgb(h,s,l) { h/=360;s/=100;l/=100; let r,g,b; if(s===0){r=g=b=l;}else{const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;}; const q=l<0.5?l*(1+s):l+s-l*s; const p=2*l-q; r=hue2rgb(p,q,h+1/3); g=hue2rgb(p,q,h); b=hue2rgb(p,q,h-1/3);} return {r:Math.round(r*255),g:Math.round(g*255),b:Math.round(b*255)}; }
                 function randomColor() { const hex = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0'); document.getElementById('colorHex').value = hex; convertColor('hex'); }
                 function copyColor() { copyToClipboard(currentColor); showToast('已复制: ' + currentColor); }
+            </script>
+            <!-- Cron表达式解析 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">⏰ Cron解析器</span></div>
+                <div class="cron-tool">
+                    <input type="text" class="cron-input" id="cronInput" placeholder="输入Cron表达式，如 */5 * * * *" value="*/5 * * * *" oninput="parseCron()">
+                    <div class="cron-result" id="cronResult">点击解析</div>
+                    <div class="cron-presets">
+                        <button class="cron-preset" onclick="setCron('* * * * *')">每分钟</button>
+                        <button class="cron-preset" onclick="setCron('*/5 * * * *')">每5分钟</button>
+                        <button class="cron-preset" onclick="setCron('0 * * * *')">每小时</button>
+                        <button class="cron-preset" onclick="setCron('0 0 * * *')">每天0点</button>
+                        <button class="cron-preset" onclick="setCron('0 9 * * 1')">每周一9点</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .cron-tool { display: flex; flex-direction: column; gap: 10px; }
+                .cron-input { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--accent-gold); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+                .cron-result { min-height: 60px; padding: 10px; background: rgba(251,191,36,0.1); border: 1px solid var(--accent-gold); border-radius: 8px; color: var(--accent-gold); font-size: 0.8rem; line-height: 1.6; }
+                .cron-presets { display: flex; flex-wrap: wrap; gap: 6px; }
+                .cron-preset { padding: 6px 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
+                .cron-preset:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+            </style>
+            <script>
+                function setCron(expr) { document.getElementById('cronInput').value = expr; parseCron(); }
+                function parseCron() {
+                    const expr = document.getElementById('cronInput').value.trim();
+                    const parts = expr.split(/\s+/);
+                    const result = document.getElementById('cronResult');
+                    if (parts.length < 5) { result.textContent = '请输入5位Cron表达式'; return; }
+                    const [min, hour, day, month, dow] = parts;
+                    let desc = '📅 执行时间说明:\n';
+                    if (min === '*') desc += '• 每分钟\n';
+                    else if (min.startsWith('*/')) desc += `• 每${min.slice(2)}分钟\n`;
+                    else desc += `• 第${min}分钟\n`;
+                    if (hour === '*') desc += '• 每小时\n';
+                    else if (hour.startsWith('*/')) desc += `• 每${hour.slice(2)}小时\n`;
+                    else desc += `• ${hour}点\n`;
+                    if (day === '*') desc += '• 每天\n';
+                    else desc += `• 每月${day}日\n`;
+                    if (month === '*') desc += '• 每月\n';
+                    else desc += `• ${month}月\n`;
+                    const weekDays = ['周日','周一','周二','周三','周四','周五','周六'];
+                    if (dow === '*') desc += '• 每天\n';
+                    else if (dow.match(/^\d+$/)) desc += `• ${weekDays[parseInt(dow)]}\n`;
+                    else desc += `• 每周${dow}\n`;
+                    result.textContent = desc;
+                }
+                parseCron();
             </script>
             <!-- UUID生成器 -->
             <div class="card">

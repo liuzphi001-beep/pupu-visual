@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V170.0",
-    "version": "V170.0",
+    "title": "🐾 噗噗控制台 V171.0",
+    "version": "V171.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "⏰", "title": "V171.0 Cron解析器", "desc": "新增Cron表达式解析和说明" },
     { "icon": "🎨", "title": "V170.0 颜色转换器", "desc": "新增HEX/RGB/HSL颜色转换" },
     { "icon": "🔍", "title": "V169.0 JSON路径提取", "desc": "新增JSON路径提取工具" },
     { "icon": "📝", "title": "V128.0 字符串差异", "desc": "新增字符串差异比较工具" },
@@ -121,6 +122,7 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "⏰", "title": "V171.0 Cron解析器", "time": "刚刚", "type": "success" },
     { "icon": "🎨", "title": "V170.0 颜色转换器", "time": "刚刚", "type": "success" },
     { "icon": "🔍", "title": "V169.0 JSON路径提取", "time": "刚刚", "type": "success" },
     { "icon": "📝", "title": "V128.0 字符串差异", "time": "刚刚", "type": "success" },
@@ -149,6 +151,7 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
+    { "id": 1, "title": "⏰ V171.0 发布!", "content": "新增Cron表达式解析器", "time": "刚刚", "read": false },
     { "id": 1, "title": "🎨 V170.0 发布!", "content": "新增颜色转换器(HEX/RGB/HSL)", "time": "刚刚", "read": false },
     { "id": 1, "title": "🔍 V169.0 发布!", "content": "新增JSON路径提取工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "📝 V128.0 发布!", "content": "新增字符串差异比较工具", "time": "刚刚", "read": false },
