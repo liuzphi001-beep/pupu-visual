@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V183.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V184.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1845,6 +1845,39 @@
                     if (lines) text = text.split('\n').filter(l=>l.trim()).join('\n');
                     if (space) text = text.replace(/\s+/g, ' ');
                     document.getElementById('cleanOutput').textContent = text || '清理结果';
+                }
+            </script>
+            <!-- JSON转义 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔙 JSON转义</span></div>
+                <div class="json-escape-tool">
+                    <div class="json-escape-mode">
+                        <button class="json-escape-btn active" onclick="setJsonEscape('escape')">转义</button>
+                        <button class="json-escape-btn" onclick="setJsonEscape('unescape')">反转义</button>
+                    </div>
+                    <textarea class="json-escape-input" id="jsonEscapeInput" placeholder="输入内容..." oninput="processJsonEscape()"></textarea>
+                    <div class="json-escape-output" id="jsonEscapeOutput">结果</div>
+                </div>
+            </div>
+            <style>
+                .json-escape-tool { display: flex; flex-direction: column; gap: 8px; }
+                .json-escape-mode { display: flex; gap: 8px; }
+                .json-escape-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.8rem; }
+                .json-escape-btn.active { background: var(--accent-gold); color: var(--bg-primary); border-color: var(--accent-gold); }
+                .json-escape-input { width: 100%; min-height: 50px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .json-escape-output { min-height: 40px; padding: 10px; background: rgba(251,191,36,0.1); border: 1px solid var(--accent-gold); border-radius: 8px; color: var(--accent-gold); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; word-break: break-all; }
+            </style>
+            <script>
+                let jsonEscapeMode = 'escape';
+                function setJsonEscape(mode) { jsonEscapeMode = mode; document.querySelectorAll('.json-escape-btn').forEach((b,i)=>b.classList.toggle('active',i===(mode==='escape'?0:1))); processJsonEscape(); }
+                function processJsonEscape() {
+                    const input = document.getElementById('jsonEscapeInput').value;
+                    const output = document.getElementById('jsonEscapeOutput');
+                    if (!input) { output.textContent = '结果'; return; }
+                    try {
+                        if (jsonEscapeMode === 'escape') output.textContent = JSON.stringify(input);
+                        else output.textContent = JSON.parse('"'+input+'"');
+                    } catch(e) { output.textContent = '错误: ' + e.message; }
                 }
             </script>
             <div class="card">

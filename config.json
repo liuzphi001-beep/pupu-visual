@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V183.0",
-    "version": "V183.0",
+    "title": "🐾 噗噗控制台 V184.0",
+    "version": "V184.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "🔙", "title": "V184.0 JSON转义", "desc": "新增JSON字符串转义/反转义" },
     { "icon": "🧹", "title": "V183.0 文本清理", "desc": "新增去除空行和多余空格工具" },
     { "icon": "🔢", "title": "V182.0 添加行号", "desc": "新增文本添加行号工具" },
     { "icon": "📅", "title": "V181.0 日期计算", "desc": "新增日期天数差计算器" },
@@ -133,6 +134,7 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "🔙", "title": "V184.0 JSON转义", "time": "刚刚", "type": "success" },
     { "icon": "🧹", "title": "V183.0 文本清理", "time": "刚刚", "type": "success" },
     { "icon": "🔢", "title": "V182.0 添加行号", "time": "刚刚", "type": "success" },
     { "icon": "📅", "title": "V181.0 日期计算", "time": "刚刚", "type": "success" },
@@ -173,6 +175,7 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
+    { "id": 1, "title": "🔙 V184.0 发布!", "content": "新增JSON转义/反转义工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "🧹 V183.0 发布!", "content": "新增文本清理工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "🔢 V182.0 发布!", "content": "新增文本添加行号工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "📅 V181.0 发布!", "content": "新增日期天数差计算器", "time": "刚刚", "read": false },
