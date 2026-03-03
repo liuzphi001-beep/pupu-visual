@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V178.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V179.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2358,6 +2358,39 @@
                         if (from !== '2') document.getElementById('base2').value = dec.toString(2);
                         if (from !== '8') document.getElementById('base8').value = dec.toString(8);
                     } catch(e) {}
+                }
+            </script>
+            <!-- 文本排序器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📑 文本排序</span></div>
+                <div class="sort-tool">
+                    <textarea class="sort-input" id="sortInput" placeholder="每行一个文本条目" oninput="sortText()"></textarea>
+                    <div class="sort-options">
+                        <label><input type="checkbox" id="sortUnique"> 去重</label>
+                        <label><input type="checkbox" id="sortReverse"> 逆序</label>
+                    </div>
+                    <button class="sort-btn" onclick="sortText()">排序</button>
+                    <div class="sort-output" id="sortOutput">排序结果</div>
+                </div>
+            </div>
+            <style>
+                .sort-tool { display: flex; flex-direction: column; gap: 8px; }
+                .sort-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .sort-options { display: flex; gap: 12px; font-size: 0.8rem; }
+                .sort-options label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+                .sort-btn { padding: 8px; background: var(--accent-gold); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500; }
+                .sort-output { min-height: 40px; padding: 10px; background: rgba(251,191,36,0.1); border: 1px solid var(--accent-gold); border-radius: 8px; color: var(--accent-gold); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; white-space: pre-wrap; max-height: 100px; overflow-y: auto; }
+            </style>
+            <script>
+                function sortText() {
+                    const input = document.getElementById('sortInput').value;
+                    const unique = document.getElementById('sortUnique').checked;
+                    const reverse = document.getElementById('sortReverse').checked;
+                    let lines = input.split('\n').filter(l=>l.trim());
+                    if (unique) lines = [...new Set(lines)];
+                    if (reverse) lines.reverse();
+                    else lines.sort();
+                    document.getElementById('sortOutput').textContent = lines.join('\n') || '排序结果';
                 }
             </script>
             <!-- URL编码解码 -->

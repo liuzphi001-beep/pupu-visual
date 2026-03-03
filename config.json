@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V178.0",
-    "version": "V178.0",
+    "title": "🐾 噗噗控制台 V179.0",
+    "version": "V179.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "📑", "title": "V179.0 文本排序", "desc": "新增文本行排序工具" },
     { "icon": "🔢", "title": "V178.0 进制转换器", "desc": "新增十/二/八/十六进制转换" },
     { "icon": "📋", "title": "V177.0 CSV转JSON", "desc": "新增CSV转JSON数组工具" },
     { "icon": "📊", "title": "V176.0 JSON转CSV", "desc": "新增JSON数组转CSV工具" },
@@ -128,6 +129,7 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "📑", "title": "V179.0 文本排序", "time": "刚刚", "type": "success" },
     { "icon": "🔢", "title": "V178.0 进制转换器", "time": "刚刚", "type": "success" },
     { "icon": "📋", "title": "V177.0 CSV转JSON", "time": "刚刚", "type": "success" },
     { "icon": "📊", "title": "V176.0 JSON转CSV", "time": "刚刚", "type": "success" },
@@ -163,6 +165,7 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
+    { "id": 1, "title": "📑 V179.0 发布!", "content": "新增文本行排序工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "🔢 V178.0 发布!", "content": "新增进制转换器", "time": "刚刚", "read": false },
     { "id": 1, "title": "📋 V177.0 发布!", "content": "新增CSV转JSON数组工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "📊 V176.0 发布!", "content": "新增JSON数组转CSV工具", "time": "刚刚", "read": false },
