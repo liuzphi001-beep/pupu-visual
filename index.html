@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V171.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V172.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2033,6 +2033,35 @@
                 .cron-preset { padding: 6px 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
                 .cron-preset:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
             </style>
+            <script>
+                function setCron(expr) { document.getElementById('cronInput').value = expr; parseCron(); }
+            </script>
+            <!-- Unicode字符查看器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔤 Unicode字符</span></div>
+                <div class="unicode-tool">
+                    <input type="text" class="unicode-input" id="unicodeInput" placeholder="输入字符查看" oninput="inspectUnicode()">
+                    <div class="unicode-result" id="unicodeResult">输入字符查看详情</div>
+                </div>
+            </div>
+            <style>
+                .unicode-tool { display: flex; flex-direction: column; gap: 10px; }
+                .unicode-input { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--accent-green); font-size: 1.5rem; text-align: center; }
+                .unicode-result { min-height: 60px; padding: 10px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; color: var(--accent-green); font-size: 0.75rem; line-height: 1.6; font-family: 'JetBrains Mono', monospace; }
+            </style>
+            <script>
+                function inspectUnicode() {
+                    const input = document.getElementById('unicodeInput').value;
+                    const result = document.getElementById('unicodeResult');
+                    if (!input) { result.textContent = '输入字符查看详情'; return; }
+                    let output = '';
+                    for (const char of input) {
+                        const code = char.codePointAt(0);
+                        output += `字符: ${char}\nUnicode: U+${code.toString(16).toUpperCase().padStart(4,'0')}\n十进制: ${code}\nHTML: &#${code};\n---`;
+                    }
+                    result.textContent = output;
+                }
+            </script>
             <script>
                 function setCron(expr) { document.getElementById('cronInput').value = expr; parseCron(); }
                 function parseCron() {
