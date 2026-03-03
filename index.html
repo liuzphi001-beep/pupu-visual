@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V174.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V175.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1877,6 +1877,42 @@
                 .pwd-btn { padding: 10px; background: var(--accent-cyan); color: var(--bg-primary); border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
                 .pwd-btn:hover { opacity: 0.9; }
             </style>
+            <!-- 随机文本生成器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📄 随机文本</span></div>
+                <div class="lorem-tool">
+                    <div class="lorem-options">
+                        <label>段落: <input type="number" id="loremParagraphs" value="3" min="1" max="10" style="width:50px"></label>
+                        <label>每段句子: <input type="number" id="loremSentences" value="4" min="1" max="10" style="width:50px"></label>
+                    </div>
+                    <button class="lorem-btn" onclick="generateLorem()">生成</button>
+                    <div class="lorem-output" id="LoremOutput">点击生成随机文本</div>
+                </div>
+            </div>
+            <style>
+                .lorem-tool { display: flex; flex-direction: column; gap: 8px; }
+                .lorem-options { display: flex; gap: 12px; font-size: 0.8rem; }
+                .lorem-options label { display: flex; align-items: center; gap: 4px; }
+                .lorem-btn { padding: 8px; background: var(--accent-purple); color: white; border: none; border-radius: 6px; cursor: pointer; }
+                .lorem-output { min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.8rem; line-height: 1.6; }
+            </style>
+            <script>
+                const loremWords = ['lorem','ipsum','dolor','sit','amet','consectetur','adipiscing','elit','sed','do','eiusmod','tempor','incididunt','ut','labore','et','dolore','magna','aliqua','enim','ad','minim','veniam','quis','nostrud','exercitation','ullamco','laboris','nisi','aliquip','ex','ea','commodo','consequat','duis','aute','irure','in','reprehenderit','voluptate','velit','esse','cillum','fugiat','nulla','pariatur','excepteur','sint','occaecat','cupidatat','non','proident','sunt','culpa','qui','officia','deserunt','mollit','anim','id','est','laborum'];
+                const loremSentences = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit.','Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Ut enim ad minim veniam, quis nostrud exercitation ullamco.','Duis aute irure dolor in reprehenderit in voluptate velit esse.','Excepteur sint occaecat cupidatat non proident, sunt in culpa.'];
+                function generateLorem() {
+                    const paras = parseInt(document.getElementById('loremParagraphs').value) || 3;
+                    const sens = parseInt(document.getElementById('loremSentences').value) || 4;
+                    let output = '';
+                    for (let p=0; p<paras; p++) {
+                        let para = '';
+                        for (let s=0; s<sens; s++) {
+                            para += loremSentences[Math.floor(Math.random()*loremSentences.length)] + ' ';
+                        }
+                        output += para.trim() + '\n\n';
+                    }
+                    document.getElementById('LoremOutput').textContent = output.trim();
+                }
+            </script>
             <!-- JSON路径提取 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">🔍 JSON路径提取</span></div>
