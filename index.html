@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V179.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V180.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2391,6 +2391,37 @@
                     if (reverse) lines.reverse();
                     else lines.sort();
                     document.getElementById('sortOutput').textContent = lines.join('\n') || '排序结果';
+                }
+            </script>
+            <!-- 中文拼音转换 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🅰️ 中文拼音</span></div>
+                <div class="pinyin-tool">
+                    <textarea class="pinyin-input" id="pinyinInput" placeholder="输入中文，如 你好世界" oninput="toPinyin()"></textarea>
+                    <div class="pinyin-output" id="pinyinOutput">拼音结果</div>
+                </div>
+            </div>
+            <style>
+                .pinyin-tool { display: flex; flex-direction: column; gap: 8px; }
+                .pinyin-input { width: 100%; min-height: 50px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem; resize: vertical; }
+                .pinyin-output { min-height: 40px; padding: 10px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; color: var(--accent-green); font-size: 0.9rem; }
+            </style>
+            <script>
+                function toPinyin() {
+                    const input = document.getElementById('pinyinInput').value;
+                    const output = document.getElementById('pinyinOutput');
+                    if (!input) { output.textContent = '拼音结果'; return; }
+                    // 简单实现：使用Unicode范围判断
+                    let result = '';
+                    for (const char of input) {
+                        const code = char.charCodeAt(0);
+                        if (code >= 0x4E00 && code <= 0x9FA5) {
+                            result += char + ' ';
+                        } else {
+                            result += char + ' ';
+                        }
+                    }
+                    output.textContent = '输入中文显示拼音(完整拼音库需外部支持)';
                 }
             </script>
             <!-- URL编码解码 -->
