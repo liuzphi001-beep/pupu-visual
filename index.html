@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V184.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V185.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1878,6 +1878,38 @@
                         if (jsonEscapeMode === 'escape') output.textContent = JSON.stringify(input);
                         else output.textContent = JSON.parse('"'+input+'"');
                     } catch(e) { output.textContent = '错误: ' + e.message; }
+                }
+            </script>
+            <!-- 大小写转换 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">Aa 大小写转换</span></div>
+                <div class="case-tool">
+                    <textarea class="case-input" id="caseInput" placeholder="输入文本进行大小写转换" oninput="convertCase()"></textarea>
+                    <div class="case-btns">
+                        <button class="case-btn" onclick="toCase('upper')">大写</button>
+                        <button class="case-btn" onclick="toCase('lower')">小写</button>
+                        <button class="case-btn" onclick="toCase('title')">首字母大写</button>
+                    </div>
+                    <div class="case-output" id="caseOutput">转换结果</div>
+                </div>
+            </div>
+            <style>
+                .case-tool { display: flex; flex-direction: column; gap: 8px; }
+                .case-input { width: 100%; min-height: 50px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; resize: vertical; }
+                .case-btns { display: flex; gap: 8px; }
+                .case-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.8rem; }
+                .case-btn:hover { border-color: var(--accent-cyan); }
+                .case-output { min-height: 40px; padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+            </style>
+            <script>
+                function convertCase() { toCase('upper'); }
+                function toCase(type) {
+                    const input = document.getElementById('caseInput').value;
+                    const output = document.getElementById('caseOutput');
+                    if (!input) { output.textContent = '转换结果'; return; }
+                    if (type === 'upper') output.textContent = input.toUpperCase();
+                    else if (type === 'lower') output.textContent = input.toLowerCase();
+                    else if (type === 'title') output.textContent = input.replace(/\b\w/g, c => c.toUpperCase());
                 }
             </script>
             <div class="card">
