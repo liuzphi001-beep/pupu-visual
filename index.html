@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V180.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V181.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2422,6 +2422,40 @@
                         }
                     }
                     output.textContent = '输入中文显示拼音(完整拼音库需外部支持)';
+                }
+            </script>
+            <!-- 日期计算器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📅 日期计算</span></div>
+                <div class="datecalc-tool">
+                    <div class="datecalc-row">
+                        <label>开始日期</label>
+                        <input type="date" id="dateStart" onchange="calcDate()">
+                    </div>
+                    <div class="datecalc-row">
+                        <label>结束日期</label>
+                        <input type="date" id="dateEnd" onchange="calcDate()">
+                    </div>
+                    <div class="datecalc-result" id="dateCalcResult">选择日期计算天数差</div>
+                </div>
+            </div>
+            <style>
+                .datecalc-tool { display: flex; flex-direction: column; gap: 8px; }
+                .datecalc-row { display: flex; align-items: center; gap: 8px; }
+                .datecalc-row label { width: 60px; font-size: 0.75rem; color: var(--text-secondary); }
+                .datecalc-row input { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); }
+                .datecalc-result { padding: 10px; background: rgba(168,85,247,0.1); border: 1px solid var(--accent-purple); border-radius: 8px; color: var(--accent-purple); font-size: 0.85rem; text-align: center; }
+            </style>
+            <script>
+                function calcDate() {
+                    const start = document.getElementById('dateStart').value;
+                    const end = document.getElementById('dateEnd').value;
+                    const result = document.getElementById('dateCalcResult');
+                    if (!start || !end) { result.textContent = '选择日期计算天数差'; return; }
+                    const d1 = new Date(start), d2 = new Date(end);
+                    const diff = Math.abs(d2 - d1);
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    result.textContent = `相差 ${days} 天`;
                 }
             </script>
             <!-- URL编码解码 -->

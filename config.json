@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V180.0",
-    "version": "V180.0",
+    "title": "🐾 噗噗控制台 V181.0",
+    "version": "V181.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "📅", "title": "V181.0 日期计算", "desc": "新增日期天数差计算器" },
     { "icon": "🅰️", "title": "V180.0 中文拼音", "desc": "新增中文拼音转换占位" },
     { "icon": "📑", "title": "V179.0 文本排序", "desc": "新增文本行排序工具" },
     { "icon": "🔢", "title": "V178.0 进制转换器", "desc": "新增十/二/八/十六进制转换" },
@@ -130,6 +131,7 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "📅", "title": "V181.0 日期计算", "time": "刚刚", "type": "success" },
     { "icon": "🅰️", "title": "V180.0 中文拼音", "time": "刚刚", "type": "success" },
     { "icon": "📑", "title": "V179.0 文本排序", "time": "刚刚", "type": "success" },
     { "icon": "🔢", "title": "V178.0 进制转换器", "time": "刚刚", "type": "success" },
@@ -167,6 +169,7 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
+    { "id": 1, "title": "📅 V181.0 发布!", "content": "新增日期天数差计算器", "time": "刚刚", "read": false },
     { "id": 1, "title": "🅰️ V180.0 发布!", "content": "新增中文拼音转换占位", "time": "刚刚", "read": false },
     { "id": 1, "title": "📑 V179.0 发布!", "content": "新增文本行排序工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "🔢 V178.0 发布!", "content": "新增进制转换器", "time": "刚刚", "read": false },
