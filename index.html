@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V181.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V182.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2456,6 +2456,28 @@
                     const diff = Math.abs(d2 - d1);
                     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                     result.textContent = `相差 ${days} 天`;
+                }
+            </script>
+            <!-- 添加行号 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔢 添加行号</span></div>
+                <div class="linenum-tool">
+                    <textarea class="linenum-input" id="linenumInput" placeholder="输入文本添加行号" oninput="addLineNumbers()"></textarea>
+                    <div class="linenum-output" id="linenumOutput">输出带行号的文本</div>
+                </div>
+            </div>
+            <style>
+                .linenum-tool { display: flex; flex-direction: column; gap: 8px; }
+                .linenum-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .linenum-output { min-height: 60px; padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; white-space: pre; overflow: auto; max-height: 120px; }
+            </style>
+            <script>
+                function addLineNumbers() {
+                    const input = document.getElementById('linenumInput').value;
+                    const output = document.getElementById('linenumOutput');
+                    if (!input) { output.textContent = '输出带行号的文本'; return; }
+                    const lines = input.split('\n');
+                    output.textContent = lines.map((l,i)=>(i+1)+': '+l).join('\n');
                 }
             </script>
             <!-- URL编码解码 -->
