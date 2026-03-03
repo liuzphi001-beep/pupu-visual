@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V176.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V177.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2005,6 +2005,39 @@
                         Object.values(obj).forEach(v => findDeepValues(v, key, results));
                     }
                     return results;
+                }
+            </script>
+            <!-- CSV转JSON -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📋 CSV转JSON</span></div>
+                <div class="csv-json-tool">
+                    <textarea class="csv-json-input" id="csvJsonInput" placeholder="输入CSV，如 name,age&#10;张三,20&#10;李四,30" oninput="csvToJson()"></textarea>
+                    <div class="csv-json-output" id="csvJsonOutput">JSON输出</div>
+                </div>
+            </div>
+            <style>
+                .csv-json-tool { display: flex; flex-direction: column; gap: 8px; }
+                .csv-json-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--accent-purple); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; resize: vertical; }
+                .csv-json-output { min-height: 60px; padding: 10px; background: rgba(168,85,247,0.1); border: 1px solid var(--accent-purple); border-radius: 8px; color: var(--accent-purple); font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; white-space: pre; overflow: auto; max-height: 120px; }
+            </style>
+            <script>
+                function csvToJson() {
+                    const input = document.getElementById('csvJsonInput').value.trim();
+                    const output = document.getElementById('csvJsonOutput');
+                    if (!input) { output.textContent = 'JSON输出'; return; }
+                    try {
+                        const lines = input.split('\n').filter(l=>l.trim());
+                        if (lines.length < 2) { output.textContent = '需要表头+数据'; return; }
+                        const headers = lines[0].split(',').map(h=>h.trim());
+                        const result = [];
+                        for (let i=1; i<lines.length; i++) {
+                            const values = lines[i].split(',').map(v=>v.trim());
+                            const obj = {};
+                            headers.forEach((h,idx) => { obj[h] = values[idx] || ''; });
+                            result.push(obj);
+                        }
+                        output.textContent = JSON.stringify(result, null, 2);
+                    } catch(e) { output.textContent = '错误: ' + e.message; }
                 }
             </script>
             <!-- 颜色转换器 -->
