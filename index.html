@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V175.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V176.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1911,6 +1911,42 @@
                         output += para.trim() + '\n\n';
                     }
                     document.getElementById('LoremOutput').textContent = output.trim();
+                }
+            </script>
+            <!-- JSON转CSV -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">📊 JSON转CSV</span></div>
+                <div class="json-csv-tool">
+                    <textarea class="json-csv-input" id="jsonCsvInput" placeholder='输入JSON数组，如 [{"name":"张三","age":20},{"name":"李四","age":30}]' oninput="jsonToCsv()"></textarea>
+                    <div class="json-csv-output" id="jsonCsvOutput">CSV输出</div>
+                    <button class="json-csv-btn" onclick="copyToClipboard(document.getElementById('jsonCsvOutput').textContent)">复制CSV</button>
+                </div>
+            </div>
+            <style>
+                .json-csv-tool { display: flex; flex-direction: column; gap: 8px; }
+                .json-csv-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; resize: vertical; }
+                .json-csv-output { min-height: 40px; padding: 10px; background: rgba(34,197,94,0.1); border: 1px solid var(--accent-green); border-radius: 8px; color: var(--accent-green); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; white-space: pre; overflow-x: auto; }
+                .json-csv-btn { padding: 8px; background: var(--accent-green); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+            </style>
+            <script>
+                function jsonToCsv() {
+                    const input = document.getElementById('jsonCsvInput').value.trim();
+                    const output = document.getElementById('jsonCsvOutput');
+                    if (!input) { output.textContent = 'CSV输出'; return; }
+                    try {
+                        const data = JSON.parse(input);
+                        const arr = Array.isArray(data) ? data : [data];
+                        if (arr.length === 0) { output.textContent = '无数据'; return; }
+                        const keys = Object.keys(arr[0]);
+                        let csv = keys.join(',') + '\n';
+                        arr.forEach(row => {
+                            csv += keys.map(k => {
+                                const v = row[k] === undefined ? '' : String(row[k]);
+                                return v.includes(',') || v.includes('"') ? '"' + v.replace(/"/g,'""') + '"' : v;
+                            }).join(',') + '\n';
+                        });
+                        output.textContent = csv;
+                    } catch(e) { output.textContent = '错误: ' + e.message; }
                 }
             </script>
             <!-- JSON路径提取 -->

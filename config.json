@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V175.0",
-    "version": "V175.0",
+    "title": "🐾 噗噗控制台 V176.0",
+    "version": "V176.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,8 +57,8 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "📊", "title": "V176.0 JSON转CSV", "desc": "新增JSON数组转CSV工具" },
     { "icon": "📄", "title": "V175.0 随机文本", "desc": "新增Lorem Ipsum随机文本生成" },
-    { "icon": "🔓", "title": "V174.0 URL参数解析", "desc": "新增URL参数解析工具" },
     { "icon": "🏷️", "title": "V173.0 HTML实体", "desc": "新增HTML实体编码解码工具" },
     { "icon": "🔤", "title": "V172.0 Unicode字符", "desc": "新增Unicode字符查看器" },
     { "icon": "⏰", "title": "V171.0 Cron解析器", "desc": "新增Cron表达式解析和说明" },
@@ -126,8 +126,8 @@
     "networkTx": "12.4GB"
   },
   "activities": [
+    { "icon": "📊", "title": "V176.0 JSON转CSV", "time": "刚刚", "type": "success" },
     { "icon": "📄", "title": "V175.0 随机文本生成", "time": "刚刚", "type": "success" },
-    { "icon": "🔓", "title": "V174.0 URL参数解析", "time": "刚刚", "type": "success" },
     { "icon": "🏷️", "title": "V173.0 HTML实体编码", "time": "刚刚", "type": "success" },
     { "icon": "🔤", "title": "V172.0 Unicode字符查看器", "time": "刚刚", "type": "success" },
     { "icon": "⏰", "title": "V171.0 Cron解析器", "time": "刚刚", "type": "success" },
@@ -159,8 +159,8 @@
     { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
   ],
   "notifications": [
+    { "id": 1, "title": "📊 V176.0 发布!", "content": "新增JSON数组转CSV工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "📄 V175.0 发布!", "content": "新增Lorem Ipsum随机文本生成", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🔓 V174.0 发布!", "content": "新增URL参数解析工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "🏷️ V173.0 发布!", "content": "新增HTML实体编码解码工具", "time": "刚刚", "read": false },
     { "id": 1, "title": "🔤 V172.0 发布!", "content": "新增Unicode字符查看器", "time": "刚刚", "read": false },
     { "id": 1, "title": "⏰ V171.0 发布!", "content": "新增Cron表达式解析器", "time": "刚刚", "read": false },
