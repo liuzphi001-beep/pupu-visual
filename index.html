@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V173.0 - Pupu Dashboard</title>
+    <title>🐾 噗噗控制台 V174.0 - Pupu Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2242,6 +2242,35 @@
                 .url-btn:hover { border-color: var(--accent-gold); }
                 .url-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
+            <!-- URL参数解析 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔓 URL参数解析</span></div>
+                <div class="url-params-tool">
+                    <input type="text" class="url-params-input" id="urlParamsInput" placeholder="输入URL" oninput="parseUrlParams()">
+                    <div class="url-params-output" id="urlParamsOutput">解析结果</div>
+                </div>
+            </div>
+            <style>
+                .url-params-tool { display: flex; flex-direction: column; gap: 10px; }
+                .url-params-input { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+                .url-params-output { min-height: 60px; padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; color: var(--accent-cyan); font-size: 0.75rem; line-height: 1.6; font-family: 'JetBrains Mono', monospace; }
+            </style>
+            <script>
+                function parseUrlParams() {
+                    const input = document.getElementById('urlParamsInput').value.trim();
+                    const output = document.getElementById('urlParamsOutput');
+                    if (!input) { output.textContent = '解析结果'; return; }
+                    try {
+                        let url = input.startsWith('http') ? input : 'https://' + input;
+                        const u = new URL(url);
+                        const params = new URLSearchParams(u.search);
+                        if (params.size === 0) { output.textContent = '无查询参数'; return; }
+                        let result = `URL: ${u.origin}${u.pathname}\n参数: ${params.size}个\n\n`;
+                        params.forEach((v,k) => { result += k + ' = ' + v + '\n'; });
+                        output.textContent = result;
+                    } catch(e) { output.textContent = '无效URL'; }
+                }
+            </script>
             <!-- JSON格式化 -->
             <div class="card">
                 <div class="card-header"><span class="card-title">📋 JSON工具</span></div>
