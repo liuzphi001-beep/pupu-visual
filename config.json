@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V202.0",
-    "version": "V202.0",
+    "title": "🐾 噗噗控制台 V203.0",
+    "version": "V203.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -41,10 +41,10 @@
     { "icon": "📚", "name": "文档", "url": "https://docs.openclaw.ai" }
   ],
   "connections": [
-    { "icon": "💬", "name": "Telegram", "status": "offline", "detail": "代理未配置", "lastChecked": "2026-02-27 05:47 UTC" },
-    { "icon": "📱", "name": "企业微信", "status": "online", "detail": "正常运行", "lastChecked": "2026-02-27 05:47 UTC" },
-    { "icon": "🐙", "name": "GitHub", "status": "online", "detail": "正常运行", "lastChecked": "2026-02-27 05:47 UTC" },
-    { "icon": "☁️", "name": "飞书", "status": "online", "detail": "正常运行", "lastChecked": "2026-02-27 05:47 UTC" }
+    { "icon": "💬", "name": "Telegram", "status": "online", "detail": "正常运行", "lastChecked": "2026-03-05 02:03 UTC" },
+    { "icon": "📱", "name": "企业微信", "status": "online", "detail": "正常运行", "lastChecked": "2026-03-05 02:03 UTC" },
+    { "icon": "🐙", "name": "GitHub", "status": "online", "detail": "正常运行", "lastChecked": "2026-03-05 02:03 UTC" },
+    { "icon": "☁️", "name": "飞书", "status": "online", "detail": "正常运行", "lastChecked": "2026-03-05 02:03 UTC" }
   ],
   "cronTasks": [
     { "name": "页面迭代汇报", "schedule": "每2小时", "status": "运行中", "next": "2小时后", "last": "刚刚" },
@@ -57,6 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "🔗", "title": "V203.0 连接状态", "desc": "更新Telegram等连接状态为最新" },
     { "icon": "🔄", "title": "V202.0 状态同步", "desc": "在线用户数同步更新" },
     { "icon": "🎉", "title": "V200.0 里程碑", "desc": "看板持续迭代200个版本" },
     { "icon": "Aa", "title": "V185.0 大小写转换", "desc": "新增大写/小写/首字母大写转换" },
