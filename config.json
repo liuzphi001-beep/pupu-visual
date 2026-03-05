@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V201.0",
-    "version": "V201.0",
+    "title": "🐾 噗噗控制台 V202.0",
+    "version": "V202.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -52,13 +52,13 @@
     { "name": "每日反思日报", "schedule": "23:50", "status": "就绪", "next": "4小时后", "last": "20小时前" }
   ],
   "network": {
-    "onlineUsers": 225,
+    "onlineUsers": 231,
     "connectionStatus": "excellent",
     "apiLatency": 12
   },
   "highlights": [
+    { "icon": "🔄", "title": "V202.0 状态同步", "desc": "在线用户数同步更新" },
     { "icon": "🎉", "title": "V200.0 里程碑", "desc": "看板持续迭代200个版本" },
-    { "icon": "🔧", "title": "V201.0 维护更新", "desc": "例行检查与优化" },
     { "icon": "Aa", "title": "V185.0 大小写转换", "desc": "新增大写/小写/首字母大写转换" },
     { "icon": "🔙", "title": "V184.0 JSON转义", "desc": "新增JSON字符串转义/反转义" },
     { "icon": "🧹", "title": "V183.0 文本清理", "desc": "新增去除空行和多余空格工具" },
