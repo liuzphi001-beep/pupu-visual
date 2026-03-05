@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 噗噗控制台 V206.0 - Pupu Dashboard</title></title>
+    <title>🐾 噗噗控制台 V207.0 - Pupu Dashboard</title></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2741,6 +2741,37 @@
                 .diff-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.75rem; transition: all 0.2s; }
                 .diff-btn:hover { border-color: #3b82f6; }
                 .diff-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+            </style>
+            <!-- 正则表达式测试器 -->
+            <div class="card">
+                <div class="card-header"><span class="card-title">🔍 正则测试器</span></div>
+                <div class="regex-tool">
+                    <input type="text" class="regex-pattern" id="regexPattern" placeholder="输入正则表达式..." oninput="testRegex()">
+                    <div class="regex-flags">
+                        <label><input type="checkbox" id="regexG" checked onchange="testRegex()"> 全局(g)</label>
+                        <label><input type="checkbox" id="regexI" onchange="testRegex()"> 忽略大小写(i)</label>
+                        <label><input type="checkbox" id="regexM" onchange="testRegex()"> 多行(m)</label>
+                    </div>
+                    <textarea class="regex-input" id="regexInput" placeholder="输入测试文本..." oninput="testRegex()"></textarea>
+                    <div class="regex-result" id="regexResult">匹配结果将显示在这里</div>
+                    <div class="regex-actions">
+                        <button class="regex-btn" onclick="testRegex()">🔄 测试</button>
+                        <button class="regex-btn" onclick="copyToClipboard(document.getElementById('regexResult').textContent)">📋 复制</button>
+                        <button class="regex-btn clear" onclick="document.getElementById('regexPattern').value='';document.getElementById('regexInput').value='';clearRegex()">🗑️ 清除</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .regex-tool { display: flex; flex-direction: column; gap: 10px; }
+                .regex-pattern { width: 100%; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+                .regex-flags { display: flex; gap: 12px; font-size: 0.75rem; }
+                .regex-flags label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+                .regex-input { width: 100%; min-height: 60px; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: vertical; }
+                .regex-result { min-height: 40px; padding: 10px; background: rgba(0,255,245,0.1); border: 1px solid var(--accent-cyan); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-primary); word-break: break-all; max-height: 120px; overflow-y: auto; }
+                .regex-actions { display: flex; gap: 6px; }
+                .regex-btn { flex: 1; padding: 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 0.7rem; transition: all 0.2s; }
+                .regex-btn:hover { border-color: var(--accent-cyan); }
+                .regex-btn.clear { background: rgba(239,68,68,0.2); color: var(--accent-red); }
             </style>
             <!-- 随机数生成器 -->
             <div class="card">
@@ -5629,6 +5660,51 @@
             document.getElementById('diffText1').value = '';
             document.getElementById('diffText2').value = '';
             document.getElementById('diffResult').textContent = '差异结果将显示在这里';
+        }
+        
+        // Regex tester functions
+        function testRegex() {
+            const pattern = document.getElementById('regexPattern').value;
+            const text = document.getElementById('regexInput').value;
+            const result = document.getElementById('regexResult');
+            
+            if (!pattern) {
+                result.textContent = '请输入正则表达式';
+                result.style.color = 'var(--text-secondary)';
+                return;
+            }
+            
+            if (!text) {
+                result.textContent = '请输入测试文本';
+                result.style.color = 'var(--text-secondary)';
+                return;
+            }
+            
+            try {
+                let flags = '';
+                if (document.getElementById('regexG').checked) flags += 'g';
+                if (document.getElementById('regexI').checked) flags += 'i';
+                if (document.getElementById('regexM').checked) flags += 'm';
+                
+                const regex = new RegExp(pattern, flags);
+                const matches = text.match(regex);
+                
+                if (matches) {
+                    result.innerHTML = `✅ 匹配 ${matches.length} 个结果:\n` + matches.join('\n');
+                    result.style.color = 'var(--accent-green)';
+                } else {
+                    result.textContent = '❌ 无匹配';
+                    result.style.color = 'var(--accent-red)';
+                }
+            } catch (e) {
+                result.textContent = '⚠️ 正则表达式错误: ' + e.message;
+                result.style.color = 'var(--accent-red)';
+            }
+        }
+        
+        function clearRegex() {
+            document.getElementById('regexResult').textContent = '匹配结果将显示在这里';
+            document.getElementById('regexResult').style.color = 'var(--text-primary)';
         }
         
         // Random number generator functions
