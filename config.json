@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V210.0",
-    "version": "V211.0",
+    "version": "V212.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,7 +57,7 @@
     "apiLatency": 12
   },
   "highlights": [
-    { "icon": "📋", "title": "V211.0 看板优化", "desc": "新增JSON Schema验证工具" },
+    { "icon": "📋", "title": "V212.0 看板优化", "desc": "新增JSON Schema验证工具" },
     { "icon": "🔍", "title": "V210.0 正则测试器", "desc": "新增正则表达式测试工具(支持g/i/m标志)" },
     { "icon": "🔑", "title": "V210.0 HMAC生成器", "desc": "新增HMAC-SHA256/SHA1/MD5生成工具" },
     { "icon": "🔗", "title": "V210.0 连接状态", "desc": "更新Telegram等连接状态为最新" },
