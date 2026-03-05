@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V207.0",
-    "version": "V207.0",
+    "title": "🐾 噗噗控制台 V208.0",
+    "version": "V208.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -57,9 +57,9 @@
     "apiLatency": 12
   },
   "highlights": [
-    { "icon": "🔍", "title": "V207.0 正则测试器", "desc": "新增正则表达式测试工具(支持g/i/m标志)" },
-    { "icon": "🔑", "title": "V207.0 HMAC生成器", "desc": "新增HMAC-SHA256/SHA1/MD5生成工具" },
-    { "icon": "🔗", "title": "V207.0 连接状态", "desc": "更新Telegram等连接状态为最新" },
+    { "icon": "🔍", "title": "V208.0 正则测试器", "desc": "新增正则表达式测试工具(支持g/i/m标志)" },
+    { "icon": "🔑", "title": "V208.0 HMAC生成器", "desc": "新增HMAC-SHA256/SHA1/MD5生成工具" },
+    { "icon": "🔗", "title": "V208.0 连接状态", "desc": "更新Telegram等连接状态为最新" },
     { "icon": "🔄", "title": "V202.0 状态同步", "desc": "在线用户数同步更新" },
     { "icon": "🎉", "title": "V200.0 里程碑", "desc": "看板持续迭代200个版本" },
     { "icon": "Aa", "title": "V185.0 大小写转换", "desc": "新增大写/小写/首字母大写转换" },
