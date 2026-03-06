@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V210.0",
-    "version": "V213.0",
+    "version": "V214.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -12,44 +12,167 @@
     "timezoneOffset": "+8"
   },
   "skills": [
-    { "icon": "📝", "name": "update-docs" },
-    { "icon": "📧", "name": "send-email" },
-    { "icon": "🎨", "name": "frontend-design" },
-    { "icon": "🔎", "name": "code-reviewer" },
-    { "icon": "🔀", "name": "pr-creator" },
-    { "icon": "🔧", "name": "fix" },
-    { "icon": "🛠️", "name": "code" },
-    { "icon": "🗄️", "name": "database-operations" },
-    { "icon": "🚀", "name": "deploy-agent" },
-    { "icon": "🐳", "name": "docker-compose" },
-    { "icon": "📦", "name": "docker-essentials" },
-    { "icon": "🔍", "name": "find-skills" },
-    { "icon": "🎭", "name": "frontend-code-review" },
-    { "icon": "📊", "name": "github-repo-stats" },
-    { "icon": "🤖", "name": "minimax-mcp" },
-    { "icon": "🚂", "name": "railway-deploy" },
-    { "icon": "▲", "name": "vercel-deploy" },
-    { "icon": "☁️", "name": "aws" },
-    { "icon": "⚡", "name": "cache-components" }
+    {
+      "icon": "📝",
+      "name": "update-docs"
+    },
+    {
+      "icon": "📧",
+      "name": "send-email"
+    },
+    {
+      "icon": "🎨",
+      "name": "frontend-design"
+    },
+    {
+      "icon": "🔎",
+      "name": "code-reviewer"
+    },
+    {
+      "icon": "🔀",
+      "name": "pr-creator"
+    },
+    {
+      "icon": "🔧",
+      "name": "fix"
+    },
+    {
+      "icon": "🛠️",
+      "name": "code"
+    },
+    {
+      "icon": "🗄️",
+      "name": "database-operations"
+    },
+    {
+      "icon": "🚀",
+      "name": "deploy-agent"
+    },
+    {
+      "icon": "🐳",
+      "name": "docker-compose"
+    },
+    {
+      "icon": "📦",
+      "name": "docker-essentials"
+    },
+    {
+      "icon": "🔍",
+      "name": "find-skills"
+    },
+    {
+      "icon": "🎭",
+      "name": "frontend-code-review"
+    },
+    {
+      "icon": "📊",
+      "name": "github-repo-stats"
+    },
+    {
+      "icon": "🤖",
+      "name": "minimax-mcp"
+    },
+    {
+      "icon": "🚂",
+      "name": "railway-deploy"
+    },
+    {
+      "icon": "▲",
+      "name": "vercel-deploy"
+    },
+    {
+      "icon": "☁️",
+      "name": "aws"
+    },
+    {
+      "icon": "⚡",
+      "name": "cache-components"
+    }
   ],
   "quickLinks": [
-    { "icon": "🌐", "name": "看板预览", "url": "/" },
-    { "icon": "🐙", "name": "GitHub", "url": "https://github.com" },
-    { "icon": "📖", "name": "Moltbook", "url": "https://www.moltbook.com" },
-    { "icon": "💬", "name": "Discord", "url": "https://discord.com/invite/clawd" },
-    { "icon": "🛠️", "name": "技能市场", "url": "https://clawhub.com" },
-    { "icon": "📚", "name": "文档", "url": "https://docs.openclaw.ai" }
+    {
+      "icon": "🌐",
+      "name": "看板预览",
+      "url": "/"
+    },
+    {
+      "icon": "🐙",
+      "name": "GitHub",
+      "url": "https://github.com"
+    },
+    {
+      "icon": "📖",
+      "name": "Moltbook",
+      "url": "https://www.moltbook.com"
+    },
+    {
+      "icon": "💬",
+      "name": "Discord",
+      "url": "https://discord.com/invite/clawd"
+    },
+    {
+      "icon": "🛠️",
+      "name": "技能市场",
+      "url": "https://clawhub.com"
+    },
+    {
+      "icon": "📚",
+      "name": "文档",
+      "url": "https://docs.openclaw.ai"
+    }
   ],
   "connections": [
-    { "icon": "💬", "name": "Telegram", "status": "online", "detail": "正常运行", "lastChecked": "2026-03-05 02:03 UTC" },
-    { "icon": "📱", "name": "企业微信", "status": "online", "detail": "正常运行", "lastChecked": "2026-03-05 02:03 UTC" },
-    { "icon": "🐙", "name": "GitHub", "status": "online", "detail": "正常运行", "lastChecked": "2026-03-05 02:03 UTC" },
-    { "icon": "☁️", "name": "飞书", "status": "online", "detail": "正常运行", "lastChecked": "2026-03-05 02:03 UTC" }
+    {
+      "icon": "💬",
+      "name": "Telegram",
+      "status": "online",
+      "detail": "正常运行",
+      "lastChecked": "2026-03-05 02:03 UTC"
+    },
+    {
+      "icon": "📱",
+      "name": "企业微信",
+      "status": "online",
+      "detail": "正常运行",
+      "lastChecked": "2026-03-05 02:03 UTC"
+    },
+    {
+      "icon": "🐙",
+      "name": "GitHub",
+      "status": "online",
+      "detail": "正常运行",
+      "lastChecked": "2026-03-05 02:03 UTC"
+    },
+    {
+      "icon": "☁️",
+      "name": "飞书",
+      "status": "online",
+      "detail": "正常运行",
+      "lastChecked": "2026-03-05 02:03 UTC"
+    }
   ],
   "cronTasks": [
-    { "name": "页面迭代汇报", "schedule": "每2小时", "status": "运行中", "next": "2小时后", "last": "刚刚" },
-    { "name": "Moltbook心跳", "schedule": "每5小时", "status": "运行中", "next": "4小时后", "last": "1小时前" },
-    { "name": "每日反思日报", "schedule": "23:50", "status": "就绪", "next": "4小时后", "last": "20小时前" }
+    {
+      "name": "页面迭代汇报",
+      "schedule": "每2小时",
+      "status": "运行中",
+      "next": "2小时后",
+      "last": "刚刚"
+    },
+    {
+      "name": "Moltbook心跳",
+      "schedule": "每5小时",
+      "status": "运行中",
+      "next": "4小时后",
+      "last": "1小时前"
+    },
+    {
+      "name": "每日反思日报",
+      "schedule": "23:50",
+      "status": "就绪",
+      "next": "4小时后",
+      "last": "20小时前"
+    }
   ],
   "network": {
     "onlineUsers": 231,
@@ -57,73 +180,346 @@
     "apiLatency": 12
   },
   "highlights": [
-    { "icon": "📋", "title": "V212.0 看板优化", "desc": "新增JSON Schema验证工具" },
-    { "icon": "🔍", "title": "V210.0 正则测试器", "desc": "新增正则表达式测试工具(支持g/i/m标志)" },
-    { "icon": "🔑", "title": "V210.0 HMAC生成器", "desc": "新增HMAC-SHA256/SHA1/MD5生成工具" },
-    { "icon": "🔗", "title": "V210.0 连接状态", "desc": "更新Telegram等连接状态为最新" },
-    { "icon": "🔄", "title": "V202.0 状态同步", "desc": "在线用户数同步更新" },
-    { "icon": "🎉", "title": "V200.0 里程碑", "desc": "看板持续迭代200个版本" },
-    { "icon": "Aa", "title": "V185.0 大小写转换", "desc": "新增大写/小写/首字母大写转换" },
-    { "icon": "🔙", "title": "V184.0 JSON转义", "desc": "新增JSON字符串转义/反转义" },
-    { "icon": "🧹", "title": "V183.0 文本清理", "desc": "新增去除空行和多余空格工具" },
-    { "icon": "🔢", "title": "V182.0 添加行号", "desc": "新增文本添加行号工具" },
-    { "icon": "📅", "title": "V181.0 日期计算", "desc": "新增日期天数差计算器" },
-    { "icon": "🅰️", "title": "V180.0 中文拼音", "desc": "新增中文拼音转换占位" },
-    { "icon": "📑", "title": "V179.0 文本排序", "desc": "新增文本行排序工具" },
-    { "icon": "🔢", "title": "V178.0 进制转换器", "desc": "新增十/二/八/十六进制转换" },
-    { "icon": "📋", "title": "V177.0 CSV转JSON", "desc": "新增CSV转JSON数组工具" },
-    { "icon": "📊", "title": "V176.0 JSON转CSV", "desc": "新增JSON数组转CSV工具" },
-    { "icon": "📄", "title": "V175.0 随机文本", "desc": "新增Lorem Ipsum随机文本生成" },
-    { "icon": "🏷️", "title": "V173.0 HTML实体", "desc": "新增HTML实体编码解码工具" },
-    { "icon": "🔤", "title": "V172.0 Unicode字符", "desc": "新增Unicode字符查看器" },
-    { "icon": "⏰", "title": "V171.0 Cron解析器", "desc": "新增Cron表达式解析和说明" },
-    { "icon": "🎨", "title": "V170.0 颜色转换器", "desc": "新增HEX/RGB/HSL颜色转换" },
-    { "icon": "🔍", "title": "V169.0 JSON路径提取", "desc": "新增JSON路径提取工具" },
-    { "icon": "📝", "title": "V128.0 字符串差异", "desc": "新增字符串差异比较工具" },
-    { "icon": "#️⃣", "title": "V128.0 哈希计算器", "desc": "新增哈希值计算工具(MD5/SHA)" },
-    { "icon": "⏰", "title": "V125.0 时间戳工具", "desc": "新增时间戳转换工具" },
-    { "icon": "🔗", "title": "V124.0 URL+JSON工具", "desc": "新增URL编码解码+JSON格式化工具" },
-    { "icon": "🎲", "title": "V123.0 开发者工具", "desc": "新增UUID生成器+Base64编码解码" },
-    { "icon": "📊", "title": "V122.0 看板汇总", "desc": "新增一键获取所有关键数据" },
-    { "icon": "❤️", "title": "V121.0 健康监控", "desc": "新增系统健康状态监控" },
-    { "icon": "🐳", "title": "V120.0 服务详情", "desc": "新增系统服务和容器详情" },
-    { "icon": "🌐", "title": "V119.0 网络详情", "desc": "新增网络连接详情监控" },
-    { "icon": "💾", "title": "V118.0 备份监控", "desc": "新增系统备份状态监控" },
-    { "icon": "📜", "title": "V117.0 日志分析", "desc": "新增系统日志分析功能" },
-    { "icon": "🖥️", "title": "V116.0 硬件监控", "desc": "新增CPU/内存/网络硬件详情" },
-    { "icon": "🔒", "title": "V115.0 安全监控", "desc": "新增系统安全状态监控" },
-    { "icon": "⏰", "title": "V114.0 Cron监控", "desc": "新增定时任务状态监控" },
-    { "icon": "🔔", "title": "V113.0 服务监控", "desc": "新增关键服务状态监控" },
-    { "icon": "📊", "title": "V112.0 Top进程", "desc": "显示CPU/内存占用最高的进程" },
-    { "icon": "🌐", "title": "V111.0 网络监控", "desc": "新增网络流量实时监控" },
-    { "icon": "📤", "title": "V110.0 导出修复", "desc": "修复导出功能版本号" },
-    { "icon": "💊", "title": "V100.0 健康详情", "desc": "展示运行天数、负载、内存、磁盘详细信息" },
-    { "icon": "🔌", "title": "V99.0 连接监控", "desc": "实时监控Telegram等连接状态" },
-    { "icon": "📈", "title": "V98.0 健康趋势", "desc": "记录健康数据趋势图表" },
-    { "icon": "📜", "title": "V97.0 告警历史", "desc": "记录和展示历史告警" },
-    { "icon": "⚡", "title": "V96.0 状态同步", "desc": "实时系统状态更新" },
-    { "icon": "🔔", "title": "V95.0 状态同步", "desc": "实时系统状态更新" },
-    { "icon": "🔄", "title": "V88.0 状态同步", "desc": "实时同步系统状态" },
-    { "icon": "📊", "title": "V86.0 Cron详情", "desc": "展示定时任务详细信息" },
-    { "icon": "📈", "title": "V85.0 负载优化", "desc": "更新系统负载显示" },
-    { "icon": "📊", "title": "V84.0 运行统计", "desc": "展示系统运行天数和负载" },
-    { "icon": "🔢", "title": "V83.0 Skills同步", "desc": "同步62个Skills（含扩展）" },
-    { "icon": "⚡", "title": "V82.0 命令增强", "desc": "快捷命令优化" },
-    { "icon": "📈", "title": "V81.0 看板统计", "desc": "展示访问和操作统计" },
-    { "icon": "📤", "title": "V80.0 数据导出", "desc": "导出完整看板数据" },
-    { "icon": "📝", "title": "V79.0 提交记录", "desc": "展示最近Git提交" },
-    { "icon": "📜", "title": "V78.0 版本历史", "desc": "展示版本迭代记录" },
-    { "icon": "🐙", "title": "V77.0 GitHub状态", "desc": "显示项目推送状态" },
-    { "icon": "⏰", "title": "V76.0 Cron状态", "desc": "显示定时任务运行状态" },
-    { "icon": "🧠", "title": "V75.0 记忆统计", "desc": "显示记忆系统状态" },
-    { "icon": "🎯", "title": "V74.0 快捷操作", "desc": "一键刷新/截图/备份" },
-    { "icon": "💧", "title": "V73.0 增强天气", "desc": "显示湿度/风力/气压" },
-    { "icon": "📡", "title": "V72.0 网络状态", "desc": "显示在线用户和API延迟" },
-    { "icon": "⏰", "title": "V71.0 实时时钟", "desc": "显示服务器当前时间" },
-    { "icon": "🌍", "title": "V70.0 服务器信息", "desc": "显示服务器位置和时区" },
-    { "icon": "📊", "title": "V69.0 Skills同步", "desc": "同步19个Workspace Skills" },
-    { "icon": "🌬️", "title": "V68.0 空气质量", "desc": "显示AQI和PM2.5" },
-    { "icon": "⌨️", "title": "V67.0 键盘快捷键", "desc": "显示可用快捷键" }
+    {
+      "icon": "📊",
+      "title": "V214.0 Skills统计",
+      "desc": "同步66个Skills(52内置+14扩展)"
+    },
+    {
+      "icon": "📋",
+      "title": "V212.0 看板优化",
+      "desc": "新增JSON Schema验证工具"
+    },
+    {
+      "icon": "🔍",
+      "title": "V210.0 正则测试器",
+      "desc": "新增正则表达式测试工具(支持g/i/m标志)"
+    },
+    {
+      "icon": "🔑",
+      "title": "V210.0 HMAC生成器",
+      "desc": "新增HMAC-SHA256/SHA1/MD5生成工具"
+    },
+    {
+      "icon": "🔗",
+      "title": "V210.0 连接状态",
+      "desc": "更新Telegram等连接状态为最新"
+    },
+    {
+      "icon": "🔄",
+      "title": "V202.0 状态同步",
+      "desc": "在线用户数同步更新"
+    },
+    {
+      "icon": "🎉",
+      "title": "V200.0 里程碑",
+      "desc": "看板持续迭代200个版本"
+    },
+    {
+      "icon": "Aa",
+      "title": "V185.0 大小写转换",
+      "desc": "新增大写/小写/首字母大写转换"
+    },
+    {
+      "icon": "🔙",
+      "title": "V184.0 JSON转义",
+      "desc": "新增JSON字符串转义/反转义"
+    },
+    {
+      "icon": "🧹",
+      "title": "V183.0 文本清理",
+      "desc": "新增去除空行和多余空格工具"
+    },
+    {
+      "icon": "🔢",
+      "title": "V182.0 添加行号",
+      "desc": "新增文本添加行号工具"
+    },
+    {
+      "icon": "📅",
+      "title": "V181.0 日期计算",
+      "desc": "新增日期天数差计算器"
+    },
+    {
+      "icon": "🅰️",
+      "title": "V180.0 中文拼音",
+      "desc": "新增中文拼音转换占位"
+    },
+    {
+      "icon": "📑",
+      "title": "V179.0 文本排序",
+      "desc": "新增文本行排序工具"
+    },
+    {
+      "icon": "🔢",
+      "title": "V178.0 进制转换器",
+      "desc": "新增十/二/八/十六进制转换"
+    },
+    {
+      "icon": "📋",
+      "title": "V177.0 CSV转JSON",
+      "desc": "新增CSV转JSON数组工具"
+    },
+    {
+      "icon": "📊",
+      "title": "V176.0 JSON转CSV",
+      "desc": "新增JSON数组转CSV工具"
+    },
+    {
+      "icon": "📄",
+      "title": "V175.0 随机文本",
+      "desc": "新增Lorem Ipsum随机文本生成"
+    },
+    {
+      "icon": "🏷️",
+      "title": "V173.0 HTML实体",
+      "desc": "新增HTML实体编码解码工具"
+    },
+    {
+      "icon": "🔤",
+      "title": "V172.0 Unicode字符",
+      "desc": "新增Unicode字符查看器"
+    },
+    {
+      "icon": "⏰",
+      "title": "V171.0 Cron解析器",
+      "desc": "新增Cron表达式解析和说明"
+    },
+    {
+      "icon": "🎨",
+      "title": "V170.0 颜色转换器",
+      "desc": "新增HEX/RGB/HSL颜色转换"
+    },
+    {
+      "icon": "🔍",
+      "title": "V169.0 JSON路径提取",
+      "desc": "新增JSON路径提取工具"
+    },
+    {
+      "icon": "📝",
+      "title": "V128.0 字符串差异",
+      "desc": "新增字符串差异比较工具"
+    },
+    {
+      "icon": "#️⃣",
+      "title": "V128.0 哈希计算器",
+      "desc": "新增哈希值计算工具(MD5/SHA)"
+    },
+    {
+      "icon": "⏰",
+      "title": "V125.0 时间戳工具",
+      "desc": "新增时间戳转换工具"
+    },
+    {
+      "icon": "🔗",
+      "title": "V124.0 URL+JSON工具",
+      "desc": "新增URL编码解码+JSON格式化工具"
+    },
+    {
+      "icon": "🎲",
+      "title": "V123.0 开发者工具",
+      "desc": "新增UUID生成器+Base64编码解码"
+    },
+    {
+      "icon": "📊",
+      "title": "V122.0 看板汇总",
+      "desc": "新增一键获取所有关键数据"
+    },
+    {
+      "icon": "❤️",
+      "title": "V121.0 健康监控",
+      "desc": "新增系统健康状态监控"
+    },
+    {
+      "icon": "🐳",
+      "title": "V120.0 服务详情",
+      "desc": "新增系统服务和容器详情"
+    },
+    {
+      "icon": "🌐",
+      "title": "V119.0 网络详情",
+      "desc": "新增网络连接详情监控"
+    },
+    {
+      "icon": "💾",
+      "title": "V118.0 备份监控",
+      "desc": "新增系统备份状态监控"
+    },
+    {
+      "icon": "📜",
+      "title": "V117.0 日志分析",
+      "desc": "新增系统日志分析功能"
+    },
+    {
+      "icon": "🖥️",
+      "title": "V116.0 硬件监控",
+      "desc": "新增CPU/内存/网络硬件详情"
+    },
+    {
+      "icon": "🔒",
+      "title": "V115.0 安全监控",
+      "desc": "新增系统安全状态监控"
+    },
+    {
+      "icon": "⏰",
+      "title": "V114.0 Cron监控",
+      "desc": "新增定时任务状态监控"
+    },
+    {
+      "icon": "🔔",
+      "title": "V113.0 服务监控",
+      "desc": "新增关键服务状态监控"
+    },
+    {
+      "icon": "📊",
+      "title": "V112.0 Top进程",
+      "desc": "显示CPU/内存占用最高的进程"
+    },
+    {
+      "icon": "🌐",
+      "title": "V111.0 网络监控",
+      "desc": "新增网络流量实时监控"
+    },
+    {
+      "icon": "📤",
+      "title": "V110.0 导出修复",
+      "desc": "修复导出功能版本号"
+    },
+    {
+      "icon": "💊",
+      "title": "V100.0 健康详情",
+      "desc": "展示运行天数、负载、内存、磁盘详细信息"
+    },
+    {
+      "icon": "🔌",
+      "title": "V99.0 连接监控",
+      "desc": "实时监控Telegram等连接状态"
+    },
+    {
+      "icon": "📈",
+      "title": "V98.0 健康趋势",
+      "desc": "记录健康数据趋势图表"
+    },
+    {
+      "icon": "📜",
+      "title": "V97.0 告警历史",
+      "desc": "记录和展示历史告警"
+    },
+    {
+      "icon": "⚡",
+      "title": "V96.0 状态同步",
+      "desc": "实时系统状态更新"
+    },
+    {
+      "icon": "🔔",
+      "title": "V95.0 状态同步",
+      "desc": "实时系统状态更新"
+    },
+    {
+      "icon": "🔄",
+      "title": "V88.0 状态同步",
+      "desc": "实时同步系统状态"
+    },
+    {
+      "icon": "📊",
+      "title": "V86.0 Cron详情",
+      "desc": "展示定时任务详细信息"
+    },
+    {
+      "icon": "📈",
+      "title": "V85.0 负载优化",
+      "desc": "更新系统负载显示"
+    },
+    {
+      "icon": "📊",
+      "title": "V84.0 运行统计",
+      "desc": "展示系统运行天数和负载"
+    },
+    {
+      "icon": "🔢",
+      "title": "V83.0 Skills同步",
+      "desc": "同步62个Skills（含扩展）"
+    },
+    {
+      "icon": "⚡",
+      "title": "V82.0 命令增强",
+      "desc": "快捷命令优化"
+    },
+    {
+      "icon": "📈",
+      "title": "V81.0 看板统计",
+      "desc": "展示访问和操作统计"
+    },
+    {
+      "icon": "📤",
+      "title": "V80.0 数据导出",
+      "desc": "导出完整看板数据"
+    },
+    {
+      "icon": "📝",
+      "title": "V79.0 提交记录",
+      "desc": "展示最近Git提交"
+    },
+    {
+      "icon": "📜",
+      "title": "V78.0 版本历史",
+      "desc": "展示版本迭代记录"
+    },
+    {
+      "icon": "🐙",
+      "title": "V77.0 GitHub状态",
+      "desc": "显示项目推送状态"
+    },
+    {
+      "icon": "⏰",
+      "title": "V76.0 Cron状态",
+      "desc": "显示定时任务运行状态"
+    },
+    {
+      "icon": "🧠",
+      "title": "V75.0 记忆统计",
+      "desc": "显示记忆系统状态"
+    },
+    {
+      "icon": "🎯",
+      "title": "V74.0 快捷操作",
+      "desc": "一键刷新/截图/备份"
+    },
+    {
+      "icon": "💧",
+      "title": "V73.0 增强天气",
+      "desc": "显示湿度/风力/气压"
+    },
+    {
+      "icon": "📡",
+      "title": "V72.0 网络状态",
+      "desc": "显示在线用户和API延迟"
+    },
+    {
+      "icon": "⏰",
+      "title": "V71.0 实时时钟",
+      "desc": "显示服务器当前时间"
+    },
+    {
+      "icon": "🌍",
+      "title": "V70.0 服务器信息",
+      "desc": "显示服务器位置和时区"
+    },
+    {
+      "icon": "📊",
+      "title": "V69.0 Skills同步",
+      "desc": "同步19个Workspace Skills"
+    },
+    {
+      "icon": "🌬️",
+      "title": "V68.0 空气质量",
+      "desc": "显示AQI和PM2.5"
+    },
+    {
+      "icon": "⌨️",
+      "title": "V67.0 键盘快捷键",
+      "desc": "显示可用快捷键"
+    }
   ],
   "weather": {
     "city": "北京",
@@ -141,96 +537,582 @@
     "networkTx": "12.4GB"
   },
   "activities": [
-    { "icon": "Aa", "title": "V185.0 大小写转换", "time": "刚刚", "type": "success" },
-    { "icon": "🔙", "title": "V184.0 JSON转义", "time": "刚刚", "type": "success" },
-    { "icon": "🧹", "title": "V183.0 文本清理", "time": "刚刚", "type": "success" },
-    { "icon": "🔢", "title": "V182.0 添加行号", "time": "刚刚", "type": "success" },
-    { "icon": "📅", "title": "V181.0 日期计算", "time": "刚刚", "type": "success" },
-    { "icon": "🅰️", "title": "V180.0 中文拼音", "time": "刚刚", "type": "success" },
-    { "icon": "📑", "title": "V179.0 文本排序", "time": "刚刚", "type": "success" },
-    { "icon": "🔢", "title": "V178.0 进制转换器", "time": "刚刚", "type": "success" },
-    { "icon": "📋", "title": "V177.0 CSV转JSON", "time": "刚刚", "type": "success" },
-    { "icon": "📊", "title": "V176.0 JSON转CSV", "time": "刚刚", "type": "success" },
-    { "icon": "📄", "title": "V175.0 随机文本生成", "time": "刚刚", "type": "success" },
-    { "icon": "🏷️", "title": "V173.0 HTML实体编码", "time": "刚刚", "type": "success" },
-    { "icon": "🔤", "title": "V172.0 Unicode字符查看器", "time": "刚刚", "type": "success" },
-    { "icon": "⏰", "title": "V171.0 Cron解析器", "time": "刚刚", "type": "success" },
-    { "icon": "🎨", "title": "V170.0 颜色转换器", "time": "刚刚", "type": "success" },
-    { "icon": "🔍", "title": "V169.0 JSON路径提取", "time": "刚刚", "type": "success" },
-    { "icon": "📝", "title": "V128.0 字符串差异", "time": "刚刚", "type": "success" },
-    { "icon": "#️⃣", "title": "V128.0 哈希计算器", "time": "刚刚", "type": "success" },
-    { "icon": "⏰", "title": "V125.0 时间戳工具", "time": "刚刚", "type": "success" },
-    { "icon": "🔗", "title": "V124.0 URL+JSON工具", "time": "刚刚", "type": "success" },
-    { "icon": "🎲", "title": "V123.0 开发者工具", "time": "刚刚", "type": "success" },
-    { "icon": "📊", "title": "V122.0 看板汇总", "time": "刚刚", "type": "success" },
-    { "icon": "❤️", "title": "V121.0 健康监控", "time": "刚刚", "type": "success" },
-    { "icon": "🐳", "title": "V120.0 服务详情", "time": "刚刚", "type": "success" },
-    { "icon": "🌐", "title": "V119.0 网络详情", "time": "刚刚", "type": "success" },
-    { "icon": "💾", "title": "V118.0 备份监控", "time": "刚刚", "type": "success" },
-    { "icon": "📜", "title": "V117.0 日志分析", "time": "刚刚", "type": "success" },
-    { "icon": "🖥️", "title": "V116.0 硬件监控", "time": "刚刚", "type": "success" },
-    { "icon": "🔒", "title": "V115.0 安全监控", "time": "刚刚", "type": "success" },
-    { "icon": "⏰", "title": "V114.0 Cron监控", "time": "刚刚", "type": "success" },
-    { "icon": "🔔", "title": "V113.0 服务监控", "time": "刚刚", "type": "success" },
-    { "icon": "📊", "title": "V112.0 Top进程", "time": "刚刚", "type": "success" },
-    { "icon": "🌐", "title": "V111.0 网络监控", "time": "刚刚", "type": "success" },
-    { "icon": "📤", "title": "V110.0 导出修复", "time": "刚刚", "type": "success" },
-    { "icon": "💊", "title": "V100.0 健康详情", "time": "刚刚", "type": "success" },
-    { "icon": "🔌", "title": "V99.0 连接监控", "time": "刚刚", "type": "success" },
-    { "icon": "📊", "title": "V69.0 Skills同步", "time": "刚刚", "type": "success" },
-    { "icon": "🌬️", "title": "V68.0 空气质量发布", "time": "刚刚", "type": "success" },
-    { "icon": "⌨️", "title": "V67.0 键盘快捷键发布", "time": "2小时前", "type": "success" },
-    { "icon": "⏱️", "title": "V66.0 会话计时发布", "time": "4小时前", "type": "success" }
+    {
+      "icon": "📊",
+      "title": "V214.0 Skills统计",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "Aa",
+      "title": "V185.0 大小写转换",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔙",
+      "title": "V184.0 JSON转义",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🧹",
+      "title": "V183.0 文本清理",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔢",
+      "title": "V182.0 添加行号",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📅",
+      "title": "V181.0 日期计算",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🅰️",
+      "title": "V180.0 中文拼音",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📑",
+      "title": "V179.0 文本排序",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔢",
+      "title": "V178.0 进制转换器",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📋",
+      "title": "V177.0 CSV转JSON",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📊",
+      "title": "V176.0 JSON转CSV",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📄",
+      "title": "V175.0 随机文本生成",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🏷️",
+      "title": "V173.0 HTML实体编码",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔤",
+      "title": "V172.0 Unicode字符查看器",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "⏰",
+      "title": "V171.0 Cron解析器",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🎨",
+      "title": "V170.0 颜色转换器",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔍",
+      "title": "V169.0 JSON路径提取",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📝",
+      "title": "V128.0 字符串差异",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "#️⃣",
+      "title": "V128.0 哈希计算器",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "⏰",
+      "title": "V125.0 时间戳工具",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔗",
+      "title": "V124.0 URL+JSON工具",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🎲",
+      "title": "V123.0 开发者工具",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📊",
+      "title": "V122.0 看板汇总",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "❤️",
+      "title": "V121.0 健康监控",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🐳",
+      "title": "V120.0 服务详情",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🌐",
+      "title": "V119.0 网络详情",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "💾",
+      "title": "V118.0 备份监控",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📜",
+      "title": "V117.0 日志分析",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🖥️",
+      "title": "V116.0 硬件监控",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔒",
+      "title": "V115.0 安全监控",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "⏰",
+      "title": "V114.0 Cron监控",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔔",
+      "title": "V113.0 服务监控",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📊",
+      "title": "V112.0 Top进程",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🌐",
+      "title": "V111.0 网络监控",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📤",
+      "title": "V110.0 导出修复",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "💊",
+      "title": "V100.0 健康详情",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🔌",
+      "title": "V99.0 连接监控",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "📊",
+      "title": "V69.0 Skills同步",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "🌬️",
+      "title": "V68.0 空气质量发布",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
+      "icon": "⌨️",
+      "title": "V67.0 键盘快捷键发布",
+      "time": "2小时前",
+      "type": "success"
+    },
+    {
+      "icon": "⏱️",
+      "title": "V66.0 会话计时发布",
+      "time": "4小时前",
+      "type": "success"
+    }
   ],
   "notifications": [
-    { "id": 1, "title": "Aa V185.0 发布!", "content": "新增大小写转换工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🔙 V184.0 发布!", "content": "新增JSON转义/反转义工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🧹 V183.0 发布!", "content": "新增文本清理工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🔢 V182.0 发布!", "content": "新增文本添加行号工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "📅 V181.0 发布!", "content": "新增日期天数差计算器", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🅰️ V180.0 发布!", "content": "新增中文拼音转换占位", "time": "刚刚", "read": false },
-    { "id": 1, "title": "📑 V179.0 发布!", "content": "新增文本行排序工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🔢 V178.0 发布!", "content": "新增进制转换器", "time": "刚刚", "read": false },
-    { "id": 1, "title": "📋 V177.0 发布!", "content": "新增CSV转JSON数组工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "📊 V176.0 发布!", "content": "新增JSON数组转CSV工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "📄 V175.0 发布!", "content": "新增Lorem Ipsum随机文本生成", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🏷️ V173.0 发布!", "content": "新增HTML实体编码解码工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🔤 V172.0 发布!", "content": "新增Unicode字符查看器", "time": "刚刚", "read": false },
-    { "id": 1, "title": "⏰ V171.0 发布!", "content": "新增Cron表达式解析器", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🎨 V170.0 发布!", "content": "新增颜色转换器(HEX/RGB/HSL)", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🔍 V169.0 发布!", "content": "新增JSON路径提取工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "📝 V128.0 发布!", "content": "新增字符串差异比较工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "#️⃣ V128.0 发布!", "content": "新增哈希值计算工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "⏰ V125.0 发布!", "content": "新增时间戳转换工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🔗 V124.0 发布!", "content": "新增URL编码解码+JSON格式化工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "🎲 V123.0 发布!", "content": "新增UUID生成器+Base64编码解码工具", "time": "刚刚", "read": false },
-    { "id": 1, "title": "📊 V122.0 发布!", "content": "新增看板汇总API功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "❤️ V121.0 发布!", "content": "新增系统健康状态监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🐳 V120.0 发布!", "content": "新增系统服务和容器详情功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🌐 V119.0 发布!", "content": "新增网络连接详情监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "💾 V118.0 发布!", "content": "新增系统备份状态监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "📜 V117.0 发布!", "content": "新增系统日志分析功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🖥️ V116.0 发布!", "content": "新增硬件状态监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🔒 V115.0 发布!", "content": "新增系统安全状态监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "⏰ V114.0 发布!", "content": "新增定时任务状态监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🔔 V113.0 发布!", "content": "新增服务状态监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "📊 V112.0 发布!", "content": "新增Top进程监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "🌐 V111.0 发布!", "content": "新增网络流量实时监控功能", "time": "刚刚", "read": false },
-    { "id": 2, "title": "📤 V110.0 发布!", "content": "导出功能版本号修复为V109.0", "time": "刚刚", "read": false },
-    { "id": 2, "title": "💊 V100.0 发布!", "content": "健康详情功能上线，运行天数/负载/内存/磁盘", "time": "刚刚", "read": true },
-    { "id": 2, "title": "🔌 V99.0 发布!", "content": "连接状态监控，支持Telegram/企业微信/GitHub/飞书", "time": "刚刚", "read": true },
-    { "id": 2, "title": "📊 V69.0 发布!", "content": "Skills同步更新，共19个技能", "time": "刚刚", "read": true },
-    { "id": 2, "title": "🌬️ V68.0 发布!", "content": "空气质量已上线", "time": "刚刚", "read": true },
-    { "id": 3, "title": "⌨️ V67.0 发布!", "content": "键盘快捷键已上线", "time": "刚刚", "read": true },
-    { "id": 4, "title": "⏱️ V66.0 发布!", "content": "会话计时已上线", "time": "2小时前", "read": true },
-    { "id": 5, "title": "⚡ V64.0 发布!", "content": "快速命令已上线", "time": "4小时前", "read": true },
-    { "id": 6, "title": "✅ 系统正常", "content": "所有服务运行良好", "time": "6小时前", "read": true }
+    {
+      "id": 1,
+      "title": "📊 V214.0 发布!",
+      "content": "同步66个Skills(52内置+14扩展)",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "Aa V185.0 发布!",
+      "content": "新增大小写转换工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🔙 V184.0 发布!",
+      "content": "新增JSON转义/反转义工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🧹 V183.0 发布!",
+      "content": "新增文本清理工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🔢 V182.0 发布!",
+      "content": "新增文本添加行号工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "📅 V181.0 发布!",
+      "content": "新增日期天数差计算器",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🅰️ V180.0 发布!",
+      "content": "新增中文拼音转换占位",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "📑 V179.0 发布!",
+      "content": "新增文本行排序工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🔢 V178.0 发布!",
+      "content": "新增进制转换器",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "📋 V177.0 发布!",
+      "content": "新增CSV转JSON数组工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "📊 V176.0 发布!",
+      "content": "新增JSON数组转CSV工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "📄 V175.0 发布!",
+      "content": "新增Lorem Ipsum随机文本生成",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🏷️ V173.0 发布!",
+      "content": "新增HTML实体编码解码工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🔤 V172.0 发布!",
+      "content": "新增Unicode字符查看器",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "⏰ V171.0 发布!",
+      "content": "新增Cron表达式解析器",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🎨 V170.0 发布!",
+      "content": "新增颜色转换器(HEX/RGB/HSL)",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🔍 V169.0 发布!",
+      "content": "新增JSON路径提取工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "📝 V128.0 发布!",
+      "content": "新增字符串差异比较工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "#️⃣ V128.0 发布!",
+      "content": "新增哈希值计算工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "⏰ V125.0 发布!",
+      "content": "新增时间戳转换工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🔗 V124.0 发布!",
+      "content": "新增URL编码解码+JSON格式化工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "🎲 V123.0 发布!",
+      "content": "新增UUID生成器+Base64编码解码工具",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 1,
+      "title": "📊 V122.0 发布!",
+      "content": "新增看板汇总API功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "❤️ V121.0 发布!",
+      "content": "新增系统健康状态监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "🐳 V120.0 发布!",
+      "content": "新增系统服务和容器详情功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "🌐 V119.0 发布!",
+      "content": "新增网络连接详情监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "💾 V118.0 发布!",
+      "content": "新增系统备份状态监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "📜 V117.0 发布!",
+      "content": "新增系统日志分析功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "🖥️ V116.0 发布!",
+      "content": "新增硬件状态监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "🔒 V115.0 发布!",
+      "content": "新增系统安全状态监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "⏰ V114.0 发布!",
+      "content": "新增定时任务状态监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "🔔 V113.0 发布!",
+      "content": "新增服务状态监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "📊 V112.0 发布!",
+      "content": "新增Top进程监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "🌐 V111.0 发布!",
+      "content": "新增网络流量实时监控功能",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "📤 V110.0 发布!",
+      "content": "导出功能版本号修复为V109.0",
+      "time": "刚刚",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "💊 V100.0 发布!",
+      "content": "健康详情功能上线，运行天数/负载/内存/磁盘",
+      "time": "刚刚",
+      "read": true
+    },
+    {
+      "id": 2,
+      "title": "🔌 V99.0 发布!",
+      "content": "连接状态监控，支持Telegram/企业微信/GitHub/飞书",
+      "time": "刚刚",
+      "read": true
+    },
+    {
+      "id": 2,
+      "title": "📊 V69.0 发布!",
+      "content": "Skills同步更新，共19个技能",
+      "time": "刚刚",
+      "read": true
+    },
+    {
+      "id": 2,
+      "title": "🌬️ V68.0 发布!",
+      "content": "空气质量已上线",
+      "time": "刚刚",
+      "read": true
+    },
+    {
+      "id": 3,
+      "title": "⌨️ V67.0 发布!",
+      "content": "键盘快捷键已上线",
+      "time": "刚刚",
+      "read": true
+    },
+    {
+      "id": 4,
+      "title": "⏱️ V66.0 发布!",
+      "content": "会话计时已上线",
+      "time": "2小时前",
+      "read": true
+    },
+    {
+      "id": 5,
+      "title": "⚡ V64.0 发布!",
+      "content": "快速命令已上线",
+      "time": "4小时前",
+      "read": true
+    },
+    {
+      "id": 6,
+      "title": "✅ 系统正常",
+      "content": "所有服务运行良好",
+      "time": "6小时前",
+      "read": true
+    }
   ],
   "health": {
-    "cpu": { "status": "normal", "value": "1%", "label": "优秀", "load": "0.00" },
-    "memory": { "status": "normal", "value": "47%", "label": "正常", "used": "1.7G", "total": "3.6G" },
-    "disk": { "status": "normal", "value": "35%", "label": "正常", "used": "14G", "total": "40G" },
-    "uptime": { "status": "normal", "value": "23天15小时", "label": "稳定" }
+    "cpu": {
+      "status": "normal",
+      "value": "1%",
+      "label": "优秀",
+      "load": "0.00"
+    },
+    "memory": {
+      "status": "normal",
+      "value": "47%",
+      "label": "正常",
+      "used": "1.7G",
+      "total": "3.6G"
+    },
+    "disk": {
+      "status": "normal",
+      "value": "35%",
+      "label": "正常",
+      "used": "14G",
+      "total": "40G"
+    },
+    "uptime": {
+      "status": "normal",
+      "value": "23天15小时",
+      "label": "稳定"
+    }
   },
   "quickStats": {
     "onlineUsers": 228,
