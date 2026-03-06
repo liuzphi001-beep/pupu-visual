@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V210.0",
-    "version": "V212.0",
+    "version": "V213.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -133,9 +133,9 @@
   "system": {
     "startDate": "2026-02-02",
     "model": "MiniMax-M2.5",
-    "skillsCount": 56,
+    "skillsCount": 66,
     "builtinSkills": 52,
-    "extensionSkills": 4,
+    "extensionSkills": 14,
     "processes": 152,
     "networkRx": "12.2GB",
     "networkTx": "12.4GB"
