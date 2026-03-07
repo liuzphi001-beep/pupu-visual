@@ -1102,13 +1102,13 @@
   "health": {
     "cpu": {
       "status": "normal",
-      "value": "12%",
+      "value": "1%",
       "label": "优秀",
       "load": "0.00"
     },
     "memory": {
       "status": "normal",
-      "value": "47%",
+      "value": "29%",
       "label": "正常",
       "used": "1.1G",
       "total": "3.6G"
@@ -1122,7 +1122,7 @@
     },
     "uptime": {
       "status": "normal",
-      "value": "11小时",
+      "value": "13小时52分钟",
       "label": "稳定"
     }
   },
@@ -1132,7 +1132,7 @@
     "diskUsage": "19G/40G",
     "memoryUsage": "1.1G/3.6G",
     "skillsCount": 56,
-    "uptime": "7天10小时",
+    "uptime": "13小时52分钟",
     "sessions": 13,
     "model": "MiniMax-M2.5",
     "networkRx": "12.2GB",
