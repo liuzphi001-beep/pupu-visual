@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V224.0",
-    "version": "V224.0",
+    "version": "V225.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -156,22 +156,36 @@
       "name": "页面迭代汇报",
       "schedule": "每2小时",
       "status": "运行中",
-      "next": "2小时后",
-      "last": "刚刚"
+      "nextRun": "14:00",
+      "lastRun": "刚刚"
     },
     {
       "name": "Moltbook心跳",
-      "schedule": "每5小时",
+      "schedule": "每5分钟",
       "status": "运行中",
-      "next": "4小时后",
-      "last": "1小时前"
+      "nextRun": "20:05",
+      "lastRun": "刚刚"
     },
     {
       "name": "每日反思日报",
-      "schedule": "23:50",
+      "schedule": "22:00",
       "status": "就绪",
-      "next": "4小时后",
-      "last": "20小时前"
+      "nextRun": "22:00",
+      "lastRun": "10小时前"
+    },
+    {
+      "name": "系统监控",
+      "schedule": "每小时",
+      "status": "运行中",
+      "nextRun": "21:00",
+      "lastRun": "3分钟前"
+    },
+    {
+      "name": "日志分析",
+      "schedule": "每小时",
+      "status": "运行中",
+      "nextRun": "21:00",
+      "lastRun": "18分钟前"
     }
   ],
   "network": {
@@ -180,6 +194,11 @@
     "apiLatency": 12
   },
   "highlights": [
+    {
+      "icon": "🎯",
+      "title": "V225.0 定时任务优化",
+      "desc": "新增定时任务下次执行时间显示"
+    },
     {
       "icon": "📈",
       "title": "V223.0 负载优化",
@@ -1130,7 +1149,7 @@
   "health": {
     "cpu": {
       "status": "normal",
-      "value": "1%",
+      "value": "6%",
       "label": "优秀",
       "load": "0.00"
     },
@@ -1138,7 +1157,7 @@
       "status": "normal",
       "value": "29%",
       "label": "正常",
-      "used": "1.1G",
+      "used": "1.4G",
       "total": "3.6G"
     },
     "disk": {
