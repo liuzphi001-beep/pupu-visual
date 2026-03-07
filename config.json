@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V218.0",
-    "version": "V221.0",
+    "version": "V222.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -180,6 +180,11 @@
     "apiLatency": 12
   },
   "highlights": [
+    {
+      "icon": "🔄",
+      "title": "V222.0 系统状态同步",
+      "desc": "实时同步系统状态(CPU/内存/磁盘/运行时间)"
+    },
     {
       "icon": "🔔",
       "title": "V220.0 状态同步",
@@ -555,6 +560,12 @@
   },
   "activities": [
     {
+      "icon": "🔄",
+      "title": "V222.0 系统状态同步",
+      "time": "刚刚",
+      "type": "success"
+    },
+    {
       "icon": "📊",
       "title": "V214.0 Skills统计",
       "time": "刚刚",
@@ -802,6 +813,13 @@
     }
   ],
   "notifications": [
+    {
+      "id": 1,
+      "title": "🔄 V222.0 发布!",
+      "content": "实时同步系统状态(CPU/内存/磁盘/运行时间)",
+      "time": "刚刚",
+      "read": false
+    },
     {
       "id": 1,
       "title": "📊 V214.0 发布!",
@@ -1127,7 +1145,7 @@
     },
     "uptime": {
       "status": "normal",
-      "value": "15小时11分钟",
+      "value": "15小时24分钟",
       "label": "稳定"
     }
   },
@@ -1137,7 +1155,7 @@
     "diskUsage": "19G/40G",
     "memoryUsage": "1.1G/3.6G",
     "skillsCount": 66,
-    "uptime": "15小时11分钟",
+    "uptime": "15小时24分钟",
     "sessions": 13,
     "model": "MiniMax-M2.5",
     "networkRx": "12.2GB",
