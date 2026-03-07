@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V226.0",
-    "version": "V226.0",
+    "version": "V227.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -1154,7 +1154,7 @@
   "health": {
     "cpu": {
       "status": "normal",
-      "value": "6%",
+      "value": "1%",
       "label": "优秀",
       "load": "0.00"
     },
