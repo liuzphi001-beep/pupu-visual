@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V218.0",
-    "version": "V222.0",
+    "version": "V223.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -180,6 +180,11 @@
     "apiLatency": 12
   },
   "highlights": [
+    {
+      "icon": "📈",
+      "title": "V223.0 负载优化",
+      "desc": "更新负载显示精度"
+    },
     {
       "icon": "🔄",
       "title": "V222.0 系统状态同步",
