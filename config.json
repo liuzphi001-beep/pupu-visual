@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V218.0",
-    "version": "V220.0",
+    "version": "V221.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -180,6 +180,11 @@
     "apiLatency": 12
   },
   "highlights": [
+    {
+      "icon": "🔔",
+      "title": "V220.0 状态同步",
+      "desc": "更新系统状态为最新"
+    },
     {
       "icon": "🔐",
       "title": "V217.0 JWT解码器",
@@ -1122,7 +1127,7 @@
     },
     "uptime": {
       "status": "normal",
-      "value": "13小时52分钟",
+      "value": "15小时11分钟",
       "label": "稳定"
     }
   },
@@ -1132,7 +1137,7 @@
     "diskUsage": "19G/40G",
     "memoryUsage": "1.1G/3.6G",
     "skillsCount": 66,
-    "uptime": "13小时52分钟",
+    "uptime": "15小时11分钟",
     "sessions": 13,
     "model": "MiniMax-M2.5",
     "networkRx": "12.2GB",
