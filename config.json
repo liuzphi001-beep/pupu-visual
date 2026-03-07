@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V214.0",
-    "version": "V216.0",
+    "version": "V217.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -180,6 +180,11 @@
     "apiLatency": 12
   },
   "highlights": [
+    {
+      "icon": "🔐",
+      "title": "V217.0 JWT解码器",
+      "desc": "新增JWT令牌解析验证工具"
+    },
     {
       "icon": "📊",
       "title": "V216.0 系统负载详情",
