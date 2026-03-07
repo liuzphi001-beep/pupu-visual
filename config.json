@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V214.0",
-    "version": "V217.0",
+    "title": "🐾 噗噗控制台 V218.0",
+    "version": "V218.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -1122,7 +1122,7 @@
     },
     "uptime": {
       "status": "normal",
-      "value": "7天10小时",
+      "value": "11小时",
       "label": "稳定"
     }
   },
