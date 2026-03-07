@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "🐾 噗噗控制台 V224.0",
-    "version": "V225.0",
+    "title": "🐾 噗噗控制台 V226.0",
+    "version": "V226.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -194,6 +194,11 @@
     "apiLatency": 12
   },
   "highlights": [
+    {
+      "icon": "📊",
+      "title": "V226.0 系统负载",
+      "desc": "新增系统负载平均值显示"
+    },
     {
       "icon": "🎯",
       "title": "V225.0 定时任务优化",
@@ -1171,6 +1176,10 @@
       "status": "normal",
       "value": "15小时24分钟",
       "label": "稳定"
+    },
+    "load": {
+      "value": "0.01",
+      "label": "优秀"
     }
   },
   "quickStats": {
