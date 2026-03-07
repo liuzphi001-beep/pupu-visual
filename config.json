@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V214.0",
-    "version": "V214.0",
+    "version": "V215.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -175,7 +175,7 @@
     }
   ],
   "network": {
-    "onlineUsers": 231,
+    "onlineUsers": 228,
     "connectionStatus": "excellent",
     "apiLatency": 12
   },
@@ -1098,29 +1098,29 @@
       "status": "normal",
       "value": "47%",
       "label": "正常",
-      "used": "1.7G",
+      "used": "1.1G",
       "total": "3.6G"
     },
     "disk": {
       "status": "normal",
-      "value": "35%",
+      "value": "47%",
       "label": "正常",
-      "used": "14G",
+      "used": "19G",
       "total": "40G"
     },
     "uptime": {
       "status": "normal",
-      "value": "23天15小时",
+      "value": "7天10小时",
       "label": "稳定"
     }
   },
   "quickStats": {
     "onlineUsers": 228,
     "loadAverage": "0.00",
-    "diskUsage": "15G/40G",
-    "memoryUsage": "1.6G/3.6G",
+    "diskUsage": "19G/40G",
+    "memoryUsage": "1.1G/3.6G",
     "skillsCount": 56,
-    "uptime": "24天1小时",
+    "uptime": "7天10小时",
     "sessions": 13,
     "model": "MiniMax-M2.5",
     "networkRx": "12.2GB",
