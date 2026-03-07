@@ -96,6 +96,18 @@
             padding: 20px;
             color: rgba(255,255,255,0.5);
         }
+        .load-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .load-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -103,14 +115,15 @@
         <div class="header">
             <h1>🐾 噗噗控制台 V214.0</h1>
             <p>🕐 Asia/Shanghai | 📍 北京 (华北) | ☁️ OpenCloudOS</p>
-            <span class="version">V215.0</span>
+            <span class="version">V216.0</span>
         </div>
         
         <div class="grid">
             <div class="card">
                 <h2>⚡ 系统状态</h2>
-                <div class="stat"><span>CPU</span><span class="stat-value">1%</span></div>
-                <div class="stat"><span>内存</span><span class="stat-value">1.1G/3.6G</span></div>
+                <div class="stat"><span>CPU负载</span><span class="stat-value">0.02</span></div>
+                <div class="load-bar"><div class="load-fill" style="width: 0.4%"></div></div>
+                <div class="stat"><span>内存详情</span><span class="stat-value">3.6G总量 / 2.5G可用</span></div>
                 <div class="stat"><span>磁盘</span><span class="stat-value">19G/40G</span></div>
                 <div class="stat"><span>运行时间</span><span class="stat-value">7天10小时</span></div>
                 <div class="stat"><span>进程数</span><span class="stat-value">152</span></div>

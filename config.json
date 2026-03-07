@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V214.0",
-    "version": "V215.0",
+    "version": "V216.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -180,6 +180,11 @@
     "apiLatency": 12
   },
   "highlights": [
+    {
+      "icon": "📊",
+      "title": "V216.0 系统负载详情",
+      "desc": "新增系统负载和内存详情展示"
+    },
     {
       "icon": "📊",
       "title": "V214.0 Skills统计",
@@ -534,7 +539,9 @@
     "extensionSkills": 14,
     "processes": 152,
     "networkRx": "12.2GB",
-    "networkTx": "12.4GB"
+    "networkTx": "12.4GB",
+    "loadAverage": "0.02",
+    "memoryDetail": "3.6G总量 / 2.5G可用"
   },
   "activities": [
     {
