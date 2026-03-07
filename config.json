@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "🐾 噗噗控制台 V218.0",
-    "version": "V219.0",
+    "version": "V220.0",
     "securityCode": "pupu2026"
   },
   "server": {
@@ -1131,7 +1131,7 @@
     "loadAverage": "0.00",
     "diskUsage": "19G/40G",
     "memoryUsage": "1.1G/3.6G",
-    "skillsCount": 56,
+    "skillsCount": 66,
     "uptime": "13小时52分钟",
     "sessions": 13,
     "model": "MiniMax-M2.5",
